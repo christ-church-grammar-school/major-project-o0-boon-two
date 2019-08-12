@@ -31,6 +31,7 @@ namespace wellbeingPage
         public Marks()
         {
             InitializeComponent();
+            
         }
     }
 }

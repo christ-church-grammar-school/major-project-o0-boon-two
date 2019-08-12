@@ -5,36 +5,61 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:wellbeingPage"
       mc:Ignorable="d" 
+      MinHeight="200"
+      MinWidth="400"
       d:DesignHeight="800" d:DesignWidth="1200"
       Title="Marks">
 
 
     <Grid Background="#FF1F1F1F">
 
-        <Rectangle x:Name="rectangle1" Fill="#FF191919" Height="120" Stroke="#FF191919" VerticalAlignment="Top" Width="1200"/>
-        <Rectangle Fill="#FF282828" Margin="350,120,0,0" Stroke="#FF191919" Width="850"/>
-        <Rectangle x:Name="rectangle1_Copy" Fill="#FF191919" HorizontalAlignment="Left" Height="94" Stroke="#FF191919" VerticalAlignment="Bottom" Width="355" Margin="-5,0,0,1"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="130"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" MinWidth="220"></ColumnDefinition>
+                <ColumnDefinition Width="5*" MinWidth="100"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <ScrollViewer Margin="0,0,0,95" VerticalScrollBarVisibility="Auto" Grid.Column="0">
+                <StackPanel Name="stack" VerticalAlignment="Top">
+                    <TextBlock TextWrapping="Wrap" Text="TextBlock" Height="132"/>
+                    <TextBlock TextWrapping="Wrap" Text="TextBlock" Height="132"/>
+                    <TextBlock TextWrapping="Wrap" Text="TextBlock" Height="132"/>
+                    <TextBlock TextWrapping="Wrap" Text="TextBlock" Height="132"/>
+                    <TextBlock TextWrapping="Wrap" Text="TextBlock" Height="132"/>
 
-        <Border x:Name="helpBorder" CornerRadius="15" BorderBrush="#FFFAD200" BorderThickness="7" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="200" Height="50" Margin="71,0,0,19">
-            <Button x:Name="helpButton" Content="Input Marks" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="190" Background="#FFFAD200" BorderThickness="0" BorderBrush="#FFFAD200" FontFamily="Consolas" Foreground="Black" Height="40" FontSize="20" FontWeight="Bold"/>
-        </Border>
+                </StackPanel>
 
-        <Label x:Name="wellbeingLabel" Content="Results" HorizontalAlignment="Center" Margin="0,10,10,0" VerticalAlignment="Top" Height="100" Width="1190" FontFamily="Consolas" FontSize="72" FontWeight="Bold" Foreground="White" HorizontalContentAlignment="Center"/>
+            </ScrollViewer>
+            <Rectangle x:Name="rectangle1_Copy" Grid.Column="0"  Fill="#FF191919" Stroke="#FF191919" Margin="0,0,0,1" VerticalAlignment="Bottom" Height="95" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="-1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Rectangle Fill="#FF282828" Grid.Column="1" Stroke="#FF191919"/>
+            <Border x:Name="helpBorder" Grid.Column="0" CornerRadius="15" BorderBrush="#FFFAD200" BorderThickness="7" VerticalAlignment="Bottom" Width="200" Height="50" Margin="0,0,0,20">
+                <Button x:Name="helpButton" Content="Input Marks" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="190" Background="#FFFAD200" BorderThickness="0" BorderBrush="#FFFAD200" FontFamily="Consolas" Foreground="Black" Height="40" FontSize="20" FontWeight="Bold"/>
+            </Border>
+            <GridSplitter Grid.Column="1" HorizontalAlignment="Left" Width="5" Background="#FF1B1B1B" Foreground="{x:Null}"/>
 
-        <ScrollViewer Margin="0,120,0,95" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" Width="350" VerticalAlignment="Bottom">
-            <StackPanel Name="stack">
-                <TextBlock TextWrapping="Wrap" Text="TextBlock" Height="132"/>
-                <TextBlock TextWrapping="Wrap" Text="TextBlock" Height="132"/>
-                <TextBlock TextWrapping="Wrap" Text="TextBlock" Height="132"/>
-                <TextBlock TextWrapping="Wrap" Text="TextBlock" Height="132"/>
-                <TextBlock TextWrapping="Wrap" Text="TextBlock" Height="132"/>
-                <TextBlock TextWrapping="Wrap" Text="TextBlock" Height="132"/>
-                <TextBlock TextWrapping="Wrap" Text="TextBlock" Height="132"/>
-                <TextBlock TextWrapping="Wrap" Text="TextBlock" Height="132"/>
-            </StackPanel>
+        </Grid>
 
-        </ScrollViewer>
-        <Button x:Name="menuButton" Width="80" Height="80" Margin="24,20,0,0" Foreground="{x:Null}" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="Black" Background="Black">
+        <Rectangle x:Name="rectangle1" Grid.Row="0" Fill="#FF191919" Stroke="#FF191919"/>
+
+
+
+        <Label x:Name="wellbeingLabel" Grid.Row="0" Content="Results" Margin="0,0,0,0" VerticalAlignment="Top" Height="100" Width="1200" FontFamily="Consolas" FontSize="72" FontWeight="Bold" Foreground="White" HorizontalContentAlignment="Center" HorizontalAlignment="Center"/>
+
+
+
+        <Button x:Name="menuButton" Grid.Row="0" Width="80" Height="80" Margin="24,20,0,0" Foreground="{x:Null}" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="Black" Background="Black">
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid>
@@ -47,7 +72,6 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-
 
     </Grid>
 
