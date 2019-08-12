@@ -32,7 +32,7 @@ namespace wellbeingPage
 
         private void ShowWellbeingPage()
         {
-            wellbeing page = new wellbeing();
+            Marks page = new Marks();
             var contentCopy = Content;
             Content = page;
             page.ladder += (object sender, EventArgs e) =>
