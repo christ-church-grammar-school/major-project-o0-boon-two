@@ -21,28 +21,28 @@ namespace wellbeingPage
     /// </summary>
     public partial class MainWindow : Window
     {
-        DispatcherTimer sec = new DispatcherTimer();
-        DispatcherTimer milli = new DispatcherTimer();
+        DispatcherTimer seconds = new DispatcherTimer();
+        DispatcherTimer milliseconds = new DispatcherTimer();
 
         public MainWindow()
         {
             InitializeComponent();
             Popup.Visibility = Visibility.Collapsed;
 
-            sec.Tick += new EventHandler(oneSecond);
-            sec.Interval = new TimeSpan(0, 0, 1);
-            sec.Start();
+            seconds.Tick += new EventHandler(OneSecond);
+            seconds.Interval = new TimeSpan(0, 0, 1);
+            seconds.Start();
 
-            milli.Interval = TimeSpan.FromMilliseconds(1);
-            milli.Tick += updateSecondHand;
-            milli.Start();
+            milliseconds.Interval = TimeSpan.FromMilliseconds(1);
+            milliseconds.Tick += UpdateSecondHand;
+            milliseconds.Start();
 
         }
-        void updateSecondHand(object sender, object e)
+        void UpdateSecondHand(object sender, object e)
         {
             secondHand.Angle = (DateTime.Now.Second + (double)DateTime.Now.Millisecond / 1000)*6;
         }
-        private void oneSecond(object sender, EventArgs e)
+        private void OneSecond(object sender, EventArgs e)
         {
             TimerTextBlock.Text = DateTime.Now.ToString("HH:mm:ss");
             minuteHand1.Angle = (DateTime.Now.Minute + (double)DateTime.Now.Second / 60) * 6;
