@@ -84,7 +84,7 @@
         <Border x:Name="infoPopupTop" BorderThickness="1" Grid.Row="0" Grid.ColumnSpan="2" CornerRadius="50,50,0,0" BorderBrush="#00000000" Background="#FF191919" HorizontalAlignment="Left" VerticalAlignment="Top" Width="0" Height="150" Margin="100,100,0,0">
             <TextBlock x:Name="infoTextBlock" Text="Information" FontSize="48" FontFamily="Consolas" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="50,0,0,0" Foreground="White" Width="500"/>
         </Border>
-        
+
         <Border x:Name="infoPopupBottom" BorderThickness="1" Grid.Row="0" Grid.ColumnSpan="2" CornerRadius="0,0,50,50" BorderBrush="#00000000" Background="#FF1F1F1F" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="0" Height="450" Margin="100,0,0,100"/>
 
         <Button x:Name="infoCloseButton" Width="0" Height="80" Margin="0,120,110,0" Foreground="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Top" BorderBrush="Black" Background="Black" Click="infoCloseClicked" RenderTransformOrigin="0.5,0.5">
