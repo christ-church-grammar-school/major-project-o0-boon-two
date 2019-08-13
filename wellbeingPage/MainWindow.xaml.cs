@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace wellbeingPage
 {
@@ -20,59 +21,32 @@ namespace wellbeingPage
     /// </summary>
     public partial class MainWindow : Window
     {
-        System.Windows.Threading.DispatcherTimer Timer = new System.Windows.Threading.DispatcherTimer();
+        DispatcherTimer sec = new DispatcherTimer();
+        DispatcherTimer milli = new DispatcherTimer();
 
         public MainWindow()
         {
             InitializeComponent();
-            CloseMenuPopup();
+            Popup.Visibility = Visibility.Collapsed;
 
-            Timer.Tick += new EventHandler(Timer_Click);
+            sec.Tick += new EventHandler(oneSecond);
+            sec.Interval = new TimeSpan(0, 0, 1);
+            sec.Start();
 
-            Timer.Interval = new TimeSpan(0, 0, 1);
+            milli.Interval = TimeSpan.FromMilliseconds(1);
+            milli.Tick += updateSecondHand;
+            milli.Start();
 
-            Timer.Start();
         }
-
-        private void CloseMenuPopup()
+        void updateSecondHand(object sender, object e)
         {
-            DarknessButtonScreen.Margin = new Thickness(10000, 0, 0, 0);
-            MenuPopupRectangle.Width = 0;
-            TaskPageButton.Width = 0;
-            TaskPageTitle.Width = 0;
-            TaskPageText.Width = 0;
-            WellbeingPageButton.Width = 0;
-            WellbeingPageTitle.Width = 0;
-            WellbeingPageText.Width = 0;
-            GymPageTitle.Width = 0;
-            GymPageButton.Width = 0;
-            GymPageText.Width = 0;
-            LiveMarksPageButton.Width = 0;
-            LiveMarksPageTitle.Width = 0;
-            LiveMarksPageText.Width = 0;
+            secondHand.Angle = (DateTime.Now.Second + (double)DateTime.Now.Millisecond / 1000)*6;
         }
-
-        private void OpenMenuPopup()
-        {
-            DarknessButtonScreen.Margin = new Thickness(0, 0, 0, 0);
-            MenuPopupRectangle.Width = 1000;
-            TaskPageButton.Width = 100;
-            TaskPageTitle.Width = 70;
-            TaskPageText.Width = 800;
-            WellbeingPageButton.Width = 100;
-            WellbeingPageTitle.Width = 120;
-            WellbeingPageText.Width = 800;
-            GymPageButton.Width = 100;
-            GymPageTitle.Width = 40;
-            GymPageText.Width = 800;
-            LiveMarksPageButton.Width = 100;
-            LiveMarksPageTitle.Width = 135;
-            LiveMarksPageText.Width = 800;
-        }
-
-        private void Timer_Click(object sender, EventArgs e)
+        private void oneSecond(object sender, EventArgs e)
         {
             TimerTextBlock.Text = DateTime.Now.ToString("HH:mm:ss");
+            minuteHand1.Angle = (DateTime.Now.Minute + (double)DateTime.Now.Second / 60) * 6;
+            hourhand1.Angle = (DateTime.Now.Hour + (double)DateTime.Now.Minute / 60) * 15;
         }
 
         private void TasksClicked(object sender, RoutedEventArgs e)
@@ -118,7 +92,7 @@ namespace wellbeingPage
         }
         private void ShowGymPage()
         {
-
+            
         }
         private void ShowLiveMarksPage()
         {
@@ -133,21 +107,12 @@ namespace wellbeingPage
 
         private void DarknessButtonScreenClicked(object sender, RoutedEventArgs e)
         {
-            CloseMenuPopup();
+            Popup.Visibility = Visibility.Collapsed;
         }
 
         private void MenuButtonClicked(object sender, RoutedEventArgs e)
         {
-            OpenMenuPopup();
-        }
-
-        private void WindowSizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            var yratio = e.NewSize.Height / 764.5;
-            var xratio = e.NewSize.Width / 1187;
-
-            DarknessButtonScreen.Width = xratio * 1195;
-            DarknessButtonScreen.Height = yratio * 772.5;
+            Popup.Visibility = Visibility.Visible;
         }
     }
 }

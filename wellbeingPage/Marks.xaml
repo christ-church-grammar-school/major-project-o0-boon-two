@@ -5,8 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:wellbeingPage"
       mc:Ignorable="d" 
-      MinHeight="200"
-      MinWidth="400"
+
       d:DesignHeight="800" d:DesignWidth="1200"
       Title="Marks">
 
@@ -23,7 +22,7 @@
                 <ColumnDefinition Width="5*" MinWidth="100"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <ScrollViewer Margin="0,0,0,95" VerticalScrollBarVisibility="Auto" Grid.Column="0">
-                
+
                 <StackPanel Name="stack" VerticalAlignment="Top">
                     <TextBlock TextWrapping="Wrap" Text="Subject 1 advanced"  FontSize="48" Foreground="White" Background="#FF232323" Height="216" FontFamily="Consolas"/>
                     <TextBlock TextWrapping="Wrap" Text="Subject 2"  FontSize="48" Foreground="White" Height="108" FontFamily="Consolas"/>
@@ -107,9 +106,9 @@
                     <Grid>
                         <Ellipse Stroke="Black" StrokeThickness="1" Fill="#FFFAD200" Width="80" Height="80"/>
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <Rectangle Fill="Black" HorizontalAlignment="Left" Height="6" Stroke="#00000000" VerticalAlignment="Top" Margin="22.5,25,0,0" Grid.Row="1" Width="35" RadiusX="3" RadiusY="3"/>
-                        <Rectangle Fill="Black" HorizontalAlignment="Left" Height="6" Stroke="#00000000" VerticalAlignment="Top" Margin="22.5,37,0,0" Grid.Row="1" Width="35" RadiusX="3" RadiusY="3"/>
-                        <Rectangle Fill="Black" HorizontalAlignment="Left" Height="6" Stroke="#00000000" VerticalAlignment="Top" Margin="22.5,49,0,0" Grid.Row="1" Width="35" RadiusX="3" RadiusY="3"/>
+                        <Rectangle Fill="White" HorizontalAlignment="Left" Height="6" Stroke="#00000000" VerticalAlignment="Top" Margin="22.5,25,0,0" Grid.Row="1" Width="35" RadiusX="3" RadiusY="3"/>
+                        <Rectangle Fill="White" HorizontalAlignment="Left" Height="6" Stroke="#00000000" VerticalAlignment="Top" Margin="22.5,37,0,0" Grid.Row="1" Width="35" RadiusX="3" RadiusY="3"/>
+                        <Rectangle Fill="White" HorizontalAlignment="Left" Height="6" Stroke="#00000000" VerticalAlignment="Top" Margin="22.5,49,0,0" Grid.Row="1" Width="35" RadiusX="3" RadiusY="3"/>
                     </Grid>
                 </ControlTemplate>
             </Button.Template>
@@ -143,11 +142,8 @@
                 </Style>
             </Button.Style>
         </Button>
-        
-        
-        
-        
-        
+
+
 
 
     </Grid>

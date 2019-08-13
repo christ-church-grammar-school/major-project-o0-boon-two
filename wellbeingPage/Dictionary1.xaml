@@ -20,6 +20,7 @@
                             Width="Auto"
                             Height="Auto"
                             Margin="0,1,0,1"
+                            
                             Background="{TemplateBinding Background}" />
                     </Grid>
                     <ControlTemplate.Triggers>
