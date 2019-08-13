@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="GymPage.cs" />
     <Compile Include="Marks.xaml.cs">
       <DependentUpon>Marks.xaml</DependentUpon>
     </Compile>
@@ -64,6 +65,10 @@
     <Compile Include="wellbeing.xaml.cs">
       <DependentUpon>wellbeing.xaml</DependentUpon>
     </Compile>
+    <Page Include="GymPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
