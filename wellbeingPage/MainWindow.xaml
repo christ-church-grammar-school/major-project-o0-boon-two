@@ -11,9 +11,7 @@
         <TextBlock x:Name="TimerTextBlock" Foreground="White" FontSize="132" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1116,568,-777,28.5" TextAlignment="Center" Width="856"/>
 
         <Button x:Name="MenuButton" Width="80" Height="80" Margin="0,20,40,0" Foreground="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Top" Click="MenuButtonClicked" Cursor="Hand">
-            <Button.Effect>
-                <DropShadowEffect Direction="250" ShadowDepth="10" BlurRadius="17"/>
-            </Button.Effect>
+         
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid>
