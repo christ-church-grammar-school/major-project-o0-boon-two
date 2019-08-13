@@ -55,7 +55,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="GymPage.cs" />
+    <Compile Include="Gym.xaml.cs">
+      <DependentUpon>Gym.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Marks.xaml.cs">
       <DependentUpon>Marks.xaml</DependentUpon>
     </Compile>
@@ -69,9 +71,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="GymPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Gym.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

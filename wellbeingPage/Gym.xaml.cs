@@ -54,7 +54,7 @@ namespace BumbleBee
 
         //adds a new component
         private void Exercises_Click(object sender, RoutedEventArgs e)
-        { 
+        {
             DataRecord();
 
             //important code that applies style templates
@@ -68,7 +68,7 @@ namespace BumbleBee
             TextBlock workoutName = new TextBlock();
             style = this.FindResource("textBlockListStyle") as Style;
             workoutName.Style = style;
-            
+
             workoutName.Text = workout.workoutName;
             workoutName.FontSize = 36;
             workoutName.Margin = new Thickness(55, -((workout1.Count * 31) + 30), 0, 0);
@@ -138,7 +138,7 @@ namespace BumbleBee
     }
     public class GymWorkout
     {
-     //will not change at any point
+        //will not change at any point
         public string workoutName;
         public List<string> exercises = new List<string>();
     }
