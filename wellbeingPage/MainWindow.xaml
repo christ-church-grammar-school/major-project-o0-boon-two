@@ -7,8 +7,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="1200" MinHeight="300" MinWidth="300" >
     <Grid Background="#FF1F1F1F" Margin="0,0,0,1.5">
-        <Image Source="photo-1537210249814-b9a10a161ae4.jpg" HorizontalAlignment="Left" Height="771" VerticalAlignment="Top" Width="1195"/>
-        <Image Source="34139.png" Height="632" Margin="0,0,355,119" VerticalAlignment="Bottom" Width="632" HorizontalAlignment="Right"/>
         <TextBlock x:Name="TimerTextBlock" Foreground="White" FontSize="132" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1116,568,-777,28.5" TextAlignment="Center" Width="856"/>
 
         <Button x:Name="MenuButton" Width="80" Height="80" Margin="0,20,40,0" Foreground="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Top" Click="MenuButtonClicked" Cursor="Hand">
