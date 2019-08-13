@@ -27,10 +27,10 @@ namespace wellbeingPage
 
         private void Clicked(object sender, RoutedEventArgs e)
         {
-            ShowWellbeingPage();
+            ShowMarksPage();
         }
 
-        private void ShowWellbeingPage()
+        private void ShowMarksPage()
         {
             Marks page = new Marks();
             var contentCopy = Content;
@@ -39,6 +39,21 @@ namespace wellbeingPage
             {
                 Content = contentCopy;
             };
+        }
+        private void ShowWellbeingPage()
+        {
+            wellbeing page = new wellbeing();
+            var contentCopy = Content;
+            Content = page;
+            page.ladder += (object sender, EventArgs e) =>
+            {
+                Content = contentCopy;
+            };
+        }
+
+        private void GoWellbeing(object sender, RoutedEventArgs e)
+        {
+            ShowWellbeingPage();
         }
     }
 }
