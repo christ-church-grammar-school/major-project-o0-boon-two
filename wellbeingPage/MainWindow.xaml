@@ -55,7 +55,6 @@
                     </Style.Triggers>
                 </Style>
             </Button.Style>
-
         </Button>
         <Rectangle Fill="#FF747474" Margin="0,0,667,433" RenderTransformOrigin="1,0.5" HorizontalAlignment="Right" Width="302" VerticalAlignment="Bottom" Height="2">
             <Rectangle.RenderTransform>
