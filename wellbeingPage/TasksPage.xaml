@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:wellbeingPage"
       mc:Ignorable="d" 
-      d:DesignHeight="800" d:DesignWidth="1200"
+      d:DesignHeight="450" d:DesignWidth="800"
       Title="TasksPage" SizeChanged="WindowSizeChanged">
 
     <Grid>
