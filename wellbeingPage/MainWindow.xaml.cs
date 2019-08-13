@@ -92,7 +92,13 @@ namespace wellbeingPage
         }
         private void ShowGymPage()
         {
-            
+            Gym page = new Gym();
+            var contentCopy = Content;
+            Content = page;
+            page.ladder += (object sender, EventArgs e) =>
+            {
+                Content = contentCopy;
+            };
         }
         private void ShowLiveMarksPage()
         {
