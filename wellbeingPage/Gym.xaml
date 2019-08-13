@@ -1,9 +1,9 @@
-﻿<Page x:Class="BumbleBee.Page1"
+﻿<Page x:Class="wellbeingPage.Gym"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:BumbleBee"
+      xmlns:local="clr-namespace:wellbeingPage"
       mc:Ignorable="d" 
       d:DesignHeight="800" d:DesignWidth="1200"
       Title="Gym Section">
@@ -50,7 +50,7 @@
 
     <Grid>
 
-        <Button Click="Exercises_Click" x:Name="exercises" Width="123" Height="80" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+        <Button Click="AddClicked" x:Name="exercises" Width="123" Height="80" HorizontalAlignment="Right" VerticalAlignment="Bottom">
             adadad
         </Button>
 
@@ -77,8 +77,6 @@
         <StackPanel x:Name="workoutsPanel" HorizontalAlignment="Left" Height="650" Margin="0" VerticalAlignment="Top" Width="1040" Background="Transparent" Orientation="Vertical"/>
         <StackPanel x:Name="addPanel" HorizontalAlignment="Left" Height="650" Margin="0" VerticalAlignment="Top" Width="0" Background="Transparent" Orientation="Vertical"/>
         <StackPanel x:Name="exercisePanel" HorizontalAlignment="Left" Height="650" Margin="0" VerticalAlignment="Top" Width="0" Background="Transparent" Orientation="Vertical"/>
-
-
 
     </Grid>
     </Page>
