@@ -23,7 +23,7 @@
                 <ColumnDefinition Width="5*" MinWidth="100"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <ScrollViewer Margin="0,0,0,95" VerticalScrollBarVisibility="Auto" Grid.Column="0">
-
+                
                 <StackPanel Name="stack" VerticalAlignment="Top">
                     <TextBlock TextWrapping="Wrap" Text="Subject 1 advanced"  FontSize="48" Foreground="White" Background="#FF232323" Height="216" FontFamily="Consolas"/>
                     <TextBlock TextWrapping="Wrap" Text="Subject 2"  FontSize="48" Foreground="White" Height="108" FontFamily="Consolas"/>
@@ -143,6 +143,11 @@
                 </Style>
             </Button.Style>
         </Button>
+        
+        
+        
+        
+        
 
 
     </Grid>
