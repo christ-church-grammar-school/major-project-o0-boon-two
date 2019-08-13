@@ -13,12 +13,12 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BumbleBee
+namespace wellbeingPage
 {
     /// <summary>
-    /// Interaction logic for Page1.xaml
+    /// Interaction logic for Gym.xaml
     /// </summary>
-    public partial class Page1 : Page
+    public partial class Gym : Page
     {
         List<string> workout1 = new List<string>
         {
@@ -34,7 +34,7 @@ namespace BumbleBee
 
 
 
-        public Page1()
+        public Gym()
         {
             InitializeComponent();
         }
@@ -53,7 +53,7 @@ namespace BumbleBee
 
 
         //adds a new component
-        private void Exercises_Click(object sender, RoutedEventArgs e)
+        private void AddClicked(object sender, RoutedEventArgs e)
         {
             DataRecord();
 
