@@ -18,6 +18,8 @@ namespace wellbeingPage
     /// <summary>
     /// Interaction logic for wellbeing.xaml
     /// </summary>
+    /// 
+    /// I hope everyone can see this?
     public partial class wellbeing : Page
     {
         public EventHandler ladder;
