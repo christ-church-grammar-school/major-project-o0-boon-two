@@ -7,10 +7,14 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="1200" MinHeight="300" MinWidth="300" >
     <Grid Background="#FF1F1F1F" Margin="0,0,0,1.5">
-        <Image Source="34139.jpg" HorizontalAlignment="Left" Height="632" Margin="328,74,0,0" VerticalAlignment="Top" Width="632"/>
+        <Image Source="photo-1537210249814-b9a10a161ae4.jpg" HorizontalAlignment="Left" Height="771" VerticalAlignment="Top" Width="1195"/>
+        <Image Source="34139.png" Height="632" Margin="0,0,355,119" VerticalAlignment="Bottom" Width="632" HorizontalAlignment="Right"/>
         <TextBlock x:Name="TimerTextBlock" Foreground="White" FontSize="132" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1116,568,-777,28.5" TextAlignment="Center" Width="856"/>
 
         <Button x:Name="MenuButton" Width="80" Height="80" Margin="0,20,40,0" Foreground="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Top" Click="MenuButtonClicked" Cursor="Hand">
+            <Button.Effect>
+                <DropShadowEffect Direction="250" ShadowDepth="10" BlurRadius="17"/>
+            </Button.Effect>
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid>
@@ -53,7 +57,7 @@
             </Button.Style>
 
         </Button>
-        <Rectangle Fill="#FF747474" Margin="0,0,552,376" RenderTransformOrigin="1,0.5" HorizontalAlignment="Right" Width="301" VerticalAlignment="Bottom" Height="2">
+        <Rectangle Fill="#FF747474" Margin="0,0,667,433" RenderTransformOrigin="1,0.5" HorizontalAlignment="Right" Width="302" VerticalAlignment="Bottom" Height="2">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -63,7 +67,7 @@
                 </TransformGroup>
             </Rectangle.RenderTransform>
         </Rectangle>
-        <Rectangle Fill="Black" RadiusX="1.75" RadiusY="1.75" Margin="0,0,552,374" RenderTransformOrigin="1,0.5" HorizontalAlignment="Right" Width="229" VerticalAlignment="Bottom" Height="6">
+        <Rectangle Fill="Black" RadiusX="1.75" RadiusY="1.75" Margin="0,0,667,431" RenderTransformOrigin="1,0.5" HorizontalAlignment="Right" Width="230" VerticalAlignment="Bottom" Height="6">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -73,7 +77,7 @@
                 </TransformGroup>
             </Rectangle.RenderTransform>
         </Rectangle>
-        <Rectangle Fill="#FF111111" RadiusX="7" RadiusY="7" Margin="0,0,548,372" RenderTransformOrigin="0.97,0.523" HorizontalAlignment="Right" Width="178" VerticalAlignment="Bottom" Height="11">
+        <Rectangle Fill="#FF111111" RadiusX="7" RadiusY="7" Margin="0,0,663,429" RenderTransformOrigin="0.97,0.523" HorizontalAlignment="Right" Width="178" VerticalAlignment="Bottom" Height="11">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
