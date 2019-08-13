@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="1200">
     <Grid>
-        <Button x:Name="toPageButton" Content="Go To Livemarks" HorizontalAlignment="Left" Margin="109,130,0,0" VerticalAlignment="Top" Width="217" Click="Clicked" Height="50"/>
-        <Button x:Name="toPageButton_Copy" Content="Go To wellbeing" HorizontalAlignment="Left" Margin="430,130,0,0" VerticalAlignment="Top" Width="217" Click="GoWellbeing" Height="50"/>
+        <Button x:Name="toMarksPageButton" Content="Go To Livemarks" HorizontalAlignment="Left" Margin="109,130,0,0" VerticalAlignment="Top" Width="217" Click="Clicked" Height="50"/>
+        <Button x:Name="toWellbeingPageButton" Content="Go To Wellbeing" HorizontalAlignment="Left" Margin="430,130,0,0" VerticalAlignment="Top" Width="217" Click="GoWellbeing" Height="50"/>
 
     </Grid>
 </Window>
