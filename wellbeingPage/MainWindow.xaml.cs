@@ -27,7 +27,7 @@ namespace wellbeingPage
         public MainWindow()
         {
             InitializeComponent();
-            Popup.Visibility = Visibility.Collapsed;
+            MenuPopup.Visibility = Visibility.Collapsed;
 
             seconds.Tick += new EventHandler(OneSecond);
             seconds.Interval = new TimeSpan(0, 0, 1);
@@ -44,7 +44,6 @@ namespace wellbeingPage
         }
         private void OneSecond(object sender, EventArgs e)
         {
-            TimerTextBlock.Text = DateTime.Now.ToString("HH:mm:ss");
             minuteHand1.Angle = (DateTime.Now.Minute + (double)DateTime.Now.Second / 60) * 6;
             hourhand1.Angle = (DateTime.Now.Hour + (double)DateTime.Now.Minute / 60) * 15;
         }
@@ -113,12 +112,12 @@ namespace wellbeingPage
 
         private void DarknessButtonScreenClicked(object sender, RoutedEventArgs e)
         {
-            Popup.Visibility = Visibility.Collapsed;
+            MenuPopup.Visibility = Visibility.Collapsed;
         }
 
         private void MenuButtonClicked(object sender, RoutedEventArgs e)
         {
-            Popup.Visibility = Visibility.Visible;
+            MenuPopup.Visibility = Visibility.Visible;
         }
     }
 }

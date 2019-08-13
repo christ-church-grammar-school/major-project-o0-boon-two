@@ -51,6 +51,7 @@ namespace wellbeingPage
         {
             // Sets up that page
             InitializeComponent();
+            MenuPopup.Visibility = Visibility.Collapsed;
             UpdateTasks();
             CloseAddAnItem();
         }
@@ -65,47 +66,13 @@ namespace wellbeingPage
         {
             // THIS IS THE SOURCE OF BUG WHEN WINDOW SIZE IS CHANGED
             // Creates add an item pop up window
-            DarknessScreen.Margin = new Thickness(0, 0, 0, 0);
-            AddATaskTopBorder.Width = 1000;
-            AddATaskTextBlock.Width = 396;
-            AddATaskBottomBorder.Width = 1000;
-            TaskNameTextBlock.Width = 220;
-            TaskNameRectangle.Width = 690;
-            TaskNameTextBox.Width = 656.5;
-            TaskDateTextBlock.Width = 198;
-            TaskDateRectangle.Width = 80;
-            TaskDateTextBox.Width = 46;
-            Slash1.Width = 26.5;
-            TaskMonthRectangle.Width = 80;
-            TaskMonthTextBox.Width = 46;
-            Slash2.Width = 26.5;
-            TaskYearRectangle.Width = 120;
-            TaskYearTextBox.Width = 86;
-            DeleteButton.Width = 200;
-            CreateButton.Width = 200;
+            AddAnItemPopup.Visibility = Visibility.Visible;
         }
 
         private void CloseAddAnItem()
         {
             // Removes add an item pop up window
-            DarknessScreen.Margin = new Thickness(10000, 0, 0, 0);
-            AddATaskTopBorder.Width = 0;
-            AddATaskTextBlock.Width = 0;
-            AddATaskBottomBorder.Width = 0;
-            TaskNameTextBlock.Width = 0;
-            TaskNameRectangle.Width = 0;
-            TaskNameTextBox.Width = 0;
-            TaskDateTextBlock.Width = 0;
-            TaskDateRectangle.Width = 0;
-            TaskDateTextBox.Width = 0;
-            Slash1.Width = 0;
-            TaskMonthRectangle.Width = 0;
-            TaskMonthTextBox.Width = 0;
-            Slash2.Width = 0;
-            TaskYearRectangle.Width = 0;
-            TaskYearTextBox.Width = 0;
-            DeleteButton.Width = 0;
-            CreateButton.Width = 0;
+            AddAnItemPopup.Visibility = Visibility.Collapsed;
 
             // Resets typed content in the text boxes
             TaskNameTextBox.Text = "";
@@ -869,6 +836,55 @@ namespace wellbeingPage
             public string taskmonth;
             public string taskyear;
             public bool check;
+        }
+
+
+        private void ShowTasksPage()
+        {
+            
+        }
+
+        private void ShowWellbeingPage()
+        {
+            
+        }
+        private void ShowGymPage()
+        {
+            
+        }
+        private void ShowLiveMarksPage()
+        {
+            
+        }
+
+        private void TasksClicked(object sender, RoutedEventArgs e)
+        {
+            ShowTasksPage();
+        }
+
+        private void WellbeingClicked(object sender, RoutedEventArgs e)
+        {
+            ShowWellbeingPage();
+        }
+
+        private void GymClicked(object sender, RoutedEventArgs e)
+        {
+            ShowGymPage();
+        }
+
+        private void LiveMarksClicked(object sender, RoutedEventArgs e)
+        {
+            ShowLiveMarksPage();
+        }
+
+        private void DarknessButtonScreenClicked(object sender, RoutedEventArgs e)
+        {
+            MenuPopup.Visibility = Visibility.Collapsed;
+        }
+
+        private void MenuButtonClicked(object sender, RoutedEventArgs e)
+        {
+            MenuPopup.Visibility = Visibility.Visible;
         }
     }
 }
