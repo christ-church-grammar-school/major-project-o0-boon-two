@@ -550,6 +550,7 @@ namespace wellbeingPage
         }
 
 
+        //All the clicked functions are for the removal from the displayed list
         private void Check1Clicked(object sender, RoutedEventArgs e)
         {
             // Checks which section's task objects to update
