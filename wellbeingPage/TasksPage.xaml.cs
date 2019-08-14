@@ -51,7 +51,7 @@ namespace wellbeingPage
         {
             // Sets up that page
             InitializeComponent();
-            MenuPopup.Visibility = Visibility.Collapsed;
+
             UpdateTasks();
             CloseAddAnItem();
         }

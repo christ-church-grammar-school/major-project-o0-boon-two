@@ -9,6 +9,9 @@ namespace wellbeingPage
 {
     class GetStudentData
     {
+        public static void Start()
+        {
 
+        }
     }
 }

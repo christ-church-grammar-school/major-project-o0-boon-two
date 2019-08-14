@@ -27,7 +27,6 @@ namespace wellbeingPage
         public MainWindow()
         {
             InitializeComponent();
-            MenuPopup.Visibility = Visibility.Collapsed;
 
             seconds.Tick += new EventHandler(OneSecond);
             seconds.Interval = new TimeSpan(0, 0, 1);
@@ -37,15 +36,18 @@ namespace wellbeingPage
             milliseconds.Tick += UpdateSecondHand;
             milliseconds.Start();
 
+            GetStudentData.Start();
+
         }
         void UpdateSecondHand(object sender, object e)
         {
-            secondHand.Angle = (DateTime.Now.Second + (double)DateTime.Now.Millisecond / 1000)*6;
+            secondHand.Angle = (DateTime.Now.Second + (double)DateTime.Now.Millisecond / 1000)*6 + 90;
         }
         private void OneSecond(object sender, EventArgs e)
         {
-            minuteHand1.Angle = (DateTime.Now.Minute + (double)DateTime.Now.Second / 60) * 6;
-            hourhand1.Angle = (DateTime.Now.Hour + (double)DateTime.Now.Minute / 60) * 15;
+            minuteHand1.Angle = (DateTime.Now.Minute + (double)DateTime.Now.Second / 60) * 6 + 90;
+            
+            hourhand1.Angle = (DateTime.Now.Hour + (double)DateTime.Now.Minute / 60) * 15 + 90;
         }
 
         private void TasksClicked(object sender, RoutedEventArgs e)
