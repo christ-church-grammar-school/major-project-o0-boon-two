@@ -9,9 +9,17 @@ namespace wellbeingPage
 {
     class GetStudentData
     {
+        
         public static void Start()
         {
+            var driverService = ChromeDriverService.CreateDefaultService();
+            driverService.HideCommandPromptWindow = true;
 
+            var Options = new ChromeOptions();
+
+            Options.AddAdditionalCapability("useAutomationExtension", false);
+
+            var Driver = new ChromeDriver(driverService,Options);
         }
     }
 }

@@ -46,8 +46,8 @@ namespace wellbeingPage
         private void OneSecond(object sender, EventArgs e)
         {
             minuteHand1.Angle = (DateTime.Now.Minute + (double)DateTime.Now.Second / 60) * 6 + 90;
-            
-            hourhand1.Angle = (DateTime.Now.Hour + (double)DateTime.Now.Minute / 60) * 15 + 90;
+            Console.WriteLine(DateTime.Now.Hour + (double)DateTime.Now.Minute / 60);
+            hourhand1.Angle = (DateTime.Now.Hour + (double)DateTime.Now.Minute / 60) * 30 + 90;
         }
 
         private void TasksClicked(object sender, RoutedEventArgs e)
