@@ -5,10 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wellbeingPage"
         mc:Ignorable="d"
+        
         Title="MainWindow" Height="800" Width="1200" MinHeight="300" MinWidth="300" SizeChanged="WindowSizeChanged">
     <Grid>
-        <Frame Name="MainFrame" HorizontalAlignment="Left" Height="772" VerticalAlignment="Top" Width="1195"/>
-        <Button x:Name="MenuButton" Width="80" Height="80" Margin="0,20,40,0" Foreground="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Top" Click="MenuButtonClicked" Cursor="Hand">
+        <Frame NavigationUIVisibility="Hidden" Name="MainFrame" Margin="0,0,0,0"/>
+        <Button Style="{StaticResource Expand}" x:Name="MenuButton" Width="80" Height="80" Margin="0,20,40,0" Foreground="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Top" Click="MenuButtonClicked" Cursor="Hand">
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid>
@@ -20,9 +21,9 @@
                     </Grid>
                 </ControlTemplate>
             </Button.Template>
-            
+
         </Button>
-        <Grid x:Name="MenuPopup" Visibility="Visible">
+        <Grid x:Name="MenuPopup" Visibility="Collapsed">
             <Button x:Name="DarknessButtonScreen" Background="#CC3C3C3C" Click="DarknessButtonScreenClicked">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
@@ -36,7 +37,7 @@
 
             <Rectangle x:Name="MenuPopupRectangle" Fill="#FF1F1F1F" HorizontalAlignment="Center" Height="600" VerticalAlignment="Center" Width="1000" Margin="0" RadiusX="50" RadiusY="50"/>
 
-            <Button x:Name="TaskPageButton" Width="100" Height="100" Margin="0,0,820,420" Foreground="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="Black" Background="Black" Click="TasksClicked" Cursor="Hand">
+            <Button x:Name="TaskPageButton" Style="{StaticResource Expand}" Width="100" Height="100" Margin="0,0,820,420" Foreground="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="Black" Background="Black" Click="TasksClicked" Cursor="Hand">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
@@ -55,7 +56,7 @@
             <TextBlock x:Name="TaskPageTitle" Foreground="White" FontFamily="Consolas" FontWeight="Bold" FontSize="24" Text="Tasks" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,610,495" Width="70"/>
             <TextBlock x:Name="TaskPageText" Foreground="#FF494949" TextWrapping="Wrap" FontFamily="Consolas" Text="The pile of work is ever-increasing. Organise all of your homework and tasks in here." HorizontalAlignment="Center" VerticalAlignment="Center" Margin="120,0,0,408" Width="800" FontSize="24"/>
 
-            <Button x:Name="WellbeingPageButton" Width="100" Height="100" Margin="0,0,820,140" Foreground="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="Black" Background="Black" Click="WellbeingClicked" Cursor="Hand">
+            <Button x:Name="WellbeingPageButton" Style="{StaticResource Expand}" Width="100" Height="100" Margin="0,0,820,140" Foreground="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="Black" Background="Black" Click="WellbeingClicked" Cursor="Hand">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
@@ -72,7 +73,7 @@
             <TextBlock x:Name="WellbeingPageTitle" Foreground="White" FontFamily="Consolas" FontWeight="Bold" FontSize="24" Text="Wellbeing" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,560,215" Width="120"/>
             <TextBlock x:Name="WellbeingPageText" Foreground="#FF494949" TextWrapping="Wrap" FontFamily="Consolas" Text="Stressed out? Unwind from your day with a bit of relaxing mindfulness in here." HorizontalAlignment="Center" VerticalAlignment="Center" Margin="120,0,0,128" Width="800" FontSize="24"/>
 
-            <Button x:Name="GymPageButton" Width="100" Height="100" Margin="0,140,820,0" Foreground="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="Black" Background="Black" Click="GymClicked" Cursor="Hand">
+            <Button x:Name="GymPageButton" Style="{StaticResource Expand}" Width="100" Height="100" Margin="0,140,820,0" Foreground="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="Black" Background="Black" Click="GymClicked" Cursor="Hand">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
@@ -90,7 +91,7 @@
             <TextBlock x:Name="GymPageTitle" Foreground="White" FontFamily="Consolas" FontWeight="Bold" FontSize="24" Text="Gym" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,65,640,0" Width="40"/>
             <TextBlock x:Name="GymPageText" Foreground="#FF494949" TextWrapping="Wrap" FontFamily="Consolas" Text="Every day is another chance to get stronger and to be the best version of you. Manage your workouts in here." HorizontalAlignment="Center" VerticalAlignment="Center" Margin="120,152,0,0" Width="800" FontSize="24"/>
 
-            <Button x:Name="LiveMarksPageButton" Width="100" Height="100" Margin="0,420,820,0" Foreground="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="Black" Background="Black" Click="LiveMarksClicked" Cursor="Hand">
+            <Button x:Name="LiveMarksPageButton" Style="{StaticResource Expand}" Width="100" Height="100" Margin="0,420,820,0" Foreground="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="Black" Background="Black" Click="LiveMarksClicked" Cursor="Hand">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
@@ -101,7 +102,7 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            
+
             <TextBlock x:Name="LiveMarksPageTitle" Foreground="White" FontFamily="Consolas" FontWeight="Bold" FontSize="24" Text="Live Marks" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,345,545,0" Width="135"/>
             <TextBlock x:Name="LiveMarksPageText" Foreground="#FF494949" TextWrapping="Wrap" FontFamily="Consolas" Text="Curious to see your academic progress? Check out your latest marks on your tests and assignments in here." HorizontalAlignment="Center" VerticalAlignment="Center" Margin="120,432,0,0" Width="800" FontSize="24"/>
         </Grid>
