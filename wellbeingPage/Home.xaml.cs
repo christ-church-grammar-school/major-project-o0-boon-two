@@ -45,6 +45,15 @@ namespace wellbeingPage
         {
             minuteHand1.Angle = (DateTime.Now.Minute + (double)DateTime.Now.Second / 60) * 6;
             hourhand1.Angle = (DateTime.Now.Hour + (double)DateTime.Now.Minute / 60) * 15;
-        }       
+        }
+        private void WindowSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            var yratio = e.NewSize.Height / 764.5;
+            var xratio = e.NewSize.Width / 1187;
+
+            SecondHand.Margin = new Thickness(0, 0, xratio * 599, yratio * 384);
+            MinuteHand.Margin = new Thickness(0, 0, xratio * 596, yratio * 382);
+            HourHand.Margin = new Thickness(0, 0, xratio * 593, yratio * 379.5);
+        }
     }
 }

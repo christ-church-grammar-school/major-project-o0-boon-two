@@ -28,15 +28,7 @@ namespace wellbeingPage
             InitializeComponent();
             MainFrame.Content = new Home();
         }
-        private void WindowSizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            var yratio = e.NewSize.Height / 764.5;
-            var xratio = e.NewSize.Width / 1187;
-
-            /*SecondHand.Margin = new Thickness(0, 0, xratio * 599, yratio * 384);
-            MinuteHand.Margin = new Thickness(0, 0, xratio * 596, yratio * 382);
-            HourHand.Margin = new Thickness(0, 0, xratio * 593, yratio * 379.5);*/
-        }
+        
         private void DarknessButtonScreenClicked(object sender, RoutedEventArgs e)
         {
             MenuPopup.Visibility = Visibility.Collapsed;
@@ -51,30 +43,48 @@ namespace wellbeingPage
         private void TasksClicked(object sender, RoutedEventArgs e)
         {
             MenuPopup.Visibility = Visibility.Collapsed;
+            ShowAllPages();
+            TasksSection.Visibility = Visibility.Collapsed;
             MainFrame.Content = new TasksPage();
         }
 
         private void WellbeingClicked(object sender, RoutedEventArgs e)
         {
             MenuPopup.Visibility = Visibility.Collapsed;
+            ShowAllPages();
+            WellbeingSection.Visibility = Visibility.Collapsed;
             MainFrame.Content = new wellbeing();
         }
 
         private void GymClicked(object sender, RoutedEventArgs e)
         {
             MenuPopup.Visibility = Visibility.Collapsed;
+            ShowAllPages();
+            GymSection.Visibility = Visibility.Collapsed;
             MainFrame.Content = new Gym();
         }
 
         private void LiveMarksClicked(object sender, RoutedEventArgs e)
         {
             MenuPopup.Visibility = Visibility.Collapsed;
+            ShowAllPages();
+            MarksSection.Visibility = Visibility.Collapsed;
             MainFrame.Content = new Marks();
         }
         private void HomeClicked(object sender, RoutedEventArgs e)
         {
             MenuPopup.Visibility = Visibility.Collapsed;
+            ShowAllPages();
+            HomeSection.Visibility = Visibility.Collapsed;
             MainFrame.Content = new Home();
+        }
+        void ShowAllPages()
+        {
+            HomeSection.Visibility = Visibility.Visible;
+            TasksSection.Visibility = Visibility.Visible;
+            WellbeingSection.Visibility = Visibility.Visible;
+            GymSection.Visibility = Visibility.Visible;
+            MarksSection.Visibility = Visibility.Visible;
         }
     }
 }
