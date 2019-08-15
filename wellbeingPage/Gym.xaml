@@ -49,13 +49,7 @@
     </Page.Resources>
 
     <Grid>
-
-        <Button Click="AddClicked" x:Name="exercises" Width="123" Height="80" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-            adadad
-        </Button>
-
         <Rectangle Width="1200" Height="800" HorizontalAlignment="Left" VerticalAlignment="Top" Fill="#FF1F1F1F" />
-
         <Button Style="{StaticResource buttonWhiteStyle}" x:Name="Workouts" Margin="0,0,265,20" BorderBrush="#00000000" VerticalAlignment="Bottom" HorizontalAlignment="Right" Click="ExerciseButton">EXERCISES</Button>
         <Button Style="{StaticResource buttonWhiteStyle}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="160,0,0,20" BorderBrush="#00000000" Click="WorkoutButton">WORKOUTS</Button>
         <Button Style="{StaticResource buttonWhiteStyle}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="450,0,0,20" BorderBrush="#00000000" Click="AddButton">ADD WORKOUTS</Button>
@@ -75,7 +69,11 @@
         </Button>
 
         <StackPanel x:Name="workoutsPanel" HorizontalAlignment="Left" Height="650" Margin="0" VerticalAlignment="Top" Width="1040" Background="Transparent" Orientation="Vertical"/>
-        <StackPanel x:Name="addPanel" HorizontalAlignment="Left" Height="650" Margin="0" VerticalAlignment="Top" Width="0" Background="Transparent" Orientation="Vertical"/>
+        <StackPanel x:Name="addPanel" HorizontalAlignment="Left" Height="650" Margin="0" VerticalAlignment="Top" Width="0" Background="Transparent" Orientation="Horizontal">
+            <Button Click="AddClicked" x:Name="exercises" Width="123" Height="80" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                adadad
+            </Button>
+        </StackPanel>
         <StackPanel x:Name="exercisePanel" HorizontalAlignment="Left" Height="650" Margin="0" VerticalAlignment="Top" Width="0" Background="Transparent" Orientation="Vertical"/>
 
     </Grid>

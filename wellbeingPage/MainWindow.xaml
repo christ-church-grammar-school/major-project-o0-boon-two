@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wellbeingPage"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="1200" MinHeight="300" MinWidth="300" >
+        Title="MainWindow" Height="800" Width="1200" MinHeight="300" MinWidth="300" SizeChanged="WindowSizeChanged">
     <Grid Background="#FF1F1F1F" Margin="0,0,0,1.5">
-        <Rectangle Fill="#FF747474" Margin="0,0,667,433" RenderTransformOrigin="1,0.5" HorizontalAlignment="Right" Width="302" VerticalAlignment="Bottom" Height="2">
+        <Ellipse HorizontalAlignment="Center" VerticalAlignment="Center" Width="600" Height="600" Fill="#FFFAD200"/>
+        <Rectangle x:Name="SecondHand" Fill="#FF747474" Margin="0,0,599,384" RenderTransformOrigin="1,0.5" HorizontalAlignment="Right" Width="250" VerticalAlignment="Bottom" Height="2">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -17,7 +18,7 @@
                 </TransformGroup>
             </Rectangle.RenderTransform>
         </Rectangle>
-        <Rectangle Fill="Black" RadiusX="1.75" RadiusY="1.75" Margin="0,0,667,431" RenderTransformOrigin="1,0.5" HorizontalAlignment="Right" Width="230" VerticalAlignment="Bottom" Height="6">
+        <Rectangle x:Name="MinuteHand" Fill="Black" RadiusX="1.75" RadiusY="1.75" Margin="0,0,596,382" RenderTransformOrigin="1,0.5" HorizontalAlignment="Right" Width="200" VerticalAlignment="Bottom" Height="6">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -27,7 +28,7 @@
                 </TransformGroup>
             </Rectangle.RenderTransform>
         </Rectangle>
-        <Rectangle Fill="#FF111111" RadiusX="7" RadiusY="7" Margin="0,0,663,429" RenderTransformOrigin="0.97,0.523" HorizontalAlignment="Right" Width="178" VerticalAlignment="Bottom" Height="11">
+        <Rectangle x:Name="HourHand" Fill="#FF111111" RadiusX="7" RadiusY="7" Margin="0,0,593,379.5" RenderTransformOrigin="0.97,0.523" HorizontalAlignment="Right" Width="150" VerticalAlignment="Bottom" Height="11">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

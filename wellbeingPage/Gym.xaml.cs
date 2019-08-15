@@ -37,6 +37,7 @@ namespace wellbeingPage
         public Gym()
         {
             InitializeComponent();
+            InitiateAddPanel();
         }
         public EventHandler ladder;
         public void ClimbLadder()
@@ -52,7 +53,7 @@ namespace wellbeingPage
         }
 
 
-        //adds a new component
+        //adds a new component to workouts
         private void AddClicked(object sender, RoutedEventArgs e)
         {
             DataRecord();
@@ -93,14 +94,6 @@ namespace wellbeingPage
             //workoutName.Text;
             workoutsPanel.Children.Add(workoutName);
             workoutsPanel.Children.Add(textLine);
-
-            //this is to count the children nodes and whether its full
-            int intCount = 0;
-            foreach (Object obj in workoutsPanel.Children)
-            {
-                intCount++;
-            }
-
         }
 
         private void WorkoutPanel()
@@ -130,11 +123,66 @@ namespace wellbeingPage
         private void AddButton(object sender, RoutedEventArgs e)
         {
             AddPanel();
+       
         }
         private void ExerciseButton(object sender, RoutedEventArgs e)
         {
             ExercisePanel();
         }
+
+        private void InitiateAddPanel()
+        {
+            StackPanel textblockPanel = new StackPanel();
+            
+            TextBlock exercise = new TextBlock();
+            TextBlock sets = new TextBlock();
+            TextBlock reps = new TextBlock();
+            TextBlock rest = new TextBlock();
+           
+            Style style = this.FindResource("textBlockListStyle") as Style;
+            exercise.Style = style;
+            exercise.Text = "Exercise:";
+            sets.Style = style;
+            sets.Text = "Sets:";
+            reps.Style = style;
+            reps.Text = "Reps:";
+            rest.Style = style;
+            rest.Text = "Tempo:";
+
+            Rectangle exerciseRectangle = new Rectangle();
+            Rectangle setsRectangle = new Rectangle();
+            Rectangle repsRectangle = new Rectangle();
+            Rectangle restRectangle = new Rectangle();
+
+            style = this.FindResource("rectangleYellowStyle") as Style;
+            exerciseRectangle.Style = style;
+            exerciseRectangle.Width = exercise.Text.Length * 19.4;
+            setsRectangle.Style = style;
+            setsRectangle.Width = sets.Text.Length * 19.4;
+            repsRectangle.Style = style;
+            repsRectangle.Width = reps.Text.Length * 19.4;
+            restRectangle.Style = style;
+            restRectangle.Width = rest.Text.Length * 19.4;
+
+            exercise.Margin = new Thickness(55, -(workout1.Count * 39.8 * 1.45), 0, 0);
+            sets.Margin = new Thickness(55, -(workout1.Count * 39.8), 0, 0);
+            reps.Margin = new Thickness(55, -(workout1.Count * 39.8 * 0.55), 0, 0);
+            rest.Margin = new Thickness(55, 0, 0, 0);
+
+            textblockPanel.Children.Add(exerciseRectangle);
+            textblockPanel.Children.Add(setsRectangle);
+            textblockPanel.Children.Add(repsRectangle);
+            textblockPanel.Children.Add(restRectangle);
+            textblockPanel.Children.Add(exercise);
+            textblockPanel.Children.Add(sets);
+            textblockPanel.Children.Add(reps);
+            textblockPanel.Children.Add(rest);
+
+            addPanel.Children.Add(textblockPanel);
+
+
+        }
+
     }
     public class GymWorkout
     {

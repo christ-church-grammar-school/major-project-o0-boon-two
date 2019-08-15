@@ -37,33 +37,35 @@ namespace wellbeingPage
         private void addClicked(object sender, RoutedEventArgs e)
         {
             opacityRectangle.Width = 1200;
-            addPopupBottom.Width = 1000;
-            addPopupTop.Width = 1000;
-            addCloseButton.Width = 80;
+            addPopup.Visibility = Visibility.Visible;
         }
 
         private void addCloseClicked(object sender, RoutedEventArgs e)
         {
             opacityRectangle.Width = 0;
-            addPopupBottom.Width = 0;
-            addPopupTop.Width = 0;
-            addCloseButton.Width = 0;
+            addPopup.Visibility = Visibility.Collapsed;
         }
 
         private void infoClicked(object sender, RoutedEventArgs e)
         {
             opacityRectangle.Width = 1200;
-            infoPopupBottom.Width = 1000;
-            infoPopupTop.Width = 1000;
-            infoCloseButton.Width = 80;
+            infoPopup.Visibility = Visibility.Visible;
         }
 
         private void infoCloseClicked(object sender, RoutedEventArgs e)
         {
             opacityRectangle.Width = 0;
-            infoPopupBottom.Width = 0;
-            infoPopupTop.Width = 0;
-            infoCloseButton.Width = 0;
+            infoPopup.Visibility = Visibility.Collapsed;
+        }
+
+        private void menuButtonClicked(object sender, RoutedEventArgs e)
+        {
+            MenuPopup.Visibility = Visibility.Visible;
+        }
+
+        private void DarknessButtonScreenClicked(object sender, RoutedEventArgs e)
+        {
+            MenuPopup.Visibility = Visibility.Collapsed;
         }
     }
 }
