@@ -20,37 +20,9 @@
                     </Grid>
                 </ControlTemplate>
             </Button.Template>
-            <Button.Style>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="RenderTransform">
-                        <Setter.Value>
-                            <ScaleTransform CenterX="40" CenterY="40" ScaleY="1" ScaleX="1" />
-                        </Setter.Value>
-                    </Setter>
-                    <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Trigger.EnterActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation From="1" To="1.2"  AutoReverse="False" Duration="00:00:00.3" Storyboard.TargetProperty="RenderTransform.ScaleY" />
-                                        <DoubleAnimation From="1" To="1.2"  AutoReverse="False" Duration="00:00:00.3" Storyboard.TargetProperty="RenderTransform.ScaleX" />
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </Trigger.EnterActions>
-                            <Trigger.ExitActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation To="1"  Duration="00:00:00.4" Storyboard.TargetProperty="RenderTransform.ScaleY" />
-                                        <DoubleAnimation To="1" Duration="00:00:00.4" Storyboard.TargetProperty="RenderTransform.ScaleX" />
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </Trigger.ExitActions>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </Button.Style>
+            
         </Button>
-        <Grid x:Name="MenuPopup" Visibility="Collapsed">
+        <Grid x:Name="MenuPopup" Visibility="Visible">
             <Button x:Name="DarknessButtonScreen" Background="#CC3C3C3C" Click="DarknessButtonScreenClicked">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
@@ -79,35 +51,6 @@
                         </Grid>
                     </ControlTemplate>
                 </Button.Template>
-                <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="RenderTransform">
-                            <Setter.Value>
-                                <ScaleTransform CenterX="40" CenterY="40" ScaleY="1" ScaleX="1" />
-                            </Setter.Value>
-                        </Setter>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Trigger.EnterActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation From="1" To="1.2"  AutoReverse="False" Duration="00:00:00.3" Storyboard.TargetProperty="RenderTransform.ScaleY" />
-                                            <DoubleAnimation From="1" To="1.2"  AutoReverse="False" Duration="00:00:00.3" Storyboard.TargetProperty="RenderTransform.ScaleX" />
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </Trigger.EnterActions>
-                                <Trigger.ExitActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation To="1"  Duration="00:00:00.4" Storyboard.TargetProperty="RenderTransform.ScaleY" />
-                                            <DoubleAnimation To="1" Duration="00:00:00.4" Storyboard.TargetProperty="RenderTransform.ScaleX" />
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </Trigger.ExitActions>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
             </Button>
             <TextBlock x:Name="TaskPageTitle" Foreground="White" FontFamily="Consolas" FontWeight="Bold" FontSize="24" Text="Tasks" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,610,495" Width="70"/>
             <TextBlock x:Name="TaskPageText" Foreground="#FF494949" TextWrapping="Wrap" FontFamily="Consolas" Text="The pile of work is ever-increasing. Organise all of your homework and tasks in here." HorizontalAlignment="Center" VerticalAlignment="Center" Margin="120,0,0,408" Width="800" FontSize="24"/>
@@ -125,35 +68,6 @@
                         </Grid>
                     </ControlTemplate>
                 </Button.Template>
-                <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="RenderTransform">
-                            <Setter.Value>
-                                <ScaleTransform CenterX="40" CenterY="40" ScaleY="1" ScaleX="1" />
-                            </Setter.Value>
-                        </Setter>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Trigger.EnterActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation From="1" To="1.2"  AutoReverse="False" Duration="00:00:00.3" Storyboard.TargetProperty="RenderTransform.ScaleY" />
-                                            <DoubleAnimation From="1" To="1.2"  AutoReverse="False" Duration="00:00:00.3" Storyboard.TargetProperty="RenderTransform.ScaleX" />
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </Trigger.EnterActions>
-                                <Trigger.ExitActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation To="1"  Duration="00:00:00.4" Storyboard.TargetProperty="RenderTransform.ScaleY" />
-                                            <DoubleAnimation To="1" Duration="00:00:00.4" Storyboard.TargetProperty="RenderTransform.ScaleX" />
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </Trigger.ExitActions>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
             </Button>
             <TextBlock x:Name="WellbeingPageTitle" Foreground="White" FontFamily="Consolas" FontWeight="Bold" FontSize="24" Text="Wellbeing" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,560,215" Width="120"/>
             <TextBlock x:Name="WellbeingPageText" Foreground="#FF494949" TextWrapping="Wrap" FontFamily="Consolas" Text="Stressed out? Unwind from your day with a bit of relaxing mindfulness in here." HorizontalAlignment="Center" VerticalAlignment="Center" Margin="120,0,0,128" Width="800" FontSize="24"/>
@@ -172,35 +86,6 @@
                         </Grid>
                     </ControlTemplate>
                 </Button.Template>
-                <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="RenderTransform">
-                            <Setter.Value>
-                                <ScaleTransform CenterX="40" CenterY="40" ScaleY="1" ScaleX="1" />
-                            </Setter.Value>
-                        </Setter>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Trigger.EnterActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation From="1" To="1.2"  AutoReverse="False" Duration="00:00:00.3" Storyboard.TargetProperty="RenderTransform.ScaleY" />
-                                            <DoubleAnimation From="1" To="1.2"  AutoReverse="False" Duration="00:00:00.3" Storyboard.TargetProperty="RenderTransform.ScaleX" />
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </Trigger.EnterActions>
-                                <Trigger.ExitActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation To="1"  Duration="00:00:00.4" Storyboard.TargetProperty="RenderTransform.ScaleY" />
-                                            <DoubleAnimation To="1" Duration="00:00:00.4" Storyboard.TargetProperty="RenderTransform.ScaleX" />
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </Trigger.ExitActions>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
             </Button>
             <TextBlock x:Name="GymPageTitle" Foreground="White" FontFamily="Consolas" FontWeight="Bold" FontSize="24" Text="Gym" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,65,640,0" Width="40"/>
             <TextBlock x:Name="GymPageText" Foreground="#FF494949" TextWrapping="Wrap" FontFamily="Consolas" Text="Every day is another chance to get stronger and to be the best version of you. Manage your workouts in here." HorizontalAlignment="Center" VerticalAlignment="Center" Margin="120,152,0,0" Width="800" FontSize="24"/>
@@ -215,36 +100,8 @@
                         </Grid>
                     </ControlTemplate>
                 </Button.Template>
-                <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="RenderTransform">
-                            <Setter.Value>
-                                <ScaleTransform CenterX="40" CenterY="40" ScaleY="1" ScaleX="1" />
-                            </Setter.Value>
-                        </Setter>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Trigger.EnterActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation From="1" To="1.2"  AutoReverse="False" Duration="00:00:00.3" Storyboard.TargetProperty="RenderTransform.ScaleY" />
-                                            <DoubleAnimation From="1" To="1.2"  AutoReverse="False" Duration="00:00:00.3" Storyboard.TargetProperty="RenderTransform.ScaleX" />
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </Trigger.EnterActions>
-                                <Trigger.ExitActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation To="1"  Duration="00:00:00.4" Storyboard.TargetProperty="RenderTransform.ScaleY" />
-                                            <DoubleAnimation To="1" Duration="00:00:00.4" Storyboard.TargetProperty="RenderTransform.ScaleX" />
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </Trigger.ExitActions>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
             </Button>
+            
             <TextBlock x:Name="LiveMarksPageTitle" Foreground="White" FontFamily="Consolas" FontWeight="Bold" FontSize="24" Text="Live Marks" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,345,545,0" Width="135"/>
             <TextBlock x:Name="LiveMarksPageText" Foreground="#FF494949" TextWrapping="Wrap" FontFamily="Consolas" Text="Curious to see your academic progress? Check out your latest marks on your tests and assignments in here." HorizontalAlignment="Center" VerticalAlignment="Center" Margin="120,432,0,0" Width="800" FontSize="24"/>
         </Grid>

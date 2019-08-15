@@ -50,22 +50,31 @@ namespace wellbeingPage
 
         private void TasksClicked(object sender, RoutedEventArgs e)
         {
+            MenuPopup.Visibility = Visibility.Collapsed;
             MainFrame.Content = new TasksPage();
         }
 
         private void WellbeingClicked(object sender, RoutedEventArgs e)
         {
+            MenuPopup.Visibility = Visibility.Collapsed;
             MainFrame.Content = new wellbeing();
         }
 
         private void GymClicked(object sender, RoutedEventArgs e)
         {
+            MenuPopup.Visibility = Visibility.Collapsed;
             MainFrame.Content = new Gym();
         }
 
         private void LiveMarksClicked(object sender, RoutedEventArgs e)
         {
+            MenuPopup.Visibility = Visibility.Collapsed;
             MainFrame.Content = new Marks();
+        }
+        private void HomeClicked(object sender, RoutedEventArgs e)
+        {
+            MenuPopup.Visibility = Visibility.Collapsed;
+            MainFrame.Content = new Home();
         }
     }
 }

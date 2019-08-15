@@ -21,20 +21,6 @@
             <Button x:Name="helpButton" Content="Help" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="190" Background="#FFFAD200" BorderThickness="0" BorderBrush="#FFFAD200" FontFamily="Consolas" Foreground="White" Height="40" FontSize="20" FontWeight="Bold"/>
         </Border>
 
-        <Button x:Name="menuButton" Width="80" Height="80" Margin="0,20,40,0" Foreground="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Top" BorderBrush="Black" Background="Black" Click="menuButtonClicked">
-            <Button.Template>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Grid>
-                        <Ellipse Stroke="Black" StrokeThickness="1" Fill="#FFFAD200" Width="80" Height="80"/>
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <Rectangle Fill="White" HorizontalAlignment="Left" Height="6" Stroke="#00000000" VerticalAlignment="Top" Margin="22.5,25,0,0" Grid.Row="1" Width="35" RadiusX="3" RadiusY="3"/>
-                        <Rectangle Fill="White" HorizontalAlignment="Left" Height="6" Stroke="#00000000" VerticalAlignment="Top" Margin="22.5,37,0,0" Grid.Row="1" Width="35" RadiusX="3" RadiusY="3"/>
-                        <Rectangle Fill="White" HorizontalAlignment="Left" Height="6" Stroke="#00000000" VerticalAlignment="Top" Margin="22.5,49,0,0" Grid.Row="1" Width="35" RadiusX="3" RadiusY="3"/>
-                    </Grid>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
-
         <Button x:Name="addButton" Width="80" Height="80" Margin="0,0,40,20" Foreground="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Bottom" BorderBrush="Black" Background="Black" Click="addClicked">
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
