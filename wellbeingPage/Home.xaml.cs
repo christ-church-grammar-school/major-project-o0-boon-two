@@ -28,6 +28,10 @@ namespace wellbeingPage
         {
             InitializeComponent();
 
+            secondHand.Angle = (DateTime.Now.Second + (double)DateTime.Now.Millisecond / 1000) * 6;
+            minuteHand1.Angle = (DateTime.Now.Minute + (double)DateTime.Now.Second / 60) * 6;
+            hourhand1.Angle = (DateTime.Now.Hour + (double)DateTime.Now.Minute / 60) * 15;
+
             seconds.Tick += new EventHandler(OneSecond);
             seconds.Interval = new TimeSpan(0, 0, 1);
             seconds.Start();

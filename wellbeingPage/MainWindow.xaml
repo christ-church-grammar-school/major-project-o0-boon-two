@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:wellbeingPage"
         mc:Ignorable="d"
         
-        Title="MainWindow" Height="800" Width="1200" MinHeight="300" MinWidth="300">
+        Title="Bumblebee" Height="800" Width="1200" MinHeight="300" MinWidth="300">
     <Grid>
         <Frame NavigationUIVisibility="Hidden" Name="MainFrame" Margin="0,0,0,0"/>
         <Button Style="{StaticResource Expand}" x:Name="MenuButton" Width="80" Height="80" Margin="0,20,40,0" Foreground="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Top" Click="MenuButtonClicked" Cursor="Hand">
@@ -23,7 +23,7 @@
             </Button.Template>
 
         </Button>
-        <Grid x:Name="MenuPopup" Visibility="Visible">
+        <Grid x:Name="MenuPopup" Visibility="Collapsed">
 
             <Button x:Name="DarknessButtonScreen" Background="#CC3C3C3C" Click="DarknessButtonScreenClicked">
                 <Button.Template>
