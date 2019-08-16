@@ -23,7 +23,7 @@
             </Button.Template>
 
         </Button>
-        <Grid x:Name="MenuPopup" Visibility="Visible">
+        <Grid x:Name="MenuPopup" Visibility="Collapsed">
 
             <Button x:Name="DarknessButtonScreen" Background="#CC3C3C3C" Click="DarknessButtonScreenClicked" Margin="0,0,0,-17.5">
                 <Button.Template>
