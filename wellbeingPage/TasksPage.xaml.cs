@@ -790,8 +790,6 @@ namespace wellbeingPage
             {
                 Underline.Margin = new Thickness(OtherButton.Margin.Left + 1, 0, 0, OtherButton.Margin.Bottom - 5);
             }
-
-            MenuButton.Margin = new Thickness(0, yratio * 20, xratio * 40, 0);
             ScrollUpButton.Margin = new Thickness(0, yratio * 220, xratio * 55, 0);
             PageNumberTextBlock.Margin = new Thickness(xratio * 1040, 0, 0, yratio * 120);
             ScrollDownButton.Margin = new Thickness(0, 0, xratio * 55, yratio * 335);
