@@ -16,15 +16,10 @@ namespace wellbeingPage
             driverService.HideCommandPromptWindow = true;
 
             var Options = new ChromeOptions();
-            //Options.AddArgument("--window-position=-32000,-32000");  //sets chrome window to out of screen (-32000, -320000)
-            Options.AddAdditionalCapability("useAutomationExtension", false);
-            //Options.AddArgument("--headless");
-            //Options.AddArgument("--hide"); 
-            ChromeDriver driver = new ChromeDriver(driverService,Options);
 
-            driver.Navigate().GoToUrl("https://parentportal.ccgs.wa.edu.au/");
-            System.Threading.Thread.Sleep(5000);
+            Options.AddAdditionalCapability("useAutomationExtension", false);
+
+            var Driver = new ChromeDriver(driverService,Options);
         }
     }
 }
-    
