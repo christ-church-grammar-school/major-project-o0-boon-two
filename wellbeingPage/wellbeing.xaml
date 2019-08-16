@@ -13,29 +13,15 @@
         <Rectangle x:Name="rectangle1" Fill="#FF191919" HorizontalAlignment="Left" Height="120" Margin="400,0,0,0" Stroke="#FF191919" VerticalAlignment="Top" Width="800"/>
         <Rectangle Fill="#FF282828" HorizontalAlignment="Left" Height="680" Margin="400,120,0,0" Stroke="#FF191919" VerticalAlignment="Top" Width="800"/>
 
-        <Border x:Name="infoBorder" CornerRadius="15" BorderBrush="#FFFAD200" BorderThickness="7" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="200" Height="50" Margin="100,0,0,90">
+        <Border x:Name="infoBorder" Style="{StaticResource Expands}" CornerRadius="15" BorderBrush="#FFFAD200" BorderThickness="7" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="200" Height="50" Margin="100,0,0,90">
             <Button x:Name="infoButton" Content="Information" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="190" Background="#FFFAD200" BorderThickness="0" BorderBrush="#FFFAD200" FontFamily="Consolas" Foreground="White" Height="40" FontSize="20" FontWeight="Bold" Click="infoClicked"/>
         </Border>
 
-        <Border x:Name="helpBorder" CornerRadius="15" BorderBrush="#FFFAD200" BorderThickness="7" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="200" Height="50" Margin="100,0,0,20">
+        <Border x:Name="helpBorder" Style="{StaticResource Expands}" CornerRadius="15" BorderBrush="#FFFAD200" BorderThickness="7" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="200" Height="50" Margin="100,0,0,20">
             <Button x:Name="helpButton" Content="Help" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="190" Background="#FFFAD200" BorderThickness="0" BorderBrush="#FFFAD200" FontFamily="Consolas" Foreground="White" Height="40" FontSize="20" FontWeight="Bold"/>
         </Border>
 
-        <Button x:Name="menuButton" Width="80" Height="80" Margin="0,20,40,0" Foreground="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Top" BorderBrush="Black" Background="Black" Click="menuButtonClicked">
-            <Button.Template>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Grid>
-                        <Ellipse Stroke="Black" StrokeThickness="1" Fill="#FFFAD200" Width="80" Height="80"/>
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <Rectangle Fill="White" HorizontalAlignment="Left" Height="6" Stroke="#00000000" VerticalAlignment="Top" Margin="22.5,25,0,0" Grid.Row="1" Width="35" RadiusX="3" RadiusY="3"/>
-                        <Rectangle Fill="White" HorizontalAlignment="Left" Height="6" Stroke="#00000000" VerticalAlignment="Top" Margin="22.5,37,0,0" Grid.Row="1" Width="35" RadiusX="3" RadiusY="3"/>
-                        <Rectangle Fill="White" HorizontalAlignment="Left" Height="6" Stroke="#00000000" VerticalAlignment="Top" Margin="22.5,49,0,0" Grid.Row="1" Width="35" RadiusX="3" RadiusY="3"/>
-                    </Grid>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
-
-        <Button x:Name="addButton" Width="80" Height="80" Margin="0,0,40,20" Foreground="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Bottom" BorderBrush="Black" Background="Black" Click="addClicked">
+        <Button x:Name="addButton" Style="{StaticResource Expand}" Width="80" Height="80" Margin="0,0,40,20" Foreground="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Bottom" BorderBrush="Black" Background="Black" Click="addClicked">
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid>

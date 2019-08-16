@@ -54,20 +54,6 @@
         <Button Style="{StaticResource buttonWhiteStyle}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="160,0,0,20" BorderBrush="#00000000" Click="WorkoutButton">WORKOUTS</Button>
         <Button Style="{StaticResource buttonWhiteStyle}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="450,0,0,20" BorderBrush="#00000000" Click="AddButton">ADD WORKOUTS</Button>
 
-        <Button x:Name="MenuButton" Width="80" Height="80" Margin="0,40,40,0" Foreground="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Top" BorderBrush="Black" Background="Black">
-            <Button.Template>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Grid>
-                        <Ellipse Stroke="Black" StrokeThickness="1" Fill="#FFFAD200" Width="80" Height="80"/>
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <Rectangle Fill="White" HorizontalAlignment="Left" Height="6" Stroke="#00000000" VerticalAlignment="Top" Margin="22.5,25,0,0" Grid.Row="1" Width="35" RadiusX="3" RadiusY="3"/>
-                        <Rectangle Fill="White" HorizontalAlignment="Left" Height="6" Stroke="#00000000" VerticalAlignment="Top" Margin="22.5,37,0,0" Grid.Row="1" Width="35" RadiusX="3" RadiusY="3"/>
-                        <Rectangle Fill="White" HorizontalAlignment="Left" Height="6" Stroke="#00000000" VerticalAlignment="Top" Margin="22.5,49,0,0" Grid.Row="1" Width="35" RadiusX="3" RadiusY="3"/>
-                    </Grid>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
-
         <StackPanel x:Name="workoutsPanel" HorizontalAlignment="Left" Height="650" Margin="0" VerticalAlignment="Top" Width="1040" Background="Transparent" Orientation="Vertical"/>
         <StackPanel x:Name="addPanel" HorizontalAlignment="Left" Height="650" Margin="0" VerticalAlignment="Top" Width="0" Background="Transparent" Orientation="Horizontal">
         </StackPanel>
