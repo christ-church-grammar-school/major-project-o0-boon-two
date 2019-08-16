@@ -36,7 +36,7 @@ namespace wellbeingPage
             milliseconds.Tick += UpdateSecondHand;
             milliseconds.Start();
 
-            GetStudentData.Start();
+            //GetStudentData.Start();
 
         }
         void UpdateSecondHand(object sender, object e)
