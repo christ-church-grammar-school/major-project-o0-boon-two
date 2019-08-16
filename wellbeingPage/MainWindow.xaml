@@ -23,9 +23,9 @@
             </Button.Template>
 
         </Button>
-        <Grid x:Name="MenuPopup" Visibility="Collapsed">
+        <Grid x:Name="MenuPopup" Visibility="Visible">
 
-            <Button x:Name="DarknessButtonScreen" Background="#CC3C3C3C" Click="DarknessButtonScreenClicked">
+            <Button x:Name="DarknessButtonScreen" Background="#CC3C3C3C" Click="DarknessButtonScreenClicked" Margin="0,0,0,-17.5">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
@@ -37,24 +37,25 @@
             </Button>
 
             <Rectangle x:Name="MenuPopupRectangle" Fill="#FF1F1F1F" HorizontalAlignment="Center" Height="600" VerticalAlignment="Center" Width="1000" Margin="0" RadiusX="50" RadiusY="50"/>
-            <StackPanel HorizontalAlignment="Center" Height="600" VerticalAlignment="Center" Width="1346" Margin="-51,128,-100,44.5">
+            <StackPanel HorizontalAlignment="Center" Height="560" VerticalAlignment="Center" Width="1346" Margin="0,40,0,0">
                 <Grid x:Name="HomeSection" Height="140" HorizontalAlignment="Center" VerticalAlignment="Top" Visibility="Collapsed">
-                    <Button x:Name="HomePageButton" Style="{StaticResource Expand}" Width="100" Margin="211,10,1035,0" Foreground="{x:Null}" HorizontalAlignment="Center" BorderBrush="Black" Background="Black" Click="HomeClicked" Cursor="Hand" Height="100" VerticalAlignment="Top">
+                    <Button x:Name="HomePageButton" Style="{StaticResource Expand}" Width="100" Margin="0,0,825,0" Foreground="{x:Null}" HorizontalAlignment="Center" BorderBrush="Black" Background="Black" Click="HomeClicked" Cursor="Hand" Height="100" VerticalAlignment="Top">
                         <Button.Template>
                             <ControlTemplate TargetType="{x:Type Button}">
                                 <Grid>
                                     <Ellipse Stroke="Black" StrokeThickness="1" Fill="#FFFAD200" Width="100" Height="100"/>
-                                    <Polygon Points="35,40 70,70, 0,70" Stroke="Black" Fill="Black" Margin="14,-18,18,56" />
-                                    <Rectangle Fill="Black" HorizontalAlignment="Left" Height="37" Stroke="#00000000" VerticalAlignment="Top" Margin="30,39,0,0" Grid.Row="0" Width="38" RadiusX="3.5" RadiusY="3.5"/>
+                                    <Polyline Points="25,50 50,25 75,50" StrokeThickness="5" Stroke="Black"/>
+                                    <Polyline Points="35,50 35,70 65,70 65,50" StrokeThickness="5" Stroke="Black"/>
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Grid>
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
-                    <TextBlock x:Name="HomePageTitle" Foreground="White" FontFamily="Consolas" FontWeight="Bold" FontSize="24" Text="Home" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="333,0,943,0" Width="70" Height="83"/>
-                    <TextBlock x:Name="HomePageText" Foreground="#FF494949" TextWrapping="Wrap" FontFamily="Consolas" Text="Someone put somthing here" HorizontalAlignment="Center" Margin="333,29,213,0" Width="800" FontSize="24" Height="56" VerticalAlignment="Top"/>
+                    <TextBlock x:Name="HomePageTitle" Foreground="White" FontFamily="Consolas" FontWeight="Bold" FontSize="24" Text="Home" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,560,0" Width="120"/>
+                    <TextBlock x:Name="HomePageText" Foreground="#FF494949" TextWrapping="Wrap" FontFamily="Consolas" Text="Need the time? Forgot to check your notifications? Go home." HorizontalAlignment="Center" Margin="120,30,0,0" Width="800" FontSize="24" Height="56" VerticalAlignment="Top"/>
                 </Grid>
                 <Grid x:Name="TasksSection" Height="140" HorizontalAlignment="Center" VerticalAlignment="Top" >
-                    <Button x:Name="TaskPageButton" Style="{StaticResource Expand}" Width="100" Margin="211,10,1035,0" Foreground="{x:Null}" HorizontalAlignment="Center" BorderBrush="Black" Background="Black" Click="TasksClicked" Cursor="Hand" Height="100" VerticalAlignment="Top">
+                    <Button x:Name="TaskPageButton" Style="{StaticResource Expand}" Width="100" Margin="0,0,825,0" Foreground="{x:Null}" HorizontalAlignment="Center" BorderBrush="Black" Background="Black" Click="TasksClicked" Cursor="Hand" Height="100" VerticalAlignment="Top">
                         <Button.Template>
                             <ControlTemplate TargetType="{x:Type Button}">
                                 <Grid>
@@ -70,11 +71,11 @@
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
-                    <TextBlock x:Name="TaskPageTitle" Foreground="White" FontFamily="Consolas" FontWeight="Bold" FontSize="24" Text="Tasks" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="333,0,943,0" Width="70" Height="83"/>
-                    <TextBlock x:Name="TaskPageText" Foreground="#FF494949" TextWrapping="Wrap" FontFamily="Consolas" Text="The pile of work is ever-increasing. Organise all of your homework and tasks in here." HorizontalAlignment="Center" Margin="333,29,213,0" Width="800" FontSize="24" Height="56" VerticalAlignment="Top"/>
+                    <TextBlock x:Name="TaskPageTitle" Foreground="White" FontFamily="Consolas" FontWeight="Bold" FontSize="24" Text="Tasks" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,560,0" Width="120"/>
+                    <TextBlock x:Name="TaskPageText" Foreground="#FF494949" TextWrapping="Wrap" FontFamily="Consolas" Text="The pile of work is ever-increasing. Organise all of your homework and tasks in here." HorizontalAlignment="Center" Margin="120,30,0,0" Width="800" FontSize="24" Height="56" VerticalAlignment="Top"/>
                 </Grid>
                 <Grid x:Name="WellbeingSection" Height="140" HorizontalAlignment="Center" VerticalAlignment="Top">
-                    <Button x:Name="WellbeingPageButton" Style="{StaticResource Expand}" Width="100" Height="100" Margin="213,2,1033,0" Foreground="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Top" BorderBrush="Black" Background="Black" Click="WellbeingClicked" Cursor="Hand">
+                    <Button x:Name="WellbeingPageButton" Style="{StaticResource Expand}" Width="100" Height="100" Margin="0,0,825,0" Foreground="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Top" BorderBrush="Black" Background="Black" Click="WellbeingClicked" Cursor="Hand">
                         <Button.Template>
                             <ControlTemplate TargetType="{x:Type Button}">
                                 <Grid>
@@ -88,12 +89,12 @@
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
-                    <TextBlock x:Name="WellbeingPageTitle" Foreground="White" FontFamily="Consolas" FontWeight="Bold" FontSize="24" Text="Wellbeing" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="333,0,893,0" Width="120"/>
-                    <TextBlock x:Name="WellbeingPageText" Foreground="#FF494949" TextWrapping="Wrap" FontFamily="Consolas" Text="Stressed out? Unwind from your day with a bit of relaxing mindfulness in here." HorizontalAlignment="Center" VerticalAlignment="Top" Margin="333,30,213,0" Width="800" FontSize="24"/>
+                    <TextBlock x:Name="WellbeingPageTitle" Foreground="White" FontFamily="Consolas" FontWeight="Bold" FontSize="24" Text="Wellbeing" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,560,0" Width="120"/>
+                    <TextBlock x:Name="WellbeingPageText" Foreground="#FF494949" TextWrapping="Wrap" FontFamily="Consolas" Text="Stressed out? Unwind from your day with a bit of relaxing mindfulness in here." HorizontalAlignment="Center" VerticalAlignment="Top" Margin="120,30,0,0" Width="800" FontSize="24"/>
 
                 </Grid>
                 <Grid x:Name="GymSection" Height="140" HorizontalAlignment="Center" VerticalAlignment="Top">
-                    <Button x:Name="GymPageButton" Style="{StaticResource Expand}" Width="100" Height="100" Margin="213,0,1033,0" Foreground="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Top" BorderBrush="Black" Background="Black" Click="GymClicked" Cursor="Hand">
+                    <Button x:Name="GymPageButton" Style="{StaticResource Expand}" Width="100" Height="100" Margin="0,0,825,0" Foreground="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Top" BorderBrush="Black" Background="Black" Click="GymClicked" Cursor="Hand">
                         <Button.Template>
                             <ControlTemplate TargetType="{x:Type Button}">
                                 <Grid>
@@ -108,12 +109,12 @@
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
-                    <TextBlock x:Name="GymPageTitle" Foreground="White" FontFamily="Consolas" FontWeight="Bold" FontSize="24" Text="Gym" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="333,0,973,74" Width="40"/>
-                    <TextBlock x:Name="GymPageText" Foreground="#FF494949" TextWrapping="Wrap" FontFamily="Consolas" Text="Every day is another chance to get stronger and to be the best version of you. Manage your workouts in here." HorizontalAlignment="Center" VerticalAlignment="Top" Margin="333,28,213,0" Width="800" FontSize="24"/>
+                    <TextBlock x:Name="GymPageTitle" Foreground="White" FontFamily="Consolas" FontWeight="Bold" FontSize="24" Text="Gym" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,560,0" Width="120"/>
+                    <TextBlock x:Name="GymPageText" Foreground="#FF494949" TextWrapping="Wrap" FontFamily="Consolas" Text="Every day is another chance to get stronger and to be the best version of you. Manage your workouts in here." HorizontalAlignment="Center" VerticalAlignment="Top" Margin="120,30,0,0" Width="800" FontSize="24"/>
 
                 </Grid>
                 <Grid x:Name="MarksSection" Height="140" HorizontalAlignment="Center" VerticalAlignment="Top">
-                    <Button x:Name="LiveMarksPageButton" Style="{StaticResource Expand}" Width="100" Height="100" Margin="213,0,1033,0" Foreground="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Top" BorderBrush="Black" Background="Black" Click="LiveMarksClicked" Cursor="Hand">
+                    <Button x:Name="LiveMarksPageButton" Style="{StaticResource Expand}" Width="100" Height="100" Margin="0,0,825,0" Foreground="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Top" BorderBrush="Black" Background="Black" Click="LiveMarksClicked" Cursor="Hand">
                         <Button.Template>
                             <ControlTemplate TargetType="{x:Type Button}">
                                 <Grid>
@@ -124,9 +125,8 @@
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
-
-                    <TextBlock x:Name="LiveMarksPageTitle" Foreground="White" FontFamily="Consolas" FontWeight="Bold" FontSize="24" Text="Live Marks" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="333,0,878,74" Width="135"/>
-                    <TextBlock x:Name="LiveMarksPageText" Foreground="#FF494949" TextWrapping="Wrap" FontFamily="Consolas" Text="Curious to see your academic progress? Check out your latest marks on your tests and assignments in here." HorizontalAlignment="Center" VerticalAlignment="Top" Margin="333,33,213,0" Width="800" FontSize="24"/>
+                    <TextBlock x:Name="LiveMarksPageTitle" Foreground="White" FontFamily="Consolas" FontWeight="Bold" FontSize="24" Text="Live Marks" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,545,0" Width="135"/>
+                    <TextBlock x:Name="LiveMarksPageText" Foreground="#FF494949" TextWrapping="Wrap" FontFamily="Consolas" Text="Curious to see your academic progress? Check out your latest marks on your tests and assignments in here." HorizontalAlignment="Center" VerticalAlignment="Top" Margin="120,30,0,0" Width="800" FontSize="24"/>
 
                 </Grid>
 
