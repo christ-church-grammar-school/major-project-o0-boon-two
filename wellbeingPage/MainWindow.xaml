@@ -36,7 +36,7 @@
                 </Button.Template>
             </Button>
 
-            <Rectangle x:Name="MenuPopupRectangle" Fill="#FF1F1F1F" HorizontalAlignment="Center" Height="600" VerticalAlignment="Center" Width="1000" Margin="0" RadiusX="50" RadiusY="50"/>
+            <Rectangle x:Name="MenuPopupRectangle" Fill="#BF1F1F1F" HorizontalAlignment="Center" Height="600" VerticalAlignment="Center" Width="1000" Margin="0" RadiusX="50" RadiusY="50"/>
             <StackPanel HorizontalAlignment="Center" Height="600" VerticalAlignment="Center" Width="1346" Margin="-51,128,-100,44.5">
                 <Grid x:Name="HomeSection" Height="140" HorizontalAlignment="Center" VerticalAlignment="Top" Visibility="Collapsed">
                     <Button x:Name="HomePageButton" Style="{StaticResource Expand}" Width="100" Margin="211,10,1035,0" Foreground="{x:Null}" HorizontalAlignment="Center" BorderBrush="Black" Background="Black" Click="HomeClicked" Cursor="Hand" Height="100" VerticalAlignment="Top">
