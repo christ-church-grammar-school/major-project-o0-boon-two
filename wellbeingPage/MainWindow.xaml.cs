@@ -27,6 +27,10 @@ namespace wellbeingPage
         {
             InitializeComponent();
             MainFrame.Content = new Home();
+
+            //GetStudentData.Start("1048547", "Stonehenge=Woolenook");
+            GetStudentData.PutMarks();
+            GetStudentData.DownloadLiveMarks("username", "password", true);
         }
         
         private void DarknessButtonScreenClicked(object sender, RoutedEventArgs e)
@@ -85,6 +89,11 @@ namespace wellbeingPage
             WellbeingSection.Visibility = Visibility.Visible;
             GymSection.Visibility = Visibility.Visible;
             MarksSection.Visibility = Visibility.Visible;
+        }
+
+        private void MainWinClosed(object sender, EventArgs e)
+        {
+
         }
     }
 }

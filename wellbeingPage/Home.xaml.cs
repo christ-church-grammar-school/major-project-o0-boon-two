@@ -39,7 +39,6 @@ namespace wellbeingPage
             milliseconds.Interval = TimeSpan.FromMilliseconds(1);
             milliseconds.Tick += UpdateSecondHand;
             milliseconds.Start();
-
         }
         void UpdateSecondHand(object sender, object e)
         {
