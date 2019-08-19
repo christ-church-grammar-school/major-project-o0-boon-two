@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Media;
 
 namespace wellbeingPage
 {
@@ -66,6 +67,11 @@ namespace wellbeingPage
         private void DarknessButtonScreenClicked(object sender, RoutedEventArgs e)
         {
             MenuPopup.Visibility = Visibility.Collapsed;
+        }
+
+        private void soundBeep(object sender, RoutedEventArgs e)
+        {
+            SystemSounds.Hand.Play();
         }
     }
 }
