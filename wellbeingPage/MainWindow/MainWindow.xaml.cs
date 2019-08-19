@@ -13,7 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-
 namespace wellbeingPage
 {
     /// <summary>
@@ -30,9 +29,11 @@ namespace wellbeingPage
 
             List<string> Lines = new List<string>(System.IO.File.ReadAllLines("data/cred.txt"));
 
+            //Preferences SettingsWin = new Preferences();
+            //SettingsWin.Show();
             //GetStudentData.Start("1048547", "Stonehenge=Woolenook");
             GetStudentData.PutMarks();
-            GetStudentData.DownloadLiveMarks(Lines[0],Lines[1], true);
+            //GetStudentData.DownloadLiveMarks(Lines[0],Lines[1], true);
         }
         
         private void DarknessButtonScreenClicked(object sender, RoutedEventArgs e)
