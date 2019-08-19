@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using wellbeingPage.Settings;
 
 namespace wellbeingPage
 {
@@ -27,11 +29,20 @@ namespace wellbeingPage
             InitializeComponent();
             MainFrame.Content = new Home();
 
-            List<string> Lines = new List<string>(System.IO.File.ReadAllLines("data/cred.txt"));
+            /*
+            System.Threading.Thread.Sleep(1000);
 
-            //Preferences SettingsWin = new Preferences();
-            //SettingsWin.Show();
-            //GetStudentData.Start("1048547", "Stonehenge=Woolenook");
+            if (!File.Exists("data/cred.txt")) // IF THIS PERSON HAS NOT USED THE APP BEFORE
+            {
+
+                Preferences SettingsWin = new Preferences();
+                SettingsWin.Show();
+                SettingsWin.MainFrame.Content = new Login();
+                this.Close();
+            }
+            */
+            List<string> Lines = new List<string>(System.IO.File.ReadAllLines("data/cred.txt"));
+            
             GetStudentData.PutMarks();
             //GetStudentData.DownloadLiveMarks(Lines[0],Lines[1], true);
         }
@@ -96,7 +107,7 @@ namespace wellbeingPage
 
         private void MainWinClosed(object sender, EventArgs e)
         {
-
+            
         }
     }
 }

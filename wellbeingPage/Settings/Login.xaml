@@ -17,9 +17,10 @@
         <TextBlock Margin="196,25,196,0"  FontSize="36" FontFamily="Consolas"  TextWrapping="Wrap" Text="Parent Portal Login" VerticalAlignment="Top" Foreground="White" Height="48"/>
         <TextBlock HorizontalAlignment="Center" Margin="121,78,164,0"  FontSize="14" FontFamily="Consolas"  TextWrapping="Wrap" Text="Please enter your parent portal details so that the app can display your Live Marks results and your timetable." VerticalAlignment="Top" Foreground="#FFB2B2B2" TextAlignment="Center"/>
         <Border x:Name="helpBorder" Style="{StaticResource Expands}" Grid.Column="0" CornerRadius="15" BorderBrush="#FFFAD200" BorderThickness="8" VerticalAlignment="Bottom" Height="50" Margin="270,0,0,21" HorizontalAlignment="Left" Width="200">
-            <Button x:Name="helpButton"  Content="Input Marks" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="190" Background="#FFFAD200" BorderThickness="0" BorderBrush="#FFFAD200" FontFamily="Consolas" Foreground="Black" Height="40" FontSize="20" FontWeight="Bold"/>
+            <Button x:Name="helpButton"  Content="Submit" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="190" Background="#FFFAD200" BorderThickness="0" BorderBrush="#FFFAD200" FontFamily="Consolas" Foreground="Black" Height="40" FontSize="20" FontWeight="Bold"/>
         </Border>
         <Rectangle x:Name="Underline_Copy1"  Fill="#FF1F1F1F" HorizontalAlignment="Left" Height="2" Stroke="White" VerticalAlignment="Top" Width="496" Margin="98,219,0,0" StrokeThickness="3"/>
-        <Button Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="98,342,0,0" Background="{x:Null}" BorderBrush="{x:Null}"/>
+        <Button Content="Skip" HorizontalAlignment="Left" VerticalAlignment="Top" Width="88" Margin="130,385,0,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF797979" FontStyle="Italic" FontSize="22" Cursor="Hand"/>
+        <Rectangle x:Name="Underline_Copy2" HorizontalAlignment="Left" Height="1" Stroke="#FF777777" VerticalAlignment="Top" Width="46" Margin="148,412,0,0" StrokeThickness="3"/>
     </Grid>
 </Page>

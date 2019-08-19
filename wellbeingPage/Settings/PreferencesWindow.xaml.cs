@@ -23,7 +23,8 @@ namespace wellbeingPage
         public Preferences()
         {
             InitializeComponent();
-            MainFrame.Content = new Login();
+       
         }
+        
     }
 }
