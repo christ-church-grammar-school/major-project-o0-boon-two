@@ -5,41 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wellbeingPage"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="1200" MinHeight="300" MinWidth="300" SizeChanged="WindowSizeChanged">
-    <Grid Background="#FF1F1F1F" Margin="0,0,0,1.5">
-        <Ellipse HorizontalAlignment="Center" VerticalAlignment="Center" Width="600" Height="600" Fill="#FFFAD200"/>
-        <Rectangle x:Name="SecondHand" Fill="#FF747474" Margin="0,0,599,384" RenderTransformOrigin="1,0.5" HorizontalAlignment="Right" Width="250" VerticalAlignment="Bottom" Height="2">
-            <Rectangle.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform x:Name="secondHand" Angle="0"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Rectangle x:Name="MinuteHand" Fill="Black" RadiusX="1.75" RadiusY="1.75" Margin="0,0,596,382" RenderTransformOrigin="1,0.5" HorizontalAlignment="Right" Width="200" VerticalAlignment="Bottom" Height="6">
-            <Rectangle.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform x:Name="minuteHand1" Angle="0"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Rectangle x:Name="HourHand" Fill="#FF111111" RadiusX="7" RadiusY="7" Margin="0,0,593,379.5" RenderTransformOrigin="0.97,0.523" HorizontalAlignment="Right" Width="150" VerticalAlignment="Bottom" Height="11">
-            <Rectangle.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform x:Name="hourhand1" Angle="0"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-
-        <Button x:Name="MenuButton" Width="80" Height="80" Margin="0,20,40,0" Foreground="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Top" Click="MenuButtonClicked" Cursor="Hand">
+        
+        Title="Bumblebee" Height="800" Width="1200" MinHeight="300" MinWidth="300">
+    <Grid>
+        <Frame NavigationUIVisibility="Hidden" Name="MainFrame" Margin="0,0,0,0"/>
+        <Button Style="{StaticResource Expand}" x:Name="MenuButton" Width="80" Height="80" Margin="0,20,40,0" Foreground="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Top" Click="MenuButtonClicked" Cursor="Hand">
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid>
@@ -51,40 +21,11 @@
                     </Grid>
                 </ControlTemplate>
             </Button.Template>
-            <Button.Style>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="RenderTransform">
-                        <Setter.Value>
-                            <ScaleTransform CenterX="40" CenterY="40" ScaleY="1" ScaleX="1" />
-                        </Setter.Value>
-                    </Setter>
-                    <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Trigger.EnterActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation From="1" To="1.2"  AutoReverse="False" Duration="00:00:00.3" Storyboard.TargetProperty="RenderTransform.ScaleY" />
-                                        <DoubleAnimation From="1" To="1.2"  AutoReverse="False" Duration="00:00:00.3" Storyboard.TargetProperty="RenderTransform.ScaleX" />
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </Trigger.EnterActions>
-                            <Trigger.ExitActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation To="1"  Duration="00:00:00.4" Storyboard.TargetProperty="RenderTransform.ScaleY" />
-                                        <DoubleAnimation To="1" Duration="00:00:00.4" Storyboard.TargetProperty="RenderTransform.ScaleX" />
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </Trigger.ExitActions>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </Button.Style>
+
         </Button>
-
-
         <Grid x:Name="MenuPopup" Visibility="Collapsed">
-            <Button x:Name="DarknessButtonScreen" Background="#CC3C3C3C" Click="DarknessButtonScreenClicked">
+
+            <Button x:Name="DarknessButtonScreen" Background="#CC3C3C3C" Click="DarknessButtonScreenClicked" Margin="0,0,0,-17.5">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
@@ -96,190 +37,100 @@
             </Button>
 
             <Rectangle x:Name="MenuPopupRectangle" Fill="#FF1F1F1F" HorizontalAlignment="Center" Height="600" VerticalAlignment="Center" Width="1000" Margin="0" RadiusX="50" RadiusY="50"/>
+            <StackPanel HorizontalAlignment="Center" Height="560" VerticalAlignment="Center" Width="1346" Margin="0,40,0,0">
+                <Grid x:Name="HomeSection" Height="140" HorizontalAlignment="Center" VerticalAlignment="Top" Visibility="Collapsed">
+                    <Button x:Name="HomePageButton" Style="{StaticResource Expand}" Width="100" Margin="0,0,825,0" Foreground="{x:Null}" HorizontalAlignment="Center" BorderBrush="Black" Background="Black" Click="HomeClicked" Cursor="Hand" Height="100" VerticalAlignment="Top">
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Grid>
+                                    <Ellipse Stroke="Black" StrokeThickness="1" Fill="#FFFAD200" Width="100" Height="100"/>
+                                    <Polyline Points="25,50 50,25 75,50" StrokeThickness="5" Stroke="Black"/>
+                                    <Polyline Points="35,50 35,70 65,70 65,50" StrokeThickness="5" Stroke="Black"/>
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <TextBlock x:Name="HomePageTitle" Foreground="White" FontFamily="Consolas" FontWeight="Bold" FontSize="24" Text="Home" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,560,0" Width="120"/>
+                    <TextBlock x:Name="HomePageText" Foreground="#FF494949" TextWrapping="Wrap" FontFamily="Consolas" Text="Need the time? Forgot to check your notifications? Go home." HorizontalAlignment="Center" Margin="120,30,0,0" Width="800" FontSize="24" Height="56" VerticalAlignment="Top"/>
+                </Grid>
+                <Grid x:Name="TasksSection" Height="140" HorizontalAlignment="Center" VerticalAlignment="Top" >
+                    <Button x:Name="TaskPageButton" Style="{StaticResource Expand}" Width="100" Margin="0,0,825,0" Foreground="{x:Null}" HorizontalAlignment="Center" BorderBrush="Black" Background="Black" Click="TasksClicked" Cursor="Hand" Height="100" VerticalAlignment="Top">
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Grid>
+                                    <Ellipse Stroke="Black" StrokeThickness="1" Fill="#FFFAD200" Width="100" Height="100"/>
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <Rectangle Fill="Black" HorizontalAlignment="Left" Height="7.5" Stroke="#00000000" VerticalAlignment="Top" Margin="28.125,31.25,0,0" Grid.Row="1" Width="7.5" RadiusX="3.75" RadiusY="3.75"/>
+                                    <Rectangle Fill="Black" HorizontalAlignment="Left" Height="7.5" Stroke="#00000000" VerticalAlignment="Top" Margin="28.125,46.25,0,0" Grid.Row="1" Width="7.5" RadiusX="3.75" RadiusY="3.75"/>
+                                    <Rectangle Fill="Black" HorizontalAlignment="Left" Height="7.5" Stroke="#00000000" VerticalAlignment="Top" Margin="28.125,61.25,0,0" Grid.Row="1" Width="7.5" RadiusX="3.75" RadiusY="3.75"/>
+                                    <Rectangle Fill="Black" HorizontalAlignment="Left" Height="7.5" Stroke="#00000000" VerticalAlignment="Top" Margin="38.125,31.25,0,0" Grid.Row="1" Width="33.75" RadiusX="3.75" RadiusY="3.75"/>
+                                    <Rectangle Fill="Black" HorizontalAlignment="Left" Height="7.5" Stroke="#00000000" VerticalAlignment="Top" Margin="38.125,46.25,0,0" Grid.Row="1" Width="33.75" RadiusX="3.75" RadiusY="3.75"/>
+                                    <Rectangle Fill="Black" HorizontalAlignment="Left" Height="7.5" Stroke="#00000000" VerticalAlignment="Top" Margin="38.125,61.25,0,0" Grid.Row="1" Width="33.75" RadiusX="3.75" RadiusY="3.75"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <TextBlock x:Name="TaskPageTitle" Foreground="White" FontFamily="Consolas" FontWeight="Bold" FontSize="24" Text="Tasks" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,560,0" Width="120"/>
+                    <TextBlock x:Name="TaskPageText" Foreground="#FF494949" TextWrapping="Wrap" FontFamily="Consolas" Text="The pile of work is ever-increasing. Organise all of your homework and tasks in here." HorizontalAlignment="Center" Margin="120,30,0,0" Width="800" FontSize="24" Height="56" VerticalAlignment="Top"/>
+                </Grid>
+                <Grid x:Name="WellbeingSection" Height="140" HorizontalAlignment="Center" VerticalAlignment="Top">
+                    <Button x:Name="WellbeingPageButton" Style="{StaticResource Expand}" Width="100" Height="100" Margin="0,0,825,0" Foreground="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Top" BorderBrush="Black" Background="Black" Click="WellbeingClicked" Cursor="Hand">
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Grid>
+                                    <Ellipse Stroke="Black" StrokeThickness="1" Fill="#FFFAD200" Width="100" Height="100"/>
+                                    <Ellipse Stroke="#00000000" StrokeThickness="1" Fill="Black" Width="50" Height="50" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="25,25,0,0"/>
+                                    <Rectangle Width="50" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="25,25,0,0" Fill="#FFFAD200"/>
+                                    <Rectangle Fill="Black" HorizontalAlignment="Left" Height="7.5" Stroke="#00000000" VerticalAlignment="Top" Margin="27.5,35,0,0" Grid.Row="1" Width="15" RadiusX="3.75" RadiusY="3.75"/>
+                                    <Rectangle Fill="Black" HorizontalAlignment="Right" Height="7.5" Stroke="#00000000" VerticalAlignment="Top" Margin="0,35,27.5,0" Grid.Row="1" Width="15" RadiusX="3.75" RadiusY="3.75"/>
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <TextBlock x:Name="WellbeingPageTitle" Foreground="White" FontFamily="Consolas" FontWeight="Bold" FontSize="24" Text="Wellbeing" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,560,0" Width="120"/>
+                    <TextBlock x:Name="WellbeingPageText" Foreground="#FF494949" TextWrapping="Wrap" FontFamily="Consolas" Text="Stressed out? Unwind from your day with a bit of relaxing mindfulness in here." HorizontalAlignment="Center" VerticalAlignment="Top" Margin="120,30,0,0" Width="800" FontSize="24"/>
 
-            <Button x:Name="TaskPageButton" Width="100" Height="100" Margin="0,0,820,420" Foreground="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="Black" Background="Black" Click="TasksClicked" Cursor="Hand">
-                <Button.Template>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Grid>
-                            <Ellipse Stroke="Black" StrokeThickness="1" Fill="#FFFAD200" Width="100" Height="100"/>
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            <Rectangle Fill="Black" HorizontalAlignment="Left" Height="7.5" Stroke="#00000000" VerticalAlignment="Top" Margin="28.125,31.25,0,0" Grid.Row="1" Width="7.5" RadiusX="3.75" RadiusY="3.75"/>
-                            <Rectangle Fill="Black" HorizontalAlignment="Left" Height="7.5" Stroke="#00000000" VerticalAlignment="Top" Margin="28.125,46.25,0,0" Grid.Row="1" Width="7.5" RadiusX="3.75" RadiusY="3.75"/>
-                            <Rectangle Fill="Black" HorizontalAlignment="Left" Height="7.5" Stroke="#00000000" VerticalAlignment="Top" Margin="28.125,61.25,0,0" Grid.Row="1" Width="7.5" RadiusX="3.75" RadiusY="3.75"/>
-                            <Rectangle Fill="Black" HorizontalAlignment="Left" Height="7.5" Stroke="#00000000" VerticalAlignment="Top" Margin="38.125,31.25,0,0" Grid.Row="1" Width="33.75" RadiusX="3.75" RadiusY="3.75"/>
-                            <Rectangle Fill="Black" HorizontalAlignment="Left" Height="7.5" Stroke="#00000000" VerticalAlignment="Top" Margin="38.125,46.25,0,0" Grid.Row="1" Width="33.75" RadiusX="3.75" RadiusY="3.75"/>
-                            <Rectangle Fill="Black" HorizontalAlignment="Left" Height="7.5" Stroke="#00000000" VerticalAlignment="Top" Margin="38.125,61.25,0,0" Grid.Row="1" Width="33.75" RadiusX="3.75" RadiusY="3.75"/>
-                        </Grid>
-                    </ControlTemplate>
-                </Button.Template>
-                <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="RenderTransform">
-                            <Setter.Value>
-                                <ScaleTransform CenterX="40" CenterY="40" ScaleY="1" ScaleX="1" />
-                            </Setter.Value>
-                        </Setter>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Trigger.EnterActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation From="1" To="1.2"  AutoReverse="False" Duration="00:00:00.3" Storyboard.TargetProperty="RenderTransform.ScaleY" />
-                                            <DoubleAnimation From="1" To="1.2"  AutoReverse="False" Duration="00:00:00.3" Storyboard.TargetProperty="RenderTransform.ScaleX" />
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </Trigger.EnterActions>
-                                <Trigger.ExitActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation To="1"  Duration="00:00:00.4" Storyboard.TargetProperty="RenderTransform.ScaleY" />
-                                            <DoubleAnimation To="1" Duration="00:00:00.4" Storyboard.TargetProperty="RenderTransform.ScaleX" />
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </Trigger.ExitActions>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-            </Button>
-            <TextBlock x:Name="TaskPageTitle" Foreground="White" FontFamily="Consolas" FontWeight="Bold" FontSize="24" Text="Tasks" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,610,495" Width="70"/>
-            <TextBlock x:Name="TaskPageText" Foreground="#FF494949" TextWrapping="Wrap" FontFamily="Consolas" Text="The pile of work is ever-increasing. Organise all of your homework and tasks in here." HorizontalAlignment="Center" VerticalAlignment="Center" Margin="120,0,0,408" Width="800" FontSize="24"/>
+                </Grid>
+                <Grid x:Name="GymSection" Height="140" HorizontalAlignment="Center" VerticalAlignment="Top">
+                    <Button x:Name="GymPageButton" Style="{StaticResource Expand}" Width="100" Height="100" Margin="0,0,825,0" Foreground="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Top" BorderBrush="Black" Background="Black" Click="GymClicked" Cursor="Hand">
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Grid>
+                                    <Ellipse Stroke="Black" StrokeThickness="1" Fill="#FFFAD200" Width="100" Height="100"/>
+                                    <Rectangle HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="Black" StrokeThickness="5" Width="15" Height="25" Margin="0,0,50,0"/>
+                                    <Rectangle HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="Black" StrokeThickness="5" Width="15" Height="40" Margin="0,0,30,0"/>
+                                    <Rectangle HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="Black" StrokeThickness="5" Width="20"/>
+                                    <Rectangle HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="Black" StrokeThickness="5" Width="15" Height="40" Margin="30,0,0,0"/>
+                                    <Rectangle HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="Black" StrokeThickness="5" Width="15" Height="25" Margin="50,0,0,0"/>
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <TextBlock x:Name="GymPageTitle" Foreground="White" FontFamily="Consolas" FontWeight="Bold" FontSize="24" Text="Gym" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,560,0" Width="120"/>
+                    <TextBlock x:Name="GymPageText" Foreground="#FF494949" TextWrapping="Wrap" FontFamily="Consolas" Text="Every day is another chance to get stronger and to be the best version of you. Manage your workouts in here." HorizontalAlignment="Center" VerticalAlignment="Top" Margin="120,30,0,0" Width="800" FontSize="24"/>
 
-            <Button x:Name="WellbeingPageButton" Width="100" Height="100" Margin="0,0,820,140" Foreground="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="Black" Background="Black" Click="WellbeingClicked" Cursor="Hand">
-                <Button.Template>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Grid>
-                            <Ellipse Stroke="Black" StrokeThickness="1" Fill="#FFFAD200" Width="100" Height="100"/>
-                            <Ellipse Stroke="#00000000" StrokeThickness="1" Fill="Black" Width="50" Height="50" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="25,25,0,0"/>
-                            <Rectangle Width="50" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="25,25,0,0" Fill="#FFFAD200"/>
-                            <Rectangle Fill="Black" HorizontalAlignment="Left" Height="7.5" Stroke="#00000000" VerticalAlignment="Top" Margin="27.5,35,0,0" Grid.Row="1" Width="15" RadiusX="3.75" RadiusY="3.75"/>
-                            <Rectangle Fill="Black" HorizontalAlignment="Right" Height="7.5" Stroke="#00000000" VerticalAlignment="Top" Margin="0,35,27.5,0" Grid.Row="1" Width="15" RadiusX="3.75" RadiusY="3.75"/>
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Grid>
-                    </ControlTemplate>
-                </Button.Template>
-                <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="RenderTransform">
-                            <Setter.Value>
-                                <ScaleTransform CenterX="40" CenterY="40" ScaleY="1" ScaleX="1" />
-                            </Setter.Value>
-                        </Setter>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Trigger.EnterActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation From="1" To="1.2"  AutoReverse="False" Duration="00:00:00.3" Storyboard.TargetProperty="RenderTransform.ScaleY" />
-                                            <DoubleAnimation From="1" To="1.2"  AutoReverse="False" Duration="00:00:00.3" Storyboard.TargetProperty="RenderTransform.ScaleX" />
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </Trigger.EnterActions>
-                                <Trigger.ExitActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation To="1"  Duration="00:00:00.4" Storyboard.TargetProperty="RenderTransform.ScaleY" />
-                                            <DoubleAnimation To="1" Duration="00:00:00.4" Storyboard.TargetProperty="RenderTransform.ScaleX" />
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </Trigger.ExitActions>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-            </Button>
-            <TextBlock x:Name="WellbeingPageTitle" Foreground="White" FontFamily="Consolas" FontWeight="Bold" FontSize="24" Text="Wellbeing" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,560,215" Width="120"/>
-            <TextBlock x:Name="WellbeingPageText" Foreground="#FF494949" TextWrapping="Wrap" FontFamily="Consolas" Text="Stressed out? Unwind from your day with a bit of relaxing mindfulness in here." HorizontalAlignment="Center" VerticalAlignment="Center" Margin="120,0,0,128" Width="800" FontSize="24"/>
+                </Grid>
+                <Grid x:Name="MarksSection" Height="140" HorizontalAlignment="Center" VerticalAlignment="Top">
+                    <Button x:Name="LiveMarksPageButton" Style="{StaticResource Expand}" Width="100" Height="100" Margin="0,0,825,0" Foreground="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Top" BorderBrush="Black" Background="Black" Click="LiveMarksClicked" Cursor="Hand">
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Grid>
+                                    <Ellipse Stroke="Black" StrokeThickness="1" Fill="#FFFAD200" Width="100" Height="100"/>
+                                    <TextBlock Foreground="Black" FontSize="36" FontFamily="Consolas" FontWeight="Bold" Text="A+" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2.5,0,0,5"/>
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <TextBlock x:Name="LiveMarksPageTitle" Foreground="White" FontFamily="Consolas" FontWeight="Bold" FontSize="24" Text="Live Marks" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,545,0" Width="135"/>
+                    <TextBlock x:Name="LiveMarksPageText" Foreground="#FF494949" TextWrapping="Wrap" FontFamily="Consolas" Text="Curious to see your academic progress? Check out your latest marks on your tests and assignments in here." HorizontalAlignment="Center" VerticalAlignment="Top" Margin="120,30,0,0" Width="800" FontSize="24"/>
 
-            <Button x:Name="GymPageButton" Width="100" Height="100" Margin="0,140,820,0" Foreground="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="Black" Background="Black" Click="GymClicked" Cursor="Hand">
-                <Button.Template>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Grid>
-                            <Ellipse Stroke="Black" StrokeThickness="1" Fill="#FFFAD200" Width="100" Height="100"/>
-                            <Rectangle HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="Black" StrokeThickness="5" Width="15" Height="25" Margin="0,0,50,0"/>
-                            <Rectangle HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="Black" StrokeThickness="5" Width="15" Height="40" Margin="0,0,30,0"/>
-                            <Rectangle HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="Black" StrokeThickness="5" Width="20"/>
-                            <Rectangle HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="Black" StrokeThickness="5" Width="15" Height="40" Margin="30,0,0,0"/>
-                            <Rectangle HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="Black" StrokeThickness="5" Width="15" Height="25" Margin="50,0,0,0"/>
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Grid>
-                    </ControlTemplate>
-                </Button.Template>
-                <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="RenderTransform">
-                            <Setter.Value>
-                                <ScaleTransform CenterX="40" CenterY="40" ScaleY="1" ScaleX="1" />
-                            </Setter.Value>
-                        </Setter>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Trigger.EnterActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation From="1" To="1.2"  AutoReverse="False" Duration="00:00:00.3" Storyboard.TargetProperty="RenderTransform.ScaleY" />
-                                            <DoubleAnimation From="1" To="1.2"  AutoReverse="False" Duration="00:00:00.3" Storyboard.TargetProperty="RenderTransform.ScaleX" />
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </Trigger.EnterActions>
-                                <Trigger.ExitActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation To="1"  Duration="00:00:00.4" Storyboard.TargetProperty="RenderTransform.ScaleY" />
-                                            <DoubleAnimation To="1" Duration="00:00:00.4" Storyboard.TargetProperty="RenderTransform.ScaleX" />
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </Trigger.ExitActions>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-            </Button>
-            <TextBlock x:Name="GymPageTitle" Foreground="White" FontFamily="Consolas" FontWeight="Bold" FontSize="24" Text="Gym" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,65,640,0" Width="40"/>
-            <TextBlock x:Name="GymPageText" Foreground="#FF494949" TextWrapping="Wrap" FontFamily="Consolas" Text="Every day is another chance to get stronger and to be the best version of you. Manage your workouts in here." HorizontalAlignment="Center" VerticalAlignment="Center" Margin="120,152,0,0" Width="800" FontSize="24"/>
+                </Grid>
 
-            <Button x:Name="LiveMarksPageButton" Width="100" Height="100" Margin="0,420,820,0" Foreground="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="Black" Background="Black" Click="LiveMarksClicked" Cursor="Hand">
-                <Button.Template>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Grid>
-                            <Ellipse Stroke="Black" StrokeThickness="1" Fill="#FFFAD200" Width="100" Height="100"/>
-                            <TextBlock Foreground="Black" FontSize="36" FontFamily="Consolas" FontWeight="Bold" Text="A+" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2.5,0,0,5"/>
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Grid>
-                    </ControlTemplate>
-                </Button.Template>
-                <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="RenderTransform">
-                            <Setter.Value>
-                                <ScaleTransform CenterX="40" CenterY="40" ScaleY="1" ScaleX="1" />
-                            </Setter.Value>
-                        </Setter>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Trigger.EnterActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation From="1" To="1.2"  AutoReverse="False" Duration="00:00:00.3" Storyboard.TargetProperty="RenderTransform.ScaleY" />
-                                            <DoubleAnimation From="1" To="1.2"  AutoReverse="False" Duration="00:00:00.3" Storyboard.TargetProperty="RenderTransform.ScaleX" />
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </Trigger.EnterActions>
-                                <Trigger.ExitActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation To="1"  Duration="00:00:00.4" Storyboard.TargetProperty="RenderTransform.ScaleY" />
-                                            <DoubleAnimation To="1" Duration="00:00:00.4" Storyboard.TargetProperty="RenderTransform.ScaleX" />
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </Trigger.ExitActions>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-            </Button>
-            <TextBlock x:Name="LiveMarksPageTitle" Foreground="White" FontFamily="Consolas" FontWeight="Bold" FontSize="24" Text="Live Marks" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,345,545,0" Width="135"/>
-            <TextBlock x:Name="LiveMarksPageText" Foreground="#FF494949" TextWrapping="Wrap" FontFamily="Consolas" Text="Curious to see your academic progress? Check out your latest marks on your tests and assignments in here." HorizontalAlignment="Center" VerticalAlignment="Center" Margin="120,432,0,0" Width="800" FontSize="24"/>
+            </StackPanel>
         </Grid>
     </Grid>
 </Window>
