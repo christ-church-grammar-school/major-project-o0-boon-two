@@ -8,6 +8,7 @@ using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium;
 using System.Windows;
 using System.IO;
+using System.Threading;
 
 namespace wellbeingPage
 {
@@ -111,7 +112,9 @@ namespace wellbeingPage
             //Options.AddArgument("--headless");
             //Options.AddArgument("--always-on");
 
-                        ChromeDriver driver = new ChromeDriver(driverService, Options);
+            Console.WriteLine("Logging into live marks with username: " + username + " and password:  " + password);
+
+            ChromeDriver driver = new ChromeDriver(driverService, Options);
             try
             {
                 driver.Navigate().GoToUrl("https://parentportal.ccgs.wa.edu.au/");
@@ -137,25 +140,40 @@ namespace wellbeingPage
                 var element = driver.FindElementByCssSelector("body");
                 System.Threading.Thread.Sleep(4000);
 
-                var PrevClipboard = Clipboard.GetText();
-                Console.Write(PrevClipboard);
+                string PrevClipboard = "";
 
-                element.Click();
+                string Data = "";
 
-                Console.WriteLine("Yes");
-                
+                var t = new Thread((ThreadStart)(() =>
 
-                element.SendKeys(Keys.Control + "a");
-                System.Threading.Thread.Sleep(50);
-                element.SendKeys(Keys.Control + "c");
+                {
 
-                System.Threading.Thread.Sleep(50);
-                string Data = Clipboard.GetText();
+                    PrevClipboard = Clipboard.GetText();
+                    //Console.Write(PrevClipboard);
+
+                    element.Click();
+
+                    //Console.WriteLine("Yes");
 
 
-                Clipboard.Clear();
+                    element.SendKeys(Keys.Control + "a");
+                    System.Threading.Thread.Sleep(50);
+                    element.SendKeys(Keys.Control + "c");
 
-                Clipboard.SetText(PrevClipboard);
+                    System.Threading.Thread.Sleep(50);
+                    Data = Clipboard.GetText();
+                    Clipboard.Clear();
+
+                    Clipboard.SetText(PrevClipboard);
+
+                }));
+
+                t.SetApartmentState(ApartmentState.STA);
+
+                t.Start();
+
+                t.Join();
+
 
                 driver.Close();
                 driver.Quit();
@@ -196,7 +214,7 @@ namespace wellbeingPage
                 }
                 
                 return true;
-
+                
             }
             catch
             {

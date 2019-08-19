@@ -28,9 +28,11 @@ namespace wellbeingPage
             InitializeComponent();
             MainFrame.Content = new Home();
 
+            List<string> Lines = new List<string>(System.IO.File.ReadAllLines("data/cred.txt"));
+
             //GetStudentData.Start("1048547", "Stonehenge=Woolenook");
             GetStudentData.PutMarks();
-            GetStudentData.DownloadLiveMarks("username", "password", true);
+            GetStudentData.DownloadLiveMarks(Lines[0],Lines[1], true);
         }
         
         private void DarknessButtonScreenClicked(object sender, RoutedEventArgs e)
