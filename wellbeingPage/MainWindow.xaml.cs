@@ -32,7 +32,7 @@ namespace wellbeingPage
 
             //GetStudentData.Start("1048547", "Stonehenge=Woolenook");
             GetStudentData.PutMarks();
-            GetStudentData.DownloadLiveMarks(Lines[0],Lines[1], true);
+            //GetStudentData.DownloadLiveMarks(Lines[0],Lines[1], true);
         }
         
         private void DarknessButtonScreenClicked(object sender, RoutedEventArgs e)

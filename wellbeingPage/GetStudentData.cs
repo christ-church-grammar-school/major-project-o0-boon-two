@@ -23,13 +23,12 @@ namespace wellbeingPage
 
         public static async Task PutMarks()
         {
-            var cTask = Task.Run(() => SetMarks());
+            var cTask = Task.Run(() => PM());
             await cTask;
             
         }
-
-
-        private static void SetMarks()
+        
+        private static void PM()
         {
             List<FileInfo> info = new List<FileInfo>();
 
@@ -212,7 +211,7 @@ namespace wellbeingPage
 
                     run++;
                 }
-                
+                PutMarks();
                 return true;
                 
             }

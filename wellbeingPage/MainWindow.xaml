@@ -8,7 +8,7 @@
         
         Title="Bumblebee" Height="800" Width="1200" MinHeight="500" MinWidth="600" Closed="MainWinClosed" >
     <Grid>
-        <Frame NavigationUIVisibility="Hidden" Name="MainFrame" Margin="0,0,0,0"/>
+        <Frame NavigationUIVisibility="Hidden" Name="MainFrame" Margin="0,0,0,0.5"/>
         <Button Style="{StaticResource Expand}" x:Name="MenuButton" Width="80" Height="80" Margin="0,20,40,0" Foreground="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Top" Click="MenuButtonClicked" Cursor="Hand">
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -36,7 +36,7 @@
                 </Button.Template>
             </Button>
 
-            <Rectangle x:Name="MenuPopupRectangle" Fill="#BF1F1F1F" HorizontalAlignment="Center" Height="600" VerticalAlignment="Center" Width="1000" Margin="0" RadiusX="50" RadiusY="50"/>
+            <Rectangle x:Name="MenuPopupRectangle" Fill="#FF1F1F1F" HorizontalAlignment="Center" Height="600" VerticalAlignment="Center" Width="1000" Margin="0" RadiusX="50" RadiusY="50"/>
             <StackPanel HorizontalAlignment="Center" Height="560" VerticalAlignment="Center" Width="1346" Margin="0,40,0,0">
                 <Grid x:Name="HomeSection" Height="140" HorizontalAlignment="Center" VerticalAlignment="Top" Visibility="Collapsed">
                     <Button x:Name="HomePageButton" Style="{StaticResource Expand}" Width="100" Margin="0,0,825,0" Foreground="{x:Null}" HorizontalAlignment="Center" BorderBrush="Black" Background="Black" Click="HomeClicked" Cursor="Hand" Height="100" VerticalAlignment="Top">
