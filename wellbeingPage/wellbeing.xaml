@@ -296,6 +296,7 @@
             <TextBlock x:Name="LiveMarksPageTitle" Foreground="White" FontFamily="Consolas" FontWeight="Bold" FontSize="24" Text="Live Marks" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,345,545,0" Width="135"/>
             <TextBlock x:Name="LiveMarksPageText" Foreground="#FF494949" TextWrapping="Wrap" FontFamily="Consolas" Text="Curious to see your academic progress? Check out your latest marks on your tests and assignments in here." HorizontalAlignment="Center" VerticalAlignment="Center" Margin="120,432,0,0" Width="800" FontSize="24"/>
         </Grid>
+        <Button x:Name="beepButton" Content="Beep" HorizontalAlignment="Left" Margin="697,358,0,0" VerticalAlignment="Top" Width="0" Click="soundBeep"/>
 
     </Grid>
 </Page>

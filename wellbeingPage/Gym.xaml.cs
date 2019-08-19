@@ -30,6 +30,7 @@ namespace wellbeingPage
         };
         List<GymWorkout> workouts = new List<GymWorkout>();
         GymWorkout workout = new GymWorkout();
+        Button addButton = new Button();
         //StackPanel stackPanel;// = new StackPanel;
 
 
@@ -94,6 +95,7 @@ namespace wellbeingPage
             //workoutName.Text;
             workoutsPanel.Children.Add(workoutName);
             workoutsPanel.Children.Add(textLine);
+            addButton.IsEnabled = false;
         }
 
         private void WorkoutPanel()
@@ -133,7 +135,8 @@ namespace wellbeingPage
         private void InitiateAddPanel()
         {
             StackPanel textblockPanel = new StackPanel();
-            
+            textblockPanel.Margin = new Thickness(180, 110, 0, 0);
+
             TextBlock exercise = new TextBlock();
             TextBlock sets = new TextBlock();
             TextBlock reps = new TextBlock();
@@ -141,33 +144,46 @@ namespace wellbeingPage
            
             Style style = this.FindResource("textBlockListStyle") as Style;
             exercise.Style = style;
-            exercise.Text = "Exercise:";
+            exercise.Text = "Exercise";
             sets.Style = style;
-            sets.Text = "Sets:";
+            sets.Text = "Sets";
             reps.Style = style;
-            reps.Text = "Reps:";
+            reps.Text = "Reps";
             rest.Style = style;
-            rest.Text = "Tempo:";
+            rest.Text = "Tempo";
 
             Rectangle exerciseRectangle = new Rectangle();
             Rectangle setsRectangle = new Rectangle();
             Rectangle repsRectangle = new Rectangle();
             Rectangle restRectangle = new Rectangle();
 
+            addButton.Content = "Add workout";
+            addButton.Click += new RoutedEventHandler(AddClicked);
+
+      //      Button appendButton = new Button();
+        //    appendButton.Content = "Add exercise";
+
+            //creates the textblock lengths based on length of text
+
             style = this.FindResource("rectangleYellowStyle") as Style;
             exerciseRectangle.Style = style;
-            exerciseRectangle.Width = exercise.Text.Length * 19.4;
+            exerciseRectangle.Width = (exercise.Text.Length * 13.5) + 30;
             setsRectangle.Style = style;
-            setsRectangle.Width = sets.Text.Length * 19.4;
+            setsRectangle.Width = (sets.Text.Length * 13.5) + 30;
             repsRectangle.Style = style;
-            repsRectangle.Width = reps.Text.Length * 19.4;
+            repsRectangle.Width = (reps.Text.Length * 13.5) + 30;
             restRectangle.Style = style;
-            restRectangle.Width = rest.Text.Length * 19.4;
+            restRectangle.Width = (rest.Text.Length * 13.5) + 30;
 
-            exercise.Margin = new Thickness(55, -(workout1.Count * 39.8 * 1.45), 0, 0);
-            sets.Margin = new Thickness(55, -(workout1.Count * 39.8), 0, 0);
-            reps.Margin = new Thickness(55, -(workout1.Count * 39.8 * 0.55), 0, 0);
-            rest.Margin = new Thickness(55, 0, 0, 0);
+            exercise.Margin = new Thickness(85, -195, 0, 0);
+            sets.Margin = new Thickness(85, -100, 0, 0);
+            reps.Margin = new Thickness(85, -45, 0, 0);
+            rest.Margin = new Thickness(85, -60, 0, 0);
+
+            exerciseRectangle.Margin = new Thickness(55, 0, 0, 0);
+            setsRectangle.Margin = new Thickness(55, 0, 0, 0);
+            repsRectangle.Margin = new Thickness(55, 0, 0, 0);
+            restRectangle.Margin = new Thickness(55, 0, 0, 0);
 
             textblockPanel.Children.Add(exerciseRectangle);
             textblockPanel.Children.Add(setsRectangle);
@@ -177,6 +193,8 @@ namespace wellbeingPage
             textblockPanel.Children.Add(sets);
             textblockPanel.Children.Add(reps);
             textblockPanel.Children.Add(rest);
+            textblockPanel.Children.Add(addButton);
+            
 
             addPanel.Children.Add(textblockPanel);
 
