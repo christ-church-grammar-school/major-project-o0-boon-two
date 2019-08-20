@@ -56,9 +56,6 @@
 
         <StackPanel x:Name="workoutsPanel" HorizontalAlignment="Left" Height="650" Margin="0" VerticalAlignment="Top" Width="1040" Background="Transparent" Orientation="Vertical"/>
         <StackPanel x:Name="addPanel" HorizontalAlignment="Left" Height="650" Margin="0" VerticalAlignment="Top" Width="0" Background="Transparent" Orientation="Horizontal">
-            <Button Click="AddClicked" x:Name="exercises" Width="123" Height="80" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                adadad
-            </Button>
         </StackPanel>
         <StackPanel x:Name="exercisePanel" HorizontalAlignment="Left" Height="650" Margin="0" VerticalAlignment="Top" Width="0" Background="Transparent" Orientation="Vertical"/>
 

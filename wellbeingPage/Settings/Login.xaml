@@ -1,0 +1,20 @@
+﻿<Page x:Class="wellbeingPage.Settings.Login"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:wellbeingPage.Settings"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800" 
+      Title="Login" Background="#FF191919">
+
+    <Grid>
+        <TextBlock HorizontalAlignment="Left" Margin="98,143,0,0"  FontSize="20" FontFamily="Consolas"  TextWrapping="Wrap" Text="Username" VerticalAlignment="Top" Foreground="White"/>
+        <TextBlock HorizontalAlignment="Left" Margin="98,258,0,0"  FontSize="20" FontFamily="Consolas"  TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" Foreground="White"/>
+        <Rectangle x:Name="Underline_Copy"  Fill="#FF1F1F1F" HorizontalAlignment="Left" Height="2" Stroke="White" VerticalAlignment="Top" Width="496" Margin="98,335,0,0" StrokeThickness="3"/>
+        <TextBlock Margin="196,25,196,0"  FontSize="36" FontFamily="Consolas"  TextWrapping="Wrap" Text="Parent Portal Login" VerticalAlignment="Top" Foreground="White" Height="48"/>
+        <TextBlock HorizontalAlignment="Center" Margin="121,78,164,0"  FontSize="14" FontFamily="Consolas"  TextWrapping="Wrap" Text="Please enter your parent portal details so that the app can display your Live Marks results and your timetable." VerticalAlignment="Top" Foreground="#FFB2B2B2" TextAlignment="Center"/>
+        <Rectangle x:Name="Underline_Copy1"  Fill="#FF1F1F1F" HorizontalAlignment="Left" Height="2" Stroke="White" VerticalAlignment="Top" Width="496" Margin="98,219,0,0" StrokeThickness="3"/>
+        <Rectangle x:Name="Underline_Copy2" HorizontalAlignment="Left" Height="1" Stroke="#FF777777" VerticalAlignment="Top" Width="46" Margin="148,412,0,0" StrokeThickness="3"/>
+    </Grid>
+</Page>

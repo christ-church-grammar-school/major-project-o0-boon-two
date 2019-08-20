@@ -1,0 +1,80 @@
+﻿<Page x:Class="wellbeingPage.Marks"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:wellbeingPage"
+      mc:Ignorable="d" 
+
+      d:DesignHeight="861.5" d:DesignWidth="1200" MouseDown="MyListView_MouseDown"
+      Title="Marks">
+
+
+    <Grid Background="#FF1F1F1F">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="130"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" MinWidth="250"></ColumnDefinition>
+                <ColumnDefinition Width="5*" MinWidth="300"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Rectangle Fill="#FF181818" Stroke="#FF191919" Margin="0,0,23,96"/>
+
+            <ListBox x:Name="SubjectList" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  AlternationCount="2"  ScrollViewer.CanContentScroll="False" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,0,0,96" SelectionChanged="changed">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}"  TextWrapping="Wrap"  FontSize="38" Foreground="White" FontFamily="Consolas" Width="Auto"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+
+            <Rectangle x:Name="rectangle1_Copy" Grid.Column="0"  Fill="#FF191919" Stroke="#FF191919" VerticalAlignment="Bottom" Height="96" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.Effect>
+                    <DropShadowEffect Direction="100" BlurRadius="7" ShadowDepth="3"/>
+                </Rectangle.Effect>
+
+            </Rectangle>
+            <Rectangle Fill="#FF282828" Grid.Column="1" Stroke="#FF191919" Margin="0,0,0,-1">
+                <Rectangle.Effect>
+                    <DropShadowEffect BlurRadius="9" Direction="100" ShadowDepth="3"/>
+                </Rectangle.Effect>
+            </Rectangle>
+            <Border x:Name="helpBorder" Style="{StaticResource Expands}" Grid.Column="0" CornerRadius="15" BorderBrush="#FFFAD200" BorderThickness="8" VerticalAlignment="Bottom" Width="200" Height="50" Margin="0,0,0,20">
+                <Button x:Name="helpButton"  Content="Input Marks" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="190" Background="#FFFAD200" BorderThickness="0" BorderBrush="#FFFAD200" FontFamily="Consolas" Foreground="Black" Height="40" FontSize="20" FontWeight="Bold"/>
+            </Border>
+            <GridSplitter Grid.Column="1" HorizontalAlignment="Left" Width="7" Background="#FF282828" Foreground="{x:Null}"/>
+            <ListBox x:Name="OverallRes" Grid.Column="1" ScrollViewer.VerticalScrollBarVisibility="Disabled" AlternationCount="-1" ScrollViewer.CanContentScroll="False" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,199,0,0" SelectionChanged="changed" IsManipulationEnabled="True" Height="250" VerticalAlignment="Top">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding YourAverage}" TextWrapping="Wrap"  FontSize="38" Foreground="White" FontFamily="Consolas" Width="100"> %</TextBlock>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Label x:Name="TitleSubject" Grid.Column="1" Content="" Margin="0,23,0,0" FontFamily="Consolas" FontSize="48" Foreground="White" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Height="66" VerticalAlignment="Top" Width="857"/>
+            <Label x:Name="TitleGrade" Grid.Column="1" Content="" Margin="0,89,0,0" FontFamily="Consolas" FontSize="78" Foreground="White" HorizontalContentAlignment="Center" Background="{x:Null}" Width="857" Height="110" VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Bold"/>
+
+
+        </Grid>
+
+        <Rectangle x:Name="rectangle1" Grid.Row="0" Fill="#FF191919" Stroke="#FF191919" StrokeThickness="7">
+            <Rectangle.Effect>
+                <DropShadowEffect BlurRadius="20" Direction="260" ShadowDepth="7"/>
+            </Rectangle.Effect>
+        </Rectangle>
+
+
+
+        <Label x:Name="ResultsLabel" Grid.Row="0" Content="Results" Margin="0,15" Height="100" FontFamily="Consolas" FontSize="72" FontWeight="Bold" Foreground="White" HorizontalContentAlignment="Center"/>
+
+    </Grid>
+
+</Page>
