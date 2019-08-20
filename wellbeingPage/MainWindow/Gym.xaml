@@ -6,6 +6,7 @@
       xmlns:local="clr-namespace:wellbeingPage"
       mc:Ignorable="d" 
       d:DesignHeight="800" d:DesignWidth="1200"
+
       Title="Gym Section">
 
     <Page.Resources>
@@ -28,7 +29,7 @@
             <Setter Property="TextWrapping" Value="NoWrap"/>
         </Style>
 
-                <Style x:Key="buttonWhiteStyle" TargetType="Button">
+        <Style x:Key="buttonWhiteStyle" TargetType="Button">
             <Setter Property="Background" Value="#1F1F1F" />
             <Setter Property="FontFamily" Value="Consolas" />
             <Setter Property="Foreground" Value="#FFFFFF"/>
@@ -62,15 +63,22 @@
     </Page.Resources>
 
     <Grid>
-        <Rectangle Width="1200" Height="800" HorizontalAlignment="Left" VerticalAlignment="Top" Fill="#FF1F1F1F" />
-        <Button Style="{StaticResource buttonWhiteStyle}" x:Name="Workouts" Margin="0,0,265,20" BorderBrush="#00000000" VerticalAlignment="Bottom" HorizontalAlignment="Right" Click="ExerciseButton">EXERCISES</Button>
-        <Button Style="{StaticResource buttonWhiteStyle}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="160,0,0,20" BorderBrush="#00000000" Click="WorkoutButton">WORKOUTS</Button>
-        <Button Style="{StaticResource buttonWhiteStyle}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="450,0,0,20" BorderBrush="#00000000" Click="AddButton">ADD WORKOUTS</Button>
+        <Rectangle x:Name="BackgroundScreen" Fill="#FF1F1F1F" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+        <TextBlock Style="{StaticResource textBlockListStyle}" FontSize="36" Foreground="#FAD200" Margin="85,34,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="165" Height="50"> Workouts</TextBlock>
 
-        <StackPanel x:Name="workoutsPanel" HorizontalAlignment="Left" Height="650" Margin="0" VerticalAlignment="Top" Width="1040" Background="Transparent" Orientation="Vertical"/>
-        <StackPanel x:Name="addPanel" HorizontalAlignment="Left" Height="650" Margin="0" VerticalAlignment="Top" Width="0" Background="Transparent" Orientation="Horizontal">
-        </StackPanel>
-        <StackPanel x:Name="exercisePanel" HorizontalAlignment="Left" Height="650" Margin="0" VerticalAlignment="Top" Width="0" Background="Transparent" Orientation="Vertical"/>
+        <StackPanel x:Name="workoutsPanel" Margin="85,84,160,63" Background="LightGray" Orientation="Vertical"/>
+
+        <Button x:Name="AddATaskButton" Style="{StaticResource Expand}" Margin="471,313,649,407" Cursor="Hand">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid Margin="7,8,0,0">
+                        <Ellipse Fill="#FFFAD200" Width="Auto" Height="Auto"/>
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Foreground="White" FontSize="64" FontWeight="Bold" Text="+" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="-4,-4,0,0" Height="Auto" Width="Auto" RenderTransformOrigin="0.665,0.381"/>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
 
     </Grid>
-    </Page>
+</Page>
