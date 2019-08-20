@@ -113,18 +113,6 @@ namespace wellbeingPage
 
         private void UpdateTasks()
         {
-            // Checks whether scroll should be allowed
-            if (ummlist.Count <= 8)
-            {
-                ScrollUpButton.Opacity = 0.5;
-                ScrollDownButton.Opacity = 0.5;
-            }
-            else
-            {
-                ScrollUpButton.Opacity = 1;
-                ScrollDownButton.Opacity = 1;
-            }
-
             // Selects currently active section
             if (currentsection == "Homework")
             {
@@ -738,10 +726,8 @@ namespace wellbeingPage
             {
                 Underline.Margin = new Thickness(OtherButton.Margin.Left + 1, 0, 0, OtherButton.Margin.Bottom - 5);
             }
-            ScrollUpButton.Margin = new Thickness(0, yratio * 220, xratio * 55, 0);
-            PageNumberTextBlock.Margin = new Thickness(xratio * 1040, 0, 0, yratio * 120);
-            ScrollDownButton.Margin = new Thickness(0, 0, xratio * 55, yratio * 335);
-            AddATaskButton.Margin = new Thickness(0, 0, xratio * 40, yratio * 135);
+
+            AddATaskButton.Margin = new Thickness(0, 0, xratio * 40, yratio * 170);
 
             DarknessScreen.Width = xratio * 1200;
             DarknessScreen.Height = yratio * 800;

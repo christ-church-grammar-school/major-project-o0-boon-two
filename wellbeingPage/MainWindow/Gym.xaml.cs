@@ -31,9 +31,8 @@ namespace wellbeingPage
         List<GymWorkout> workouts = new List<GymWorkout>();
         GymWorkout workout = new GymWorkout();
         Button addButton = new Button();
-        //StackPanel stackPanel;// = new StackPanel;
-
-
+        StackPanel textblockPanel = new StackPanel();
+        StackPanel textboxPanel = new StackPanel();
 
         public Gym()
         {
@@ -132,16 +131,14 @@ namespace wellbeingPage
             ExercisePanel();
         }
 
-        private void InitiateAddPanel()
+        private void initiateTextblockPanel()
         {
-            StackPanel textblockPanel = new StackPanel();
-            textblockPanel.Margin = new Thickness(180, 110, 0, 0);
+            textblockPanel.Margin = new Thickness(180, 150, 0, 0);
 
             TextBlock exercise = new TextBlock();
             TextBlock sets = new TextBlock();
             TextBlock reps = new TextBlock();
-            TextBlock rest = new TextBlock();
-           
+
             Style style = this.FindResource("textBlockListStyle") as Style;
             exercise.Style = style;
             exercise.Text = "Exercise";
@@ -149,21 +146,10 @@ namespace wellbeingPage
             sets.Text = "Sets";
             reps.Style = style;
             reps.Text = "Reps";
-            rest.Style = style;
-            rest.Text = "Tempo";
 
             Rectangle exerciseRectangle = new Rectangle();
             Rectangle setsRectangle = new Rectangle();
             Rectangle repsRectangle = new Rectangle();
-            Rectangle restRectangle = new Rectangle();
-
-            addButton.Content = "Add workout";
-            addButton.Click += new RoutedEventHandler(AddClicked);
-
-      //      Button appendButton = new Button();
-        //    appendButton.Content = "Add exercise";
-
-            //creates the textblock lengths based on length of text
 
             style = this.FindResource("rectangleYellowStyle") as Style;
             exerciseRectangle.Style = style;
@@ -172,33 +158,65 @@ namespace wellbeingPage
             setsRectangle.Width = (sets.Text.Length * 13.5) + 30;
             repsRectangle.Style = style;
             repsRectangle.Width = (reps.Text.Length * 13.5) + 30;
-            restRectangle.Style = style;
-            restRectangle.Width = (rest.Text.Length * 13.5) + 30;
 
-            exercise.Margin = new Thickness(85, -195, 0, 0);
-            sets.Margin = new Thickness(85, -100, 0, 0);
-            reps.Margin = new Thickness(85, -45, 0, 0);
-            rest.Margin = new Thickness(85, -60, 0, 0);
+            exercise.Margin = new Thickness(15, -220, 0, 0);
+            sets.Margin = new Thickness(15, -130, 0, 0);
+            reps.Margin = new Thickness(15, -40, 0, 0);
 
-            exerciseRectangle.Margin = new Thickness(55, 0, 0, 0);
-            setsRectangle.Margin = new Thickness(55, 0, 0, 0);
-            repsRectangle.Margin = new Thickness(55, 0, 0, 0);
-            restRectangle.Margin = new Thickness(55, 0, 0, 0);
+            exerciseRectangle.Margin = new Thickness(0, 40, 0, 0);
+            setsRectangle.Margin = new Thickness(0, 40, 0, 0);
+            repsRectangle.Margin = new Thickness(0, 40, 0, 0);
 
             textblockPanel.Children.Add(exerciseRectangle);
             textblockPanel.Children.Add(setsRectangle);
             textblockPanel.Children.Add(repsRectangle);
-            textblockPanel.Children.Add(restRectangle);
             textblockPanel.Children.Add(exercise);
             textblockPanel.Children.Add(sets);
             textblockPanel.Children.Add(reps);
-            textblockPanel.Children.Add(rest);
-            textblockPanel.Children.Add(addButton);
-            
+        }
 
+        private void initiateTextboxPanel()
+        {
+            textboxPanel.Margin = new Thickness(50, 150, 0, 0);
+
+            TextBox exerciseEntered = new TextBox();
+            ComboBox setsEntered = new ComboBox();
+            ComboBox repsEntered = new ComboBox();
+
+            Rectangle exerciseTextbox = new Rectangle();
+            Rectangle setsCombobox = new Rectangle();
+            Rectangle repsCombobox = new Rectangle();
+
+            Style style = this.FindResource("yellowTextbox") as Style;
+            exerciseEntered.Style = style;
+
+            style = this.FindResource("rectangleYellowStyle") as Style;
+            exerciseTextbox.Style = style;
+            setsCombobox.Style = style;
+            repsCombobox.Style = style;
+
+            exerciseEntered.Margin = new Thickness(30, 0, 0, 0);
+
+            textboxPanel.Children.Add(exerciseEntered);
+            textboxPanel.Children.Add(setsEntered);
+            textboxPanel.Children.Add(repsEntered);
+            textboxPanel.Children.Add(exerciseTextbox);
+            textboxPanel.Children.Add(setsCombobox);
+            textboxPanel.Children.Add(repsCombobox);
+        }
+
+        private void InitiateAddPanel()
+        {
+            initiateTextblockPanel();
+            initiateTextboxPanel();
+
+            //add to the right of the gym panel
+            //addButton.Content = "Add workout";
+            //addButton.Click += new RoutedEventHandler(AddClicked);
+
+            //textblockPanel.Children.Add(addButton);
             addPanel.Children.Add(textblockPanel);
-
-
+            addPanel.Children.Add(textboxPanel);
         }
 
     }
