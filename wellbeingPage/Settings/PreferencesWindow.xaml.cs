@@ -33,7 +33,6 @@ namespace wellbeingPage
         public Preferences()
         {
             InitializeComponent();
-            MainFrame.Content = new SetSettings();
         }
 
         private void Submit(object sender, RoutedEventArgs e)

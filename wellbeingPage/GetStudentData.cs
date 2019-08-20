@@ -9,26 +9,27 @@ using OpenQA.Selenium;
 using System.Windows;
 using System.IO;
 using System.Threading;
+using wellbeingPage.Settings;
 
 namespace wellbeingPage
 {
     class GetStudentData
     {
-        public string LastDownload = "";
+        public DateTime LastDownload;
         public static async Task DownloadLiveMarks(string username, string password, bool ShowError)
         {
-            var cTask = Task.Run(() => Start(username,password,ShowError));
+            var cTask = Task.Run(() => StartDownload(username,password,ShowError));
             await cTask;
         }
 
         public static async Task PutMarks()
         {
-            var cTask = Task.Run(() => PM());
+            var cTask = Task.Run(() => ParseMarks());
             await cTask;
             
         }
         
-        private static void PM()
+        private static void ParseMarks()
         {
             List<FileInfo> info = new List<FileInfo>();
 
@@ -102,12 +103,10 @@ namespace wellbeingPage
                 {
                     Marks.SubjectResults.Add(sub);
                 });
-                
-
             }
         }
 
-        private static bool Start(string username, string password, bool ShowError)
+        private static bool StartDownload(string username, string password, bool ShowError)
         {
             var driverService = ChromeDriverService.CreateDefaultService();
             driverService.HideCommandPromptWindow = true;
@@ -226,8 +225,14 @@ namespace wellbeingPage
             {
                 Console.WriteLine("Chromedriver was unable to complete webscraping");
                 driver.Quit();
-                if (ShowError) 
-                    MessageBox.Show("          Error connecting to Live Marks\n\nPlease ensure that you are:\n -connected to the internet\n -have inputed the correct username and password\n -not shutting Chrome\n\n          And then try again");
+                if (ShowError)
+                {
+                    Application.Current.Dispatcher.Invoke((Action)delegate {
+                        Preferences p = new Preferences();
+                        p.MainFrame.Content = new LivemarksError();
+                        p.Show();
+                    });
+                }
                 return false;
             }
         }

@@ -14,7 +14,7 @@
                 <DropShadowEffect BlurRadius="7" ShadowDepth="4"/>
             </TextBlock.Effect>
         </TextBlock>
-        <TextBlock TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FF6C6C6C" FontFamily="Consolas" FontSize="22" FontWeight="Bold" Margin="31,82,46,0" Height="205"><Run Text="There was an error connecting to Live Marks. Please ensure that you:"/><LineBreak/><Run Text=""/><LineBreak/><Run Text="-  Are connected to the internet"/><LineBreak/><Run/><LineBreak/><Run Text="-  Have inputted the correct credentials(click here to change)"/><LineBreak/><Run/><LineBreak/><Run/></TextBlock>
+        <TextBlock TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FF6C6C6C" FontFamily="Consolas" FontSize="22" FontWeight="Bold" Margin="31,82,46,0" Height="366"><Run Text="There was an error connecting to Live Marks. Please ensure that you:"/><LineBreak/><Run Text=""/><LineBreak/><Run Text="&#x9;-  Are connected to the internet"/><LineBreak/><Run/><LineBreak/><Run Text="&#x9;-  Have inputted the correct credentials(click here &#x9;   to change)"/><LineBreak/><Run/><LineBreak/><Run Text="&#x9;-  Do not exit the Chrome window"/><LineBreak/><Run/><LineBreak/><Run/><LineBreak/><Run Text=" And then try again."/></TextBlock>
 
     </Grid>
 </Page>
