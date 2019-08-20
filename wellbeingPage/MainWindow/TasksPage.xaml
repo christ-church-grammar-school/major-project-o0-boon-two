@@ -183,33 +183,7 @@
 
         <Rectangle x:Name="Underline"  Fill="#FF1F1F1F" HorizontalAlignment="Left" Height="1" Stroke="White" VerticalAlignment="Bottom" Width="103.5" Margin="51,0,0,25" StrokeThickness="3"/>
 
-        <Button x:Name="ScrollUpButton" Width="50" Height="50" Margin="0,220,55,0" Foreground="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Top" BorderBrush="Black" Background="Black" Click="ScrollUpClicked" Cursor="Hand">
-            <Button.Template>
-                <ControlTemplate TargetType="Button">
-                    <Grid>
-                        <Ellipse Stroke="Transparent" Fill="Transparent" Width="50" Height="50"/>
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <Polyline Points="15,30 25,20 35,30" StrokeThickness="4" Stroke="White"/>
-                    </Grid>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
-
-        <TextBlock x:Name="PageNumberTextBlock" Text="1/1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1040,0,0,120" FontFamily="Consolas" FontSize="24" Foreground="White"/>
-
-        <Button x:Name="ScrollDownButton" Width="50" Height="50" Margin="0,0,55,335" Foreground="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Bottom" BorderBrush="Black" Background="Black" Click="ScrollDownClicked" Cursor="Hand">
-            <Button.Template>
-                <ControlTemplate TargetType="Button">
-                    <Grid>
-                        <Ellipse Stroke="Transparent" Fill="Transparent" Width="50" Height="50"/>
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <Polyline Points="15,20 25,30 35,20" StrokeThickness="4" Stroke="White"/>
-                    </Grid>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
-
-        <Button x:Name="AddATaskButton" Style="{StaticResource Expand}" Width="80" Height="80" Margin="0,0,40,135" Foreground="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="AddAnItemClicked" Cursor="Hand">
+        <Button x:Name="AddATaskButton" Style="{StaticResource Expand}" Width="80" Height="80" Margin="0,0,40,170" Foreground="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="AddAnItemClicked" Cursor="Hand">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Grid>
