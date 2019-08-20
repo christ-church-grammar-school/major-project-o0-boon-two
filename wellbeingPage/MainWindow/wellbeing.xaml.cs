@@ -16,11 +16,6 @@ using System.Media;
 
 namespace wellbeingPage
 {
-    /// <summary>
-    /// Interaction logic for wellbeing.xaml
-    /// </summary>
-    /// 
-    /// I hope everyone can see this?
     public partial class wellbeing : Page
     {
         public EventHandler ladder;
@@ -28,6 +23,16 @@ namespace wellbeingPage
         public wellbeing()
         {
             InitializeComponent();
+
+            if (DateTime.Now.Hour > 0)
+            {
+                greetingLabel.Content = "Good Morning,";
+            }
+
+            if (DateTime.Now.Hour > 12)
+            {
+                greetingLabel.Content = "Good Afternoon,";
+            }
         }
 
         public void Climbladder()
