@@ -18,11 +18,8 @@ namespace wellbeingPage
     public partial class TasksPage : Page
     {
         /// OVERALL TASKS
-
-        // fix change screen size darkness screen bug
+        
         // implement keeping data after app is closed
-        // make menu button work
-        // add animations
 
         /// MINOR TASKS
 
@@ -64,7 +61,6 @@ namespace wellbeingPage
 
         private void OpenAddAnItem()
         {
-            // THIS IS THE SOURCE OF BUG WHEN WINDOW SIZE IS CHANGED
             // Creates add an item pop up window
             AddAnItemPopup.Visibility = Visibility.Visible;
         }
@@ -381,70 +377,22 @@ namespace wellbeingPage
             }
         }
 
-        private void UpdateScrollButtons()
-        {
-
-        }
-
-
-        private void ScrollUpClicked(object sender, RoutedEventArgs e)
-        {
-            // Add if statements for currentpos -=
-            if (ScrollUpButton.Opacity == 0.5)
-            {
-                currentpos -= 1;
-            }
-
-            // Add conditions for when button is active
-            if (currentpos == 0)
-            {
-                ScrollUpButton.Opacity = 0.5;
-            }
-            else
-            {
-                ScrollUpButton.Opacity = 1;
-            }
-
-            UpdateTasks();
-        }
-
-        private void ScrollDownClicked(object sender, RoutedEventArgs e)
-        {
-            // Add if statements for currentpos +=
-            if (ScrollDownButton.Opacity == 0.5)
-            {
-                currentpos += 1;
-            }
-
-            // Add conditions for when button is active          
-            if (currentpos == ummlist.Count - 8)
-            {
-                ScrollDownButton.Opacity = 0.5;
-            }
-            else
-            {
-                ScrollDownButton.Opacity = 1;
-            }
-
-            UpdateTasks();
-        }
-
         private void AddAnItemClicked(object sender, RoutedEventArgs e)
         {
             // Checks whether the maximum number of tasks have been reached
-            if (currentsection == "Homework")
+            if (currentsection == "Homework" && HomeworkList.Count < 8)
             {
                 OpenAddAnItem();
             }
-            else if (currentsection == "Assignments")
+            else if (currentsection == "Assignments" && AssignmentsList.Count < 8)
             {
                 OpenAddAnItem();
             }
-            else if (currentsection == "Tests")
+            else if (currentsection == "Tests" && TestsList.Count < 8)
             {
                 OpenAddAnItem();
             }
-            else if (currentsection == "Other")
+            else if (currentsection == "Other" && OtherList.Count < 8)
             {
                 OpenAddAnItem();
             }
