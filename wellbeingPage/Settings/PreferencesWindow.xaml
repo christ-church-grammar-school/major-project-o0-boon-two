@@ -7,6 +7,15 @@
         mc:Ignorable="d"
         Title="Bumblebee Preferences" Height="480" Width="800" MinHeight="480" MinWidth="800" MaxHeight="480" MaxWidth="800">
     <Grid>
-        <Frame NavigationUIVisibility="Hidden" Name="MainFrame" Margin="0,0,0,0.5"/>
+        <Grid x:Name="LoginStuff" Visibility="Collapsed">
+            <Frame NavigationUIVisibility="Hidden" Name="MainFrame" Margin="0,0,0,0.5"/>
+            <TextBox x:Name="UsernameBox" HorizontalAlignment="Left" Text="{Binding Source={StaticResource Settings}, Path=Default.Username}"  MaxLength="18" VerticalAlignment="Top" Margin="98,172,0,0" FontSize="36" FontFamily="Consolas" Background="#00000000" BorderBrush="#00C1C1C1" Width="580" BorderThickness="0" Foreground="#FFC6C6C6" />
+            <PasswordBox x:Name="PasswordBox" HorizontalAlignment="Left" Password="{Binding Source={StaticResource Settings}, Path=Default.Password}"  MaxLength="18"  VerticalAlignment="Top" Margin="98,288,0,0" FontSize="36" FontFamily="Consolas" Background="#00000000" BorderBrush="#00C1C1C1" Width="580" BorderThickness="0" Foreground="#FFC6C6C6" />
+            <Border x:Name="helpBorder" Style="{StaticResource Expands}" Grid.Column="0" CornerRadius="15" BorderBrush="#FFFAD200" BorderThickness="8" VerticalAlignment="Bottom" Height="50" Margin="270,0,0,23.5" HorizontalAlignment="Left" Width="200">
+                <Button x:Name="subButton"  Content="Submit" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="190" Background="#FFFAD200" BorderThickness="0" BorderBrush="#FFFAD200" FontFamily="Consolas" Foreground="Black" Height="40" FontSize="20" FontWeight="Bold" Click="Submit"/>
+            </Border>
+            
+            <Button Content="Skip" HorizontalAlignment="Left" VerticalAlignment="Top" Width="88" Margin="130,385,0,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF797979" FontStyle="Italic" FontSize="22" Cursor="Hand" Click="Submit"/>
+        </Grid>
     </Grid>
 </Window>

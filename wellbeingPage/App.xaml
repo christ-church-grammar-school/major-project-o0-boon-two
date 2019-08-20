@@ -1,9 +1,12 @@
 ﻿<Application x:Class="SampleApplication.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             StartupUri="MainWindow/MainWindow.xaml">
+             xmlns:properties="clr-namespace:wellbeingPage.Properties"
+             StartupUri="MainWindow/MainWindow.xaml"
+             Exit="OnExit">
     <Application.Resources>
         <ResourceDictionary>
+            <properties:Settings x:Key="Settings" />
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Dictionary1.xaml" />
             </ResourceDictionary.MergedDictionaries>

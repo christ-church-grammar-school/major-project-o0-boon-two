@@ -25,22 +25,6 @@ namespace wellbeingPage.Settings
         {
             InitializeComponent();
         }
-
-        private void submit(object sender, RoutedEventArgs e)
-        {
-
-            Directory.CreateDirectory("data");
-            using (StreamWriter outputFile = new StreamWriter("data/cred.txt"))
-            {
-                outputFile.WriteLine(UsernameBox.Text);
-                outputFile.WriteLine(PasswordBox.Password.ToString());
-            }
-           
-            MainWindow win = new MainWindow();
-            win.Show();
-            
-            
-
-        }
+        
     }
 }

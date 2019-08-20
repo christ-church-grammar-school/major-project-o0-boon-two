@@ -15,4 +15,9 @@ namespace wellbeingPage
     {
 
     }
+    private void OnExit(object sender, ExitEventArgs e)
+    {
+        Properties.Settings.Default.Save();
+
+    }
 }
