@@ -39,6 +39,12 @@ namespace wellbeingPage
             InitializeComponent();
             //InitiateAddPanel();
         }
+
+
+        private void AddWorkout_Click(object sender, RoutedEventArgs e)
+        {
+            AddWorkoutPopup.Visibility = Visibility.Visible;
+        }
         //public EventHandler ladder;
         //public void ClimbLadder()
         //{
@@ -124,7 +130,7 @@ namespace wellbeingPage
         //private void AddButton(object sender, RoutedEventArgs e)
         //{
         //    AddPanel();
-       
+
         //}
         //private void ExerciseButton(object sender, RoutedEventArgs e)
         //{

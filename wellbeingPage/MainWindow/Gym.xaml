@@ -66,19 +66,18 @@
         <Rectangle x:Name="BackgroundScreen" Fill="#FF1F1F1F" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
         <TextBlock Style="{StaticResource textBlockListStyle}" FontSize="36" Foreground="#FAD200" Margin="85,34,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="165" Height="50"> Workouts</TextBlock>
 
+        <Button x:Name="AddWorkout" Margin="1050, 650, 10, 70" Click="AddWorkout_Click">Add a new workout</Button>
+
         <StackPanel x:Name="workoutsPanel" Margin="85,84,160,63" Background="LightGray" Orientation="Vertical"/>
 
-        <Button x:Name="AddATaskButton" Style="{StaticResource Expand}" Margin="471,313,649,407" Cursor="Hand">
-            <Button.Template>
-                <ControlTemplate TargetType="Button">
-                    <Grid Margin="7,8,0,0">
-                        <Ellipse Fill="#FFFAD200" Width="Auto" Height="Auto"/>
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <TextBlock Foreground="White" FontSize="64" FontWeight="Bold" Text="+" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="-4,-4,0,0" Height="Auto" Width="Auto" RenderTransformOrigin="0.665,0.381"/>
-                    </Grid>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
+        <Grid x:Name="AddWorkoutPopup" Visibility="Visible">
+            <Rectangle x:Name="DarknessScreen" Fill="#CC3C3C3C"/>
 
+            <Border x:Name="AddATaskTopBorder" BorderThickness="1" CornerRadius="50,50,0,0" BorderBrush="#00000000" Background="#FFFAD200" Margin="100,100,100,0" Height="150" VerticalAlignment="Top">
+                <TextBlock x:Name="AddATaskTextBlock" Text="New Workout" FontSize="72" FontFamily="Consolas" FontWeight="Bold" Margin="50,31,496,32" Foreground="White"/>
+            </Border>
+            <Border x:Name="AddATaskBottomBorder" BorderThickness="1" CornerRadius="0,0,50,50" BorderBrush="#00000000" Background="#FF1F1F1F" Margin="100,250,100,100"/>
+
+        </Grid>
     </Grid>
 </Page>
