@@ -36,6 +36,16 @@ namespace wellbeingPage
             {
                 greetingLabel.Content = "Good Afternoon,";
             }
+
+            if (DateTime.Now.Hour > 17.5)
+            {
+                greetingLabel.Content = "Good Evening,";
+            }
+
+            else
+            {
+                greetingLabel.Content = "Hello,";
+            }
         }
 
         public void Climbladder()
