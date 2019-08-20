@@ -94,8 +94,15 @@ namespace wellbeingPage
                     sub.YourAverage = (int)Math.Round(numerator * 100 / denomenator);
                 }
                 if (sub.YourAverage < 0)
+                {
                     sub.YourAverage = -1;
-                Marks.SubjectResults.Add(sub);
+                }
+
+                App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+                {
+                    Marks.SubjectResults.Add(sub);
+                });
+                
 
             }
         }

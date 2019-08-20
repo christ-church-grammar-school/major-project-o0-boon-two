@@ -22,7 +22,7 @@ namespace wellbeingPage
     /// </summary>
     public partial class MainWindow : Window
     {
-        public bool Download = false;
+        
 
         public MainWindow()
         {
@@ -42,9 +42,17 @@ namespace wellbeingPage
             {
                 List<string> Lines = new List<string>(System.IO.File.ReadAllLines("data/cred.txt"));
 
+
+
+                //GetStudentData.DownloadLiveMarks(Lines[0], Lines[1], true);
+
+                if (File.Exists("data/marks/Subject0.txt")){ // if marks have been downloaded: parse marks 
+                    GetStudentData.PutMarks();
+                }
+                    
                 
-                GetStudentData.PutMarks();
-                GetStudentData.DownloadLiveMarks(Lines[0],Lines[1], true);
+                
+                //GetStudentData.DownloadLiveMarks(Lines[0],Lines[1], true);
             }
 
 
