@@ -33,7 +33,6 @@ namespace wellbeingPage
         public Preferences()
         {
             InitializeComponent();
-            MainFrame.Content = new SetSettings();
         }
 
         private void Submit(object sender, RoutedEventArgs e)
@@ -46,8 +45,15 @@ namespace wellbeingPage
             }
 
             MainWindow win = new MainWindow();
+            
             win.Show();
+            
             LoginStuff.Visibility = Visibility.Collapsed;
+            List<string> Lines = new List<string>(System.IO.File.ReadAllLines("data/cred.txt"));
+            if (sender == subButton)
+            {
+                GetStudentData.DownloadLiveMarks(Lines[0], Lines[1], true);
+            }
             this.Close();
         }
     }

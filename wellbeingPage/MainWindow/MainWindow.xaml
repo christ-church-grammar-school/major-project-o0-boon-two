@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wellbeingPage"
         mc:Ignorable="d"
-        
-        Title="Bumblebee" Height="800" Width="1200" MinHeight="500" MinWidth="600" Closed="MainWinClosed" >
+        Background="#FF1F1F1F"
+        Title="Bumblebee" Height="800" Width="1200" MinHeight="500" MinWidth="600" Closed="MainWinClosed" Icon="/wellbeingPage;component/Icon.png" >
     <Grid>
         <Frame NavigationUIVisibility="Hidden" Name="MainFrame" Margin="0,0,0,-2.5"/>
         <Button Style="{StaticResource Expand}" x:Name="MenuButton" Width="80" Height="80" Margin="0,20,40,0" Foreground="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Top" Click="MenuButtonClicked" Cursor="Hand">

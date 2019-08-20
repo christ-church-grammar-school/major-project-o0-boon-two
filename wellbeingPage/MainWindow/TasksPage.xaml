@@ -183,7 +183,7 @@
 
         <Rectangle x:Name="Underline"  Fill="#FF1F1F1F" HorizontalAlignment="Left" Height="1" Stroke="White" VerticalAlignment="Bottom" Width="103.5" Margin="51,0,0,25" StrokeThickness="3"/>
 
-        <Button x:Name="AddATaskButton" Style="{StaticResource Expand}" Width="80" Height="80" Margin="0,0,40,170" Foreground="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="AddAnItemClicked" Cursor="Hand">
+        <Button x:Name="AddATaskButton" Style="{StaticResource Expand}" Width="80" Height="80" Margin="0,550,40,0" Foreground="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Top" Click="AddAnItemClicked" Cursor="Hand">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Grid>

@@ -698,6 +698,8 @@ namespace wellbeingPage
             TaskCheckEllipse8.Margin = new Thickness(xratio * 20 + 15, yratio * 580 + 15, 0, 0);
             TaskCheck8.Margin = new Thickness(xratio * 20 + 15, yratio * 580 + 15, 0, 0);
 
+            AddATaskButton.Margin = new Thickness(0, TaskRectangle8.Margin.Top - 30, 40, 0);
+
             HomeworkTextBlock.Margin = new Thickness(xratio * 50, 0, 0, yratio * 30);
             HomeworkButton.Margin = new Thickness(xratio * 50, 0, 0, yratio * 30);
 
@@ -726,8 +728,6 @@ namespace wellbeingPage
             {
                 Underline.Margin = new Thickness(OtherButton.Margin.Left + 1, 0, 0, OtherButton.Margin.Bottom - 5);
             }
-
-            AddATaskButton.Margin = new Thickness(0, 0, xratio * 40, yratio * 170);
 
             DarknessScreen.Width = xratio * 1200;
             DarknessScreen.Height = yratio * 800;

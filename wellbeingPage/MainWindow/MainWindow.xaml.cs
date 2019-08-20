@@ -22,7 +22,7 @@ namespace wellbeingPage
     /// </summary>
     public partial class MainWindow : Window
     {
-        
+        public bool ShutAll = true;  //when this window shuts everything shuts
 
         public MainWindow()
         {
@@ -37,16 +37,20 @@ namespace wellbeingPage
                 SettingsWin.Show();
                 SettingsWin.MainFrame.Content = new Login();
                 SettingsWin.LoginStuff.Visibility = Visibility.Visible;
+                ShutAll = false;
                 this.Close();
             } else
             {
                 List<string> Lines = new List<string>(System.IO.File.ReadAllLines("data/cred.txt"));
 
-                //GetStudentData.PutMarks();
-                //GetStudentData.DownloadLiveMarks(Lines[0],Lines[1], true);
+
+
+                //GetStudentData.DownloadLiveMarks(Lines[0], Lines[1], true);
+
+                if (File.Exists("data/marks/Subject0.txt")){ // if marks have been downloaded: parse marks 
+                    GetStudentData.PutMarks();
+                }
             }
-
-
         }
         
         private void DarknessButtonScreenClicked(object sender, RoutedEventArgs e)
@@ -109,7 +113,10 @@ namespace wellbeingPage
 
         private void MainWinClosed(object sender, EventArgs e)
         {
-            
+            if (ShutAll)
+            {
+                Application.Current.Shutdown();
+            }
         }
     }
 }
