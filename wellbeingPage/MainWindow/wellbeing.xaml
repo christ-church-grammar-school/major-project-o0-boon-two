@@ -10,8 +10,8 @@
 
 
     <Grid Background="#FF1F1F1F">
-        <Rectangle x:Name="rectangle1" Fill="#FF191919" HorizontalAlignment="Left" Height="120" Margin="400,0,0,0" Stroke="#FF191919" VerticalAlignment="Top" Width="800"/>
-        <Rectangle Fill="#FF282828" HorizontalAlignment="Left" Height="680" Margin="400,120,0,0" Stroke="#FF191919" VerticalAlignment="Top" Width="800"/>
+        <Rectangle x:Name="rectangle1" Fill="#FF191919" Stroke="#FF191919" VerticalAlignment="Top" Margin="400,0,0,0" Height="120"/>
+        <Rectangle Fill="#FF282828" Margin="400,120,0,0" Stroke="#FF191919"/>
 
         <Border x:Name="infoBorder" Style="{StaticResource Expands}" CornerRadius="15" BorderBrush="#FFFAD200" BorderThickness="7" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="200" Height="50" Margin="100,0,0,90">
             <Button x:Name="infoButton" Content="Information" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="190" Background="#FFFAD200" BorderThickness="0" BorderBrush="#FFFAD200" FontFamily="Consolas" Foreground="White" Height="40" FontSize="20" FontWeight="Bold" Click="infoClicked"/>
@@ -37,7 +37,7 @@
         <Label x:Name="wellbeingLabel" Content="Wellbeing" HorizontalAlignment="Left" Margin="10,140,0,0" VerticalAlignment="Top" Height="100" Width="380" FontFamily="Consolas" FontSize="72" FontWeight="Bold" Foreground="White" HorizontalContentAlignment="Center"/>
         <Label x:Name="greetingLabel" Content="Good Morning," HorizontalAlignment="Left" Margin="10,285,0,0" VerticalAlignment="Top" Height="60" Width="380" FontSize="36" HorizontalContentAlignment="Center" FontFamily="Consolas" Foreground="White"/>
         <Label x:Name="nameLabel" Content="Isaac Ching" HorizontalAlignment="Left" Margin="10,350,0,0" VerticalAlignment="Top" Height="60" Width="380" FontFamily="Consolas" FontSize="36" HorizontalContentAlignment="Center" Foreground="White"/>
-        <Label x:Name="planLabel" Content="Mindfulness" HorizontalAlignment="Left" Margin="410,0,0,0" VerticalAlignment="Top" Height="120" Width="665" FontFamily="Consolas" FontSize="48" VerticalContentAlignment="Center" Foreground="White"/>
+        <Label x:Name="planLabel" Content="Mindfulness" Margin="410,0,0,680" FontFamily="Consolas" FontSize="48" VerticalContentAlignment="Center" Foreground="White" Height="120" VerticalAlignment="Top" HorizontalAlignment="Left" Width="665"/>
 
         <Rectangle x:Name="opacityRectangle" Fill="#CC3C3C3C" HorizontalAlignment="Left" Height="800" Margin="0" Stroke="#FF191919" VerticalAlignment="Top" Width="0" Opacity="0.8"/>
 
