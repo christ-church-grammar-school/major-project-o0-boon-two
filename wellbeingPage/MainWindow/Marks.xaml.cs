@@ -96,5 +96,10 @@ namespace wellbeingPage
             }
             
         }
+
+        private void ReloadMarks(object sender, RoutedEventArgs e)
+        {
+            GetStudentData.DownloadLiveMarks(true);
+        }
     }
 }

@@ -11,12 +11,16 @@
 
 
     <Grid Background="#FF1F1F1F">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="383*"/>
+            <ColumnDefinition Width="817*"/>
+        </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="130"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,0,-0.5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*" MinWidth="250"></ColumnDefinition>
                 <ColumnDefinition Width="5*" MinWidth="300"></ColumnDefinition>
@@ -65,7 +69,7 @@
 
         </Grid>
 
-        <Rectangle x:Name="rectangle1" Grid.Row="0" Fill="#FF191919" Stroke="#FF191919" StrokeThickness="7">
+        <Rectangle x:Name="rectangle1" Grid.Row="0" Fill="#FF191919" Stroke="#FF191919" StrokeThickness="7" Grid.ColumnSpan="2">
             <Rectangle.Effect>
                 <DropShadowEffect BlurRadius="20" Direction="260" ShadowDepth="7"/>
             </Rectangle.Effect>
@@ -73,7 +77,16 @@
 
 
 
-        <Label x:Name="ResultsLabel" Grid.Row="0" Content="Results" Margin="0,15" Height="100" FontFamily="Consolas" FontSize="72" FontWeight="Bold" Foreground="White" HorizontalContentAlignment="Center"/>
+        <Label x:Name="ResultsLabel" Grid.Row="0" Content="Results" Margin="0,15" Height="100" FontFamily="Consolas" FontSize="72" FontWeight="Bold" Foreground="White" HorizontalContentAlignment="Center" Grid.ColumnSpan="2"/>
+        <Button Style="{StaticResource Expand}" x:Name="ReloadButton" Height="80" Margin="10,15,0,0" Foreground="{x:Null}" VerticalAlignment="Top" Click="ReloadMarks" Cursor="Hand" HorizontalAlignment="Left" Width="80">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Ellipse Fill="#FFFAD200" Width="80" Height="80"/>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
 
     </Grid>
 

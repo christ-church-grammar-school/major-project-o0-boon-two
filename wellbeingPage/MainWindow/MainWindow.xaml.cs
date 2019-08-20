@@ -35,13 +35,13 @@ namespace wellbeingPage
 
                 Preferences SettingsWin = new Preferences();
                 SettingsWin.Show();
-                SettingsWin.MainFrame.Content = new Login();
+                SettingsWin.SettingsFrame.Content = new Login();
                 SettingsWin.LoginStuff.Visibility = Visibility.Visible;
                 ShutAll = false;
                 this.Close();
             } else
             {
-                List<string> Lines = new List<string>(System.IO.File.ReadAllLines("data/cred.txt"));
+                
 
 
 
@@ -118,6 +118,7 @@ namespace wellbeingPage
                 Application.Current.Shutdown();
             }
         }
+
     }
 }
 

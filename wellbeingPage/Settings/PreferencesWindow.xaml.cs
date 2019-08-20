@@ -17,7 +17,7 @@ using wellbeingPage.Settings;
 namespace wellbeingPage
 {
 
-    
+
     /// <summary>
     /// Interaction logic for Preferences.xaml
     /// </summary>
@@ -27,7 +27,7 @@ namespace wellbeingPage
         public bool UpdateLiveMarksOnOpen = false; //  false for manual true for evey time opened                                                                      
         public bool HomeworkOnPeriodEnd = true;
         public DateTime HomeworkRemind;
-        public int RemindForAssignment= 0; //number of days to start reminding before the assignment due date
+        public int RemindForAssignment = 0; //number of days to start reminding before the assignment due date
         public int RemindForTest = 0; //number of days to start reminding before the Test due date
 
         public Preferences()
@@ -45,14 +45,14 @@ namespace wellbeingPage
             }
 
             MainWindow win = new MainWindow();
-            
+
             win.Show();
-            
+
             LoginStuff.Visibility = Visibility.Collapsed;
-            List<string> Lines = new List<string>(System.IO.File.ReadAllLines("data/cred.txt"));
+            
             if (sender == subButton)
             {
-                GetStudentData.DownloadLiveMarks(Lines[0], Lines[1], true);
+                GetStudentData.DownloadLiveMarks( true);
             }
             this.Close();
         }

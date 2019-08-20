@@ -71,9 +71,6 @@
     <Compile Include="MainWindow\Marks.xaml.cs">
       <DependentUpon>Marks.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Settings\LivemarksError.xaml.cs">
-      <DependentUpon>LivemarksError.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Settings\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
@@ -114,10 +111,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="MainWindow\Marks.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Settings\LivemarksError.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
