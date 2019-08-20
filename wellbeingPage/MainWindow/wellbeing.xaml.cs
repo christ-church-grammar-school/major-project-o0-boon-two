@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
+using Microsoft.Win32;
 using System.Media;
 
 namespace wellbeingPage
@@ -19,6 +21,7 @@ namespace wellbeingPage
     public partial class wellbeing : Page
     {
         public EventHandler ladder;
+        private MediaPlayer mediaPlayer = new MediaPlayer();
 
         public wellbeing()
         {
@@ -74,9 +77,14 @@ namespace wellbeingPage
             MenuPopup.Visibility = Visibility.Collapsed;
         }
 
-        private void soundBeep(object sender, RoutedEventArgs e)
+        private void audioClicked(object sender, RoutedEventArgs e)
         {
-            SystemSounds.Hand.Play();
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "MP3 files (*.mp3)|*.mp3|All files (*.*)|*.*";
+            if (openFileDialog.ShowDialog() == true)
+            {
+                mediaPlayer.Open(new Uri(openFileDialog.FileName));
+            }
         }
     }
 }
