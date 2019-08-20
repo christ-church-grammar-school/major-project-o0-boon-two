@@ -42,8 +42,8 @@ namespace wellbeingPage
             {
                 List<string> Lines = new List<string>(System.IO.File.ReadAllLines("data/cred.txt"));
 
-                GetStudentData.PutMarks();
-                GetStudentData.DownloadLiveMarks(Lines[0],Lines[1], true);
+                //GetStudentData.PutMarks();
+                //GetStudentData.DownloadLiveMarks(Lines[0],Lines[1], true);
             }
 
 
