@@ -40,8 +40,20 @@
                 </TransformGroup>
             </Rectangle.RenderTransform>
         </Rectangle>
+        <Button x:Name="addButton" Style="{StaticResource Expand}" Margin="53,36,0,0" Foreground="{x:Null}" BorderBrush="Black" Background="Black" Height="80" VerticalAlignment="Top" HorizontalAlignment="Left" Width="80" Click="OpenSettings">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Ellipse Stroke="Black" StrokeThickness="1" Fill="#FFFAD200" Width="80" Height="80"/>
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Rectangle Fill="Black" HorizontalAlignment="Left" Height="6" Stroke="#00000000" VerticalAlignment="Top" Margin="22.5,37,0,0" Grid.Row="1" Width="35" RadiusX="3" RadiusY="3"/>
+                        <Rectangle Fill="Black" HorizontalAlignment="Left" Height="35" Stroke="#00000000" VerticalAlignment="Top" Margin="37,22.5,0,0" Grid.Row="1" Width="6" RadiusX="3" RadiusY="3"/>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
 
-       
+
 
     </Grid>
 </Page>

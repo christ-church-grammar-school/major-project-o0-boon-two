@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using wellbeingPage.Settings;
 
 namespace wellbeingPage
 {
@@ -57,6 +58,13 @@ namespace wellbeingPage
             SecondHand.Margin = new Thickness(0, 0, xratio * 599, yratio * 384);
             MinuteHand.Margin = new Thickness(0, 0, xratio * 596, yratio * 382);
             HourHand.Margin = new Thickness(0, 0, xratio * 593, yratio * 379.5);
+        }
+        
+        private void OpenSettings(object sender, RoutedEventArgs e)
+        {
+            Preferences prefWin = new Preferences();
+            prefWin.Show();
+            prefWin.MainFrame.Content = new SetSettings();
         }
     }
 }
