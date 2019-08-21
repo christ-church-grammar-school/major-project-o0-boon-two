@@ -64,20 +64,50 @@
 
     <Grid>
         <Rectangle x:Name="BackgroundScreen" Fill="#FF1F1F1F" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
-        <TextBlock Style="{StaticResource textBlockListStyle}" FontSize="36" Foreground="#FAD200" Margin="85,34,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="165" Height="50"> Workouts</TextBlock>
+        <TextBlock Style="{StaticResource textBlockListStyle}" FontSize="36" Foreground="#FAD200" Margin="85,34,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="50" Width="Auto"> Workouts</TextBlock>
 
         <Button x:Name="AddWorkout" Margin="1050, 650, 10, 70" Click="AddWorkout_Click">Add a new workout</Button>
 
-        <StackPanel x:Name="workoutsPanel" Margin="85,84,160,63" Background="LightGray" Orientation="Vertical"/>
+        <StackPanel x:Name="workoutsPanel" Margin="85,84,0,63" Background="Black" Orientation="Vertical" HorizontalAlignment="Left" Width="955"/>
 
-        <Grid x:Name="AddWorkoutPopup" Visibility="Visible">
+        <Grid x:Name="AddWorkoutPopup" Visibility="Collapsed">
             <Rectangle x:Name="DarknessScreen" Fill="#CC3C3C3C"/>
 
-            <Border x:Name="AddATaskTopBorder" BorderThickness="1" CornerRadius="50,50,0,0" BorderBrush="#00000000" Background="#FFFAD200" Margin="100,100,100,0" Height="150" VerticalAlignment="Top">
-                <TextBlock x:Name="AddATaskTextBlock" Text="New Workout" FontSize="72" FontFamily="Consolas" FontWeight="Bold" Margin="50,31,496,32" Foreground="White"/>
+            <Border x:Name="AddATaskTopBorder" BorderThickness="1" CornerRadius="50,50,0,0" BorderBrush="#00000000" Background="#FFFAD200" Margin="100,101,127,0" Height="114" VerticalAlignment="Top">
+                <TextBlock x:Name="AddATaskTextBlock" Text="New Workout" FontSize="72" FontFamily="Consolas" FontWeight="Bold" Margin="45,9,485,9" Foreground="White"/>
             </Border>
-            <Border x:Name="AddATaskBottomBorder" BorderThickness="1" CornerRadius="0,0,50,50" BorderBrush="#00000000" Background="#FF1F1F1F" Margin="100,250,100,100"/>
 
+            <Border x:Name="AddATaskBottomBorder" BorderThickness="1" CornerRadius="0,0,50,50" BorderBrush="#00000000" Background="#FF1F1F1F" Margin="100,215,127,100">
+                <Button Width="Auto" Height="Auto" Margin="693,309,51,57" Click="Button_Click">Add an Exercise</Button>
+            </Border>
+            <TextBlock Style="{StaticResource textBlockListStyle}" FontSize="36" Foreground="#FAD200" Margin="117,215,782,0" Width="Auto" VerticalAlignment="Top" HorizontalAlignment="Stretch" Height="47" Text="Current Workout"/>
+
+            <StackPanel Background="White" Margin="100,262,444,100">
+
+            </StackPanel>
+
+        </Grid>
+
+        <Grid x:Name="AddExercisePopup" Visibility="Visible">
+            <Rectangle Fill="#CC3C3C3C"/>
+
+            <Border x:Name="AddAnExerciseTopBorder" BorderThickness="1" CornerRadius="50,50,0,0" BorderBrush="#00000000" Background="#FFFAD200" Margin="0, 0, 0, 450" HorizontalAlignment="Center" Width="800" Height="100" VerticalAlignment="Center">
+                <TextBlock x:Name="AddAnExerciseTextBlock" Text="Add Exercise" FontSize="72" FontFamily="Consolas" Width="485" FontWeight="Bold" Margin="20,9,20,24" Foreground="White" Height="70" VerticalAlignment="Center" HorizontalAlignment="Center" RenderTransformOrigin="0.805,0.171"/>
+            </Border>
+
+            <Border x:Name="AddAnExerciseBottomBorder" BorderThickness="1" CornerRadius="0,0,50,50" BorderBrush="#00000000" Background="#FF1F1F1F" Height="481" VerticalAlignment="Center" HorizontalAlignment="Center" Width="800" Margin="200,225,200,94">
+                <StackPanel Margin="0,0,-1,-24">
+                    <TextBlock  Margin="20" FontFamily="consolas" FontSize="45" Foreground="#FAD200">Exercise</TextBlock>
+                    <TextBox Margin="250, -60, 200, 30" FontSize="32" CharacterCasing="Upper" ></TextBox>
+                    <TextBlock  Margin="20" FontFamily="consolas" FontSize="45" Foreground="#FAD200">Sets</TextBlock>
+                    <TextBox Margin="250, -60, 200, 30" FontSize="32" CharacterCasing="Upper" ></TextBox>
+                    <TextBlock  Margin="20" FontFamily="consolas" FontSize="45" Foreground="#FAD200">Reps</TextBlock>
+                    <TextBox Margin="250, -60, 200, 30" FontSize="32" CharacterCasing="Upper" ></TextBox>
+                    <TextBlock  Margin="20" FontFamily="consolas" FontSize="45" Foreground="#FAD200">Rest</TextBlock>
+                    <TextBox Margin="250, -60, 200, 30" FontSize="32" CharacterCasing="Upper" ></TextBox>
+
+                </StackPanel>
+            </Border>
         </Grid>
     </Grid>
 </Page>

@@ -45,6 +45,12 @@ namespace wellbeingPage
         {
             AddWorkoutPopup.Visibility = Visibility.Visible;
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            AddExercisePopup.Visibility = Visibility.Visible;
+            AddWorkoutPopup.Visibility = Visibility.Collapsed;
+        }
         //public EventHandler ladder;
         //public void ClimbLadder()
         //{
