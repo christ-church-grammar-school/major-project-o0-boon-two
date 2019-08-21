@@ -74,22 +74,9 @@
                 <DropShadowEffect BlurRadius="20" Direction="260" ShadowDepth="7"/>
             </Rectangle.Effect>
         </Rectangle>
-
-
+        
 
         <Label x:Name="ResultsLabel" Grid.Row="0" Content="Results" Margin="0,15" Height="100" FontFamily="Consolas" FontSize="72" FontWeight="Bold" Foreground="White" HorizontalContentAlignment="Center" Grid.ColumnSpan="2"/>
-        <Button x:Name="ReloadButton" Style="{StaticResource Expand}" Height="80" Margin="9,14,0,0" Foreground="{x:Null}" VerticalAlignment="Top" Click="ReloadMarks" Cursor="Hand" HorizontalAlignment="Left" Width="80">
-            <Button.Template>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Grid>
-                        <Ellipse Fill="#FFFAD200" Width="80" Height="80"/>
-                        <Image Source="Reload.png" HorizontalAlignment="Left" Height="65" Margin="10,8,-3,0" VerticalAlignment="Top" Width="73"/>
-
-                    </Grid>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
-        <TextBlock  x:Name="LastUp" HorizontalAlignment="Left" TextWrapping="Wrap"  Text="{Binding Name}" VerticalAlignment="Top" Margin="108,46,0,0" Foreground="#FF797979" FontSize="16"/>
     </Grid>
 
 </Page>

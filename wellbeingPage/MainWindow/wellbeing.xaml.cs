@@ -42,10 +42,7 @@ namespace wellbeingPage
                 greetingLabel.Content = "Good Evening,";
             }
 
-            else
-            {
-                greetingLabel.Content = "Hello,";
-            }
+            
         }
 
         public void Climbladder()

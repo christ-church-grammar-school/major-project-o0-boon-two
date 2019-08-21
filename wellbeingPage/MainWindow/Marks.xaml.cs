@@ -40,9 +40,7 @@ namespace wellbeingPage
 
             
         public static ObservableCollection<Subject> SubjectResults = new ObservableCollection<Subject>();
-
-        public static ObservableCollection<Subject> UpdateTime = new ObservableCollection<Subject>();
-
+        
         public Marks()
         {
             InitializeComponent();
@@ -52,17 +50,13 @@ namespace wellbeingPage
             {
                 TitleSubject.Content = "Overall";
             }
-            var a = new Subject();
-            a.Name = "Last updated: never";
-            UpdateTime.Add(a);
-            
+                        
             TitleGrade.Content = "";
             
             
             SubjectList.ItemsSource = SubjectResults;
             OverallRes.ItemsSource = SubjectResults;
-
-            LastUp.Text = UpdateTime[0].Name;          
+       
         }
 
         private void MyListView_MouseDown(object sender, MouseButtonEventArgs e)
@@ -73,7 +67,7 @@ namespace wellbeingPage
             OverallRes.Visibility = Visibility.Visible;
             TitleSubject.Content = "Overall";
             TitleGrade.Content = "";
-            LastUp.Text = UpdateTime[0].Name;
+            
 
         }
 
@@ -100,14 +94,9 @@ namespace wellbeingPage
             {
                 
             }
-            LastUp.Text = UpdateTime[0].Name;
-
+          
         }
         
-        private void ReloadMarks(object sender, RoutedEventArgs e)
-        {
-            GetStudentData.DownloadLiveMarks(true);
-            //Console.WriteLine(((MainWindow)System.Windows.Application.Current.MainWindow).MainFrame.Content);
-        }
+        
     }
 }
