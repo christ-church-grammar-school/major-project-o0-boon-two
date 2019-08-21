@@ -32,19 +32,14 @@ namespace wellbeingPage
                 greetingLabel.Content = "Good Morning,";
             }
 
-            if (DateTime.Now.Hour > 12)
+            else if (DateTime.Now.Hour > 12)
             {
                 greetingLabel.Content = "Good Afternoon,";
             }
 
-            if (DateTime.Now.Hour > 17.5)
+            else if (DateTime.Now.Hour > 17.5)
             {
                 greetingLabel.Content = "Good Evening,";
-            }
-
-            else
-            {
-                greetingLabel.Content = "Hello,";
             }
         }
 

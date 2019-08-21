@@ -89,6 +89,8 @@ namespace wellbeingPage
             MenuPopup.Visibility = Visibility.Collapsed;
             ShowAllPages();
             MarksSection.Visibility = Visibility.Collapsed;
+            LastUp.Visibility = Visibility.Visible;
+            ReloadButton.Visibility = Visibility.Visible;
             MainFrame.Content = new Marks();
         }
         private void HomeClicked(object sender, RoutedEventArgs e)
@@ -100,6 +102,8 @@ namespace wellbeingPage
         }
         void ShowAllPages()
         {
+            LastUp.Visibility = Visibility.Collapsed;
+            ReloadButton.Visibility = Visibility.Collapsed;
             HomeSection.Visibility = Visibility.Visible;
             TasksSection.Visibility = Visibility.Visible;
             WellbeingSection.Visibility = Visibility.Visible;
@@ -113,6 +117,11 @@ namespace wellbeingPage
             {
                 Application.Current.Shutdown();
             }
+        }
+        private void ReloadMarks(object sender, RoutedEventArgs e)
+        {
+            GetStudentData.DownloadLiveMarks(true);
+            ReloadButton.IsEnabled = false;
         }
 
     }

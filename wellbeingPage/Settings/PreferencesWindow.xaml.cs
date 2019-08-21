@@ -52,7 +52,8 @@ namespace wellbeingPage
             
             if (sender == subButton)
             {
-                GetStudentData.DownloadLiveMarks( true);
+                GetStudentData.DownloadLiveMarks(true);
+                win.ReloadButton.IsEnabled = false;
             }
             this.Close();
         }
