@@ -15,10 +15,11 @@ namespace wellbeingPage
 {
     class GetStudentData
     {
-        public DateTime LastDownload;
-        public static async Task DownloadLiveMarks(string username, string password, bool ShowError)
+        
+        public static async Task DownloadLiveMarks(bool ShowError)
         {
-            var cTask = Task.Run(() => StartDownload(username,password,ShowError));
+            List<string> Lines = new List<string>(System.IO.File.ReadAllLines("data/cred.txt"));
+            var cTask = Task.Run(() => StartDownload(Lines[0],Lines[1],ShowError));
             await cTask;
         }
 
@@ -35,6 +36,12 @@ namespace wellbeingPage
 
             var dirInfo = new DirectoryInfo("data/marks");
             info.AddRange(dirInfo.GetFiles("*.txt*"));
+            
+            App.Current.Dispatcher.Invoke((Action)delegate
+            {
+                Marks.SubjectResults.Clear();
+            });
+
             foreach (var i in info)
             {
                 Subject sub = new Subject();
@@ -63,6 +70,7 @@ namespace wellbeingPage
 
                 double numerator = 0;
                 double denomenator = 0;
+                
 
                 foreach (var a in tests)
                 {
@@ -210,16 +218,22 @@ namespace wellbeingPage
                     var subset = lines.ToList().GetRange(indexSub[run], indexProg[run] - indexSub[run] + 1);
                     Directory.CreateDirectory("data");
                     Directory.CreateDirectory("data/marks");
-                    using (StreamWriter outputFile = new StreamWriter("data/marks/Subject" + run + ".txt"))
-                    {
-                        outputFile.Write(String.Join("", subset));
-                    }
+                    
+                    File.WriteAllText("data/marks/Subject" + run + ".txt", String.Join("", subset));
 
                     run++;
                 }
                 PutMarks();
+                App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+                {
+                    var su = new Subject();
+                    su.Name = "Last Updated: " + DateTime.Now.ToString("dd/MM/yyyy  HH:mm");
+                    
+                    Marks.UpdateTime.Clear();
+                    Marks.UpdateTime.Add(su);
+                });
                 return true;
-                
+                                
             }
             catch
             {
@@ -227,15 +241,11 @@ namespace wellbeingPage
                 driver.Quit();
                 if (ShowError)
                 {
-                    Application.Current.Dispatcher.Invoke((Action)delegate {
-                        Preferences p = new Preferences();
-                        p.MainFrame.Content = new LivemarksError();
-                        p.Show();
-                    });
+                    MessageBox.Show("There was an error connecting to Live Marks. Please ensure that you:\n\n    - Are connected to the internet\n\n    - Have inputted the correct credentials (change in settings)\n\n    - Do not exit the Chrome window\n\n\n And then try again.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
+                
                 return false;
             }
         }
-
     }
 }
