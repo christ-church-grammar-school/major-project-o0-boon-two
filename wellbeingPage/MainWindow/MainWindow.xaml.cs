@@ -41,10 +41,6 @@ namespace wellbeingPage
                 this.Close();
             } else
             {
-                
-
-
-
                 //GetStudentData.DownloadLiveMarks(Lines[0], Lines[1], true);
 
                 if (File.Exists("data/marks/Subject0.txt")){ // if marks have been downloaded: parse marks 

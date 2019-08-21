@@ -38,28 +38,33 @@ namespace wellbeingPage
     public partial class Marks : Page
     {
 
-        
-
+            
         public static ObservableCollection<Subject> SubjectResults = new ObservableCollection<Subject>();
-        
+
+        public static ObservableCollection<Subject> UpdateTime = new ObservableCollection<Subject>();
+
         public Marks()
         {
             InitializeComponent();
             
             OverallRes.Visibility = Visibility.Visible;
-            TitleSubject.Content = "Overall";
+            if (SubjectResults.Count != 0)
+            {
+                TitleSubject.Content = "Overall";
+            }
+            var a = new Subject();
+            a.Name = "Last updated: never";
+            UpdateTime.Add(a);
+            
             TitleGrade.Content = "";
-            /*
-            XmlTextWriter Writer = new XmlTextWriter("LMD.xml", Encoding.UTF8); //LMD obviuosly stands for Live Marks Data right?
-            Writer.Formatting = Formatting.Indented;
-            Writer.WriteStartElement("Start");
-            Writer.WriteEndElement();
-            Writer.Close();*/
+            
+            
             SubjectList.ItemsSource = SubjectResults;
             OverallRes.ItemsSource = SubjectResults;
-            //GetStudentData.Start("1048547", "Stonehenge=Woolenook");
-            
+
+            LastUp.Text = UpdateTime[0].Name;          
         }
+
         private void MyListView_MouseDown(object sender, MouseButtonEventArgs e)
         {
             HitTestResult r = VisualTreeHelper.HitTest(this, e.GetPosition(this));
@@ -68,7 +73,8 @@ namespace wellbeingPage
             OverallRes.Visibility = Visibility.Visible;
             TitleSubject.Content = "Overall";
             TitleGrade.Content = "";
-            
+            LastUp.Text = UpdateTime[0].Name;
+
         }
 
         private void changed(object sender, SelectionChangedEventArgs e)
@@ -94,12 +100,14 @@ namespace wellbeingPage
             {
                 
             }
-            
-        }
+            LastUp.Text = UpdateTime[0].Name;
 
+        }
+        
         private void ReloadMarks(object sender, RoutedEventArgs e)
         {
             GetStudentData.DownloadLiveMarks(true);
+            //Console.WriteLine(((MainWindow)System.Windows.Application.Current.MainWindow).MainFrame.Content);
         }
     }
 }

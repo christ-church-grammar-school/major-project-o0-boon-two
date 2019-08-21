@@ -65,6 +65,7 @@ namespace wellbeingPage
             Preferences prefWin = new Preferences();
             prefWin.Show();
             prefWin.SettingsFrame.Content = new SetSettings();
+            
         }
     }
 }
