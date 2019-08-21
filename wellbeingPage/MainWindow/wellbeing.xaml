@@ -21,6 +21,10 @@
             <Button x:Name="helpButton" Content="Help" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="190" Background="#FFFAD200" BorderThickness="0" BorderBrush="#FFFAD200" FontFamily="Consolas" Foreground="White" Height="40" FontSize="20" FontWeight="Bold"/>
         </Border>
 
+        <Border x:Name="audioBorder" Style="{StaticResource Expands}" CornerRadius="15" BorderBrush="#FFFAD200" BorderThickness="7" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="200" Height="50" Margin="100,0,0,160">
+            <Button x:Name="audioButton" Content="Audio File" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="190" Background="#FFFAD200" BorderThickness="0" BorderBrush="#FFFAD200" FontFamily="Consolas" Foreground="White" Height="40" FontSize="20" FontWeight="Bold" Click="audioClicked"/>
+        </Border>
+
         <Button x:Name="addButton" Style="{StaticResource Expand}" Width="80" Height="80" Margin="0,0,40,20" Foreground="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Bottom" BorderBrush="Black" Background="Black" Click="addClicked">
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -36,7 +40,7 @@
 
         <Label x:Name="wellbeingLabel" Content="Wellbeing" HorizontalAlignment="Left" Margin="10,140,0,0" VerticalAlignment="Top" Height="100" Width="380" FontFamily="Consolas" FontSize="72" FontWeight="Bold" Foreground="White" HorizontalContentAlignment="Center"/>
         <Label x:Name="greetingLabel" Content="Good Morning," HorizontalAlignment="Left" Margin="10,285,0,0" VerticalAlignment="Top" Height="60" Width="380" FontSize="36" HorizontalContentAlignment="Center" FontFamily="Consolas" Foreground="White"/>
-        <Label x:Name="nameLabel" Content="Isaac Ching" HorizontalAlignment="Left" Margin="10,350,0,0" VerticalAlignment="Top" Height="60" Width="380" FontFamily="Consolas" FontSize="36" HorizontalContentAlignment="Center" Foreground="White"/>
+        <Label x:Name="nameLabel" Content="Isaac" HorizontalAlignment="Left" Margin="10,350,0,0" VerticalAlignment="Top" Height="60" Width="380" FontFamily="Consolas" FontSize="36" HorizontalContentAlignment="Center" Foreground="White"/>
         <Label x:Name="planLabel" Content="Mindfulness" Margin="410,0,0,680" FontFamily="Consolas" FontSize="48" VerticalContentAlignment="Center" Foreground="White" Height="120" VerticalAlignment="Top" HorizontalAlignment="Left" Width="665"/>
 
         <Rectangle x:Name="opacityRectangle" Fill="#CC3C3C3C" HorizontalAlignment="Left" Height="800" Margin="0" Stroke="#FF191919" VerticalAlignment="Top" Width="0" Opacity="0.8"/>
@@ -296,7 +300,5 @@
             <TextBlock x:Name="LiveMarksPageTitle" Foreground="White" FontFamily="Consolas" FontWeight="Bold" FontSize="24" Text="Live Marks" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,345,545,0" Width="135"/>
             <TextBlock x:Name="LiveMarksPageText" Foreground="#FF494949" TextWrapping="Wrap" FontFamily="Consolas" Text="Curious to see your academic progress? Check out your latest marks on your tests and assignments in here." HorizontalAlignment="Center" VerticalAlignment="Center" Margin="120,432,0,0" Width="800" FontSize="24"/>
         </Grid>
-        <Button x:Name="beepButton" Content="Beep" HorizontalAlignment="Left" Margin="697,358,0,0" VerticalAlignment="Top" Width="0" Click="soundBeep"/>
-
     </Grid>
 </Page>
