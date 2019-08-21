@@ -9,7 +9,23 @@
       Title="SetSettings">
 
     <Grid Background="#FF252525">
+        <Rectangle x:Name="rectangle1" Grid.Row="0" Fill="#FF191919" Stroke="#FF191919" StrokeThickness="7" Margin="0,0,0,371">
+            <Rectangle.Effect>
+                <DropShadowEffect BlurRadius="20" Direction="260" ShadowDepth="7"/>
+            </Rectangle.Effect>
+        </Rectangle>
         <TextBlock Margin="267,10,303,0"  FontSize="36" FontFamily="Consolas"  TextWrapping="Wrap" Text="Preferences" VerticalAlignment="Top" Foreground="White" Height="48"/>
-        <TextBox x:Name="Password" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" Margin="196,189,0,0" Background="{x:Null}" Foreground="#FFF1F1F1"/>
+        <ScrollViewer HorizontalAlignment="Left" Height="366" VerticalAlignment="Top" Width="800" Margin="0,84,0,0">
+            <StackPanel Height="330" Width="775"/>
+        </ScrollViewer>
+        <TextBlock HorizontalAlignment="Left" Margin="94,116,0,0"  FontSize="20" FontFamily="Consolas"  TextWrapping="Wrap" Text="Username" VerticalAlignment="Top" Foreground="White"/>
+        <Rectangle x:Name="Underline_Copy"  Fill="#FF1F1F1F" HorizontalAlignment="Left" Height="2" Stroke="White" VerticalAlignment="Top" Width="496" Margin="94,192,0,0" StrokeThickness="3"/>
+        <TextBlock HorizontalAlignment="Left" Margin="94,210,0,0"  FontSize="20" FontFamily="Consolas"  TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" Foreground="White"/>
+        <Rectangle x:Name="Underline_Copy1"  Fill="#FF1F1F1F" HorizontalAlignment="Left" Height="2" Stroke="White" VerticalAlignment="Top" Width="496" Margin="94,286,0,0" StrokeThickness="3"/>
+        <Border x:Name="helpBorder" Style="{StaticResource Expands}" Grid.Column="0" CornerRadius="15" BorderBrush="#FFFAD200" BorderThickness="8" VerticalAlignment="Bottom" Width="200" Height="50" Margin="297,0,303,34" HorizontalAlignment="Center">
+            <Button x:Name="helpButton"  Content="Save" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="190" Background="#FFFAD200" BorderThickness="0" BorderBrush="#FFFAD200" FontFamily="Consolas" Foreground="Black" Height="40" FontSize="20" FontWeight="Bold" Click="Save"/>
+        </Border>
+        <PasswordBox x:Name="PassField" HorizontalAlignment="Left" MaxLength="56"  VerticalAlignment="Top" Margin="94,239,0,0" FontSize="36" FontFamily="Consolas" Background="#00000000" BorderBrush="#00C1C1C1" Width="496" BorderThickness="0" Foreground="#FFC6C6C6" />
+        <TextBox x:Name="UserField" HorizontalAlignment="Left"  MaxLength="56" VerticalAlignment="Top" Margin="94,145,0,0" FontSize="36" FontFamily="Consolas" Background="#00000000" BorderBrush="#00C1C1C1" Width="496" BorderThickness="0" Foreground="#FFC6C6C6" />
     </Grid>
 </Page>

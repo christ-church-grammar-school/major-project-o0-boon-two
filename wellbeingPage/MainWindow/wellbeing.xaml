@@ -39,7 +39,7 @@
         </Button>
 
         <Label x:Name="wellbeingLabel" Content="Wellbeing" HorizontalAlignment="Left" Margin="10,140,0,0" VerticalAlignment="Top" Height="100" Width="380" FontFamily="Consolas" FontSize="72" FontWeight="Bold" Foreground="White" HorizontalContentAlignment="Center"/>
-        <Label x:Name="greetingLabel" Content="Good Afternoon," HorizontalAlignment="Left" Margin="10,285,0,0" VerticalAlignment="Top" Height="60" Width="380" FontSize="36" HorizontalContentAlignment="Center" FontFamily="Consolas" Foreground="White"/>
+        <Label x:Name="greetingLabel" Content="Good Morning," HorizontalAlignment="Left" Margin="10,285,0,0" VerticalAlignment="Top" Height="60" Width="380" FontSize="36" HorizontalContentAlignment="Center" FontFamily="Consolas" Foreground="White"/>
         <Label x:Name="nameLabel" Content="Isaac" HorizontalAlignment="Left" Margin="10,350,0,0" VerticalAlignment="Top" Height="60" Width="380" FontFamily="Consolas" FontSize="36" HorizontalContentAlignment="Center" Foreground="White"/>
         <Label x:Name="planLabel" Content="Mindfulness" Margin="410,0,0,680" FontFamily="Consolas" FontSize="48" VerticalContentAlignment="Center" Foreground="White" Height="120" VerticalAlignment="Top" HorizontalAlignment="Left" Width="665"/>
 

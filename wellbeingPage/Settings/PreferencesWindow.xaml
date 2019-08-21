@@ -7,10 +7,11 @@
         mc:Ignorable="d"
         Background="#FF1F1F1F"
         
-        Title="Bumblebee Preferences" Height="480" Width="800" MinHeight="480" MinWidth="800" MaxHeight="480" MaxWidth="800" ShowInTaskbar="False">
+        Title="Bumblebee Preferences" Height="480" Width="800" MinHeight="480" MinWidth="800" MaxHeight="480" MaxWidth="800" ShowInTaskbar="True">
     <Grid>
+        <Frame NavigationUIVisibility="Hidden" Name="SettingsFrame" Margin="0,0,0,0.5"/>
         <Grid x:Name="LoginStuff" Visibility="Collapsed">
-            <Frame NavigationUIVisibility="Hidden" Name="MainFrame" Margin="0,0,0,0.5"/>
+            
             <TextBox x:Name="UsernameBox" HorizontalAlignment="Left"  MaxLength="56" VerticalAlignment="Top" Margin="98,172,0,0" FontSize="36" FontFamily="Consolas" Background="#00000000" BorderBrush="#00C1C1C1" Width="580" BorderThickness="0" Foreground="#FFC6C6C6" />
             <PasswordBox x:Name="PasswordBox" HorizontalAlignment="Left" MaxLength="56"  VerticalAlignment="Top" Margin="98,288,0,0" FontSize="36" FontFamily="Consolas" Background="#00000000" BorderBrush="#00C1C1C1" Width="580" BorderThickness="0" Foreground="#FFC6C6C6" />
             <Border x:Name="helpBorder" Style="{StaticResource Expands}" Grid.Column="0" CornerRadius="15" BorderBrush="#FFFAD200" BorderThickness="8" VerticalAlignment="Bottom" Height="50" Margin="270,0,0,23.5" HorizontalAlignment="Left" Width="200">
