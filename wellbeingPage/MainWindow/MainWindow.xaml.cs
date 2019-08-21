@@ -35,16 +35,12 @@ namespace wellbeingPage
 
                 Preferences SettingsWin = new Preferences();
                 SettingsWin.Show();
-                SettingsWin.MainFrame.Content = new Login();
+                SettingsWin.SettingsFrame.Content = new Login();
                 SettingsWin.LoginStuff.Visibility = Visibility.Visible;
                 ShutAll = false;
                 this.Close();
             } else
             {
-                List<string> Lines = new List<string>(System.IO.File.ReadAllLines("data/cred.txt"));
-
-
-
                 //GetStudentData.DownloadLiveMarks(Lines[0], Lines[1], true);
 
                 if (File.Exists("data/marks/Subject0.txt")){ // if marks have been downloaded: parse marks 
@@ -93,6 +89,8 @@ namespace wellbeingPage
             MenuPopup.Visibility = Visibility.Collapsed;
             ShowAllPages();
             MarksSection.Visibility = Visibility.Collapsed;
+            LastUp.Visibility = Visibility.Visible;
+            ReloadButton.Visibility = Visibility.Visible;
             MainFrame.Content = new Marks();
         }
         private void HomeClicked(object sender, RoutedEventArgs e)
@@ -104,6 +102,8 @@ namespace wellbeingPage
         }
         void ShowAllPages()
         {
+            LastUp.Visibility = Visibility.Collapsed;
+            ReloadButton.Visibility = Visibility.Collapsed;
             HomeSection.Visibility = Visibility.Visible;
             TasksSection.Visibility = Visibility.Visible;
             WellbeingSection.Visibility = Visibility.Visible;
@@ -118,6 +118,12 @@ namespace wellbeingPage
                 Application.Current.Shutdown();
             }
         }
+        private void ReloadMarks(object sender, RoutedEventArgs e)
+        {
+            GetStudentData.DownloadLiveMarks(true);
+            ReloadButton.IsEnabled = false;
+        }
+
     }
 }
 

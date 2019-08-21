@@ -38,8 +38,7 @@ namespace wellbeingPage
     public partial class Marks : Page
     {
 
-        
-
+            
         public static ObservableCollection<Subject> SubjectResults = new ObservableCollection<Subject>();
         
         public Marks()
@@ -47,19 +46,19 @@ namespace wellbeingPage
             InitializeComponent();
             
             OverallRes.Visibility = Visibility.Visible;
-            TitleSubject.Content = "Overall";
+            if (SubjectResults.Count != 0)
+            {
+                TitleSubject.Content = "Overall";
+            }
+                        
             TitleGrade.Content = "";
-            /*
-            XmlTextWriter Writer = new XmlTextWriter("LMD.xml", Encoding.UTF8); //LMD obviuosly stands for Live Marks Data right?
-            Writer.Formatting = Formatting.Indented;
-            Writer.WriteStartElement("Start");
-            Writer.WriteEndElement();
-            Writer.Close();*/
+            
+            
             SubjectList.ItemsSource = SubjectResults;
             OverallRes.ItemsSource = SubjectResults;
-            //GetStudentData.Start("1048547", "Stonehenge=Woolenook");
-            
+       
         }
+
         private void MyListView_MouseDown(object sender, MouseButtonEventArgs e)
         {
             HitTestResult r = VisualTreeHelper.HitTest(this, e.GetPosition(this));
@@ -69,6 +68,7 @@ namespace wellbeingPage
             TitleSubject.Content = "Overall";
             TitleGrade.Content = "";
             
+
         }
 
         private void changed(object sender, SelectionChangedEventArgs e)
@@ -94,7 +94,9 @@ namespace wellbeingPage
             {
                 
             }
-            
+          
         }
+        
+        
     }
 }
