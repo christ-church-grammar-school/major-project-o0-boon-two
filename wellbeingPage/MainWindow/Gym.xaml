@@ -64,50 +64,52 @@
 
     <Grid>
         <Rectangle x:Name="BackgroundScreen" Fill="#FF1F1F1F" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
-        <TextBlock Style="{StaticResource textBlockListStyle}" FontSize="36" Foreground="#FAD200" Margin="85,34,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="50" Width="Auto"> Workouts</TextBlock>
+        <TextBlock Style="{StaticResource textBlockListStyle}" FontSize="56" FontWeight="ExtraBold" Foreground="#FAD200" Margin="85,34,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="56" Width="Auto"> Workouts</TextBlock>
 
         <Button x:Name="AddWorkout" Margin="1050, 650, 10, 70" Click="AddWorkout_Click">Add a new workout</Button>
 
-        <StackPanel x:Name="workoutsPanel" Margin="85,84,0,63" Background="Black" Orientation="Vertical" HorizontalAlignment="Left" Width="955"/>
+        <StackPanel x:Name="workoutsPanel" Margin="85,100,0,70" Background="Black" Orientation="Vertical" HorizontalAlignment="Left" Width="915"/>
 
-        <Grid x:Name="AddWorkoutPopup" Visibility="Collapsed">
+        <Grid x:Name="AddWorkoutPopup" Visibility="Visible">
             <Rectangle x:Name="DarknessScreen" Fill="#CC3C3C3C"/>
 
-            <Border x:Name="AddATaskTopBorder" BorderThickness="1" CornerRadius="50,50,0,0" BorderBrush="#00000000" Background="#FFFAD200" Margin="100,101,127,0" Height="114" VerticalAlignment="Top">
-                <TextBlock x:Name="AddATaskTextBlock" Text="New Workout" FontSize="72" FontFamily="Consolas" FontWeight="Bold" Margin="45,9,485,9" Foreground="White"/>
+            <Border x:Name="AddATaskTopBorder" BorderThickness="1" CornerRadius="50,50,0,0" BorderBrush="#00000000" Background="#FFFAD200" Margin="0,0,0,490" Height="100" VerticalAlignment="Center" HorizontalAlignment="Center" Width="1000">
+                <TextBlock x:Name="AddATaskTextBlock" Text="New Workout" FontSize="72" FontFamily="Consolas" FontWeight="Bold" Margin="30,0,0,0" Foreground="White"/>
             </Border>
 
-            <Border x:Name="AddATaskBottomBorder" BorderThickness="1" CornerRadius="0,0,50,50" BorderBrush="#00000000" Background="#FF1F1F1F" Margin="100,215,127,100">
-                <Button Width="Auto" Height="Auto" Margin="693,309,51,57" Click="Button_Click">Add an Exercise</Button>
+            <Border x:Name="AddATaskBottomBorder" BorderThickness="1" CornerRadius="0,0,50,50" BorderBrush="#00000000" Background="#FF1F1F1F" Margin="0,80,0,0" HorizontalAlignment="Center" Width="1000" Height="470" VerticalAlignment="Center">
+                <Button Width="200" Height="Auto" Margin="693,309,51,57" Click="Button_Click">Add an Exercise</Button>
             </Border>
-            <TextBlock Style="{StaticResource textBlockListStyle}" FontSize="36" Foreground="#FAD200" Margin="117,215,782,0" Width="Auto" VerticalAlignment="Top" HorizontalAlignment="Stretch" Height="47" Text="Current Workout"/>
 
-            <StackPanel Background="White" Margin="100,262,444,100">
+            <Button HorizontalAlignment="Center" Background="#f1f1f1" VerticalAlignment="Center" Margin="822,439,178,301" Width="200" Height="60">Add to Workouts</Button>
+            <TextBox HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Gray" Margin="822,375,178,383" Width="200" Height="42">Enter Workout Name</TextBox>
 
-            </StackPanel>
+            <TextBlock Style="{StaticResource textBlockListStyle}" FontSize="36" Foreground="#FAD200" Margin="0,0,630,353" VerticalAlignment="Center" HorizontalAlignment="Center" Height="42" Text="Current Workout" Width="300"/>
+
+            <StackPanel x:Name="workoutStack" Background="Wheat" Margin="0,115,325,0" HorizontalAlignment="Center" Width="656" Height="425" VerticalAlignment="Center"/>
 
         </Grid>
 
-        <Grid x:Name="AddExercisePopup" Visibility="Visible">
+        <Grid x:Name="AddExercisePopup" Visibility="Collapsed" >
             <Rectangle Fill="#CC3C3C3C"/>
 
-            <Border x:Name="AddAnExerciseTopBorder" BorderThickness="1" CornerRadius="50,50,0,0" BorderBrush="#00000000" Background="#FFFAD200" Margin="0, 0, 0, 450" HorizontalAlignment="Center" Width="800" Height="100" VerticalAlignment="Center">
-                <TextBlock x:Name="AddAnExerciseTextBlock" Text="Add Exercise" FontSize="72" FontFamily="Consolas" Width="485" FontWeight="Bold" Margin="20,9,20,24" Foreground="White" Height="70" VerticalAlignment="Center" HorizontalAlignment="Center" RenderTransformOrigin="0.805,0.171"/>
-            </Border>
-
-            <Border x:Name="AddAnExerciseBottomBorder" BorderThickness="1" CornerRadius="0,0,50,50" BorderBrush="#00000000" Background="#FF1F1F1F" Height="481" VerticalAlignment="Center" HorizontalAlignment="Center" Width="800" Margin="200,225,200,94">
-                <StackPanel Margin="0,0,-1,-24">
+            <Border x:Name="AddAnExerciseBottomBorder" BorderThickness="1" CornerRadius="0,0,50,50" BorderBrush="#00000000" Background="#FF1F1F1F" Height="470" VerticalAlignment="Center" HorizontalAlignment="Center" Width="1000" Margin="0,80,0,0">
+                <StackPanel Margin="0,0,-1,-1">
                     <TextBlock  Margin="20" FontFamily="consolas" FontSize="45" Foreground="#FAD200">Exercise</TextBlock>
-                    <TextBox Margin="250, -60, 200, 30" FontSize="32" CharacterCasing="Upper" ></TextBox>
+                    <TextBox x:Name="exerciseEntered"  Margin="250, -64, 200, 30" FontSize="32" CharacterCasing="Normal" TextChanged="ExerciseEntered_TextChanged" ></TextBox>
                     <TextBlock  Margin="20" FontFamily="consolas" FontSize="45" Foreground="#FAD200">Sets</TextBlock>
-                    <TextBox Margin="250, -60, 200, 30" FontSize="32" CharacterCasing="Upper" ></TextBox>
+                    <TextBox x:Name="setsEntered" Margin="250, -64, 200, 30" FontSize="32" CharacterCasing="Upper" TextChanged="SetsEntered_TextChanged" ></TextBox>
                     <TextBlock  Margin="20" FontFamily="consolas" FontSize="45" Foreground="#FAD200">Reps</TextBlock>
-                    <TextBox Margin="250, -60, 200, 30" FontSize="32" CharacterCasing="Upper" ></TextBox>
+                    <TextBox x:Name="repsEntered" Margin="250, -64, 200, 30" FontSize="32" CharacterCasing="Upper" TextChanged="RepsEntered_TextChanged"></TextBox>
                     <TextBlock  Margin="20" FontFamily="consolas" FontSize="45" Foreground="#FAD200">Rest</TextBlock>
-                    <TextBox Margin="250, -60, 200, 30" FontSize="32" CharacterCasing="Upper" ></TextBox>
-
+                    <TextBox x:Name="restEntered" Margin="250, -64, 200, 30" FontSize="32" CharacterCasing="Normal" TextChanged="RestEntered_TextChanged"></TextBox>
                 </StackPanel>
+
             </Border>
+            <Border x:Name="AddAnExerciseTopBorder" BorderThickness="1" CornerRadius="50,50,0,0" BorderBrush="#00000000" Background="#FFFAD200" Margin="0, 0, 0, 490" HorizontalAlignment="Center" Width="1000" Height="100" VerticalAlignment="Center">
+                <TextBlock x:Name="AddAnExerciseTextBlock" Text="Add Exercise" FontSize="72" FontFamily="Consolas" FontWeight="Bold" Margin="157,7,157,21" Foreground="White" RenderTransformOrigin="0.805,0.171"/>
+            </Border>
+            <Button x:Name="addEntered" Width="120" Height="80" Margin="915,360,165,360" IsEnabled="False" Content="Add to workout" Click="AddEntered_Click" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
     </Grid>
 </Page>

@@ -34,12 +34,15 @@ namespace wellbeingPage
         //StackPanel textblockPanel = new StackPanel();
         //StackPanel textboxPanel = new StackPanel();
 
+        List<Exercise> appendedWorkout = new List<Exercise>();
+        Exercise newestWorkout = new Exercise();
+
+
         public Gym()
         {
             InitializeComponent();
             //InitiateAddPanel();
         }
-
 
         private void AddWorkout_Click(object sender, RoutedEventArgs e)
         {
@@ -51,6 +54,90 @@ namespace wellbeingPage
             AddExercisePopup.Visibility = Visibility.Visible;
             AddWorkoutPopup.Visibility = Visibility.Collapsed;
         }
+
+        private void ExerciseEntered_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            exerciseEntered.MaxLength = 30;
+            if (exerciseEntered.Text.Length != 0 && repsEntered.Text.Length != 0 &&
+                restEntered.Text.Length != 0 && setsEntered.Text.Length != 0)
+            {
+                addEntered.IsEnabled = true;
+            }
+            else
+            {
+                addEntered.IsEnabled = false;
+            }
+        }
+
+        private void SetsEntered_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            setsEntered.MaxLength = 3;
+            if (exerciseEntered.Text.Length != 0 && repsEntered.Text.Length != 0 &&
+                 restEntered.Text.Length != 0 && setsEntered.Text.Length != 0)
+            {
+                addEntered.IsEnabled = true;
+            }
+            else
+            {
+                addEntered.IsEnabled = false;
+            }
+        }
+
+        private void RepsEntered_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            repsEntered.MaxLength = 20;
+            if (exerciseEntered.Text.Length != 0 && repsEntered.Text.Length != 0 &&
+                 restEntered.Text.Length != 0 && setsEntered.Text.Length != 0)
+            {
+                addEntered.IsEnabled = true;
+            }
+            else
+            {
+                addEntered.IsEnabled = false;
+            }
+        }
+
+        private void RestEntered_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            restEntered.MaxLength = 15;
+            if (exerciseEntered.Text.Length != 0 && repsEntered.Text.Length != 0 &&
+                 restEntered.Text.Length != 0 && setsEntered.Text.Length != 0)
+            {
+                addEntered.IsEnabled = true;
+            }
+            else
+            {
+                addEntered.IsEnabled = false;
+            }
+        }
+
+        private void AddEntered_Click(object sender, RoutedEventArgs e)
+        {
+            newestWorkout.exerciseName = exerciseEntered.Text.ToString();
+            newestWorkout.reps = repsEntered.Text.ToString();
+            newestWorkout.sets = setsEntered.Text.ToString();
+            newestWorkout.rest = restEntered.Text.ToString();
+
+            appendedWorkout.Add(newestWorkout);
+
+            exerciseEntered.Text = "";
+            repsEntered.Text = "";
+            setsEntered.Text = "";
+            restEntered.Text = "";
+
+            AddExercisePopup.Visibility = Visibility.Collapsed;
+            AddWorkoutPopup.Visibility = Visibility.Visible;
+
+            TextBlock exerciseList = new TextBlock();
+            
+            exerciseList.Text = newestWorkout.exerciseName + " || " + newestWorkout.sets + " x "  + 
+                                newestWorkout.reps + " || " + newestWorkout.rest + "\n";
+
+            workoutStack.Children.Add(exerciseList);
+        }
+
+
+
         //public EventHandler ladder;
         //public void ClimbLadder()
         //{
@@ -236,6 +323,14 @@ namespace wellbeingPage
     {
         //will not change at any point
         public string workoutName;
-        public List<string> exercises = new List<string>();
+        public List<Exercise> exercises = new List<Exercise>();
+    }
+
+    public class Exercise
+    {
+        public string exerciseName;
+        public string sets;
+        public string reps;
+        public string rest;
     }
 }
