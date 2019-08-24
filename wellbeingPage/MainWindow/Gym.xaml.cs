@@ -136,6 +136,19 @@ namespace wellbeingPage
             workoutStack.Children.Add(exerciseList);
         }
 
+        private void ClearText(object sender, KeyboardFocusChangedEventArgs e)
+        {
+                  if (namingWorkout.Text == "Enter Workout Name")
+                  {
+                      namingWorkout.Text = "";
+                      //ideally changes the text from a grey to black
+                  }
+
+        }
+
+        // clears the guiding text in textbox
+
+
 
 
         //public EventHandler ladder;

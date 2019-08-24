@@ -81,8 +81,8 @@
                 <Button Width="200" Height="Auto" Margin="693,309,51,57" Click="Button_Click">Add an Exercise</Button>
             </Border>
 
-            <Button HorizontalAlignment="Center" Background="#f1f1f1" VerticalAlignment="Center" Margin="822,439,178,301" Width="200" Height="60">Add to Workouts</Button>
-            <TextBox HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Gray" Margin="822,375,178,383" Width="200" Height="42">Enter Workout Name</TextBox>
+            <Button IsEnabled="False" HorizontalAlignment="Center" Background="#f1f1f1" VerticalAlignment="Center" Margin="822,439,178,301" Width="200" Height="60">Add to Workouts</Button>
+            <TextBox x:Name="namingWorkout"  HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Gray" Margin="650, 0, 0, 0" Width="200" Height="42" GotKeyboardFocus="ClearText">Enter Workout Name</TextBox>
 
             <TextBlock Style="{StaticResource textBlockListStyle}" FontSize="36" Foreground="#FAD200" Margin="0,0,630,353" VerticalAlignment="Center" HorizontalAlignment="Center" Height="42" Text="Current Workout" Width="300"/>
 
