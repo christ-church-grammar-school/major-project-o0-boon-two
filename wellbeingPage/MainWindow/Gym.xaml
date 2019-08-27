@@ -70,7 +70,7 @@
 
         <StackPanel x:Name="workoutsPanel" Background="Wheat" Margin="85,100,0,70" Orientation="Vertical" HorizontalAlignment="Left" Width="915"/>
 
-        <Grid x:Name="AddWorkoutPopup" Visibility="Visible">
+        <Grid x:Name="AddWorkoutPopup" Visibility="Collapsed">
             <Rectangle x:Name="DarknessScreen" Fill="#CC3C3C3C"/>
 
             <Border x:Name="AddATaskTopBorder" BorderThickness="1" CornerRadius="50,50,0,0" BorderBrush="#00000000" Background="#FFFAD200" Margin="0,0,0,490" Height="100" VerticalAlignment="Center" HorizontalAlignment="Center" Width="1000">

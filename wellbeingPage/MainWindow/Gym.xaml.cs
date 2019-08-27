@@ -49,6 +49,7 @@ namespace wellbeingPage
         private void AddWorkout_Click(object sender, RoutedEventArgs e)
         {
             AddWorkoutPopup.Visibility = Visibility.Visible;
+            AddWorkout.Width = 0;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -137,6 +138,7 @@ namespace wellbeingPage
                                 newestWorkout.reps + " || " + newestWorkout.rest + "\n";
 
             workoutStack.Children.Add(exerciseList);
+            
         }
 
         private void ClearText(object sender, KeyboardFocusChangedEventArgs e)
@@ -189,6 +191,7 @@ namespace wellbeingPage
    
                 workoutsPanel.Children.Add(workoutList);
                 AddWorkoutPopup.Visibility = Visibility.Collapsed;
+                
         }
 
         private void resetText(object sender, TextChangedEventArgs e)
