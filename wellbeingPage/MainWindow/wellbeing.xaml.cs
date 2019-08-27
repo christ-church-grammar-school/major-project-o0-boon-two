@@ -32,15 +32,17 @@ namespace wellbeingPage
                 greetingLabel.Content = "Good Morning,";
             }
 
-            else if (DateTime.Now.Hour > 12)
+            if (DateTime.Now.Hour > 12)
             {
                 greetingLabel.Content = "Good Afternoon,";
             }
 
-            else if (DateTime.Now.Hour > 17.5)
+            if (DateTime.Now.Hour > 17.5)
             {
                 greetingLabel.Content = "Good Evening,";
             }
+
+            wellbeingPopup.Visibility = Visibility.Visible;
         }
 
         public void Climbladder()
@@ -50,26 +52,38 @@ namespace wellbeingPage
 
         private void addClicked(object sender, RoutedEventArgs e)
         {
-            opacityRectangle.Width = 1200;
+            opacityRectangle.Visibility = Visibility.Visible;
             addPopup.Visibility = Visibility.Visible;
         }
 
         private void addCloseClicked(object sender, RoutedEventArgs e)
         {
-            opacityRectangle.Width = 0;
+            opacityRectangle.Visibility = Visibility.Collapsed;
             addPopup.Visibility = Visibility.Collapsed;
         }
 
         private void infoClicked(object sender, RoutedEventArgs e)
         {
-            opacityRectangle.Width = 1200;
+            opacityRectangle.Visibility = Visibility.Visible;
             infoPopup.Visibility = Visibility.Visible;
         }
 
         private void infoCloseClicked(object sender, RoutedEventArgs e)
         {
-            opacityRectangle.Width = 0;
+            opacityRectangle.Visibility = Visibility.Collapsed;
             infoPopup.Visibility = Visibility.Collapsed;
+        }
+
+        private void helpClicked(object sender, RoutedEventArgs e)
+        {
+            opacityRectangle.Visibility = Visibility.Visible;
+            helpPopup.Visibility = Visibility.Visible;
+        }
+
+        private void helpCloseClicked(object sender, RoutedEventArgs e)
+        {
+            opacityRectangle.Visibility = Visibility.Collapsed;
+            helpPopup.Visibility = Visibility.Collapsed;
         }
 
         private void menuButtonClicked(object sender, RoutedEventArgs e)
@@ -90,6 +104,11 @@ namespace wellbeingPage
             {
                 mediaPlayer.Open(new Uri(openFileDialog.FileName));
             }
+        }
+
+        private void happyClicked(object sender, RoutedEventArgs e)
+        {
+            wellbeingPopup.Visibility = Visibility.Collapsed;
         }
     }
 }
