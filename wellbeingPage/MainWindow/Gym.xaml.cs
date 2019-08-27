@@ -49,7 +49,6 @@ namespace wellbeingPage
         private void AddWorkout_Click(object sender, RoutedEventArgs e)
         {
             AddWorkoutPopup.Visibility = Visibility.Visible;
-            AddWorkout.Width = 0;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -196,7 +195,7 @@ namespace wellbeingPage
 
         private void resetText(object sender, TextChangedEventArgs e)
         {
-            if (namingWorkout.Text != "")
+            if (namingWorkout.Text != "" && namingWorkout.Text != "Enter Workout Name")
             {
                 addToWorkouts.IsEnabled = true;
                 ValidWorkout();
