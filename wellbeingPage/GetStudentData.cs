@@ -10,6 +10,7 @@ using System.Windows;
 using System.IO;
 using System.Threading;
 using wellbeingPage.Settings;
+using SQLite;
 
 namespace wellbeingPage
 {
@@ -90,10 +91,19 @@ namespace wellbeingPage
                         var subset = line.ToList().GetRange(0, line.Count - 7);
                         sub.TestNames.Add(String.Join(" ", subset));
                         
-                        double value = Convert.ToDouble(line[line.Count - 6]) / Convert.ToDouble(line[line.Count - 4]);
-                        double weight = Convert.ToDouble(line[line.Count - 1].Split(new[] { "%" }, StringSplitOptions.None).ToList()[0]);
-                        numerator += value * weight;
-                        denomenator += weight;
+                        try
+                        {
+                            double value = Convert.ToDouble(line[line.Count - 6]) / Convert.ToDouble(line[line.Count - 4]);
+                            double weight = Convert.ToDouble(line[line.Count - 1].Split(new[] { "%" }, StringSplitOptions.None).ToList()[0]);
+                            numerator += value * weight;
+                            denomenator += weight;
+                        }
+                        catch
+                        {
+
+                        }
+                            
+                        
 
                     } //no marks allocated
                     else

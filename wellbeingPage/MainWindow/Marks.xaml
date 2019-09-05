@@ -22,8 +22,8 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,0,-0.5">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*" MinWidth="250"></ColumnDefinition>
-                <ColumnDefinition Width="5*" MinWidth="300"></ColumnDefinition>
+                <ColumnDefinition Width="390" MinWidth="250"></ColumnDefinition>
+                <ColumnDefinition MinWidth="300"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Rectangle Fill="#FF181818" Stroke="#FF191919" Margin="0,0,23,96"/>
 
@@ -51,7 +51,7 @@
                 <Button x:Name="helpButton"  Content="Input Marks" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="190" Background="#FFFAD200" BorderThickness="0" BorderBrush="#FFFAD200" FontFamily="Consolas" Foreground="Black" Height="40" FontSize="20" FontWeight="Bold"/>
             </Border>
             <GridSplitter Grid.Column="1" HorizontalAlignment="Left" Width="7" Background="#FF282828" Foreground="{x:Null}"/>
-            <ListBox x:Name="OverallRes" Grid.Column="1" ScrollViewer.VerticalScrollBarVisibility="Disabled" AlternationCount="-1" ScrollViewer.CanContentScroll="False" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,199,0,0" SelectionChanged="changed" IsManipulationEnabled="True" Height="250" VerticalAlignment="Top">
+            <ListBox x:Name="OverallRes" Grid.Column="1" ScrollViewer.VerticalScrollBarVisibility="Disabled" AlternationCount="-1" ScrollViewer.CanContentScroll="False" Background="{x:Null}" BorderBrush="{x:Null}" Margin="802,61,10,0" SelectionChanged="changed" IsManipulationEnabled="True" Height="250" VerticalAlignment="Top">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Horizontal"/>
@@ -65,6 +65,17 @@
             </ListBox>
             <Label x:Name="TitleSubject" Grid.Column="1" Content="" Margin="0,23,0,0" FontFamily="Consolas" FontSize="48" Foreground="White" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Height="66" VerticalAlignment="Top" Width="857"/>
             <Label x:Name="TitleGrade" Grid.Column="1" Content="" Margin="0,89,0,0" FontFamily="Consolas" FontSize="78" Foreground="White" HorizontalContentAlignment="Center" Background="{x:Null}" Width="857" Height="110" VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Bold"/>
+            <Grid Name="HoverTestInfo" Margin="0,0,214,20" Grid.Column="1" Height="508" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="312">
+                <Rectangle Fill="#FF656565" Stroke="#FF191919" RadiusY="45.75" RadiusX="45.75"/>
+                <TextBlock Margin="152,52,5,0" TextWrapping="Wrap" Text="80%" VerticalAlignment="Top" FontSize="70" Height="97" TextAlignment="Center" FontWeight="Bold" Foreground="#FF313131"/>
+
+                <TextBlock Margin="10,52,156,0" TextWrapping="Wrap" Text="85" VerticalAlignment="Top" FontSize="70" Height="87" TextAlignment="Center" FontWeight="Bold" Foreground="#FF38BC00"/>
+                <TextBlock Margin="0,10,0,0" TextWrapping="Wrap" Text="Test Name" VerticalAlignment="Top" FontSize="36" Height="93" TextAlignment="Center" FontWeight="Bold"/>
+                <Rectangle Fill="#FF4A4A4A" Stroke="#FF191919" RadiusY="10.5" RadiusX="10.5" Margin="30,294,28,10"/>
+                <TextBox Margin="30,294,28,10" TextWrapping="Wrap" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" Text="COMMENTS: Where did you lose marks? What should you improve for your next test?" FontSize="16"/>
+                <TextBlock Margin="0,144,0,0" TextWrapping="Wrap" Text=" marks:      42.5/50" VerticalAlignment="Top" FontSize="36" Height="61" TextAlignment="Center" FontWeight="Bold" Foreground="#FF959595"/>
+                <TextBlock Margin="0,194,0,0" TextWrapping="Wrap" Text="weighting: 5.00%" VerticalAlignment="Top" FontSize="36" Height="61" TextAlignment="Center" FontWeight="Bold" Foreground="#FF434343"/>
+            </Grid>
 
 
         </Grid>
@@ -74,7 +85,7 @@
                 <DropShadowEffect BlurRadius="20" Direction="260" ShadowDepth="7"/>
             </Rectangle.Effect>
         </Rectangle>
-        
+
 
         <Label x:Name="ResultsLabel" Grid.Row="0" Content="Results" Margin="0,15" Height="100" FontFamily="Consolas" FontSize="72" FontWeight="Bold" Foreground="White" HorizontalContentAlignment="Center" Grid.ColumnSpan="2"/>
     </Grid>
