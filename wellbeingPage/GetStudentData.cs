@@ -132,7 +132,7 @@ namespace wellbeingPage
             {
                 driver.Navigate().GoToUrl("https://parentportal.ccgs.wa.edu.au/");
                 System.Threading.Thread.Sleep(5000);
-                var search_box = driver.FindElementByName("ctl00$ctl05$TextBoxUserName");
+                var search_box = driver.FindElementById("TextBoxUserName");
                 search_box.SendKeys(username);
                 search_box = driver.FindElementById("textBox2");
                 search_box.SendKeys(password);
