@@ -240,15 +240,18 @@ namespace wellbeingPage
             {
                 Console.WriteLine("Chromedriver was unable to complete webscraping");
                 driver.Quit();
+                App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+                {
+                   ((MainWindow)System.Windows.Application.Current.MainWindow).ReloadButton.IsEnabled = true;
+                    ((MainWindow)Application.Current.MainWindow).ReloadRotater.Angle = 0;
+
+                });
+                
                 if (ShowError)
                 {
                     MessageBox.Show("There was an error connecting to Live Marks. Please ensure that you:\n\n    - Are connected to the internet\n\n    - Have inputted the correct credentials (change in settings)\n\n    - Do not exit the Chrome window\n\n\n And then try again.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-                App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
-                {
-                   ((MainWindow)System.Windows.Application.Current.MainWindow).ReloadButton.IsEnabled = true;
-
-                });
+                
                 return false;
             }
         }

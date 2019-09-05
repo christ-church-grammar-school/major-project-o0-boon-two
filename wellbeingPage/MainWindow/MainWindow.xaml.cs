@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using wellbeingPage.Settings;
 
 namespace wellbeingPage
@@ -23,6 +24,7 @@ namespace wellbeingPage
     public partial class MainWindow : Window
     {
         public bool ShutAll = true;  //when this window shuts everything shuts
+        DispatcherTimer milliseconds = new DispatcherTimer();
 
         public MainWindow()
         {
@@ -47,8 +49,19 @@ namespace wellbeingPage
                     GetStudentData.PutMarks();
                 }
             }
+
+            milliseconds.Interval = TimeSpan.FromMilliseconds(1);
+            milliseconds.Tick += Rot;
+            milliseconds.Start();
         }
-        
+        void Rot(object sender, object e)
+        {
+            if (!ReloadButton.IsEnabled)
+            {
+                ReloadRotater.Angle += 3;
+            }
+            
+        }
         private void DarknessButtonScreenClicked(object sender, RoutedEventArgs e)
         {
             MenuPopup.Visibility = Visibility.Collapsed;
@@ -104,6 +117,7 @@ namespace wellbeingPage
         {
             LastUp.Visibility = Visibility.Collapsed;
             ReloadButton.Visibility = Visibility.Collapsed;
+            ReloadRotater.Angle = 0;
             HomeSection.Visibility = Visibility.Visible;
             TasksSection.Visibility = Visibility.Visible;
             WellbeingSection.Visibility = Visibility.Visible;
