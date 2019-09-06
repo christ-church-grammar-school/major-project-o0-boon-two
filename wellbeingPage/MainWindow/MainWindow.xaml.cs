@@ -25,6 +25,8 @@ namespace wellbeingPage
     /// </summary>
     public partial class MainWindow : Window
     {
+        
+
         public bool ShutAll = true;  //when this window shuts everything shuts
         DispatcherTimer milliseconds = new DispatcherTimer();
 
@@ -150,6 +152,8 @@ namespace wellbeingPage
             GetStudentData.DownloadLiveMarks(true);
             ReloadButton.IsEnabled = false;
         }
+
+        
 
     }
 }

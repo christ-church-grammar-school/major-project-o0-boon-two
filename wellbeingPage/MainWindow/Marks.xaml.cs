@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml;
+using System.Configuration;
 
 
 namespace wellbeingPage
@@ -61,7 +62,7 @@ namespace wellbeingPage
         public Marks()
         {
             InitializeComponent();
-
+            
             OverallRes.Visibility = Visibility.Visible;
             if (SubjectResults.Count != 0)
             {

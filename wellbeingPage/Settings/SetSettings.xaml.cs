@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SQLite;
 
 namespace wellbeingPage.Settings
 {
@@ -24,17 +25,25 @@ namespace wellbeingPage.Settings
         public SetSettings()
         {
             InitializeComponent();
-            List<string> Lines = new List<string>(System.IO.File.ReadAllLines("data/cred.txt"));
-            UserField.Text = Lines[0];
-            PassField.Password = Lines[1];
+            SQLiteConnection conn = new SQLiteConnection("StudentData.sqlite");
+
+            var a = conn.Table<Preferences.Info>().ToList()[0];
+            UserField.Text = a.Username;
+            PassField.Password = a.Password;
+            
         }
 
         private void Save(object sender, RoutedEventArgs e)
         {
-            using (StreamWriter outputFile = new StreamWriter("data/cred.txt"))
-            {
-                outputFile.Write( UserField.Text + "\n" + PassField.Password.ToString());
-            }
+           
+            SQLiteConnection conn = new SQLiteConnection("StudentData.sqlite");
+            
+            var a = conn.Table<Preferences.Info>().ToList()[0];
+            a.Username = UserField.Text;
+            a.Password = PassField.Password;
+            
+            conn.InsertOrReplace(a);
+
             Window.GetWindow(this).Close();
         }
     }

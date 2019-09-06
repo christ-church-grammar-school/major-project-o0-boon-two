@@ -13,6 +13,7 @@ using wellbeingPage.Settings;
 using SQLite;
 using System.Configuration;
 
+
 namespace wellbeingPage
 {
     class GetStudentData
@@ -20,8 +21,13 @@ namespace wellbeingPage
         
         public static async Task DownloadLiveMarks(bool ShowError)
         {
-            List<string> Lines = new List<string>(System.IO.File.ReadAllLines("data/cred.txt"));
-            var cTask = Task.Run(() => StartDownload(Lines[0],Lines[1],ShowError));
+            
+            SQLiteConnection conn = new SQLiteConnection("StudentData.sqlite");
+            
+            var a  = conn.Table<Preferences.Info>().ToList()[0].Username;
+            var b = conn.Table<Preferences.Info>().ToList()[0].Password;
+            
+            var cTask = Task.Run(() => StartDownload(a,b,ShowError));
             await cTask;
         }
 
@@ -229,6 +235,7 @@ namespace wellbeingPage
 
                 App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
                 {
+                    
                     var str = "Last Updated: " + DateTime.Now.ToString("dd/MM/yyyy  hh:mm tt");
                     ((MainWindow)System.Windows.Application.Current.MainWindow).LastUp.Text = str;
                     ((MainWindow)System.Windows.Application.Current.MainWindow).ReloadButton.IsEnabled = true;
