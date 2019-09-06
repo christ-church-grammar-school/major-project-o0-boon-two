@@ -1,5 +1,7 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -32,7 +34,7 @@ namespace wellbeingPage
             MainFrame.Content = new Home();
 
           
-            if (!File.Exists("data/cred.txt")) // IF THIS PERSON HAS NOT USED THE APP BEFORE
+            if (!File.Exists("StudentData.sqlite")) // IF THIS PERSON HAS NOT USED THE APP BEFORE
             {
 
                 Preferences SettingsWin = new Preferences();
@@ -43,11 +45,7 @@ namespace wellbeingPage
                 this.Close();
             } else
             {
-                //GetStudentData.DownloadLiveMarks(Lines[0], Lines[1], true);
-
-                if (File.Exists("data/marks/Subject0.txt")){ // if marks have been downloaded: parse marks 
-                    GetStudentData.PutMarks();
-                }
+                GetMarksFromDB();
             }
 
             milliseconds.Interval = TimeSpan.FromMilliseconds(1);
@@ -61,6 +59,21 @@ namespace wellbeingPage
                 ReloadRotater.Angle += 3;
             }
             
+        }
+        public void GetMarksFromDB()
+        {
+            SQLiteConnection conn = new SQLiteConnection("StudentData.sqlite");
+            var res = conn.Table<Subject>().ToList();
+            foreach(var i in res)
+            {
+                var mrks = conn.Table<Mark>().Where(p => p.subject == i.Name);
+                i.marks.AddRange(mrks);
+                Marks.SubjectResults.Add(i);
+                
+            }
+
+            
+                
         }
         private void DarknessButtonScreenClicked(object sender, RoutedEventArgs e)
         {

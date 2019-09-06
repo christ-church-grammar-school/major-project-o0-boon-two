@@ -61,7 +61,6 @@ namespace wellbeingPage
         public Marks()
         {
             InitializeComponent();
-           
 
             OverallRes.Visibility = Visibility.Visible;
             if (SubjectResults.Count != 0)
@@ -75,17 +74,7 @@ namespace wellbeingPage
             SubjectList.ItemsSource = SubjectResults;
             OverallRes.ItemsSource = SubjectResults;
 
-            SQLiteConnection conn = new SQLiteConnection("StudentData.sqlite");
-
-            conn.CreateTable<Subject>();
-            foreach (var i in SubjectResults)                
-                conn.InsertOrReplace(i);
-
             
-            conn.CreateTable<Mark>();
-            foreach (var i in SubjectResults)
-                foreach(var j in i.marks)
-                    conn.InsertOrReplace(j);
 
         }
 

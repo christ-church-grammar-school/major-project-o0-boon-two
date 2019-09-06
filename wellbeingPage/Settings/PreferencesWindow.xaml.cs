@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -43,13 +44,15 @@ namespace wellbeingPage
                 outputFile.WriteLine(UsernameBox.Text);
                 outputFile.WriteLine(PasswordBox.Password.ToString());
             }
-
-            MainWindow win = new MainWindow();
-
-            win.Show();
+            
 
             LoginStuff.Visibility = Visibility.Collapsed;
-            
+            SQLiteConnection conn = new SQLiteConnection("StudentData.sqlite");
+            conn.CreateTable<Subject>();
+            conn.Close();
+
+            var win = new MainWindow();
+            win.Show();
             if (sender == subButton)
             {
                 GetStudentData.DownloadLiveMarks(true);

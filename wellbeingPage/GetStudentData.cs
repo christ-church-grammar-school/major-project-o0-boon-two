@@ -25,105 +25,93 @@ namespace wellbeingPage
             await cTask;
         }
 
-        public static async Task PutMarks()
+                
+        private static void ParseMarks(string inp)
         {
-            var cTask = Task.Run(() => ParseMarks());
-            await cTask;
-            
-        }
-        
-        private static void ParseMarks()
-        {
-            List<FileInfo> info = new List<FileInfo>();
-            
+              
+            Subject sub = new Subject();
+            List<string> Lines = new List<string>(inp.Split(new[] { "\n" }, StringSplitOptions.None).ToList());
 
-            var dirInfo = new DirectoryInfo("data/marks");
-            info.AddRange(dirInfo.GetFiles("*.txt*"));
-            
-            App.Current.Dispatcher.Invoke((Action)delegate
+            //FIND NAME + TEACHER
+            List<string> First = Lines[0].Split(new[] { " " }, StringSplitOptions.None).ToList();
+            int Pindex = 0;
+            for (int j = 0; j < First.Count; j++)
             {
-                Marks.SubjectResults.Clear();
+                //Console.WriteLine(First[j]);
+                if (First[j] == "Mrs" || First[j] == "Ms" || First[j] == "Miss" || First[j] == "Mr" || First[j] == "Dr")
+                {
+                    Pindex = j;
+                        
+                }
+            }
+            sub.Name = String.Join(" ",First.ToList().GetRange(0, Pindex)) + "\n";
+            sub.teacher = String.Join(" ", First.ToList().GetRange(Pindex, First.Count - Pindex));
+            //MessageBox.Show(sub.Name + "         " + sub.teacher);
+
+            // FIND MARKS;
+            List<string> tests = Lines.ToList().GetRange(4, Lines.Count - 5);
+
+            var split = Lines.Last().Split(new[] { "%" }, StringSplitOptions.None).ToList();
+            if (split.Count == 3){
+                sub.YourAverage = Convert.ToInt32((split[0].Split(new[] { " " }, StringSplitOptions.None).ToList()).Last());
+                sub.EveryoneAverage = Convert.ToInt32((split[1].Split(new[] { " " }, StringSplitOptions.None).ToList()).Last());
+            }
+            else if(split.Count ==2)
+            {
+                sub.EveryoneAverage = Convert.ToInt32((split[0].Split(new[] { " " }, StringSplitOptions.None).ToList()).Last());
+            }
+             
+            foreach (var a in tests)
+            {
+                int SlashCount = a.Split('/').Length - 1;
+                if (SlashCount >= 3) //Assume there is marks
+                {
+                    //Module 1 Project 7/04/2019 20 / 20 100 93% 6.00%          EXAMPLE
+
+                    List<string> line = a.Split(new[] { " " }, StringSplitOptions.None).ToList();
+
+                    var mrk = new Mark();
+
+
+                    mrk.weight= Convert.ToDouble(line[line.Count - 1].Split(new[] { "%" }, StringSplitOptions.None).ToList()[0]); // Getting weight as last term
+                    mrk.average = Convert.ToInt32(line[line.Count - 2].Split(new[] { "%" }, StringSplitOptions.None).ToList()[0]);
+                        
+                    mrk.mark = line[line.Count - 6] + "/" +line[line.Count - 4];
+                    //MessageBox.Show(sub.YourScores[0]);
+                    mrk.date = line[line.Count - 7];
+                    mrk.subject = sub.Name;
+                    var subset = line.ToList().GetRange(0, line.Count - 7);
+                    mrk.name = String.Join(" ", subset);
+                    sub.marks.Add(mrk);
+                        
+                } //no marks allocated
+                else
+                {
+                        
+                }
+                    
+            }
+            if (sub.YourAverage < 0)
+            {
+                sub.YourAverage = -1;
+            }
+
+            App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+            {
+                Marks.SubjectResults.Add(sub);
+
             });
 
-            foreach (var i in info)
-            {
-                Subject sub = new Subject();
-                
-                List<string> Lines = new List<string>(System.IO.File.ReadAllLines("data/marks/" + i.Name));
+            SQLiteConnection conn = new SQLiteConnection("StudentData.sqlite");
+
+            conn.CreateTable<Subject>();
+            conn.InsertOrReplace(sub);
 
 
-                //FIND NAME + TEACHER
-                List<string> First = Lines[0].Split(new[] { " " }, StringSplitOptions.None).ToList();
-                int Pindex = 0;
-                for (int j = 0; j < First.Count; j++)
-                {
-                    //Console.WriteLine(First[j]);
-                    if (First[j] == "Mrs" || First[j] == "Ms" || First[j] == "Miss" || First[j] == "Mr" || First[j] == "Dr")
-                    {
-                        Pindex = j;
-                        
-                    }
-                }
-                sub.Name = String.Join(" ",First.ToList().GetRange(0, Pindex)) + "\n";
-                sub.teacher = String.Join(" ", First.ToList().GetRange(Pindex, First.Count - Pindex));
-                //MessageBox.Show(sub.Name + "         " + sub.teacher);
-                
-                // FIND MARKS
-                List<string> tests = Lines.ToList().GetRange(4, Lines.Count - 5);
+            conn.CreateTable<Mark>();
+            foreach (var j in sub.marks)
+                conn.InsertOrReplace(j);
 
-                var split = Lines.Last().Split(new[] { "%" }, StringSplitOptions.None).ToList();
-                if (split.Count == 3){
-                    sub.YourAverage = Convert.ToInt32((split[0].Split(new[] { " " }, StringSplitOptions.None).ToList()).Last());
-                    sub.EveryoneAverage = Convert.ToInt32((split[1].Split(new[] { " " }, StringSplitOptions.None).ToList()).Last());
-                }
-                else if(split.Count ==2)
-                {
-                    sub.EveryoneAverage = Convert.ToInt32((split[0].Split(new[] { " " }, StringSplitOptions.None).ToList()).Last());
-                }
-             
-                foreach (var a in tests)
-                {
-                    int SlashCount = a.Split('/').Length - 1;
-                    if (SlashCount >= 3) //Assume there is marks
-                    {
-                        //Module 1 Project 7/04/2019 20 / 20 100 93% 6.00%          EXAMPLE
-
-                        List<string> line = a.Split(new[] { " " }, StringSplitOptions.None).ToList();
-
-                        var mrk = new Mark();
-
-
-                        mrk.weight= Convert.ToDouble(line[line.Count - 1].Split(new[] { "%" }, StringSplitOptions.None).ToList()[0]); // Getting weight as last term
-                        mrk.average = Convert.ToInt32(line[line.Count - 2].Split(new[] { "%" }, StringSplitOptions.None).ToList()[0]);
-                        
-                        mrk.mark = line[line.Count - 6] + "/" +line[line.Count - 4];
-                        //MessageBox.Show(sub.YourScores[0]);
-                        mrk.date = line[line.Count - 7];
-                        mrk.subject = sub.Name;
-                        var subset = line.ToList().GetRange(0, line.Count - 7);
-                        mrk.name = String.Join(" ", subset);
-                        sub.marks.Add(mrk);
-                        
-                    } //no marks allocated
-                    else
-                    {
-                        
-                    }
-                    
-                }
-                if (sub.YourAverage < 0)
-                {
-                    sub.YourAverage = -1;
-                }
-
-                App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
-                {
-                    Marks.SubjectResults.Add(sub);
-
-                });
-            }
-            
-            
         }
 
         private static bool StartDownload(string username, string password, bool ShowError)
@@ -224,21 +212,24 @@ namespace wellbeingPage
                     }
                 }
                 int run = 0;
+
+                App.Current.Dispatcher.Invoke((Action)delegate
+                {
+                    Marks.SubjectResults.Clear();
+                });
                 while (indexProg[run] != '\0')
                 {
 
                     var subset = lines.ToList().GetRange(indexSub[run], indexProg[run] - indexSub[run] + 1);
-                    Directory.CreateDirectory("data");
-                    Directory.CreateDirectory("data/marks");
-                    
-                    File.WriteAllText("data/marks/Subject" + run + ".txt", String.Join("", subset));
+                    ParseMarks(String.Join("\n", subset));
 
                     run++;
                 }
-                PutMarks();
+
+
                 App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
                 {
-                    var str = "Last Updated: " + DateTime.Now.ToString("dd/MM/yyyy  HH:mm");
+                    var str = "Last Updated: " + DateTime.Now.ToString("dd/MM/yyyy  hh:mm tt");
                     ((MainWindow)System.Windows.Application.Current.MainWindow).LastUp.Text = str;
                     ((MainWindow)System.Windows.Application.Current.MainWindow).ReloadButton.IsEnabled = true;
                     ((MainWindow)Application.Current.MainWindow).ReloadRotater.Angle = 0;
@@ -247,7 +238,6 @@ namespace wellbeingPage
                 });
 
                 return true;
-                                
             }
             catch
             {
@@ -255,18 +245,18 @@ namespace wellbeingPage
                 driver.Quit();
                 App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
                 {
-                   ((MainWindow)System.Windows.Application.Current.MainWindow).ReloadButton.IsEnabled = true;
+                    ((MainWindow)System.Windows.Application.Current.MainWindow).ReloadButton.IsEnabled = true;
                     ((MainWindow)Application.Current.MainWindow).ReloadRotater.Angle = 0;
 
                 });
-                
+
                 if (ShowError)
                 {
                     MessageBox.Show("There was an error connecting to Live Marks. Please ensure that you:\n\n    - Are connected to the internet\n\n    - Have inputted the correct credentials (change in settings)\n\n    - Do not exit the Chrome window\n\n\n And then try again.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-                
+
                 return false;
-            }
+            }            
         }
     }
 }
