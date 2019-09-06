@@ -34,6 +34,7 @@ namespace wellbeingPage
         private static void ParseMarks()
         {
             List<FileInfo> info = new List<FileInfo>();
+            
 
             var dirInfo = new DirectoryInfo("data/marks");
             info.AddRange(dirInfo.GetFiles("*.txt*"));
@@ -81,22 +82,26 @@ namespace wellbeingPage
                         //Module 1 Project 7/04/2019 20 / 20 100 93% 6.00%          EXAMPLE
 
                         List<string> line = a.Split(new[] { " " }, StringSplitOptions.None).ToList();
-                       
-                        sub.TestWeights.Add(line[line.Count - 1]); // Getting weight as last term
-                        sub.ClassAverages.Add(line[line.Count - 2]);
-                        sub.YourScores.Add(line[line.Count - 6] + "/" +line[line.Count - 4]);
+
+                        var mrk = new Mark();
+
+
+                        mrk.weight= Convert.ToDouble(line[line.Count - 1].Split(new[] { "%" }, StringSplitOptions.None).ToList()[0]); // Getting weight as last term
+                        mrk.average = Convert.ToInt32(line[line.Count - 2].Split(new[] { "%" }, StringSplitOptions.None).ToList()[0]);
+                        mrk.mark = line[line.Count - 6] + "/" +line[line.Count - 4];
                         //MessageBox.Show(sub.YourScores[0]);
-                        sub.Date = line[line.Count - 7];
+                        mrk.date = line[line.Count - 7];
                         
                         var subset = line.ToList().GetRange(0, line.Count - 7);
-                        sub.TestNames.Add(String.Join(" ", subset));
-                        
-                        try
+                        mrk.name = String.Join(" ", subset);
+                        sub.marks.Add(mrk);
+                        try // TO DO make this work for bad format eg AMC
                         {
                             double value = Convert.ToDouble(line[line.Count - 6]) / Convert.ToDouble(line[line.Count - 4]);
                             double weight = Convert.ToDouble(line[line.Count - 1].Split(new[] { "%" }, StringSplitOptions.None).ToList()[0]);
                             numerator += value * weight;
                             denomenator += weight;
+                            
                         }
                         catch
                         {
@@ -120,8 +125,11 @@ namespace wellbeingPage
                 App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
                 {
                     Marks.SubjectResults.Add(sub);
+
                 });
             }
+            
+            
         }
 
         private static bool StartDownload(string username, string password, bool ShowError)
@@ -239,6 +247,7 @@ namespace wellbeingPage
                     var str = "Last Updated: " + DateTime.Now.ToString("dd/MM/yyyy  HH:mm");
                     ((MainWindow)System.Windows.Application.Current.MainWindow).LastUp.Text = str;
                     ((MainWindow)System.Windows.Application.Current.MainWindow).ReloadButton.IsEnabled = true;
+                    ((MainWindow)Application.Current.MainWindow).ReloadRotater.Angle = 0;
 
 
                 });

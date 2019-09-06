@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -21,18 +22,29 @@ namespace wellbeingPage
     /// <summary>
     /// Interaction logic for Marks.xaml
     /// </summary>
+    public class Mark
+    {
+        public string name;
+        public string mark;
+        public double weight;
+        public string date;
+        public int average;
+
+        public string comment;
+    }
+    [Table("Subject")]
     public class Subject
     {
+        [Unique]
         public string Name { get; set; }
+
         public string teacher { get; set; }
         public int YourAverage { get; set; }
         public int EveryoneAverage { get; set; }
-        public string Date { get; set; }
 
-        public List<string> TestWeights = new List<string>();
-        public List<string> TestNames = new List<string>(); //Names of marked assignments/tests
-        public List<string> YourScores = new List<string>();  //in x/y format
-        public List<string> ClassAverages = new List<string>(); // in percentage
+        public int SubjectID;
+
+        public List<Mark> marks = new List<Mark>();
     }
 
     public partial class Marks : Page
@@ -44,7 +56,8 @@ namespace wellbeingPage
         public Marks()
         {
             InitializeComponent();
-            
+           
+
             OverallRes.Visibility = Visibility.Visible;
             if (SubjectResults.Count != 0)
             {
@@ -56,7 +69,21 @@ namespace wellbeingPage
             
             SubjectList.ItemsSource = SubjectResults;
             OverallRes.ItemsSource = SubjectResults;
-       
+
+            SQLiteConnection conn = new SQLiteConnection("StudentData.sqlite");
+
+            conn.CreateTable<Subject>();
+            foreach(var i in SubjectResults)
+                try
+                {
+                    conn.Insert(i);
+                }
+                catch
+                {
+
+                }
+            
+            
         }
 
         private void MyListView_MouseDown(object sender, MouseButtonEventArgs e)

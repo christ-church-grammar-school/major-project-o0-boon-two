@@ -66,13 +66,17 @@
             <Label x:Name="TitleSubject" Grid.Column="1" Content="" Margin="0,23,0,0" FontFamily="Consolas" FontSize="48" Foreground="White" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Height="66" VerticalAlignment="Top" Width="857"/>
             <Label x:Name="TitleGrade" Grid.Column="1" Content="" Margin="0,89,0,0" FontFamily="Consolas" FontSize="78" Foreground="White" HorizontalContentAlignment="Center" Background="{x:Null}" Width="857" Height="110" VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Bold"/>
             <Grid Name="HoverTestInfo" Margin="0,0,214,20" Grid.Column="1" Height="508" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="312">
-                <Rectangle Fill="#FF656565" Stroke="#FF191919" RadiusY="45.75" RadiusX="45.75"/>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="65*"/>
+                    <RowDefinition Height="62*"/>
+                </Grid.RowDefinitions>
+                <Rectangle Fill="#FF656565" Stroke="#FF191919" RadiusY="45.75" RadiusX="45.75" Grid.RowSpan="2"/>
                 <TextBlock Margin="152,52,5,0" TextWrapping="Wrap" Text="80%" VerticalAlignment="Top" FontSize="70" Height="97" TextAlignment="Center" FontWeight="Bold" Foreground="#FF313131"/>
 
                 <TextBlock Margin="10,52,156,0" TextWrapping="Wrap" Text="85" VerticalAlignment="Top" FontSize="70" Height="87" TextAlignment="Center" FontWeight="Bold" Foreground="#FF38BC00"/>
                 <TextBlock Margin="0,10,0,0" TextWrapping="Wrap" Text="Test Name" VerticalAlignment="Top" FontSize="36" Height="93" TextAlignment="Center" FontWeight="Bold"/>
-                <Rectangle Fill="#FF4A4A4A" Stroke="#FF191919" RadiusY="10.5" RadiusX="10.5" Margin="30,294,28,10"/>
-                <TextBox Margin="30,294,28,10" TextWrapping="Wrap" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" Text="COMMENTS: Where did you lose marks? What should you improve for your next test?" FontSize="16"/>
+                <Rectangle Fill="#FF4A4A4A" Stroke="#FF191919" RadiusY="10.5" RadiusX="10.5" Margin="30,34,28,10" Grid.Row="1"/>
+                <TextBox Margin="30,34,28,10" TextWrapping="Wrap" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" Text="COMMENTS: Where did you lose marks? What should you improve for your next test?" FontSize="16" Grid.Row="1"/>
                 <TextBlock Margin="0,144,0,0" TextWrapping="Wrap" Text=" marks:      42.5/50" VerticalAlignment="Top" FontSize="36" Height="61" TextAlignment="Center" FontWeight="Bold" Foreground="#FF959595"/>
                 <TextBlock Margin="0,194,0,0" TextWrapping="Wrap" Text="weighting: 5.00%" VerticalAlignment="Top" FontSize="36" Height="61" TextAlignment="Center" FontWeight="Bold" Foreground="#FF434343"/>
             </Grid>
