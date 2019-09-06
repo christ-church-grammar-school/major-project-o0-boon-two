@@ -24,25 +24,30 @@ namespace wellbeingPage
     /// </summary>
     public class Mark
     {
-        public string name;
-        public string mark;
-        public double weight;
-        public string date;
-        public int average;
+        public string subject{ get; set; }
+        public string name { get; set; }
+        public string mark { get; set; }
+        public double weight { get; set; }
+        public string date { get; set; }
 
-        public string comment;
-    }
+        [AutoIncrement, PrimaryKey]
+        int MarkID { get; set; }
+
+        public int average { get; set; }
+
+
+    public string comment { get; set; }
+}
     [Table("Subject")]
     public class Subject
     {
-        [Unique]
+        [Unique,PrimaryKey]
         public string Name { get; set; }
 
         public string teacher { get; set; }
         public int YourAverage { get; set; }
         public int EveryoneAverage { get; set; }
-
-        public int SubjectID;
+        
 
         public List<Mark> marks = new List<Mark>();
     }
@@ -73,17 +78,15 @@ namespace wellbeingPage
             SQLiteConnection conn = new SQLiteConnection("StudentData.sqlite");
 
             conn.CreateTable<Subject>();
-            foreach(var i in SubjectResults)
-                try
-                {
-                    conn.Insert(i);
-                }
-                catch
-                {
+            foreach (var i in SubjectResults)                
+                conn.InsertOrReplace(i);
 
-                }
             
-            
+            conn.CreateTable<Mark>();
+            foreach (var i in SubjectResults)
+                foreach(var j in i.marks)
+                    conn.InsertOrReplace(j);
+
         }
 
         private void MyListView_MouseDown(object sender, MouseButtonEventArgs e)

@@ -11,6 +11,7 @@ using System.IO;
 using System.Threading;
 using wellbeingPage.Settings;
 using SQLite;
+using System.Configuration;
 
 namespace wellbeingPage
 {
@@ -70,10 +71,16 @@ namespace wellbeingPage
                 // FIND MARKS
                 List<string> tests = Lines.ToList().GetRange(4, Lines.Count - 5);
 
-                double numerator = 0;
-                double denomenator = 0;
-                
-
+                var split = Lines.Last().Split(new[] { "%" }, StringSplitOptions.None).ToList();
+                if (split.Count == 3){
+                    sub.YourAverage = Convert.ToInt32((split[0].Split(new[] { " " }, StringSplitOptions.None).ToList()).Last());
+                    sub.EveryoneAverage = Convert.ToInt32((split[1].Split(new[] { " " }, StringSplitOptions.None).ToList()).Last());
+                }
+                else if(split.Count ==2)
+                {
+                    sub.EveryoneAverage = Convert.ToInt32((split[0].Split(new[] { " " }, StringSplitOptions.None).ToList()).Last());
+                }
+             
                 foreach (var a in tests)
                 {
                     int SlashCount = a.Split('/').Length - 1;
@@ -88,34 +95,21 @@ namespace wellbeingPage
 
                         mrk.weight= Convert.ToDouble(line[line.Count - 1].Split(new[] { "%" }, StringSplitOptions.None).ToList()[0]); // Getting weight as last term
                         mrk.average = Convert.ToInt32(line[line.Count - 2].Split(new[] { "%" }, StringSplitOptions.None).ToList()[0]);
+                        
                         mrk.mark = line[line.Count - 6] + "/" +line[line.Count - 4];
                         //MessageBox.Show(sub.YourScores[0]);
                         mrk.date = line[line.Count - 7];
-                        
+                        mrk.subject = sub.Name;
                         var subset = line.ToList().GetRange(0, line.Count - 7);
                         mrk.name = String.Join(" ", subset);
                         sub.marks.Add(mrk);
-                        try // TO DO make this work for bad format eg AMC
-                        {
-                            double value = Convert.ToDouble(line[line.Count - 6]) / Convert.ToDouble(line[line.Count - 4]);
-                            double weight = Convert.ToDouble(line[line.Count - 1].Split(new[] { "%" }, StringSplitOptions.None).ToList()[0]);
-                            numerator += value * weight;
-                            denomenator += weight;
-                            
-                        }
-                        catch
-                        {
-
-                        }
-                            
                         
-
                     } //no marks allocated
                     else
                     {
                         
                     }
-                    sub.YourAverage = (int)Math.Round(numerator * 100 / denomenator);
+                    
                 }
                 if (sub.YourAverage < 0)
                 {
