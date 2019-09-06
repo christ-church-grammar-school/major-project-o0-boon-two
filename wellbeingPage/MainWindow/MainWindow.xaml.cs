@@ -47,7 +47,7 @@ namespace wellbeingPage
                 this.Close();
             } else
             {
-                GetMarksFromDB();
+                GetFromDB();
             }
 
             milliseconds.Interval = TimeSpan.FromMilliseconds(1);
@@ -62,13 +62,14 @@ namespace wellbeingPage
             }
             
         }
-        public void GetMarksFromDB()
+        public void GetFromDB() //ONLY USE ON STARTUP
         {
             SQLiteConnection conn = new SQLiteConnection("StudentData.sqlite");
             var res = conn.Table<Subject>().ToList();
+            
             foreach(var i in res)
             {
-                var mrks = conn.Table<Mark>().Where(p => p.subject == i.Name);
+                var mrks = conn.Table<Mark>().Where(p => p.subject == i.Name).ToList();
                 i.marks.AddRange(mrks);
                 Marks.SubjectResults.Add(i);
                 
