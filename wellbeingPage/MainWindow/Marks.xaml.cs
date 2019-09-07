@@ -26,14 +26,15 @@ namespace wellbeingPage
     public class Mark
     {
         public string subject{ get; set; }
+        [PrimaryKey, Unique]
         public string name { get; set; }
         public string mark { get; set; }
         public double weight { get; set; }
-        public string date { get; set; }
+        public DateTime date { get; set; }
 
-        [AutoIncrement, PrimaryKey]
+        [AutoIncrement]
         int MarkID { get; set; }
-
+        
         public int average { get; set; }
 
 
@@ -44,6 +45,8 @@ namespace wellbeingPage
     {
         [Unique,PrimaryKey]
         public string Name { get; set; }
+
+        public DateTime Year { get; set; }
 
         public string teacher { get; set; }
         public int YourAverage { get; set; }

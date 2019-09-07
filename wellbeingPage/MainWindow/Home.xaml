@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="800" d:DesignWidth="1200"
       Title="Home" SizeChanged="WindowSizeChanged">
-
+    
     <Grid Background="#FF1F1F1F" Margin="0,0,0,1.5">
         <Ellipse HorizontalAlignment="Center" VerticalAlignment="Center" Width="600" Height="600" Fill="#FFFAD200"/>
         <Rectangle x:Name="SecondHand" Fill="#FF747474" Margin="0,0,599,384" RenderTransformOrigin="1,0.5" HorizontalAlignment="Right" Width="250" VerticalAlignment="Bottom" Height="2">

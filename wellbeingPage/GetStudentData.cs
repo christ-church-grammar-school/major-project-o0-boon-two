@@ -52,6 +52,7 @@ namespace wellbeingPage
             }
             sub.Name = String.Join(" ",First.ToList().GetRange(0, Pindex)) + "\n";
             sub.teacher = String.Join(" ", First.ToList().GetRange(Pindex, First.Count - Pindex));
+            sub.Year = DateTime.Now;
             //MessageBox.Show(sub.Name + "         " + sub.teacher);
 
             // FIND MARKS;
@@ -74,20 +75,35 @@ namespace wellbeingPage
                 {
                     //Module 1 Project 7/04/2019 20 / 20 100 93% 6.00%          EXAMPLE
 
-                    List<string> line = a.Split(new[] { " " }, StringSplitOptions.None).ToList();
+                    List<string> line1 = a.Split(new[] { " " }, StringSplitOptions.None).ToList();
+                    List<string> line = new List<string>();
+
+                    for (var i  = 0; i < line1.Count; i ++)
+                    {
+                        if (line1[i][0] == '/' && line1[i].Length >= 2)
+                        {
+                            line.Add("/");
+                            line.Add(line1[i].Remove(0, 1));
+                        } else
+                        {
+                            
+                            line.Add(line1[i]);
+                        }
+                    }
 
                     var mrk = new Mark();
-
 
                     mrk.weight= Convert.ToDouble(line[line.Count - 1].Split(new[] { "%" }, StringSplitOptions.None).ToList()[0]); // Getting weight as last term
                     mrk.average = Convert.ToInt32(line[line.Count - 2].Split(new[] { "%" }, StringSplitOptions.None).ToList()[0]);
                         
                     mrk.mark = line[line.Count - 6] + "/" +line[line.Count - 4];
-                    //MessageBox.Show(sub.YourScores[0]);
-                    mrk.date = line[line.Count - 7];
+                    //MessageBox.Show(sub.YourScores[0]); 
+
+                    mrk.date = Convert.ToDateTime(line[line.Count - 7]);
                     mrk.subject = sub.Name;
                     var subset = line.ToList().GetRange(0, line.Count - 7);
                     mrk.name = String.Join(" ", subset);
+         
                     sub.marks.Add(mrk);
                         
                 } //no marks allocated
@@ -216,7 +232,7 @@ namespace wellbeingPage
                 }
                 int run = 0;
 
-                
+
                 while (indexProg[run] != '\0')
                 {
 
@@ -234,8 +250,9 @@ namespace wellbeingPage
 
                 App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
                 {
-                    
-                    var str = "Last Updated: " + DateTime.Now.ToString("dd/MM/yyyy  hh:mm tt");
+
+                    var str = "Last Updated: " + DateTime.Now.ToString("dd/MM/yyyy  h:mm tt");
+
                     ((MainWindow)System.Windows.Application.Current.MainWindow).LastUp.Text = str;
                     ((MainWindow)System.Windows.Application.Current.MainWindow).ReloadButton.IsEnabled = true;
                     ((MainWindow)Application.Current.MainWindow).ReloadRotater.Angle = 0;
@@ -262,7 +279,7 @@ namespace wellbeingPage
                 }
 
                 return false;
-            }            
+            }                        
         }
     }
 }

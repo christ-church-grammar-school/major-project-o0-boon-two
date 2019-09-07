@@ -62,19 +62,17 @@ namespace wellbeingPage
             }
             
         }
-        public static void GetFromDB() //ONLY USE ON STARTUP
+        public static void GetFromDB() 
         {
             Marks.SubjectResults.Clear();
             SQLiteConnection conn = new SQLiteConnection("StudentData.sqlite");
-            //conn.Table<Subject>().OrderBy<YourAverage>();
+           
             List<Subject> res = (from m in conn.Table<Subject>() orderby m.YourAverage descending select m).ToList();
             
             foreach(var i in res)
             {
-                var mrks = conn.Table<Mark>().Where(p => p.subject == i.Name).ToList();
-                i.marks.AddRange(mrks);
+                var mrks = (from m in conn.Table<Mark>().Where(p => p.subject == i.Name) orderby m.date descending select m).ToList();
                 Marks.SubjectResults.Add(i);
-                
             }
 
             
