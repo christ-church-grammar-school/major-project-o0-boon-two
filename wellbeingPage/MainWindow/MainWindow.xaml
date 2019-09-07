@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:wellbeingPage"
         mc:Ignorable="d"
         Background="#FF1F1F1F"
-        Title="Bumblebee" Height="800" Width="1200" MinHeight="500" MinWidth="600" Closed="MainWinClosed" Icon="/wellbeingPage;component/Icon.png" >
+        Title="Bumblebee" Height="800" Width="1200" MinHeight="500" MinWidth="600" Closed="MainWinClosed" Icon="/wellbeingPage;component/SplashIcon1.png" >
     <Grid>
         <Frame NavigationUIVisibility="Hidden" Name="MainFrame" Margin="0,0,0,-2.5"/>
         <Button x:Name="ReloadButton" Visibility="Visible" Style="{StaticResource Expand}" Height="80" Margin="9,14,0,0" Foreground="{x:Null}" VerticalAlignment="Top" Click="ReloadMarks" Cursor="Hand" HorizontalAlignment="Left" Width="80" Background="#FFC90000">

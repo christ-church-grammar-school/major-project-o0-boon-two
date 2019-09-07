@@ -95,7 +95,7 @@ namespace wellbeingPage
 
                     mrk.weight= Convert.ToDouble(line[line.Count - 1].Split(new[] { "%" }, StringSplitOptions.None).ToList()[0]); // Getting weight as last term
                     mrk.average = Convert.ToInt32(line[line.Count - 2].Split(new[] { "%" }, StringSplitOptions.None).ToList()[0]);
-                        
+                    mrk.percent = Convert.ToDouble(line[line.Count - 6]) / Convert.ToDouble(line[line.Count - 4]);
                     mrk.mark = line[line.Count - 6] + "/" +line[line.Count - 4];
                     //MessageBox.Show(sub.YourScores[0]); 
 

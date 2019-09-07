@@ -36,9 +36,9 @@ namespace wellbeingPage
         int MarkID { get; set; }
         
         public int average { get; set; }
+        public double percent { get; set; }
 
-
-    public string comment { get; set; }
+        public string comment { get; set; }
 }
     [Table("Subject")]
     public class Subject
@@ -112,14 +112,44 @@ namespace wellbeingPage
                     TitleGrade.Foreground = new SolidColorBrush(Color.FromRgb(181, Convert.ToByte((181/25)*(display.YourAverage-50)), 0));
                 else
                     TitleGrade.Foreground = new SolidColorBrush(Color.FromRgb(Convert.ToByte(181 - (181 / 25) * (display.YourAverage - 75)), 181, 0));
-            }
-            else
-            {
-                
-            }
-          
+                DrawGraph(display);
+            }          
         }
-        
+        void DrawGraph(Subject sub)
+        {
+            Graph.Children.Clear();
+            int wi = Convert.ToInt32( Graph.ActualWidth);
+            int he = Convert.ToInt32(Graph.ActualHeight);
+
+
+            if (sub.marks.Count >=1)
+            {
+                int incr = wi / sub.marks.Count;
+
+                PointCollection MyPoints = new PointCollection();
+                PointCollection AvPoints = new PointCollection();
+                for (var i = 0; i < sub.marks.Count; i++)
+                {
+                    MyPoints.Add(new Point(i*incr, he - sub.marks[i].percent*he));
+                    AvPoints.Add(new Point(i * incr,he- sub.marks[i].average* he));
+                }
+                Polyline MyLline = new Polyline
+                {
+                    StrokeThickness = 2,
+                    Stroke = Brushes.Red,
+                    Points = MyPoints
+                };
+                Polyline AvLline = new Polyline
+                {
+                    StrokeThickness = 2,
+                    Stroke = Brushes.Black,
+                    Points = AvPoints
+                };
+                Graph.Children.Add(AvLline);
+                Graph.Children.Add(MyLline);
+            }
+
+        }
         
     }
 }
