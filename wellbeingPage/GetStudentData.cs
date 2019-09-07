@@ -102,11 +102,7 @@ namespace wellbeingPage
                 sub.YourAverage = -1;
             }
 
-            App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
-            {
-                Marks.SubjectResults.Add(sub);
-
-            });
+            
 
             SQLiteConnection conn = new SQLiteConnection("StudentData.sqlite");
 
@@ -117,6 +113,7 @@ namespace wellbeingPage
             conn.CreateTable<Mark>();
             foreach (var j in sub.marks)
                 conn.InsertOrReplace(j);
+            
 
         }
 
@@ -219,10 +216,7 @@ namespace wellbeingPage
                 }
                 int run = 0;
 
-                App.Current.Dispatcher.Invoke((Action)delegate
-                {
-                    Marks.SubjectResults.Clear();
-                });
+                
                 while (indexProg[run] != '\0')
                 {
 
@@ -232,6 +226,11 @@ namespace wellbeingPage
                     run++;
                 }
 
+                App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+                {
+                    MainWindow.GetFromDB();
+
+                });
 
                 App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
                 {
