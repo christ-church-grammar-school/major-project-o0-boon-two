@@ -247,5 +247,45 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <Style  x:Key="MarkHover" TargetType="{x:Type Button}">
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Width" Value="13"/>
+        <Setter Property="RenderTransform">
+            <Setter.Value>
+                <ScaleTransform CenterX="40" CenterY="40" ScaleY="1" ScaleX="1"/>
+            </Setter.Value>
+        </Setter>
+        <Setter  Property="Height" Value="13"/>
+        
+        <Setter Property="Foreground" Value="{x:Null}"/>
+        <Setter Property="RenderTransformOrigin" Value="-2.5,-2.5"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation From="1" To="1.2"  AutoReverse="False" Duration="00:00:00.3" Storyboard.TargetProperty="RenderTransform.ScaleY" />
+                            <DoubleAnimation From="1" To="1.2"  AutoReverse="False" Duration="00:00:00.3" Storyboard.TargetProperty="RenderTransform.ScaleX" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation To="1"  Duration="00:00:00.4" Storyboard.TargetProperty="RenderTransform.ScaleY" />
+                            <DoubleAnimation To="1" Duration="00:00:00.4" Storyboard.TargetProperty="RenderTransform.ScaleX" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 
+    <ControlTemplate  x:Key="HMK" TargetType="{x:Type Button}">
+        <Grid>
+            <Ellipse Fill="#FFFA0000" />
+            <Ellipse Fill="#FF282828" Margin="4" />
+            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
+    </ControlTemplate>
 </ResourceDictionary>

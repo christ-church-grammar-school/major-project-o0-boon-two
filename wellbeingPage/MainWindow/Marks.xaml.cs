@@ -122,34 +122,58 @@ namespace wellbeingPage
             int he = Convert.ToInt32(Graph.ActualHeight);
 
 
-            if (sub.marks.Count >=1)
+            if (sub.marks.Count >=2)
             {
-                int incr = wi / sub.marks.Count;
+                int incr = wi / (sub.marks.Count-1);
 
                 PointCollection MyPoints = new PointCollection();
                 PointCollection AvPoints = new PointCollection();
+
+                var ButList = new List<Button>();
+
                 for (var i = 0; i < sub.marks.Count; i++)
                 {
+                    Button b = new Button();
+                    
+                    b.Style = (Style)FindResource("MarkHover");
+                    b.Template = (ControlTemplate)FindResource("HMK");
+                    Canvas.SetLeft(b, i * incr -6.5);
+                    Canvas.SetTop(b, he - sub.marks[i].percent * he - 6.5);
+
+                    ButList.Add(b);
+                    
                     MyPoints.Add(new Point(i*incr, he - sub.marks[i].percent*he));
-                    AvPoints.Add(new Point(i * incr,he- sub.marks[i].average* he));
+                    AvPoints.Add(new Point(i * incr,he- sub.marks[i].average* he/100));
                 }
                 Polyline MyLline = new Polyline
                 {
-                    StrokeThickness = 2,
+                    StrokeThickness = 3,
                     Stroke = Brushes.Red,
                     Points = MyPoints
                 };
                 Polyline AvLline = new Polyline
                 {
-                    StrokeThickness = 2,
+                    StrokeThickness = 3,
                     Stroke = Brushes.Black,
                     Points = AvPoints
                 };
                 Graph.Children.Add(AvLline);
                 Graph.Children.Add(MyLline);
+                foreach (var i in ButList)
+                {
+                    Graph.Children.Add(i);
+                }
+                
             }
 
         }
-        
+        private void SizeChangedd(object sender, SizeChangedEventArgs e)
+        {
+            if (SubjectList.SelectedIndex != -1)
+            {
+                DrawGraph(SubjectResults[SubjectList.SelectedIndex]);
+            }
+               
+        }
     }
 }

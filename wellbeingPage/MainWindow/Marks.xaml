@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       
       d:DesignHeight="861.5" d:DesignWidth="1200" MouseDown="MyListView_MouseDown"
-      Title="Marks">
+      Title="Marks" SizeChanged="SizeChangedd">
 
 
     <Grid Background="#FF1F1F1F">
@@ -80,7 +80,8 @@
                 <TextBlock Margin="0,144,0,0" TextWrapping="Wrap" Text=" marks:      42.5/50" VerticalAlignment="Top" FontSize="36" Height="61" TextAlignment="Center" FontWeight="Bold" Foreground="#FF959595"/>
                 <TextBlock Margin="0,194,0,0" TextWrapping="Wrap" Text="weighting: 5.00%" VerticalAlignment="Top" FontSize="36" Height="61" TextAlignment="Center" FontWeight="Bold" Foreground="#FF434343"/>
             </Grid>
-            <Canvas x:Name="Graph" Grid.Column="1" HorizontalAlignment="Left" Height="598" Margin="5,134,0,0" VerticalAlignment="Top" Width="805"/>
+            <Canvas x:Name="Graph" Grid.Column="1" Margin="30,134,13,0"/>
+
 
 
         </Grid>
