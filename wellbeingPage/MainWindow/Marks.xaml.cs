@@ -85,11 +85,12 @@ namespace wellbeingPage
         private void MyListView_MouseDown(object sender, MouseButtonEventArgs e)
         {
             HitTestResult r = VisualTreeHelper.HitTest(this, e.GetPosition(this));
-            if (r.VisualHit.GetType() != typeof(ListBoxItem))
+            if (r.VisualHit.GetType() != typeof(ListBoxItem) && r.VisualHit.GetType() != typeof(Button))
                 SubjectList.UnselectAll();
-            OverallRes.Visibility = Visibility.Visible;
-            TitleSubject.Content = "Overall";
-            TitleGrade.Content = "";
+                Graph.Children.Clear();
+                OverallRes.Visibility = Visibility.Visible;
+                TitleSubject.Content = "Overall";
+                TitleGrade.Content = "";
             
 
         }
@@ -133,15 +134,29 @@ namespace wellbeingPage
 
                 for (var i = 0; i < sub.marks.Count; i++)
                 {
+                    Button a = new Button();
+
+                    a.Style = (Style)FindResource("MarkHover");
+                    a.Template = (ControlTemplate)FindResource("HMK_Dark");
+                    Canvas.SetLeft(a, i * incr - 6.5);
+                    Canvas.SetTop(a, he - sub.marks[i].average * he / 100 - 6.5);
+                    a.MouseEnter += GradeHover;
+                    a.Name = "Av" + i;
+                    ButList.Add(a);
+
                     Button b = new Button();
                     
                     b.Style = (Style)FindResource("MarkHover");
                     b.Template = (ControlTemplate)FindResource("HMK");
                     Canvas.SetLeft(b, i * incr -6.5);
                     Canvas.SetTop(b, he - sub.marks[i].percent * he - 6.5);
-
+                    b.MouseEnter += GradeHover;
+                    b.Name = "My" + i;
                     ButList.Add(b);
+
                     
+
+
                     MyPoints.Add(new Point(i*incr, he - sub.marks[i].percent*he));
                     AvPoints.Add(new Point(i * incr,he- sub.marks[i].average* he/100));
                 }
@@ -154,7 +169,7 @@ namespace wellbeingPage
                 Polyline AvLline = new Polyline
                 {
                     StrokeThickness = 3,
-                    Stroke = Brushes.Black,
+                    Stroke = Brushes.DarkGray,
                     Points = AvPoints
                 };
                 Graph.Children.Add(AvLline);
@@ -173,7 +188,27 @@ namespace wellbeingPage
             {
                 DrawGraph(SubjectResults[SubjectList.SelectedIndex]);
             }
-               
+        }
+
+        private void GradeHover(object sender, MouseEventArgs e)
+        {
+            string name = ((Button)sender).Name;
+            Subject sub = SubjectResults[SubjectList.SelectedIndex];
+            var val = Convert.ToInt32(name[2]) - 48;
+
+            
+            Mark m = sub.marks[val];
+            
+            if (name[0] == 'M') // It is persons grade
+            {
+                MessageBox.Show("Name: "+ m.name +"\nMark: " + m.mark + "\nPercent: " +m.percent*100 + "\nWeight: " + m.weight + "\nDate" +m.date);
+            }
+            else // average grade
+            {
+                
+                MessageBox.Show("Name: " + m.name +  "\nPercent: " + m.average + "\nWeight: " + m.weight + "\nDate" + m.date);
+            }
+
         }
     }
 }

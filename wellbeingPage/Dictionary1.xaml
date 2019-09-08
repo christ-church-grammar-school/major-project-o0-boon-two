@@ -259,6 +259,7 @@
         
         <Setter Property="Foreground" Value="{x:Null}"/>
         <Setter Property="RenderTransformOrigin" Value="-2.5,-2.5"/>
+        
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Trigger.EnterActions>
@@ -284,6 +285,13 @@
     <ControlTemplate  x:Key="HMK" TargetType="{x:Type Button}">
         <Grid>
             <Ellipse Fill="#FFFA0000" />
+            <Ellipse Fill="#FF282828" Margin="4" />
+            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
+    </ControlTemplate>
+    <ControlTemplate  x:Key="HMK_Dark" TargetType="{x:Type Button}">
+        <Grid>
+            <Ellipse Fill="DarkGray" />
             <Ellipse Fill="#FF282828" Margin="4" />
             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
