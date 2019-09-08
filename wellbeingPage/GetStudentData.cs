@@ -73,14 +73,14 @@ namespace wellbeingPage
                 int SlashCount = a.Split('/').Length - 1;
                 if (SlashCount >= 3) //Assume there is marks
                 {
-                    //Module 1 Project 7/04/2019 20 / 20 100 93% 6.00%          EXAMPLE
+                    //Module 1 Project 7/04/2019 20 / 20 100 93% 6.00%          EXAMPLE OF LAYOU
 
                     List<string> line1 = a.Split(new[] { " " }, StringSplitOptions.None).ToList();
                     List<string> line = new List<string>();
 
                     for (var i  = 0; i < line1.Count; i ++)
                     {
-                        if (line1[i][0] == '/' && line1[i].Length >= 2)
+                        if (line1[i][0] == '/' && line1[i].Length >= 2) // AMC format
                         {
                             line.Add("/");
                             line.Add(line1[i].Remove(0, 1));
@@ -108,6 +108,9 @@ namespace wellbeingPage
                         
                 } //no marks allocated
                 else
+                {
+                                
+                }
                 {
                         
                 }
@@ -270,13 +273,13 @@ namespace wellbeingPage
                 {
                     ((MainWindow)System.Windows.Application.Current.MainWindow).ReloadButton.IsEnabled = true;
                     ((MainWindow)Application.Current.MainWindow).ReloadRotater.Angle = 0;
-
+                    if (ShowError)
+                    {
+                        MessageBox.Show("There was an error connecting to Live Marks. Please ensure that you:\n\n    - Are connected to the internet\n\n    - Have inputted the correct credentials (change in settings)\n\n    - Do not exit the Chrome window\n\n\n And then try again.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 });
 
-                if (ShowError)
-                {
-                    MessageBox.Show("There was an error connecting to Live Marks. Please ensure that you:\n\n    - Are connected to the internet\n\n    - Have inputted the correct credentials (change in settings)\n\n    - Do not exit the Chrome window\n\n\n And then try again.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                
 
                 return false;
             }                        
