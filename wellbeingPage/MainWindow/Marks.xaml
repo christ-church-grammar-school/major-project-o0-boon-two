@@ -22,8 +22,8 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,0,-0.5">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="390" MinWidth="250"></ColumnDefinition>
-                <ColumnDefinition MinWidth="300"></ColumnDefinition>
+                <ColumnDefinition Width="2*" MinWidth="250" />
+                <ColumnDefinition Width="5*" MinWidth="250"/>
             </Grid.ColumnDefinitions>
             <Rectangle Fill="#FF181818" Stroke="#FF191919" Margin="0,0,23,96"/>
 
@@ -50,7 +50,7 @@
             <Border x:Name="helpBorder" Style="{StaticResource Expands}" Grid.Column="0" CornerRadius="15" BorderBrush="#FFFAD200" BorderThickness="8" VerticalAlignment="Bottom" Width="200" Height="50" Margin="0,0,0,20">
                 <Button x:Name="helpButton"  Content="Input Marks" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="190" Background="#FFFAD200" BorderThickness="0" BorderBrush="#FFFAD200" FontFamily="Consolas" Foreground="Black" Height="40" FontSize="20" FontWeight="Bold"/>
             </Border>
-            <GridSplitter Grid.Column="1" HorizontalAlignment="Left" Width="7" Background="#FF282828" Foreground="{x:Null}"/>
+            <GridSplitter DragDelta="SizeChangedd" Grid.Column="1" HorizontalAlignment="Left" Width="7" Background="#FF282828" Foreground="{x:Null}"/>
             <ListBox x:Name="OverallRes" Grid.Column="1" ScrollViewer.VerticalScrollBarVisibility="Disabled" AlternationCount="-1" ScrollViewer.CanContentScroll="False" Background="{x:Null}" BorderBrush="{x:Null}" Margin="802,61,10,0" SelectionChanged="changed" IsManipulationEnabled="True" Height="250" VerticalAlignment="Top">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>

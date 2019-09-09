@@ -32,7 +32,7 @@ namespace wellbeingPage
         }
 
                 
-        private static void ParseMarks(string inp)
+        private static void ParseMarks(string inp, int year)
         {
               
             Subject sub = new Subject();
@@ -52,7 +52,7 @@ namespace wellbeingPage
             }
             sub.Name = String.Join(" ",First.ToList().GetRange(0, Pindex)) + "\n";
             sub.teacher = String.Join(" ", First.ToList().GetRange(Pindex, First.Count - Pindex));
-            sub.Year = DateTime.Now;
+            sub.Year = year;
             //MessageBox.Show(sub.Name + "         " + sub.teacher);
 
             // FIND MARKS;
@@ -96,6 +96,7 @@ namespace wellbeingPage
                     mrk.weight= Convert.ToDouble(line[line.Count - 1].Split(new[] { "%" }, StringSplitOptions.None).ToList()[0]); // Getting weight as last term
                     mrk.average = Convert.ToInt32(line[line.Count - 2].Split(new[] { "%" }, StringSplitOptions.None).ToList()[0]);
                     mrk.percent = Convert.ToDouble(line[line.Count - 6]) / Convert.ToDouble(line[line.Count - 4]);
+                    mrk.year = year;
                     mrk.mark = line[line.Count - 6] + "/" +line[line.Count - 4];
                     //MessageBox.Show(sub.YourScores[0]); 
 
@@ -111,10 +112,7 @@ namespace wellbeingPage
                 {
                                 
                 }
-                {
-                        
-                }
-                    
+                                    
             }
             if (sub.YourAverage < 0)
             {
@@ -214,6 +212,11 @@ namespace wellbeingPage
                 driver.Quit();
 
                 var lines = Data.Split(new[] { "\n" }, StringSplitOptions.None);
+
+                var FirstLine = lines[0].Split(new[] { " " }, StringSplitOptions.None);
+
+                var year = Convert.ToInt32(FirstLine.Last());
+
                 int[] indexSub = new int[10];
                 int[] indexProg = new int[10];
 
@@ -240,7 +243,7 @@ namespace wellbeingPage
                 {
 
                     var subset = lines.ToList().GetRange(indexSub[run], indexProg[run] - indexSub[run] + 1);
-                    ParseMarks(String.Join("\n", subset));
+                    ParseMarks(String.Join("\n", subset), year);
 
                     run++;
                 }

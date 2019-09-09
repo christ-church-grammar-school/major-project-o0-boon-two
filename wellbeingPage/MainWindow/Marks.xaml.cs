@@ -31,6 +31,7 @@ namespace wellbeingPage
         public string mark { get; set; }
         public double weight { get; set; }
         public DateTime date { get; set; }
+        public int year { get; set; }
 
         [AutoIncrement]
         int MarkID { get; set; }
@@ -46,7 +47,7 @@ namespace wellbeingPage
         [Unique,PrimaryKey]
         public string Name { get; set; }
 
-        public DateTime Year { get; set; }
+        public int Year { get; set; }
 
         public string teacher { get; set; }
         public int YourAverage { get; set; }
@@ -87,6 +88,7 @@ namespace wellbeingPage
             HitTestResult r = VisualTreeHelper.HitTest(this, e.GetPosition(this));
             if (r.VisualHit.GetType() != typeof(ListBoxItem) && r.VisualHit.GetType() != typeof(Button))
                 SubjectList.UnselectAll();
+                HoverTestInfo.Visibility = Visibility.Collapsed;
                 Graph.Children.Clear();
                 OverallRes.Visibility = Visibility.Visible;
                 TitleSubject.Content = "Overall";
@@ -112,7 +114,15 @@ namespace wellbeingPage
                 else if (display.YourAverage <= 75)
                     TitleGrade.Foreground = new SolidColorBrush(Color.FromRgb(181, Convert.ToByte((181/25)*(display.YourAverage-50)), 0));
                 else
-                    TitleGrade.Foreground = new SolidColorBrush(Color.FromRgb(Convert.ToByte(181 - (181 / 25) * (display.YourAverage - 75)), 181, 0));
+                    try
+                    {
+                        TitleGrade.Foreground = new SolidColorBrush(Color.FromRgb(Convert.ToByte(181 - (181 / 25) * (display.YourAverage - 75)), 181, 0));
+                    }
+                    catch
+                    {
+                        TitleGrade.Foreground = new SolidColorBrush(Color.FromRgb(0, 181, 0));
+                    }
+                    
                 DrawGraph(display);
             }          
         }
@@ -182,7 +192,7 @@ namespace wellbeingPage
             }
 
         }
-        private void SizeChangedd(object sender, SizeChangedEventArgs e)
+        private void SizeChangedd(object sender, EventArgs e)
         {
             if (SubjectList.SelectedIndex != -1)
             {
@@ -201,6 +211,8 @@ namespace wellbeingPage
             
             if (name[0] == 'M') // It is persons grade
             {
+                //HoverTestInfo.Visibility = Visibility.Visible;
+                
                 MessageBox.Show("Name: "+ m.name +"\nMark: " + m.mark + "\nPercent: " +m.percent*100 + "\nWeight: " + m.weight + "\nDate" +m.date);
             }
             else // average grade
