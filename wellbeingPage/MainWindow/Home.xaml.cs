@@ -34,9 +34,9 @@ namespace wellbeingPage
             loadTimer.Interval = new TimeSpan(0, 0, 4);
             loadTimer.Start();
 
-            var myProperty = App.Current.Properties["LoadThing"];
+            var LoadCheck = App.Current.Properties["LoadThing"];
 
-            if (myProperty != "1")
+            if (LoadCheck != "1")
             {
                 LoadingScreen.Visibility = Visibility.Visible;
             }
