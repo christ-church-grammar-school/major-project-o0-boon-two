@@ -42,6 +42,11 @@ namespace wellbeingPage
                 greetingLabel.Content = "Good Evening,";
             }
 
+            DispatcherTimer audioTimer = new DispatcherTimer();
+            audioTimer.Interval = TimeSpan.FromSeconds(1);
+            audioTimer.Tick += loadTimer_Tick;
+            audioTimer.Start();
+
             wellbeingPopup.Visibility = Visibility.Visible;
         }
 
@@ -103,12 +108,41 @@ namespace wellbeingPage
             if (openFileDialog.ShowDialog() == true)
             {
                 mediaPlayer.Open(new Uri(openFileDialog.FileName));
+                mediaPlayer.Play();
             }
+
+            playButton.IsEnabled = true;
+            playButton.Opacity = 1;
+            playButton.Visibility = Visibility.Collapsed;
+            pauseButton.Visibility = Visibility.Visible;
         }
 
         private void happyClicked(object sender, RoutedEventArgs e)
         {
             wellbeingPopup.Visibility = Visibility.Collapsed;
+        }
+
+        void loadTimer_Tick(object sender, EventArgs e)
+        {
+            if (mediaPlayer.Source != null)
+                if (mediaPlayer.NaturalDuration.HasTimeSpan)
+                    audioStatusLabel.Content = String.Format("{0} / {1}", mediaPlayer.Position.ToString(@"mm\:ss"), mediaPlayer.NaturalDuration.TimeSpan.ToString(@"mm\:ss"));
+            else
+                audioStatusLabel.Content = "0:00 / 0:00";
+        }
+
+        private void playClicked(object sender, RoutedEventArgs e)
+        {
+            mediaPlayer.Play();
+            playButton.Visibility = Visibility.Collapsed;
+            pauseButton.Visibility = Visibility.Visible;
+        }
+
+        private void pauseClicked(object sender, RoutedEventArgs e)
+        {
+            mediaPlayer.Pause();
+            pauseButton.Visibility = Visibility.Collapsed;
+            playButton.Visibility = Visibility.Visible;
         }
     }
 }
