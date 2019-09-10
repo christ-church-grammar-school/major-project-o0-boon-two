@@ -60,26 +60,28 @@ namespace wellbeingPage
     public partial class Marks : Page
     {
 
-            
+
         public static ObservableCollection<Subject> SubjectResults = new ObservableCollection<Subject>();
-        
+
+        public bool isPopupOpen = false;
+
         public Marks()
         {
             InitializeComponent();
-            
+
             OverallRes.Visibility = Visibility.Visible;
             if (SubjectResults.Count != 0)
             {
                 TitleSubject.Content = "Overall";
             }
-                        
+
             TitleGrade.Content = "";
-            
-            
+
+
             SubjectList.ItemsSource = SubjectResults;
             OverallRes.ItemsSource = SubjectResults;
 
-            
+
 
         }
 
@@ -88,12 +90,12 @@ namespace wellbeingPage
             HitTestResult r = VisualTreeHelper.HitTest(this, e.GetPosition(this));
             if (r.VisualHit.GetType() != typeof(ListBoxItem) && r.VisualHit.GetType() != typeof(Button))
                 SubjectList.UnselectAll();
-                HoverTestInfo.Visibility = Visibility.Collapsed;
-                Graph.Children.Clear();
-                OverallRes.Visibility = Visibility.Visible;
-                TitleSubject.Content = "Overall";
-                TitleGrade.Content = "";
-            
+            HoverTestInfo.Visibility = Visibility.Collapsed;
+            Graph.Children.Clear();
+            OverallRes.Visibility = Visibility.Visible;
+            TitleSubject.Content = "Overall";
+            TitleGrade.Content = "";
+
 
         }
 
@@ -110,9 +112,9 @@ namespace wellbeingPage
                     TitleGrade.Content = "N/A";
 
                 if (display.YourAverage <= 50)
-                    TitleGrade.Foreground = new SolidColorBrush(Color.FromRgb(181,0,0));
+                    TitleGrade.Foreground = new SolidColorBrush(Color.FromRgb(181, 0, 0));
                 else if (display.YourAverage <= 75)
-                    TitleGrade.Foreground = new SolidColorBrush(Color.FromRgb(181, Convert.ToByte((181/25)*(display.YourAverage-50)), 0));
+                    TitleGrade.Foreground = new SolidColorBrush(Color.FromRgb(181, Convert.ToByte((181 / 25) * (display.YourAverage - 50)), 0));
                 else
                     try
                     {
@@ -122,20 +124,20 @@ namespace wellbeingPage
                     {
                         TitleGrade.Foreground = new SolidColorBrush(Color.FromRgb(0, 181, 0));
                     }
-                    
+
                 DrawGraph(display);
-            }          
+            }
         }
         void DrawGraph(Subject sub)
         {
             Graph.Children.Clear();
-            int wi = Convert.ToInt32( Graph.ActualWidth);
+            int wi = Convert.ToInt32(Graph.ActualWidth);
             int he = Convert.ToInt32(Graph.ActualHeight);
 
 
-            if (sub.marks.Count >=2)
+            if (sub.marks.Count >= 2)
             {
-                int incr = wi / (sub.marks.Count-1);
+                int incr = wi / (sub.marks.Count - 1);
 
                 PointCollection MyPoints = new PointCollection();
                 PointCollection AvPoints = new PointCollection();
@@ -151,24 +153,28 @@ namespace wellbeingPage
                     Canvas.SetLeft(a, i * incr - 6.5);
                     Canvas.SetTop(a, he - sub.marks[i].average * he / 100 - 6.5);
                     a.MouseEnter += GradeHover;
+                    a.MouseLeave += GradeStopHover;
+                    a.Click += KeepPopup;
                     a.Name = "Av" + i;
                     ButList.Add(a);
 
                     Button b = new Button();
-                    
+
                     b.Style = (Style)FindResource("MarkHover");
                     b.Template = (ControlTemplate)FindResource("HMK");
-                    Canvas.SetLeft(b, i * incr -6.5);
+                    Canvas.SetLeft(b, i * incr - 6.5);
                     Canvas.SetTop(b, he - sub.marks[i].percent * he - 6.5);
                     b.MouseEnter += GradeHover;
+                    b.MouseLeave += GradeStopHover;
+                    b.Click += KeepPopup;
                     b.Name = "My" + i;
                     ButList.Add(b);
 
-                    
 
 
-                    MyPoints.Add(new Point(i*incr, he - sub.marks[i].percent*he));
-                    AvPoints.Add(new Point(i * incr,he- sub.marks[i].average* he/100));
+
+                    MyPoints.Add(new Point(i * incr, he - sub.marks[i].percent * he));
+                    AvPoints.Add(new Point(i * incr, he - sub.marks[i].average * he / 100));
                 }
                 Polyline MyLline = new Polyline
                 {
@@ -188,7 +194,7 @@ namespace wellbeingPage
                 {
                     Graph.Children.Add(i);
                 }
-                
+
             }
 
         }
@@ -198,6 +204,9 @@ namespace wellbeingPage
             {
                 DrawGraph(SubjectResults[SubjectList.SelectedIndex]);
             }
+            HoverTestAv.Visibility = Visibility.Collapsed;
+            HoverTestInfo.Visibility = Visibility.Collapsed;
+            isPopupOpen = false;
         }
 
         private void GradeHover(object sender, MouseEventArgs e)
@@ -206,21 +215,48 @@ namespace wellbeingPage
             Subject sub = SubjectResults[SubjectList.SelectedIndex];
             var val = Convert.ToInt32(name[2]) - 48;
 
-            
+            double top = (double)((Button)sender).GetValue(Canvas.GetTop);
+            double left = (double)((Button)sender).GetValue(Canvas.GetLeft);
+            MessageBox.Show(top + "   " + left);
             Mark m = sub.marks[val];
-            
+
             if (name[0] == 'M') // It is persons grade
             {
-                //HoverTestInfo.Visibility = Visibility.Visible;
-                
-                MessageBox.Show("Name: "+ m.name +"\nMark: " + m.mark + "\nPercent: " +m.percent*100 + "\nWeight: " + m.weight + "\nDate" +m.date);
+                MyHoverDate.Text = "Date: " + m.date.ToShortDateString();
+                MyHoverMarks.Text = "Mark: " + m.mark;
+                MyHoverP.Text = "" + m.percent*100;
+                MyHoverWeight.Text = "Weight: " + m.weight;
+                MyHoverName.Text = m.name;
+                HoverTestInfo.Visibility = Visibility.Visible;
+                HoverTestAv.Visibility = Visibility.Collapsed;
+                isPopupOpen = false;
             }
             else // average grade
             {
-                
-                MessageBox.Show("Name: " + m.name +  "\nPercent: " + m.average + "\nWeight: " + m.weight + "\nDate" + m.date);
+                AvHoverDate.Text = "Date: " + m.date.ToShortDateString();
+
+                AvHoverP.Text = "" + m.average;
+                AvHoverWeight.Text = "Weight: " + m.weight;
+                AvHoverName.Text = m.name;
+                HoverTestAv.Visibility = Visibility.Visible;
+                HoverTestInfo.Visibility = Visibility.Collapsed;
+                isPopupOpen = false;
             }
 
+        }
+        private void GradeStopHover(object sender, MouseEventArgs e)
+        {
+            if (!isPopupOpen)
+            {
+                HoverTestAv.Visibility = Visibility.Collapsed;
+                HoverTestInfo.Visibility = Visibility.Collapsed;
+            }
+            
+
+        }
+        private void KeepPopup(object sender, RoutedEventArgs e)
+        {
+            isPopupOpen = !isPopupOpen;
         }
     }
 }
