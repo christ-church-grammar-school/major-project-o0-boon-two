@@ -214,10 +214,7 @@ namespace wellbeingPage
             string name = ((Button)sender).Name;
             Subject sub = SubjectResults[SubjectList.SelectedIndex];
             var val = Convert.ToInt32(name[2]) - 48;
-
-            double top = (double)((Button)sender).GetValue(Canvas.GetTop);
-            double left = (double)((Button)sender).GetValue(Canvas.GetLeft);
-            MessageBox.Show(top + "   " + left);
+            
             Mark m = sub.marks[val];
 
             if (name[0] == 'M') // It is persons grade
