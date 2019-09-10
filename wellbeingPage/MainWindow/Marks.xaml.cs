@@ -90,7 +90,7 @@ namespace wellbeingPage
             HitTestResult r = VisualTreeHelper.HitTest(this, e.GetPosition(this));
             if (r.VisualHit.GetType() != typeof(ListBoxItem) && r.VisualHit.GetType() != typeof(Button))
                 SubjectList.UnselectAll();
-            HoverTestInfo.Visibility = Visibility.Collapsed;
+            //HoverTestInfo.Visibility = Visibility.Collapsed;
             Graph.Children.Clear();
             OverallRes.Visibility = Visibility.Visible;
             TitleSubject.Content = "Overall";
@@ -103,7 +103,7 @@ namespace wellbeingPage
         {
             if (SubjectList.SelectedIndex != -1)
             {
-                OverallRes.Visibility = Visibility.Collapsed;
+               // OverallRes.Visibility = Visibility.Collapsed;
                 var display = SubjectResults[SubjectList.SelectedIndex];
                 TitleSubject.Content = display.Name;
                 if (display.YourAverage != -1)
@@ -204,8 +204,8 @@ namespace wellbeingPage
             {
                 DrawGraph(SubjectResults[SubjectList.SelectedIndex]);
             }
-            HoverTestAv.Visibility = Visibility.Collapsed;
-            HoverTestInfo.Visibility = Visibility.Collapsed;
+            //HoverTestAv.Visibility = Visibility.Collapsed;
+            //HoverTestInfo.Visibility = Visibility.Collapsed;
             isPopupOpen = false;
         }
 
@@ -214,10 +214,7 @@ namespace wellbeingPage
             string name = ((Button)sender).Name;
             Subject sub = SubjectResults[SubjectList.SelectedIndex];
             var val = Convert.ToInt32(name[2]) - 48;
-
-            double top = (double)((Button)sender).GetValue(Canvas.GetTop);
-            double left = (double)((Button)sender).GetValue(Canvas.GetLeft);
-            MessageBox.Show(top + "   " + left);
+            
             Mark m = sub.marks[val];
 
             if (name[0] == 'M') // It is persons grade
@@ -228,7 +225,7 @@ namespace wellbeingPage
                 MyHoverWeight.Text = "Weight: " + m.weight;
                 MyHoverName.Text = m.name;
                 HoverTestInfo.Visibility = Visibility.Visible;
-                HoverTestAv.Visibility = Visibility.Collapsed;
+                //HoverTestAv.Visibility = Visibility.Collapsed;
                 isPopupOpen = false;
             }
             else // average grade
@@ -239,7 +236,8 @@ namespace wellbeingPage
                 AvHoverWeight.Text = "Weight: " + m.weight;
                 AvHoverName.Text = m.name;
                 HoverTestAv.Visibility = Visibility.Visible;
-                HoverTestInfo.Visibility = Visibility.Collapsed;
+               
+               // HoverTestInfo.Visibility = Visibility.Collapsed;
                 isPopupOpen = false;
             }
 
@@ -248,8 +246,8 @@ namespace wellbeingPage
         {
             if (!isPopupOpen)
             {
-                HoverTestAv.Visibility = Visibility.Collapsed;
-                HoverTestInfo.Visibility = Visibility.Collapsed;
+                //HoverTestAv.Visibility = Visibility.Collapsed;
+                //HoverTestInfo.Visibility = Visibility.Collapsed;
             }
             
 
