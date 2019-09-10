@@ -92,6 +92,7 @@ namespace wellbeingPage
                 SubjectList.UnselectAll();
             isPopupOpen = false; 
             HoverTestInfo.Visibility = Visibility.Collapsed;
+            HoverTestAv.Visibility = Visibility.Collapsed;
             Graph.Children.Clear();
             OverallRes.Visibility = Visibility.Visible;
             TitleSubject.Content = "Overall";
@@ -215,27 +216,54 @@ namespace wellbeingPage
             string name = ((Button)sender).Name;
             Subject sub = SubjectResults[SubjectList.SelectedIndex];
             var val = Convert.ToInt32(name[2]) - 48;
+            System.Windows.Point pos = e.GetPosition(DataBackround);
 
+            var x = pos.X;
+            var y = pos.Y;
+
+            if (val > sub.marks.Count/2)
+            {
+                
+                x -= HoverTestInfo.Width;
+            }
+
+            
             Mark m = sub.marks[val];
 
             if (name[0] == 'M') // It is persons grade
             {
+                if (y > DataBackround.ActualHeight / 2)
+                {
+                    y -= HoverTestInfo.Height;
+                }
+                Thickness margin = new Thickness(x, y, 0, 0);
+
                 MyHoverDate.Text = "Date: " + m.date.ToShortDateString();
                 MyHoverMarks.Text = "Mark: " + m.mark;
                 MyHoverP.Text = "" + m.percent*100;
                 MyHoverWeight.Text = "Weight: " + m.weight;
                 MyHoverName.Text = m.name;
+                HoverTestInfo.Margin = margin;
+                
+
                 HoverTestInfo.Visibility = Visibility.Visible;
                 HoverTestAv.Visibility = Visibility.Collapsed;
                 isPopupOpen = false;
             }
             else // average grade
             {
+                if (y > DataBackround.ActualHeight / 2)
+                {
+                    y -= HoverTestAv.Height;
+                }
+                Thickness margin = new Thickness(x, y, 0, 0);
+
                 AvHoverDate.Text = "Date: " + m.date.ToShortDateString();
 
                 AvHoverP.Text = "" + m.average;
                 AvHoverWeight.Text = "Weight: " + m.weight;
                 AvHoverName.Text = m.name;
+                HoverTestAv.Margin = margin;
                 HoverTestAv.Visibility = Visibility.Visible;
                 HoverTestInfo.Visibility = Visibility.Collapsed;
                 isPopupOpen = false;
