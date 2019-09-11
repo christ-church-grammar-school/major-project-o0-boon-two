@@ -39,6 +39,7 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid>
                         <Ellipse Stroke="White" StrokeThickness="3" Width="80" Height="80"/>
+                        <Ellipse Stroke="#FF191919" StrokeThickness="40" Width="77" Height="77"/>
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         <Rectangle Fill="White" HorizontalAlignment="Left" Height="35" Stroke="#00000000" VerticalAlignment="Top" Margin="28,22.5,0,0" Grid.Row="1" Width="9" RadiusX="3" RadiusY="3"/>
                         <Rectangle Fill="White" HorizontalAlignment="Left" Height="35" Stroke="#00000000" VerticalAlignment="Top" Margin="43,22.5,0,0" Grid.Row="1" Width="9" RadiusX="3" RadiusY="3"/>
@@ -52,6 +53,7 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid>
                         <Ellipse Stroke="White" StrokeThickness="3" Width="80" Height="80"/>
+                        <Ellipse Stroke="#FF191919" StrokeThickness="40" Width="77" Height="77"/>
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         <Polygon  Points="60,40 30,57.5 30,22.5 60,40"  Stroke="White" StrokeThickness="2">
                             <Polygon.Fill>
@@ -63,6 +65,7 @@
             </Button.Template>
         </Button>
 
+        <Label x:Name="mediaLabel" HorizontalAlignment="Left" Margin="100,435,0,0" VerticalAlignment="Top" Height="50" Width="200" FontFamily="Consolas" Foreground="White"/>
         <Label x:Name="wellbeingLabel" Content="Wellbeing" HorizontalAlignment="Left" Margin="10,140,0,0" VerticalAlignment="Top" Height="100" Width="380" FontFamily="Consolas" FontSize="64" FontWeight="Bold" Foreground="White" HorizontalContentAlignment="Center"/>
         <Label x:Name="greetingLabel" Content="Good Morning," HorizontalAlignment="Left" Margin="10,285,0,0" VerticalAlignment="Top" Height="60" Width="380" FontSize="36" HorizontalContentAlignment="Center" FontFamily="Consolas" Foreground="White"/>
         <Label x:Name="nameLabel" Content="Isaac" HorizontalAlignment="Left" Margin="10,350,0,0" VerticalAlignment="Top" Height="60" Width="380" FontFamily="Consolas" FontSize="36" HorizontalContentAlignment="Center" Foreground="White"/>
