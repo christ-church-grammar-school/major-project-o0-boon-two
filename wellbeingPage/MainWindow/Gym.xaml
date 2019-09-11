@@ -1,15 +1,21 @@
 ﻿<Page x:Class="wellbeingPage.Gym"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:wellbeingPage"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       mc:Ignorable="d" 
       d:DesignHeight="800" d:DesignWidth="1200"
 
       Title="Gym Section">
 
     <Page.Resources>
+
+        <Style x:Key="workoutBlock" TargetType="TextBlock">
+            <Setter Property="Background" Value="#A2FAD200"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontFamily" Value="consolas"/>
+        </Style>
         <Style x:Key="buttonYellowStyle" TargetType="Button">
             <Setter Property="Background" Value="#1F1F1F" />
             <Setter Property="FontFamily" Value="Consolas" />
@@ -90,7 +96,7 @@
 
         </Grid>
 
-        <Grid x:Name="AddExercisePopup" Visibility="Collapsed" >
+        <Grid x:Name="AddExercisePopup" Visibility="visible" >
             <Rectangle Fill="#CC3C3C3C"/>
 
             <Border x:Name="AddAnExerciseBottomBorder" BorderThickness="1" CornerRadius="0,0,50,50" BorderBrush="#00000000" Background="#FF1F1F1F" Height="470" VerticalAlignment="Center" HorizontalAlignment="Center" Width="1000" Margin="0,80,0,0">
@@ -110,6 +116,7 @@
                 <TextBlock x:Name="AddAnExerciseTextBlock" Text="Add Exercise" FontSize="72" FontFamily="Consolas" FontWeight="Bold" Margin="157,7,157,21" Foreground="White" RenderTransformOrigin="0.805,0.171"/>
             </Border>
             <Button x:Name="addEntered" Width="120" Height="80" Margin="915,360,165,360" IsEnabled="False" Content="Add to workout" Click="AddEntered_Click" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Button x:Name="makeSuperset" Width="120" Height="80" Margin="915,510,165,210" IsEnabled="False" Content="Superset" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
     </Grid>
 </Page>
