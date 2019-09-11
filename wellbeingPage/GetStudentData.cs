@@ -58,15 +58,7 @@ namespace wellbeingPage
             // FIND MARKS;
             List<string> tests = Lines.ToList().GetRange(4, Lines.Count - 5);
 
-            var split = Lines.Last().Split(new[] { "%" }, StringSplitOptions.None).ToList();
-            if (split.Count == 3){
-                sub.YourAverage = Convert.ToInt32((split[0].Split(new[] { " " }, StringSplitOptions.None).ToList()).Last());
-                sub.EveryoneAverage = Convert.ToInt32((split[1].Split(new[] { " " }, StringSplitOptions.None).ToList()).Last());
-            }
-            else if(split.Count ==2)
-            {
-                sub.EveryoneAverage = Convert.ToInt32((split[0].Split(new[] { " " }, StringSplitOptions.None).ToList()).Last());
-            }
+            
              
             foreach (var a in tests)
             {
@@ -113,6 +105,19 @@ namespace wellbeingPage
                                 
                 }
                                     
+            }
+            var split = Lines.Last().Split(new[] { "%" }, StringSplitOptions.None).ToList();
+            if (sub.marks.Count > 0)
+            {
+                sub.YourAverage = Convert.ToInt32((split[0].Split(new[] { " " }, StringSplitOptions.None).ToList()).Last());
+                
+                sub.EveryoneAverage = Convert.ToInt32((split[1].Split(new[] { " " }, StringSplitOptions.None).ToList()).Last());
+                
+                
+            }
+            if (split.Count == 2)
+            {
+                sub.EveryoneAverage = Convert.ToInt32((split[0].Split(new[] { " " }, StringSplitOptions.None).ToList()).Last());
             }
             if (sub.YourAverage < 0)
             {

@@ -35,9 +35,8 @@ namespace wellbeingPage
         //StackPanel textboxPanel = new StackPanel();
 
         List<Exercise> appendedWorkout = new List<Exercise>();
-        Exercise newestWorkout = new Exercise();
+        //Exercise newestWorkout = new Exercise();
         GymWorkout addIt = new GymWorkout();
-        TextBlock workoutList = new TextBlock();
 
 
         public Gym()
@@ -49,7 +48,16 @@ namespace wellbeingPage
         private void AddWorkout_Click(object sender, RoutedEventArgs e)
         {
             AddWorkoutPopup.Visibility = Visibility.Visible;
-            AddWorkout.Width = 0;
+
+            if (appendedWorkout.Count > 0)
+            {
+                appendedWorkout.Clear();
+      
+                if (workoutStack.Children.Count > 0)
+                {
+                    workoutStack.Children.RemoveAt(workoutStack.Children.Count - 1);
+                }
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -116,6 +124,7 @@ namespace wellbeingPage
 
         private void AddEntered_Click(object sender, RoutedEventArgs e)
         {
+            Exercise newestWorkout = new Exercise();
             newestWorkout.exerciseName = exerciseEntered.Text.ToString();
             newestWorkout.reps = repsEntered.Text.ToString();
             newestWorkout.sets = setsEntered.Text.ToString();
@@ -173,6 +182,10 @@ namespace wellbeingPage
         private void addCurrentWorkout(object sender, RoutedEventArgs e)
         {
                 ValidWorkout();
+                TextBlock workoutList = new TextBlock();
+
+                
+
                 addIt.workoutName = namingWorkout.Text;
                 addIt.exercises = appendedWorkout;
                 workoutList.Text = addIt.workoutName;
@@ -191,12 +204,13 @@ namespace wellbeingPage
    
                 workoutsPanel.Children.Add(workoutList);
                 AddWorkoutPopup.Visibility = Visibility.Collapsed;
-                
+                namingWorkout.Text = "";
+                workoutStack.Children.Clear();
         }
 
         private void resetText(object sender, TextChangedEventArgs e)
         {
-            if (namingWorkout.Text != "")
+            if (namingWorkout.Text != "" && namingWorkout.Text != "Enter Workout Name")
             {
                 addToWorkouts.IsEnabled = true;
                 ValidWorkout();
