@@ -66,7 +66,7 @@
         <Rectangle x:Name="BackgroundScreen" Fill="#FF1F1F1F" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
         <TextBlock Style="{StaticResource textBlockListStyle}" FontSize="56" FontWeight="ExtraBold" Foreground="#FAD200" Margin="85,34,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="56" Width="Auto"> Workouts</TextBlock>
 
-        <Button x:Name="AddWorkout" Margin="1050, 650, 10, 70" Click="AddWorkout_Click">Add a new workout</Button>
+        <Button x:Name="AddWorkout" Margin="1050,650,0,0" Click="AddWorkout_Click" Height="80" VerticalAlignment="Top" HorizontalAlignment="Left" Width="140">Add a new workout</Button>
 
         <StackPanel x:Name="workoutsPanel" Background="Wheat" Margin="85,100,0,70" Orientation="Vertical" HorizontalAlignment="Left" Width="915"/>
 
