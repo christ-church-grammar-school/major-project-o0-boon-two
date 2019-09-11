@@ -25,12 +25,14 @@ namespace wellbeingPage
     /// </summary>
     public class Mark
     {
+        [PrimaryKey]
         public string subject{ get; set; }
         [PrimaryKey, Unique]
         public string name { get; set; }
         public string mark { get; set; }
         public double weight { get; set; }
         public DateTime date { get; set; }
+        [PrimaryKey]
         public int year { get; set; }
 
         [AutoIncrement]
@@ -46,7 +48,7 @@ namespace wellbeingPage
     {
         [Unique,PrimaryKey]
         public string Name { get; set; }
-
+        [PrimaryKey]
         public int Year { get; set; }
 
         public string teacher { get; set; }
@@ -221,7 +223,7 @@ namespace wellbeingPage
             var x = pos.X;
             var y = pos.Y;
 
-            if (val > sub.marks.Count/2)
+            if (x > DataBackround.ActualWidth / 2)
             {
                 
                 x -= HoverTestInfo.Width;
