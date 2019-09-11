@@ -24,10 +24,13 @@ namespace wellbeingPage
     {
         DispatcherTimer seconds = new DispatcherTimer();
         DispatcherTimer milliseconds = new DispatcherTimer();
-
+        
         public Home()
         {
             InitializeComponent();
+            
+            
+            App.Current.Properties["LoadThing"] = "1";
 
             secondHand.Angle = (DateTime.Now.Second + (double)DateTime.Now.Millisecond / 1000) * 6 + 90;
             minuteHand1.Angle = (DateTime.Now.Minute + (double)DateTime.Now.Second / 60) * 6 + 90;
@@ -41,6 +44,7 @@ namespace wellbeingPage
             milliseconds.Tick += UpdateSecondHand;
             milliseconds.Start();
         }
+        
         void UpdateSecondHand(object sender, object e)
         {
             secondHand.Angle = (DateTime.Now.Second + (double)DateTime.Now.Millisecond / 1000) * 6 + 90;

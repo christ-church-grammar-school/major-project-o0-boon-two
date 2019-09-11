@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -24,12 +25,22 @@ namespace wellbeingPage
     public partial class Preferences : Window
     {
 
-        public bool UpdateLiveMarksOnOpen = false; //  false for manual true for evey time opened                                                                      
+        /*public bool UpdateLiveMarksOnOpen = false; //  false for manual true for evey time opened                                                                      
         public bool HomeworkOnPeriodEnd = true;
         public DateTime HomeworkRemind;
         public int RemindForAssignment = 0; //number of days to start reminding before the assignment due date
-        public int RemindForTest = 0; //number of days to start reminding before the Test due date
+        public int RemindForTest = 0; //number of days to start reminding before the Test due date*/
+        public class Info
+        {
+            [PrimaryKey, Unique,AutoIncrement]
+            public int ID { get; set; }
+            public string PersonName { get; set; }
+            public string Username { get; set; }
 
+            
+            public string Password { get; set; }
+            public DateTime LiveMarksUpdate { get; set; }
+        }
         public Preferences()
         {
             InitializeComponent();
@@ -37,19 +48,21 @@ namespace wellbeingPage
 
         private void Submit(object sender, RoutedEventArgs e)
         {
-            Directory.CreateDirectory("data");
-            using (StreamWriter outputFile = new StreamWriter("data/cred.txt"))
-            {
-                outputFile.WriteLine(UsernameBox.Text);
-                outputFile.WriteLine(PasswordBox.Password.ToString());
-            }
-
-            MainWindow win = new MainWindow();
-
-            win.Show();
-
-            LoginStuff.Visibility = Visibility.Collapsed;
             
+            Info inf = new Info();
+            inf.Username = UsernameBox.Text;
+            inf.Password = PasswordBox.Password;
+                
+            LoginStuff.Visibility = Visibility.Collapsed;
+            SQLiteConnection conn = new SQLiteConnection("StudentData.sqlite");
+            conn.CreateTable<Subject>();
+            conn.CreateTable<Info>();
+            conn.InsertOrReplace(inf);
+            conn.CreateTable<Mark>();
+            conn.Close();
+
+            var win = new MainWindow();
+            win.Show();
             if (sender == subButton)
             {
                 GetStudentData.DownloadLiveMarks(true);

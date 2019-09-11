@@ -10,6 +10,9 @@ using System.Windows;
 using System.IO;
 using System.Threading;
 using wellbeingPage.Settings;
+using SQLite;
+using System.Configuration;
+
 
 namespace wellbeingPage
 {
@@ -18,100 +21,117 @@ namespace wellbeingPage
         
         public static async Task DownloadLiveMarks(bool ShowError)
         {
-            List<string> Lines = new List<string>(System.IO.File.ReadAllLines("data/cred.txt"));
-            var cTask = Task.Run(() => StartDownload(Lines[0],Lines[1],ShowError));
+            
+            SQLiteConnection conn = new SQLiteConnection("StudentData.sqlite");
+            
+            var a  = conn.Table<Preferences.Info>().ToList()[0].Username;
+            var b = conn.Table<Preferences.Info>().ToList()[0].Password;
+            
+            var cTask = Task.Run(() => StartDownload(a,b,ShowError));
             await cTask;
         }
 
-        public static async Task PutMarks()
+                
+        private static void ParseMarks(string inp, int year)
         {
-            var cTask = Task.Run(() => ParseMarks());
-            await cTask;
-            
-        }
-        
-        private static void ParseMarks()
-        {
-            List<FileInfo> info = new List<FileInfo>();
+              
+            Subject sub = new Subject();
+            List<string> Lines = new List<string>(inp.Split(new[] { "\n" }, StringSplitOptions.None).ToList());
 
-            var dirInfo = new DirectoryInfo("data/marks");
-            info.AddRange(dirInfo.GetFiles("*.txt*"));
-            
-            App.Current.Dispatcher.Invoke((Action)delegate
+            //FIND NAME + TEACHER
+            List<string> First = Lines[0].Split(new[] { " " }, StringSplitOptions.None).ToList();
+            int Pindex = 0;
+            for (int j = 0; j < First.Count; j++)
             {
-                Marks.SubjectResults.Clear();
-            });
-
-            foreach (var i in info)
-            {
-                Subject sub = new Subject();
-                
-                List<string> Lines = new List<string>(System.IO.File.ReadAllLines("data/marks/" + i.Name));
-
-
-                //FIND NAME + TEACHER
-                List<string> First = Lines[0].Split(new[] { " " }, StringSplitOptions.None).ToList();
-                int Pindex = 0;
-                for (int j = 0; j < First.Count; j++)
+                //Console.WriteLine(First[j]);
+                if (First[j] == "Mrs" || First[j] == "Ms" || First[j] == "Miss" || First[j] == "Mr" || First[j] == "Dr")
                 {
-                    //Console.WriteLine(First[j]);
-                    if (First[j] == "Mrs" || First[j] == "Ms" || First[j] == "Miss" || First[j] == "Mr" || First[j] == "Dr")
-                    {
-                        Pindex = j;
+                    Pindex = j;
                         
-                    }
                 }
-                sub.Name = String.Join(" ",First.ToList().GetRange(0, Pindex)) + "\n";
-                sub.teacher = String.Join(" ", First.ToList().GetRange(Pindex, First.Count - Pindex));
-                //MessageBox.Show(sub.Name + "         " + sub.teacher);
-                
-                // FIND MARKS
-                List<string> tests = Lines.ToList().GetRange(4, Lines.Count - 5);
-
-                double numerator = 0;
-                double denomenator = 0;
-                
-
-                foreach (var a in tests)
-                {
-                    int SlashCount = a.Split('/').Length - 1;
-                    if (SlashCount >= 3) //Assume there is marks
-                    {
-                        //Module 1 Project 7/04/2019 20 / 20 100 93% 6.00%          EXAMPLE
-
-                        List<string> line = a.Split(new[] { " " }, StringSplitOptions.None).ToList();
-                       
-                        sub.TestWeights.Add(line[line.Count - 1]); // Getting weight as last term
-                        sub.ClassAverages.Add(line[line.Count - 2]);
-                        sub.YourScores.Add(line[line.Count - 6] + "/" +line[line.Count - 4]);
-                        //MessageBox.Show(sub.YourScores[0]);
-                        sub.Date = line[line.Count - 7];
-                        
-                        var subset = line.ToList().GetRange(0, line.Count - 7);
-                        sub.TestNames.Add(String.Join(" ", subset));
-                        
-                        double value = Convert.ToDouble(line[line.Count - 6]) / Convert.ToDouble(line[line.Count - 4]);
-                        double weight = Convert.ToDouble(line[line.Count - 1].Split(new[] { "%" }, StringSplitOptions.None).ToList()[0]);
-                        numerator += value * weight;
-                        denomenator += weight;
-
-                    } //no marks allocated
-                    else
-                    {
-                        
-                    }
-                    sub.YourAverage = (int)Math.Round(numerator * 100 / denomenator);
-                }
-                if (sub.YourAverage < 0)
-                {
-                    sub.YourAverage = -1;
-                }
-
-                App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
-                {
-                    Marks.SubjectResults.Add(sub);
-                });
             }
+            sub.Name = String.Join(" ",First.ToList().GetRange(0, Pindex)) + "\n";
+            sub.teacher = String.Join(" ", First.ToList().GetRange(Pindex, First.Count - Pindex));
+            sub.Year = year;
+            //MessageBox.Show(sub.Name + "         " + sub.teacher);
+
+            // FIND MARKS;
+            List<string> tests = Lines.ToList().GetRange(4, Lines.Count - 5);
+
+            var split = Lines.Last().Split(new[] { "%" }, StringSplitOptions.None).ToList();
+            if (split.Count == 3){
+                sub.YourAverage = Convert.ToInt32((split[0].Split(new[] { " " }, StringSplitOptions.None).ToList()).Last());
+                sub.EveryoneAverage = Convert.ToInt32((split[1].Split(new[] { " " }, StringSplitOptions.None).ToList()).Last());
+            }
+            else if(split.Count ==2)
+            {
+                sub.EveryoneAverage = Convert.ToInt32((split[0].Split(new[] { " " }, StringSplitOptions.None).ToList()).Last());
+            }
+             
+            foreach (var a in tests)
+            {
+                int SlashCount = a.Split('/').Length - 1;
+                if (SlashCount >= 3) //Assume there is marks
+                {
+                    //Module 1 Project 7/04/2019 20 / 20 100 93% 6.00%          EXAMPLE OF LAYOU
+
+                    List<string> line1 = a.Split(new[] { " " }, StringSplitOptions.None).ToList();
+                    List<string> line = new List<string>();
+
+                    for (var i  = 0; i < line1.Count; i ++)
+                    {
+                        if (line1[i][0] == '/' && line1[i].Length >= 2) // AMC format
+                        {
+                            line.Add("/");
+                            line.Add(line1[i].Remove(0, 1));
+                        } else
+                        {
+                            
+                            line.Add(line1[i]);
+                        }
+                    }
+
+                    var mrk = new Mark();
+
+                    mrk.weight= Convert.ToDouble(line[line.Count - 1].Split(new[] { "%" }, StringSplitOptions.None).ToList()[0]); // Getting weight as last term
+                    mrk.average = Convert.ToInt32(line[line.Count - 2].Split(new[] { "%" }, StringSplitOptions.None).ToList()[0]);
+                    mrk.percent = Convert.ToDouble(line[line.Count - 6]) / Convert.ToDouble(line[line.Count - 4]);
+                    mrk.year = year;
+                    mrk.mark = line[line.Count - 6] + "/" +line[line.Count - 4];
+                    //MessageBox.Show(sub.YourScores[0]); 
+
+                    mrk.date = Convert.ToDateTime(line[line.Count - 7]);
+                    mrk.subject = sub.Name;
+                    var subset = line.ToList().GetRange(0, line.Count - 7);
+                    mrk.name = String.Join(" ", subset);
+         
+                    sub.marks.Add(mrk);
+                        
+                } //no marks allocated
+                else
+                {
+                                
+                }
+                                    
+            }
+            if (sub.YourAverage < 0)
+            {
+                sub.YourAverage = -1;
+            }
+
+            
+
+            SQLiteConnection conn = new SQLiteConnection("StudentData.sqlite");
+
+            conn.CreateTable<Subject>();
+            conn.InsertOrReplace(sub);
+
+
+            conn.CreateTable<Mark>();
+            foreach (var j in sub.marks)
+                conn.InsertOrReplace(j);
+            
+
         }
 
         private static bool StartDownload(string username, string password, bool ShowError)
@@ -132,7 +152,7 @@ namespace wellbeingPage
             {
                 driver.Navigate().GoToUrl("https://parentportal.ccgs.wa.edu.au/");
                 System.Threading.Thread.Sleep(5000);
-                var search_box = driver.FindElementByName("ctl00$ctl05$TextBoxUserName");
+                var search_box = driver.FindElementById("TextBoxUserName");
                 search_box.SendKeys(username);
                 search_box = driver.FindElementById("textBox2");
                 search_box.SendKeys(password);
@@ -192,6 +212,11 @@ namespace wellbeingPage
                 driver.Quit();
 
                 var lines = Data.Split(new[] { "\n" }, StringSplitOptions.None);
+
+                var FirstLine = lines[0].Split(new[] { " " }, StringSplitOptions.None);
+
+                var year = Convert.ToInt32(FirstLine.Last());
+
                 int[] indexSub = new int[10];
                 int[] indexProg = new int[10];
 
@@ -212,45 +237,55 @@ namespace wellbeingPage
                     }
                 }
                 int run = 0;
+
+
                 while (indexProg[run] != '\0')
                 {
 
                     var subset = lines.ToList().GetRange(indexSub[run], indexProg[run] - indexSub[run] + 1);
-                    Directory.CreateDirectory("data");
-                    Directory.CreateDirectory("data/marks");
-                    
-                    File.WriteAllText("data/marks/Subject" + run + ".txt", String.Join("", subset));
+                    ParseMarks(String.Join("\n", subset), year);
 
                     run++;
                 }
-                PutMarks();
+
                 App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
                 {
-                    var str = "Last Updated: " + DateTime.Now.ToString("dd/MM/yyyy  HH:mm");
+                    MainWindow.GetFromDB();
+
+                });
+
+                App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+                {
+
+                    var str = "Last Updated: " + DateTime.Now.ToString("dd/MM/yyyy  h:mm tt");
+
                     ((MainWindow)System.Windows.Application.Current.MainWindow).LastUp.Text = str;
                     ((MainWindow)System.Windows.Application.Current.MainWindow).ReloadButton.IsEnabled = true;
+                    ((MainWindow)Application.Current.MainWindow).ReloadRotater.Angle = 0;
 
 
                 });
 
                 return true;
-                                
             }
             catch
             {
                 Console.WriteLine("Chromedriver was unable to complete webscraping");
                 driver.Quit();
-                if (ShowError)
-                {
-                    MessageBox.Show("There was an error connecting to Live Marks. Please ensure that you:\n\n    - Are connected to the internet\n\n    - Have inputted the correct credentials (change in settings)\n\n    - Do not exit the Chrome window\n\n\n And then try again.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
                 App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
                 {
-                   ((MainWindow)System.Windows.Application.Current.MainWindow).ReloadButton.IsEnabled = true;
-
+                    ((MainWindow)System.Windows.Application.Current.MainWindow).ReloadButton.IsEnabled = true;
+                    ((MainWindow)Application.Current.MainWindow).ReloadRotater.Angle = 0;
+                    if (ShowError)
+                    {
+                        MessageBox.Show("There was an error connecting to Live Marks. Please ensure that you:\n\n    - Are connected to the internet\n\n    - Have inputted the correct credentials (change in settings)\n\n    - Do not exit the Chrome window\n\n\n And then try again.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 });
+
+                
+
                 return false;
-            }
+            }                        
         }
     }
 }

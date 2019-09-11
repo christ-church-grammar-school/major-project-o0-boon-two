@@ -1,5 +1,7 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -13,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using wellbeingPage.Settings;
 
 namespace wellbeingPage
@@ -22,7 +25,10 @@ namespace wellbeingPage
     /// </summary>
     public partial class MainWindow : Window
     {
+        
+
         public bool ShutAll = true;  //when this window shuts everything shuts
+        DispatcherTimer milliseconds = new DispatcherTimer();
 
         public MainWindow()
         {
@@ -30,7 +36,7 @@ namespace wellbeingPage
             MainFrame.Content = new Home();
 
           
-            if (!File.Exists("data/cred.txt")) // IF THIS PERSON HAS NOT USED THE APP BEFORE
+            if (!File.Exists("StudentData.sqlite")) // IF THIS PERSON HAS NOT USED THE APP BEFORE
             {
 
                 Preferences SettingsWin = new Preferences();
@@ -41,14 +47,39 @@ namespace wellbeingPage
                 this.Close();
             } else
             {
-                //GetStudentData.DownloadLiveMarks(Lines[0], Lines[1], true);
-
-                if (File.Exists("data/marks/Subject0.txt")){ // if marks have been downloaded: parse marks 
-                    GetStudentData.PutMarks();
-                }
+                GetFromDB();
             }
+
+            milliseconds.Interval = TimeSpan.FromMilliseconds(1);
+            milliseconds.Tick += Rot;
+            milliseconds.Start();
         }
-        
+        void Rot(object sender, object e)
+        {
+            if (!ReloadButton.IsEnabled)
+            {
+                ReloadRotater.Angle += 3;
+            }
+            
+        }
+        public static void GetFromDB() 
+        {
+            Marks.SubjectResults.Clear();
+            SQLiteConnection conn = new SQLiteConnection("StudentData.sqlite");
+           
+            List<Subject> res = (from m in conn.Table<Subject>() orderby m.YourAverage descending select m).ToList();
+            
+            foreach(var i in res)
+            {
+                
+                var mrks = (from m in conn.Table<Mark>().Where(p => p.subject == i.Name) orderby m.date ascending select m).ToList();
+                i.marks.AddRange(mrks);
+                Marks.SubjectResults.Add(i);
+            }
+
+            
+                
+        }
         private void DarknessButtonScreenClicked(object sender, RoutedEventArgs e)
         {
             MenuPopup.Visibility = Visibility.Collapsed;
@@ -104,6 +135,7 @@ namespace wellbeingPage
         {
             LastUp.Visibility = Visibility.Collapsed;
             ReloadButton.Visibility = Visibility.Collapsed;
+            ReloadRotater.Angle = 0;
             HomeSection.Visibility = Visibility.Visible;
             TasksSection.Visibility = Visibility.Visible;
             WellbeingSection.Visibility = Visibility.Visible;
@@ -123,6 +155,8 @@ namespace wellbeingPage
             GetStudentData.DownloadLiveMarks(true);
             ReloadButton.IsEnabled = false;
         }
+
+        
 
     }
 }
