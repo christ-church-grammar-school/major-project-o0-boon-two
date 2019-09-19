@@ -17,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using wellbeingPage.Settings;
+using static wellbeingPage.Preferences;
 
 namespace wellbeingPage
 {
@@ -29,6 +30,9 @@ namespace wellbeingPage
 
         public bool ShutAll = true;  //when this window shuts everything shuts
         DispatcherTimer milliseconds = new DispatcherTimer();
+
+        public static Info info;
+
 
         public MainWindow()
         {
@@ -43,16 +47,27 @@ namespace wellbeingPage
                 SettingsWin.Show();
                 SettingsWin.SettingsFrame.Content = new Login();
                 SettingsWin.LoginStuff.Visibility = Visibility.Visible;
+                
                 ShutAll = false;
                 this.Close();
             } else
             {
                 GetFromDB();
+                if (info.LiveMarksUpdate.Year == 1)
+                {
+                    LastUp.Text = "Last Updated: never";
+                } else
+                {
+                    LastUp.Text = "Last Updated: " + info.LiveMarksUpdate.ToString("dd/MM/yyyy  h:mm tt");
+                }
+                
             }
 
             milliseconds.Interval = TimeSpan.FromMilliseconds(1);
             milliseconds.Tick += Rot;
             milliseconds.Start();
+
+
         }
         void Rot(object sender, object e)
         {
@@ -66,10 +81,12 @@ namespace wellbeingPage
         {
             Marks.SubjectResults.Clear();
             SQLiteConnection conn = new SQLiteConnection("StudentData.sqlite");
-           
+            
             List<Subject> res = (from m in conn.Table<Subject>() orderby m.YourAverage descending select m).ToList();
             
-            foreach(var i in res)
+            info = conn.Table<Info>().ToList()[0];
+            
+            foreach (var i in res)
             {
                 
                 var mrks = (from m in conn.Table<Mark>().Where(p => p.subject == i.Name) orderby m.date ascending select m).ToList();
@@ -145,6 +162,9 @@ namespace wellbeingPage
 
         private void MainWinClosed(object sender, EventArgs e)
         {
+            SQLiteConnection conn = new SQLiteConnection("StudentData.sqlite");
+            conn.InsertOrReplace(info);
+            
             if (ShutAll)
             {
                 Application.Current.Shutdown();

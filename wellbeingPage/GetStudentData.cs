@@ -110,8 +110,15 @@ namespace wellbeingPage
             if (sub.marks.Count > 0)
             {
                 sub.YourAverage = Convert.ToInt32((split[0].Split(new[] { " " }, StringSplitOptions.None).ToList()).Last());
-                
-                sub.EveryoneAverage = Convert.ToInt32((split[1].Split(new[] { " " }, StringSplitOptions.None).ToList()).Last());
+                try
+                {
+                    sub.EveryoneAverage = Convert.ToInt32((split[1].Split(new[] { " " }, StringSplitOptions.None).ToList()).Last());
+
+                }
+                catch
+                {
+                    sub.EveryoneAverage = 0;
+                }
                 
                 
             }
@@ -153,8 +160,7 @@ namespace wellbeingPage
             Console.WriteLine("Logging into live marks with username: " + username + " and password:  " + password);
 
             ChromeDriver driver = new ChromeDriver(driverService, Options);
-            try
-            {
+            
                 driver.Navigate().GoToUrl("https://parentportal.ccgs.wa.edu.au/");
                 System.Threading.Thread.Sleep(5000);
                 var search_box = driver.FindElementById("TextBoxUserName");
@@ -236,7 +242,7 @@ namespace wellbeingPage
                         num2++;
                     }
                     if (lines[line].Contains("Progressive mark"))
-                    {
+                    { 
                         indexProg[num1] = line;
                         num1++;
                     }
@@ -253,13 +259,13 @@ namespace wellbeingPage
                     run++;
                 }
 
-                App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+                App.Current.Dispatcher.Invoke((Action)delegate 
                 {
                     MainWindow.GetFromDB();
 
                 });
 
-                App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+                App.Current.Dispatcher.Invoke((Action)delegate 
                 {
 
                     var str = "Last Updated: " + DateTime.Now.ToString("dd/MM/yyyy  h:mm tt");
@@ -271,13 +277,12 @@ namespace wellbeingPage
 
                 });
 
+
                 return true;
-            }
-            catch
-            {
+            
                 Console.WriteLine("Chromedriver was unable to complete webscraping");
                 driver.Quit();
-                App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+                App.Current.Dispatcher.Invoke((Action)delegate
                 {
                     ((MainWindow)System.Windows.Application.Current.MainWindow).ReloadButton.IsEnabled = true;
                     ((MainWindow)Application.Current.MainWindow).ReloadRotater.Angle = 0;
@@ -290,7 +295,7 @@ namespace wellbeingPage
                 
 
                 return false;
-            }                        
+                                   
         }
     }
 }
