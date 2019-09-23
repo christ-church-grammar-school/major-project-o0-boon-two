@@ -55,18 +55,20 @@ namespace wellbeingPage
             ladder(this, EventArgs.Empty);
         }
 
+        /*
         private void addClicked(object sender, RoutedEventArgs e)
         {
             opacityRectangle.Visibility = Visibility.Visible;
             addPopup.Visibility = Visibility.Visible;
         }
-
+        */
+       
         private void addCloseClicked(object sender, RoutedEventArgs e)
         {
             opacityRectangle.Visibility = Visibility.Collapsed;
             addPopup.Visibility = Visibility.Collapsed;
         }
-
+      
         private void infoClicked(object sender, RoutedEventArgs e)
         {
             opacityRectangle.Visibility = Visibility.Visible;

@@ -13,15 +13,15 @@
         <Rectangle x:Name="mindfulnessRectangle" Fill="#FF191919" Stroke="#FF191919" VerticalAlignment="Top" Margin="400,0,0,0" Height="120"/>
         <Rectangle x:Name="listRectangle" Fill="#FF282828" Margin="400,120,0,0" Stroke="#FF191919"/>
 
-        <Border x:Name="infoBorder" Style="{StaticResource Expands}" CornerRadius="15" BorderBrush="#FFFAD200" BorderThickness="7" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="200" Height="50" Margin="100,0,0,90">
-            <Button x:Name="infoButton" Content="Information" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="190" Background="#FFFAD200" BorderThickness="0" BorderBrush="#FFFAD200" FontFamily="Consolas" Foreground="White" Height="40" FontSize="20" FontWeight="Bold" Click="infoClicked"/>
+        <Border x:Name="infoBorder" Style="{StaticResource Expands}"  CornerRadius="15" BorderBrush="#FFFAD200" BorderThickness="7" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="200" Height="50" Margin="100,0,0,90">
+            <Button x:Name="infoButton" Content="Information" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="190" Background="#FFFAD200" BorderThickness="0" BorderBrush="#FFFAD200" FontFamily="Consolas" Foreground="Black" Height="40" FontSize="20" FontWeight="Bold" Click="infoClicked"/>
         </Border>
 
         <Border x:Name="helpBorder" Style="{StaticResource Expands}" CornerRadius="15" BorderBrush="#FFFAD200" BorderThickness="7" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="200" Height="50" Margin="100,0,0,20">
-            <Button x:Name="helpButton" Content="Help" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="190" Background="#FFFAD200" BorderThickness="0" BorderBrush="#FFFAD200" FontFamily="Consolas" Foreground="White" Height="40" FontSize="20" FontWeight="Bold" Click="helpClicked"/>
+            <Button x:Name="helpButton" Content="Help" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="190" Background="#FFFAD200" BorderThickness="0" BorderBrush="#FFFAD200" FontFamily="Consolas" Foreground="Black" Height="40" FontSize="20" FontWeight="Bold" Click="helpClicked"/>
         </Border>
 
-        <Button x:Name="addButton" Style="{StaticResource Expand}" Width="80" Height="80" Margin="0,0,40,20" Foreground="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Bottom" BorderBrush="Black" Background="Black" Click="addClicked">
+        <Button x:Name="addButton" Style="{StaticResource Expand}" Width="80" Height="80" Margin="0,0,40,20" Foreground="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Bottom" BorderBrush="Black" Background="Black" Click="audioClicked">
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid>
@@ -65,7 +65,7 @@
             </Button.Template>
         </Button>
 
-        <Label x:Name="mediaLabel" HorizontalAlignment="Left" Margin="100,435,0,0" VerticalAlignment="Top" Height="50" Width="200" FontFamily="Consolas" Foreground="White"/>
+        <Label x:Name="mediaLabel" HorizontalAlignment="Left" Margin="50,435,0,0" VerticalAlignment="Top" Height="50" Width="300" FontFamily="Consolas" Foreground="White"/>
         <Label x:Name="wellbeingLabel" Content="Wellbeing" HorizontalAlignment="Left" Margin="10,140,0,0" VerticalAlignment="Top" Height="100" Width="380" FontFamily="Consolas" FontSize="64" FontWeight="Bold" Foreground="White" HorizontalContentAlignment="Center"/>
         <Label x:Name="greetingLabel" Content="Good Morning," HorizontalAlignment="Left" Margin="10,285,0,0" VerticalAlignment="Top" Height="60" Width="380" FontSize="36" HorizontalContentAlignment="Center" FontFamily="Consolas" Foreground="White"/>
         <Label x:Name="nameLabel" Content="Isaac" HorizontalAlignment="Left" Margin="10,350,0,0" VerticalAlignment="Top" Height="60" Width="380" FontFamily="Consolas" FontSize="36" HorizontalContentAlignment="Center" Foreground="White"/>
