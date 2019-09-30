@@ -25,18 +25,18 @@ namespace wellbeingPage
     /// </summary>
     public class Mark
     {
-        [PrimaryKey]
+        [Unique, PrimaryKey]
+        public string All { get; set; } // year-name-subject
+        
         public string subject{ get; set; }
-        [PrimaryKey, Unique]
+       
         public string name { get; set; }
         public string mark { get; set; }
         public double weight { get; set; }
         public DateTime date { get; set; }
-        [PrimaryKey]
+      
         public string year { get; set; }
 
-        [AutoIncrement]
-        int MarkID { get; set; }
         
         public int average { get; set; }
         public double percent { get; set; }
@@ -47,8 +47,10 @@ namespace wellbeingPage
     public class Subject
     {
         [Unique,PrimaryKey]
+        public string All { get; set; } // year-name
+
         public string Name { get; set; }
-        [PrimaryKey]
+        
         public string Year { get; set; }
 
         public string teacher { get; set; }
@@ -86,7 +88,54 @@ namespace wellbeingPage
             SubjectList.ItemsSource = CurrentResults;
             OverallRes.ItemsSource = CurrentResults;
 
+            DateTime sta = DateTime.Now;
+            DateTime end =DateTime.Now;
 
+            foreach (Subject sub in CurrentResults)
+            {
+                foreach (Mark mrk in sub.marks)
+                {
+                    if (mrk.date < sta)
+                    {
+                        sta = mrk.date;
+                    }
+                    if (mrk.date > end)
+                    {
+                        end = mrk.date;
+                    }
+                }
+            }
+
+            StartDate.Content = sta.Month.ToString();
+            EndDate.Content = end.Month.ToString();
+
+            List<PointCollection> Points = new List<PointCollection>();
+
+           
+            foreach (Subject sub in CurrentResults)
+            {
+                var pol = new PointCollection();
+                pol.Clear();
+                foreach (Mark mrk in sub.marks)
+                {
+                    pol.Add(new Point( ( mrk.date.Month - sta.Month + mrk.date.Day/30)*120, 600 - mrk.percent *600));
+                }
+                Points.Add(pol);
+            }
+            var lis = new List<System.Windows.Media.SolidColorBrush>() { Brushes.AliceBlue,Brushes.Aqua,Brushes.LightSteelBlue, Brushes.LimeGreen, Brushes.Purple,Brushes.Tomato, Brushes.AliceBlue, Brushes.Aqua, Brushes.LightSteelBlue, Brushes.LimeGreen, Brushes.Purple, Brushes.Tomato };
+            foreach(var a in Points)
+            {
+                Polyline MyLline = new Polyline
+                {
+                    StrokeThickness = 3,
+                    Stroke = lis[0],
+                    
+                    Points = a
+                };
+                lis.RemoveAt(0);
+                Console.WriteLine("aaaaaaaaaa");
+                Graph.Children.Add(MyLline);
+            }
 
         }
 
@@ -97,8 +146,7 @@ namespace wellbeingPage
             foreach (Subject sub in SubjectResults)
             {
                
-               
-                if (sub.Year == YearSelect.SelectedValue.ToString().Split(new[] { " " }, StringSplitOptions.None).ToList().Last())
+                if (sub.marks.Count >  0 && sub.Year == YearSelect.SelectedValue.ToString().Split(new[] { " " }, StringSplitOptions.None).ToList().Last())
                 {
                     CurrentResults.Add(sub);
                 }
@@ -139,7 +187,7 @@ namespace wellbeingPage
                 HoverTestInfo.Visibility = Visibility.Collapsed;
 
                 OverallRes.Visibility = Visibility.Collapsed;
-                display = SubjectResults[SubjectList.SelectedIndex];
+                display = CurrentResults[SubjectList.SelectedIndex];
                 TitleSubject.Content = display.Name;
                 if (display.YourAverage != -1)
                     TitleGrade.Content = display.YourAverage + " %";
@@ -248,7 +296,7 @@ namespace wellbeingPage
         private void GradeHover(object sender, MouseEventArgs e)
         {
             string name = ((Button)sender).Name;
-            Subject sub = SubjectResults[SubjectList.SelectedIndex];
+            Subject sub = CurrentResults[SubjectList.SelectedIndex];
             var val = Convert.ToInt32(name[2]) - 48;
             System.Windows.Point pos = e.GetPosition(DataBackround);
 
@@ -326,6 +374,15 @@ namespace wellbeingPage
 
         private void YearChanged(object sender, SelectionChangedEventArgs e)
         {
+            SubjectList.UnselectAll();
+            isPopupOpen = false;
+            HoverTestInfo.Visibility = Visibility.Collapsed;
+            HoverTestAv.Visibility = Visibility.Collapsed;
+            Graph.Children.Clear();
+            OverallRes.Visibility = Visibility.Visible;
+            TitleSubject.Content = "Overall";
+            TitleGrade.Content = "";
+
             Console.Write("cahcsac \n");
             SetCurrentResults();
         }

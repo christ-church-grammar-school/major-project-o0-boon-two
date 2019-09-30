@@ -13,7 +13,7 @@
     <Grid Background="#FF1F1F1F">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="383*"/>
-            <ColumnDefinition Width="817*"/>
+            
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
@@ -64,7 +64,11 @@
             <Label x:Name="TitleSubject" Grid.Column="1" Content="" Margin="0,23,0,0" FontFamily="Consolas" FontSize="48" Foreground="White" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Height="66" VerticalAlignment="Top" Width="857"/>
             <Label x:Name="TitleGrade" Grid.Column="1" Content="" Margin="0,89,0,0" FontFamily="Consolas" FontSize="78" Foreground="White" HorizontalContentAlignment="Center" Background="{x:Null}" Width="857" Height="110" VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Bold"/>
 
-            <Canvas x:Name="Graph" Grid.Column="1" Margin="30,180,13,0"/>
+            <Canvas x:Name="Graph" Grid.Column="1" Margin="30,180,13,0">
+                
+            </Canvas>
+            <Label Name="StartDate" Content="Jan" Canvas.Top="516" Foreground="White" Grid.Column="1" Margin="12,688,805,10"/>
+            <Label Name="EndDate" Content="Dec" Canvas.Top="516" Foreground="White" Canvas.Left="777" Margin="805,691,10,10" Grid.Column="1"/>
 
 
 
@@ -121,7 +125,7 @@
             VerticalAlignment="Bottom"
             MinWidth="100"
             MaxWidth="375"
-            ItemContainerStyle="{DynamicResource theComboBoxItem}" Background="#FFFAD200" BorderBrush="Black" Foreground="Black" Margin="20,0,0,27.5" HorizontalAlignment="Left" Width="174" Grid.Row="1" SelectedIndex="0" Height="42" SelectionChanged="YearChanged"
+            ItemContainerStyle="{DynamicResource theComboBoxItem}" Background="#FFFAD200" BorderBrush="Black" Foreground="Black" Margin="20,0,0,27.5" HorizontalAlignment="Left" Width="174" Grid.Row="1" SelectedIndex="2" Height="42" SelectionChanged="YearChanged"
             >
 
             <ComboBoxItem>2017</ComboBoxItem>

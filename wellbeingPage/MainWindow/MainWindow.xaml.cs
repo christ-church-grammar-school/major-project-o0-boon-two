@@ -87,7 +87,9 @@ namespace wellbeingPage
             foreach (var i in res)
             {
                 
-                var mrks = (from m in conn.Table<Mark>().Where(p => p.subject == i.Name) orderby m.date ascending select m).ToList();
+                var mrks = (from m in conn.Table<Mark>().Where(p => p.subject == i.Name && p.year == i.Year) orderby m.date ascending select m).ToList();
+                
+                
                 i.marks.AddRange(mrks);
                 Marks.SubjectResults.Add(i);
             }
