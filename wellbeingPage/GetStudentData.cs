@@ -32,7 +32,7 @@ namespace wellbeingPage
         }
 
                 
-        private static void ParseMarks(string inp, int year)
+        private static void ParseMarks(string inp, string year)
         {
               
             Subject sub = new Subject();
@@ -160,7 +160,8 @@ namespace wellbeingPage
             Console.WriteLine("Logging into live marks with username: " + username + " and password:  " + password);
 
             ChromeDriver driver = new ChromeDriver(driverService, Options);
-            
+            try
+            {
                 driver.Navigate().GoToUrl("https://parentportal.ccgs.wa.edu.au/");
                 System.Threading.Thread.Sleep(5000);
                 var search_box = driver.FindElementById("TextBoxUserName");
@@ -168,6 +169,7 @@ namespace wellbeingPage
                 search_box = driver.FindElementById("textBox2");
                 search_box.SendKeys(password);
                 driver.FindElementById("loginButton").Click();
+               
 
                 driver.Navigate().GoToUrl("https://parentportal.ccgs.wa.edu.au/stures.aspx");
                 System.Threading.Thread.Sleep(3000);
@@ -226,7 +228,7 @@ namespace wellbeingPage
 
                 var FirstLine = lines[0].Split(new[] { " " }, StringSplitOptions.None);
 
-                var year = Convert.ToInt32(FirstLine.Last());
+                var year = FirstLine.Last();
 
                 int[] indexSub = new int[10];
                 int[] indexProg = new int[10];
@@ -242,30 +244,37 @@ namespace wellbeingPage
                         num2++;
                     }
                     if (lines[line].Contains("Progressive mark"))
-                    { 
+                    {
                         indexProg[num1] = line;
                         num1++;
                     }
                 }
                 int run = 0;
 
+                try
+                {
+                    while (indexProg[run] != '\0')
+                    {
 
-                while (indexProg[run] != '\0')
+                        var subset = lines.ToList().GetRange(indexSub[run], indexProg[run] - indexSub[run] + 1);
+                        ParseMarks(String.Join("\n", subset), year);
+
+                        run++;
+                    }
+                }
+                catch
                 {
 
-                    var subset = lines.ToList().GetRange(indexSub[run], indexProg[run] - indexSub[run] + 1);
-                    ParseMarks(String.Join("\n", subset), year);
-
-                    run++;
                 }
 
-                App.Current.Dispatcher.Invoke((Action)delegate 
+
+                App.Current.Dispatcher.Invoke((Action)delegate
                 {
                     MainWindow.GetFromDB();
 
                 });
 
-                App.Current.Dispatcher.Invoke((Action)delegate 
+                App.Current.Dispatcher.Invoke((Action)delegate
                 {
 
                     var str = "Last Updated: " + DateTime.Now.ToString("dd/MM/yyyy  h:mm tt");
@@ -279,6 +288,9 @@ namespace wellbeingPage
 
 
                 return true;
+            }
+            catch
+            {
             
                 Console.WriteLine("Chromedriver was unable to complete webscraping");
                 driver.Quit();
@@ -292,10 +304,11 @@ namespace wellbeingPage
                     }
                 });
 
-                
+
 
                 return false;
-                                   
+            }
+                           
         }
     }
 }

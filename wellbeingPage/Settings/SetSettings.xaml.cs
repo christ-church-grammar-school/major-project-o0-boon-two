@@ -26,7 +26,7 @@ namespace wellbeingPage.Settings
         {
             InitializeComponent();
             SQLiteConnection conn = new SQLiteConnection("StudentData.sqlite");
-
+            
             var a = conn.Table<Preferences.Info>().ToList()[0];
             UserField.Text = a.Username;
             PassField.Password = a.Password;

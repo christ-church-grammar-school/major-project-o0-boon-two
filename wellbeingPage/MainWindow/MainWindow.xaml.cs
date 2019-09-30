@@ -21,9 +21,7 @@ using static wellbeingPage.Preferences;
 
 namespace wellbeingPage
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+    
     public partial class MainWindow : Window
     {
         
@@ -53,12 +51,12 @@ namespace wellbeingPage
             } else
             {
                 GetFromDB();
-                if (info.LiveMarksUpdate.Year == 1)
+                if (info.LiveMarksUpdate == "")
                 {
                     LastUp.Text = "Last Updated: never";
                 } else
                 {
-                    LastUp.Text = "Last Updated: " + info.LiveMarksUpdate.ToString("dd/MM/yyyy  h:mm tt");
+                    LastUp.Text = info.LiveMarksUpdate;
                 }
                 
             }
@@ -139,6 +137,7 @@ namespace wellbeingPage
             MarksSection.Visibility = Visibility.Collapsed;
             LastUp.Visibility = Visibility.Visible;
             ReloadButton.Visibility = Visibility.Visible;
+           
             MainFrame.Content = new Marks();
         }
         private void HomeClicked(object sender, RoutedEventArgs e)
@@ -163,12 +162,14 @@ namespace wellbeingPage
         private void MainWinClosed(object sender, EventArgs e)
         {
             SQLiteConnection conn = new SQLiteConnection("StudentData.sqlite");
+            info.LiveMarksUpdate = LastUp.Text;
             conn.InsertOrReplace(info);
             
             if (ShutAll)
             {
                 Application.Current.Shutdown();
             }
+                      
         }
         private void ReloadMarks(object sender, RoutedEventArgs e)
         {

@@ -39,7 +39,7 @@ namespace wellbeingPage
 
             
             public string Password { get; set; }
-            public DateTime LiveMarksUpdate { get; set; }
+            public string LiveMarksUpdate { get; set; }
         }
         public Preferences()
         {

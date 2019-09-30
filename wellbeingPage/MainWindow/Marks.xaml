@@ -47,9 +47,7 @@
                     <DropShadowEffect BlurRadius="9" Direction="100" ShadowDepth="3"/>
                 </Rectangle.Effect>
             </Rectangle>
-            <Border x:Name="helpBorder" Style="{StaticResource Expands}" Grid.Column="0" CornerRadius="15" BorderBrush="#FFFAD200" BorderThickness="8" VerticalAlignment="Bottom" Width="200" Height="50" Margin="0,0,0,20">
-                <Button x:Name="helpButton"  Content="Input Marks" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="190" Background="#FFFAD200" BorderThickness="0" BorderBrush="#FFFAD200" FontFamily="Consolas" Foreground="Black" Height="40" FontSize="20" FontWeight="Bold"/>
-            </Border>
+
             <GridSplitter DragDelta="SizeChangedd" Grid.Column="1" HorizontalAlignment="Left" Width="7" Background="#FF282828" Foreground="{x:Null}"/>
             <ListBox x:Name="OverallRes" Grid.Column="1" ScrollViewer.VerticalScrollBarVisibility="Disabled" AlternationCount="-1" ScrollViewer.CanContentScroll="False" Background="{x:Null}" BorderBrush="{x:Null}" Margin="802,61,10,0" SelectionChanged="changed" IsManipulationEnabled="True" Height="250" VerticalAlignment="Top">
                 <ListBox.ItemsPanel>
@@ -78,14 +76,15 @@
                     <RowDefinition Height="62*"/>
                 </Grid.RowDefinitions>
                 <Rectangle Fill="#FF656565" Stroke="#FF191919" RadiusY="45.75" RadiusX="45.75" Grid.RowSpan="2"/>
-                <TextBlock Name="MyHoverDate" Margin="10,29,-10,0" TextWrapping="Wrap" Text="Date&#x9;: 5.00%" VerticalAlignment="Top" FontSize="36" Height="61" TextAlignment="Center" FontWeight="Bold" Foreground="#FF434343" Grid.Row="1"/>
+                <TextBlock Name="MyHoverDate" Margin="10,30,-10,0" TextWrapping="Wrap" Text="Date&#x9;: 5.00%" VerticalAlignment="Top" FontSize="36" Height="61" TextAlignment="Center" FontWeight="Bold" Foreground="#FF434343" Grid.Row="1"/>
 
-                <TextBlock Name="MyHoverP" Margin="93,52,73,0" TextWrapping="Wrap" Text="85" VerticalAlignment="Top" FontSize="70" Height="87" TextAlignment="Center" FontWeight="Bold" Foreground="#FF38BC00"/>
+                <TextBlock Name="MyHoverP" Margin="80,83,86,0" TextWrapping="Wrap" Text="85" VerticalAlignment="Top" FontSize="48" Height="84" TextAlignment="Center" FontWeight="Bold" Foreground="#FF38BC00"/>
                 <TextBlock Name="MyHoverName" Margin="0,10,0,0" TextWrapping="Wrap" Text="Test Name" VerticalAlignment="Top" FontSize="36" Height="93" TextAlignment="Center" FontWeight="Bold"/>
                 <Rectangle Fill="#FF4A4A4A" Stroke="#FF191919" RadiusY="10.5" RadiusX="10.5" Margin="32,103,26,23" Grid.Row="1"/>
                 <TextBox Name="MyHoverComments"  Margin="32,103,26,23" TextWrapping="Wrap" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="#FF304E50" FontSize="16" Grid.Row="1" CaretBrush="#FF616161"/>
                 <TextBlock Name="MyHoverMarks" Margin="0,128,0,0" TextWrapping="Wrap" Text=" marks:      42.5/50" VerticalAlignment="Top" FontSize="36" Height="61" TextAlignment="Center" FontWeight="Bold" Foreground="#FF959595"/>
                 <TextBlock Name="MyHoverWeight" Margin="0,172,0,0" TextWrapping="Wrap" Text="weighting: 5.00%" VerticalAlignment="Top" FontSize="36" Height="61" TextAlignment="Center" FontWeight="Bold" Foreground="#FF434343" Grid.RowSpan="2"/>
+                <TextBlock x:Name="MyHoverName_Copy" Margin="-63,74,63,0" TextWrapping="Wrap" Text="Comments" VerticalAlignment="Top" FontSize="20" Height="24" TextAlignment="Center" FontWeight="Bold" Grid.Row="1"/>
             </Grid>
             <Grid x:Name="HoverTestAv" Visibility="Collapsed" Margin="187,150,0,0" Grid.Column="1" Height="373" VerticalAlignment="Top"  HorizontalAlignment="Left" Width="312" >
 
@@ -112,6 +111,62 @@
 
 
         <Label x:Name="ResultsLabel" Grid.Row="0" Content="Results" Margin="0,15" Height="100" FontFamily="Consolas" FontSize="72" FontWeight="Bold" Foreground="White" HorizontalContentAlignment="Center" Grid.ColumnSpan="2"/>
+
+        <ComboBox 
+            Name="YearSelect"
+            FontSize="13"
+            Style="{DynamicResource theComboBox}"
+            Padding="15,5,15,5"
+            HorizontalContentAlignment="Left"
+            VerticalAlignment="Bottom"
+            MinWidth="100"
+            MaxWidth="375"
+            ItemContainerStyle="{DynamicResource theComboBoxItem}" Background="#FFFAD200" BorderBrush="Black" Foreground="Black" Margin="20,0,0,27.5" HorizontalAlignment="Left" Width="174" Grid.Row="1" SelectedIndex="0" Height="42" SelectionChanged="YearChanged"
+            >
+
+            <ComboBoxItem>2017</ComboBoxItem>
+            <ComboBoxItem>2018</ComboBoxItem>
+            <ComboBoxItem>2019</ComboBoxItem>
+
+        </ComboBox>
+        <Button Style="{StaticResource Expand}" x:Name="helpButton" Margin="230,0,0,9.5" Foreground="{x:Null}"  Cursor="Hand" Grid.Row="1" HorizontalAlignment="Left" Width="78" Height="80" VerticalAlignment="Bottom">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Ellipse Fill="#FFFAD200" Width="Auto" Height="Auto" Margin="6,10,4,5"/>
+
+
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Rectangle Fill="Black" HorizontalAlignment="Left" Height="6" Stroke="#00000000" VerticalAlignment="Top" Margin="22,25,0,0" Grid.Row="0" Width="35" RadiusX="3" RadiusY="3"/>
+                        <Rectangle Fill="Black" HorizontalAlignment="Left" Height="36" Stroke="#00000000" VerticalAlignment="Top" Margin="22,25,0,0" Grid.Row="0" Width="6" RadiusX="3" RadiusY="3"/>
+                        <Rectangle Fill="Black" HorizontalAlignment="Left" Height="6" Stroke="#00000000" VerticalAlignment="Top" Margin="22,55,0,0" Grid.Row="0" Width="35" RadiusX="3" RadiusY="3"/>
+                        <Rectangle Fill="Black" HorizontalAlignment="Left" Height="36" Stroke="#00000000" VerticalAlignment="Top" Margin="51,25,0,0" Grid.Row="0" Width="6" RadiusX="3" RadiusY="3"/>
+                        <Ellipse Fill="#FFFAD200" Width="Auto" Height="Auto" Margin="26,28,10,43" RenderTransformOrigin="0.5,0.5">
+                            <Ellipse.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="-42.589"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Ellipse.RenderTransform>
+                        </Ellipse>
+                        <Ellipse Fill="Black" Width="Auto" Height="Auto" Margin="30,29,10,47" RenderTransformOrigin="0.5,0.5">
+                            <Ellipse.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="-42.709"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Ellipse.RenderTransform>
+                        </Ellipse>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+
+        </Button>
+
     </Grid>
 
 </Page>

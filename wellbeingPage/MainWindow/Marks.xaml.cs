@@ -33,7 +33,7 @@ namespace wellbeingPage
         public double weight { get; set; }
         public DateTime date { get; set; }
         [PrimaryKey]
-        public int year { get; set; }
+        public string year { get; set; }
 
         [AutoIncrement]
         int MarkID { get; set; }
@@ -42,14 +42,14 @@ namespace wellbeingPage
         public double percent { get; set; }
 
         public string comment { get; set; }
-}
+    }
     [Table("Subject")]
     public class Subject
     {
         [Unique,PrimaryKey]
         public string Name { get; set; }
         [PrimaryKey]
-        public int Year { get; set; }
+        public string Year { get; set; }
 
         public string teacher { get; set; }
         public int YourAverage { get; set; }
@@ -64,9 +64,11 @@ namespace wellbeingPage
 
 
         public static ObservableCollection<Subject> SubjectResults = new ObservableCollection<Subject>();
+        ObservableCollection<Subject> CurrentResults = new ObservableCollection<Subject>();
 
         public bool isPopupOpen = false;
-
+        Subject display;
+        Mark m;
         public Marks()
         {
             InitializeComponent();
@@ -76,39 +78,68 @@ namespace wellbeingPage
             {
                 TitleSubject.Content = "Overall";
             }
-
+            
             TitleGrade.Content = "";
 
+            SetCurrentResults();
 
-            SubjectList.ItemsSource = SubjectResults;
-            OverallRes.ItemsSource = SubjectResults;
+            SubjectList.ItemsSource = CurrentResults;
+            OverallRes.ItemsSource = CurrentResults;
 
 
 
+        }
+
+        void SetCurrentResults()
+        {
+            CurrentResults.Clear();
+
+            foreach (Subject sub in SubjectResults)
+            {
+               
+               
+                if (sub.Year == YearSelect.SelectedValue.ToString().Split(new[] { " " }, StringSplitOptions.None).ToList().Last())
+                {
+                    CurrentResults.Add(sub);
+                }
+            }
         }
 
         private void MyListView_MouseDown(object sender, MouseButtonEventArgs e)
         {
             HitTestResult r = VisualTreeHelper.HitTest(this, e.GetPosition(this));
-            if (r.VisualHit.GetType() != typeof(ListBoxItem) && r.VisualHit.GetType() != typeof(Button))
+            if (r.VisualHit.GetType() != typeof(ListBoxItem) && r.VisualHit.GetType() != typeof(Button) && !isPopupOpen)
+            {
                 SubjectList.UnselectAll();
-            isPopupOpen = false; 
-            HoverTestInfo.Visibility = Visibility.Collapsed;
-            HoverTestAv.Visibility = Visibility.Collapsed;
-            Graph.Children.Clear();
-            OverallRes.Visibility = Visibility.Visible;
-            TitleSubject.Content = "Overall";
-            TitleGrade.Content = "";
+                isPopupOpen = false;
+                HoverTestInfo.Visibility = Visibility.Collapsed;
+                HoverTestAv.Visibility = Visibility.Collapsed;
+                Graph.Children.Clear();
+                OverallRes.Visibility = Visibility.Visible;
+                TitleSubject.Content = "Overall";
+                TitleGrade.Content = "";
+            }
+            else 
+            {
+                isPopupOpen = false;
+                HoverTestAv.Visibility = Visibility.Collapsed;
+                HoverTestInfo.Visibility = Visibility.Collapsed;
+                m.comment = MyHoverComments.Text;
+            }
 
 
-        }
+            }
 
         private void changed(object sender, SelectionChangedEventArgs e)
         {
             if (SubjectList.SelectedIndex != -1)
             {
+                isPopupOpen = false;
+                HoverTestAv.Visibility = Visibility.Collapsed;
+                HoverTestInfo.Visibility = Visibility.Collapsed;
+
                 OverallRes.Visibility = Visibility.Collapsed;
-                var display = SubjectResults[SubjectList.SelectedIndex];
+                display = SubjectResults[SubjectList.SelectedIndex];
                 TitleSubject.Content = display.Name;
                 if (display.YourAverage != -1)
                     TitleGrade.Content = display.YourAverage + " %";
@@ -129,11 +160,12 @@ namespace wellbeingPage
                         TitleGrade.Foreground = new SolidColorBrush(Color.FromRgb(0, 181, 0));
                     }
 
-                DrawGraph(display);
+                DrawGraph();
             }
         }
-        void DrawGraph(Subject sub)
+        void DrawGraph()
         {
+            Subject sub = display; 
             Graph.Children.Clear();
             int wi = Convert.ToInt32(Graph.ActualWidth);
             int he = Convert.ToInt32(Graph.ActualHeight);
@@ -206,7 +238,7 @@ namespace wellbeingPage
         {
             if (SubjectList.SelectedIndex != -1)
             {
-                DrawGraph(SubjectResults[SubjectList.SelectedIndex]);
+                DrawGraph();
             }
             HoverTestAv.Visibility = Visibility.Collapsed;
             HoverTestInfo.Visibility = Visibility.Collapsed;
@@ -230,7 +262,7 @@ namespace wellbeingPage
             }
 
             
-            Mark m = sub.marks[val];
+            m = sub.marks[val];
 
             if (name[0] == 'M') // It is persons grade
             {
@@ -243,6 +275,7 @@ namespace wellbeingPage
                 MyHoverDate.Text = "Date: " + m.date.ToShortDateString();
                 MyHoverMarks.Text = "Mark: " + m.mark;
                 MyHoverP.Text = "" + m.percent*100;
+                MyHoverComments.Text = m.comment;
                 MyHoverWeight.Text = "Weight: " + m.weight;
                 MyHoverName.Text = m.name;
                 HoverTestInfo.Margin = margin;
@@ -276,8 +309,11 @@ namespace wellbeingPage
         {
             if (!isPopupOpen)
             {
+                
                 HoverTestAv.Visibility = Visibility.Collapsed;
                 HoverTestInfo.Visibility = Visibility.Collapsed;
+                m.comment = MyHoverComments.Text;
+
             }
             
 
@@ -285,6 +321,15 @@ namespace wellbeingPage
         private void KeepPopup(object sender, RoutedEventArgs e)
         {
             isPopupOpen = !isPopupOpen;
+            
         }
+
+        private void YearChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Console.Write("cahcsac \n");
+            SetCurrentResults();
+        }
+
+      
     }
 }
