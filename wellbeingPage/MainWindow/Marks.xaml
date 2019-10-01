@@ -67,8 +67,6 @@
             <Canvas x:Name="Graph" Grid.Column="1" Margin="30,180,13,0">
                 
             </Canvas>
-            <Label Name="StartDate" Content="Jan" Canvas.Top="516" Foreground="White" Grid.Column="1" Margin="12,688,805,10"/>
-            <Label Name="EndDate" Content="Dec" Canvas.Top="516" Foreground="White" Canvas.Left="777" Margin="805,691,10,10" Grid.Column="1"/>
 
 
 
@@ -128,49 +126,10 @@
             ItemContainerStyle="{DynamicResource theComboBoxItem}" Background="#FFFAD200" BorderBrush="Black" Foreground="Black" Margin="20,0,0,27.5" HorizontalAlignment="Left" Width="174" Grid.Row="1" SelectedIndex="2" Height="42" SelectionChanged="YearChanged"
             >
 
-            <ComboBoxItem>2017</ComboBoxItem>
-            <ComboBoxItem>2018</ComboBoxItem>
-            <ComboBoxItem>2019</ComboBoxItem>
+            
 
         </ComboBox>
-        <Button Style="{StaticResource Expand}" x:Name="helpButton" Margin="230,0,0,9.5" Foreground="{x:Null}"  Cursor="Hand" Grid.Row="1" HorizontalAlignment="Left" Width="78" Height="80" VerticalAlignment="Bottom">
-            <Button.Template>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Grid>
-                        <Ellipse Fill="#FFFAD200" Width="Auto" Height="Auto" Margin="6,10,4,5"/>
-
-
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <Rectangle Fill="Black" HorizontalAlignment="Left" Height="6" Stroke="#00000000" VerticalAlignment="Top" Margin="22,25,0,0" Grid.Row="0" Width="35" RadiusX="3" RadiusY="3"/>
-                        <Rectangle Fill="Black" HorizontalAlignment="Left" Height="36" Stroke="#00000000" VerticalAlignment="Top" Margin="22,25,0,0" Grid.Row="0" Width="6" RadiusX="3" RadiusY="3"/>
-                        <Rectangle Fill="Black" HorizontalAlignment="Left" Height="6" Stroke="#00000000" VerticalAlignment="Top" Margin="22,55,0,0" Grid.Row="0" Width="35" RadiusX="3" RadiusY="3"/>
-                        <Rectangle Fill="Black" HorizontalAlignment="Left" Height="36" Stroke="#00000000" VerticalAlignment="Top" Margin="51,25,0,0" Grid.Row="0" Width="6" RadiusX="3" RadiusY="3"/>
-                        <Ellipse Fill="#FFFAD200" Width="Auto" Height="Auto" Margin="26,28,10,43" RenderTransformOrigin="0.5,0.5">
-                            <Ellipse.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform/>
-                                    <SkewTransform/>
-                                    <RotateTransform Angle="-42.589"/>
-                                    <TranslateTransform/>
-                                </TransformGroup>
-                            </Ellipse.RenderTransform>
-                        </Ellipse>
-                        <Ellipse Fill="Black" Width="Auto" Height="Auto" Margin="30,29,10,47" RenderTransformOrigin="0.5,0.5">
-                            <Ellipse.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform/>
-                                    <SkewTransform/>
-                                    <RotateTransform Angle="-42.709"/>
-                                    <TranslateTransform/>
-                                </TransformGroup>
-                            </Ellipse.RenderTransform>
-                        </Ellipse>
-                    </Grid>
-                </ControlTemplate>
-            </Button.Template>
-
-        </Button>
-
+        
     </Grid>
 
 </Page>

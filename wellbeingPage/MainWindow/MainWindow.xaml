@@ -36,6 +36,45 @@
         </Button>
         <TextBlock  x:Name="LastUp" Visibility="Collapsed" HorizontalAlignment="Left" TextWrapping="Wrap"  Text="Last Updated: never" VerticalAlignment="Top" Margin="10,94,0,0" Foreground="#FF797979" FontSize="16"/>
 
+        <Button Style="{StaticResource Expand}" x:Name="EditButton" Visibility="Collapsed" Margin="230,0,0,9.5" Foreground="{x:Null}"  Cursor="Hand" Grid.Row="1" HorizontalAlignment="Left" Width="78" Height="80" VerticalAlignment="Bottom" Click="CreateEditMarksPopup">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Ellipse Fill="#FFFAD200" Width="Auto" Height="Auto" Margin="6,10,4,5"/>
+
+
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Rectangle Fill="Black" HorizontalAlignment="Left" Height="6" Stroke="#00000000" VerticalAlignment="Top" Margin="22,25,0,0" Grid.Row="0" Width="35" RadiusX="3" RadiusY="3"/>
+                        <Rectangle Fill="Black" HorizontalAlignment="Left" Height="36" Stroke="#00000000" VerticalAlignment="Top" Margin="22,25,0,0" Grid.Row="0" Width="6" RadiusX="3" RadiusY="3"/>
+                        <Rectangle Fill="Black" HorizontalAlignment="Left" Height="6" Stroke="#00000000" VerticalAlignment="Top" Margin="22,55,0,0" Grid.Row="0" Width="35" RadiusX="3" RadiusY="3"/>
+                        <Rectangle Fill="Black" HorizontalAlignment="Left" Height="36" Stroke="#00000000" VerticalAlignment="Top" Margin="51,25,0,0" Grid.Row="0" Width="6" RadiusX="3" RadiusY="3"/>
+                        <Ellipse Fill="#FFFAD200" Width="Auto" Height="Auto" Margin="26,28,10,43" RenderTransformOrigin="0.5,0.5">
+                            <Ellipse.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="-42.589"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Ellipse.RenderTransform>
+                        </Ellipse>
+                        <Ellipse Fill="Black" Width="Auto" Height="Auto" Margin="30,29,10,47" RenderTransformOrigin="0.5,0.5">
+                            <Ellipse.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="-42.709"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Ellipse.RenderTransform>
+                        </Ellipse>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+
+        </Button>
+
+
         <Button Style="{StaticResource Expand}" x:Name="MenuButton" Width="80" Height="80" Margin="0,20,40,0" Foreground="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Top" Click="MenuButtonClicked" Cursor="Hand">
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -62,6 +101,8 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
+
+
 
             <Rectangle x:Name="MenuPopupRectangle" Fill="#FF1F1F1F" HorizontalAlignment="Center" Height="600" VerticalAlignment="Center" Width="1000" Margin="0" RadiusX="50" RadiusY="50"/>
             <StackPanel HorizontalAlignment="Center" Height="560" VerticalAlignment="Center" Width="1346" Margin="0,40,0,0">
@@ -159,5 +200,65 @@
 
             </StackPanel>
         </Grid>
+        <Grid x:Name="EditMarks" Visibility="Visible">
+
+            <Button x:Name="DarknessButtonScreen2" Background="#CC3C3C3C" Click="DarknessButtonScreenClicked" Margin="0,0,0,-17.5">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Rectangle Fill="#CC3C3C3C"/>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+
+            </Button>
+
+            <Rectangle x:Name="EditPopupRectangle" Fill="#FF1F1F1F" HorizontalAlignment="Center" Height="600" VerticalAlignment="Center" Width="1000" Margin="0" RadiusX="50" RadiusY="50"/>
+            <Rectangle Fill="#FF181818" Stroke="#FF191919" Margin="155,121,504,150.5"/>
+            <ListBox x:Name="SubjectList" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  AlternationCount="2"  ScrollViewer.CanContentScroll="False" Background="{x:Null}" BorderBrush="{x:Null}" Margin="150,121,777,150.5" SelectionChanged="SubjectChanged" SelectedIndex="0" FontSize="10" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}"  TextWrapping="Wrap"  FontSize="38" Foreground="White" FontFamily="Consolas" Width="Auto"/>
+
+                    </DataTemplate>
+
+                </ListBox.ItemTemplate>
+
+            </ListBox>
+            <Button x:Name="AddSubjects" Style="{StaticResource Expand}" Width="80" Height="80" Foreground="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Bottom" BorderBrush="Black" Background="Black" Click="AddSub" Margin="0,0,858,80.5">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <Rectangle Fill="White" HorizontalAlignment="Left" Height="6" Stroke="#00000000" VerticalAlignment="Top" Margin="22.5,37,0,0" Grid.Row="1" Width="35" RadiusX="3" RadiusY="3"/>
+                            <Rectangle Fill="White" HorizontalAlignment="Left" Height="35" Stroke="#00000000" VerticalAlignment="Top" Margin="37,22.5,0,0" Grid.Row="1" Width="6" RadiusX="3" RadiusY="3"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <ListBox x:Name="MarksList" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  AlternationCount="2"  ScrollViewer.CanContentScroll="False" Background="{x:Null}" BorderBrush="{x:Null}" Margin="423,121,504,150.5" SelectedIndex="0" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding name}"  TextWrapping="Wrap"  FontSize="38" Foreground="White" FontFamily="Consolas" Width="Auto"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <TextBox HorizontalAlignment="Left" Height="68" Margin="747,191,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="281"/>
+            <DatePicker HorizontalAlignment="Left" Margin="816,351,0,0" VerticalAlignment="Top" Height="25" Width="129"/>
+            <Button x:Name="AddMarks" Style="{StaticResource Expand}" Width="80" Height="80" Foreground="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Bottom" BorderBrush="Black" Background="Black" Click="AddMrk" Margin="0,0,625,80.5">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <Rectangle Fill="White" HorizontalAlignment="Left" Height="6" Stroke="#00000000" VerticalAlignment="Top" Margin="22.5,37,0,0" Grid.Row="1" Width="35" RadiusX="3" RadiusY="3"/>
+                            <Rectangle Fill="White" HorizontalAlignment="Left" Height="35" Stroke="#00000000" VerticalAlignment="Top" Margin="37,22.5,0,0" Grid.Row="1" Width="6" RadiusX="3" RadiusY="3"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+        </Grid>
+
     </Grid>
 </Window>

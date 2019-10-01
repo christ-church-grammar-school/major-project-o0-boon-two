@@ -95,7 +95,7 @@ namespace wellbeingPage
                     mrk.date = Convert.ToDateTime(line[line.Count - 7]);
                     mrk.subject = sub.Name;
                     var subset = line.ToList().GetRange(0, line.Count - 7);
-                    mrk.name = String.Join(" ", subset);
+                    mrk.name = String.Join(" ", subset) + "\n";
          
                     sub.marks.Add(mrk);
                         
@@ -300,7 +300,9 @@ namespace wellbeingPage
                     ((MainWindow)Application.Current.MainWindow).ReloadRotater.Angle = 0;
                     if (ShowError)
                     {
-                        MessageBox.Show("There was an error connecting to Live Marks. Please ensure that you:\n\n    - Are connected to the internet\n\n    - Have inputted the correct credentials (change in settings)\n\n    - Do not exit the Chrome window\n\n\n And then try again.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("There was an error connecting to Live Marks. Please ensure that you:\n\n   " +
+                            " - Are connected to the internet\n\n    - Have inputted the correct credentials (change in settings)\n\n    " +
+                            "- Do not exit the Chrome window\n\n\n And then try again.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 });
 

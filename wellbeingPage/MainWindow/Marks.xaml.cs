@@ -66,7 +66,9 @@ namespace wellbeingPage
 
 
         public static ObservableCollection<Subject> SubjectResults = new ObservableCollection<Subject>();
-        ObservableCollection<Subject> CurrentResults = new ObservableCollection<Subject>();
+        public static ObservableCollection<Subject> CurrentResults = new ObservableCollection<Subject>();
+        ObservableCollection<string> Years = new ObservableCollection<string>();
+        
 
         public bool isPopupOpen = false;
         Subject display;
@@ -74,6 +76,8 @@ namespace wellbeingPage
         public Marks()
         {
             InitializeComponent();
+
+
 
             OverallRes.Visibility = Visibility.Visible;
             if (SubjectResults.Count != 0)
@@ -83,60 +87,29 @@ namespace wellbeingPage
             
             TitleGrade.Content = "";
 
-            SetCurrentResults();
+            Years.Add(DateTime.Now.Year.ToString());
+            foreach (Subject sub in SubjectResults)
+            {
+                if (!Years.Contains(sub.Year))
+                {
+                    Years.Add(sub.Year);
+                }
+            }
+
+
+
+            YearSelect.ItemsSource = Years;
+            if(Years.Count != 0) // if they have at least one subject
+            {
+                YearSelect.SelectedIndex = 0;
+
+                SetCurrentResults();
+            }
+            
 
             SubjectList.ItemsSource = CurrentResults;
             OverallRes.ItemsSource = CurrentResults;
-
-            DateTime sta = DateTime.Now;
-            DateTime end =DateTime.Now;
-
-            foreach (Subject sub in CurrentResults)
-            {
-                foreach (Mark mrk in sub.marks)
-                {
-                    if (mrk.date < sta)
-                    {
-                        sta = mrk.date;
-                    }
-                    if (mrk.date > end)
-                    {
-                        end = mrk.date;
-                    }
-                }
-            }
-
-            StartDate.Content = sta.Month.ToString();
-            EndDate.Content = end.Month.ToString();
-
-            List<PointCollection> Points = new List<PointCollection>();
-
-           
-            foreach (Subject sub in CurrentResults)
-            {
-                var pol = new PointCollection();
-                pol.Clear();
-                foreach (Mark mrk in sub.marks)
-                {
-                    pol.Add(new Point( ( mrk.date.Month - sta.Month + mrk.date.Day/30)*120, 600 - mrk.percent *600));
-                }
-                Points.Add(pol);
-            }
-            var lis = new List<System.Windows.Media.SolidColorBrush>() { Brushes.AliceBlue,Brushes.Aqua,Brushes.LightSteelBlue, Brushes.LimeGreen, Brushes.Purple,Brushes.Tomato, Brushes.AliceBlue, Brushes.Aqua, Brushes.LightSteelBlue, Brushes.LimeGreen, Brushes.Purple, Brushes.Tomato };
-            foreach(var a in Points)
-            {
-                Polyline MyLline = new Polyline
-                {
-                    StrokeThickness = 3,
-                    Stroke = lis[0],
-                    
-                    Points = a
-                };
-                lis.RemoveAt(0);
-                Console.WriteLine("aaaaaaaaaa");
-                Graph.Children.Add(MyLline);
-            }
-
+            
         }
 
         void SetCurrentResults()
@@ -369,8 +342,7 @@ namespace wellbeingPage
         private void KeepPopup(object sender, RoutedEventArgs e)
         {
             isPopupOpen = !isPopupOpen;
-            
-        }
+                  }
 
         private void YearChanged(object sender, SelectionChangedEventArgs e)
         {

@@ -65,7 +65,7 @@ namespace wellbeingPage
             milliseconds.Tick += Rot;
             milliseconds.Start();
 
-
+            SubjectList.ItemsSource = Marks.CurrentResults;
         }
         void Rot(object sender, object e)
         {
@@ -100,6 +100,7 @@ namespace wellbeingPage
         private void DarknessButtonScreenClicked(object sender, RoutedEventArgs e)
         {
             MenuPopup.Visibility = Visibility.Collapsed;
+            EditMarks.Visibility = Visibility.Collapsed;
         }
 
         private void MenuButtonClicked(object sender, RoutedEventArgs e)
@@ -139,6 +140,7 @@ namespace wellbeingPage
             MarksSection.Visibility = Visibility.Collapsed;
             LastUp.Visibility = Visibility.Visible;
             ReloadButton.Visibility = Visibility.Visible;
+            EditButton.Visibility = Visibility.Visible;
            
             MainFrame.Content = new Marks();
         }
@@ -149,7 +151,7 @@ namespace wellbeingPage
             HomeSection.Visibility = Visibility.Collapsed;
             MainFrame.Content = new Home();
         }
-        void ShowAllPages()
+        void ShowAllPages() // on the menu popup options
         {
             LastUp.Visibility = Visibility.Collapsed;
             ReloadButton.Visibility = Visibility.Collapsed;
@@ -159,6 +161,7 @@ namespace wellbeingPage
             WellbeingSection.Visibility = Visibility.Visible;
             GymSection.Visibility = Visibility.Visible;
             MarksSection.Visibility = Visibility.Visible;
+            EditButton.Visibility = Visibility.Collapsed;
         }
 
         private void MainWinClosed(object sender, EventArgs e)
@@ -179,8 +182,39 @@ namespace wellbeingPage
             ReloadButton.IsEnabled = false;
         }
 
-        
+        private void CreateEditMarksPopup(object sender, RoutedEventArgs e)
+        {
+            EditMarks.Visibility = Visibility.Visible;
+        }
 
+        private void SubjectChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                MarksList.ItemsSource = Marks.CurrentResults[SubjectList.SelectedIndex].marks;
+            }
+            catch
+            {
+
+            }
+            
+        }
+
+        private void AddSub(object sender, RoutedEventArgs e)
+        {
+            Marks.CurrentResults.Add(new Subject()
+            {
+                Name = "Untitled\n",
+                Year = DateTime.Now.Year.ToString(),
+                
+            });
+
+        }
+
+        private void AddMrk(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
 
