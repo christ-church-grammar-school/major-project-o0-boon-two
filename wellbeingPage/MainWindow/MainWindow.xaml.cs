@@ -187,11 +187,12 @@ namespace wellbeingPage
             EditMarks.Visibility = Visibility.Visible;
         }
 
-        private void SubjectChanged(object sender, SelectionChangedEventArgs e)
+        private void SubjectChanged(object sender, RoutedEventArgs e)
         {
             try
             {
                 MarksList.ItemsSource = Marks.CurrentResults[SubjectList.SelectedIndex].marks;
+                MarksList.ScrollIntoView(MarksList.Items[0]);
             }
             catch
             {
@@ -213,7 +214,28 @@ namespace wellbeingPage
 
         private void AddMrk(object sender, RoutedEventArgs e)
         {
+            
+            Marks.CurrentResults[SubjectList.SelectedIndex].marks.Add(new Mark() {
+                name = "untitled\n",
+                
+            });
+            MarksList.ItemsSource = null;                                                             //update source with new item
+            MarksList.ItemsSource = Marks.CurrentResults[SubjectList.SelectedIndex].marks;
 
+            // MarksList.ItemsSource = Marks.CurrentResults[SubjectList.SelectedIndex].marks;
+        }
+
+        private void MarkChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Mark mrk = Marks.CurrentResults[SubjectList.SelectedIndex].marks[MarksList.SelectedIndex];
+            Subject sub = Marks.CurrentResults[SubjectList.SelectedIndex];
+
+            SubName.Text = sub.Name;
+            SubYear.Text = sub.Year;
+
+            MarkName.Text = mrk.name;
+            MarkDate.Text = mrk.date.ToString();
+            MarkMark.Text = mrk.mark;
         }
     }
 }

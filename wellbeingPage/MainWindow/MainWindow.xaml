@@ -219,7 +219,7 @@
             <ListBox x:Name="SubjectList" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  AlternationCount="2"  ScrollViewer.CanContentScroll="False" Background="{x:Null}" BorderBrush="{x:Null}" Margin="150,121,777,150.5" SelectionChanged="SubjectChanged" SelectedIndex="0" FontSize="10" >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Name}"  TextWrapping="Wrap"  FontSize="38" Foreground="White" FontFamily="Consolas" Width="Auto"/>
+                        <TextBlock Text="{Binding Name}"  TextWrapping="Wrap"  FontSize="28" Foreground="White" FontFamily="Consolas" Width="Auto"/>
 
                     </DataTemplate>
 
@@ -230,6 +230,7 @@
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
+                            <Ellipse Fill="#00000004" Margin="17,16,15,16"/>
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             <Rectangle Fill="White" HorizontalAlignment="Left" Height="6" Stroke="#00000000" VerticalAlignment="Top" Margin="22.5,37,0,0" Grid.Row="1" Width="35" RadiusX="3" RadiusY="3"/>
                             <Rectangle Fill="White" HorizontalAlignment="Left" Height="35" Stroke="#00000000" VerticalAlignment="Top" Margin="37,22.5,0,0" Grid.Row="1" Width="6" RadiusX="3" RadiusY="3"/>
@@ -237,19 +238,20 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <ListBox x:Name="MarksList" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  AlternationCount="2"  ScrollViewer.CanContentScroll="False" Background="{x:Null}" BorderBrush="{x:Null}" Margin="423,121,504,150.5" SelectedIndex="0" >
+            <ListBox x:Name="MarksList" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  AlternationCount="2"  ScrollViewer.CanContentScroll="False" Background="{x:Null}" BorderBrush="{x:Null}" Margin="423,121,504,150.5" SelectedIndex="0" SelectionChanged="MarkChanged" >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding name}"  TextWrapping="Wrap"  FontSize="38" Foreground="White" FontFamily="Consolas" Width="Auto"/>
+                        <TextBlock Text="{Binding name}"  TextWrapping="Wrap"  FontSize="28" Foreground="White" FontFamily="Consolas" Width="Auto"/>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <TextBox HorizontalAlignment="Left" Height="68" Margin="747,191,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="281"/>
-            <DatePicker HorizontalAlignment="Left" Margin="816,351,0,0" VerticalAlignment="Top" Height="25" Width="129"/>
+            <TextBox x:Name="SubName" HorizontalAlignment="Left" Height="68" Margin="733,121,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="323" Background="{x:Null}" Foreground="#FFD1D1D1" FontSize="22"/>
+            <DatePicker x:Name="MarkDate" HorizontalAlignment="Left" Margin="733,368,0,0" VerticalAlignment="Top" Height="25" Width="129"/>
             <Button x:Name="AddMarks" Style="{StaticResource Expand}" Width="80" Height="80" Foreground="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Bottom" BorderBrush="Black" Background="Black" Click="AddMrk" Margin="0,0,625,80.5">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
+                            <Ellipse Fill="#00000004" Margin="17,16,15,16"/>
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             <Rectangle Fill="White" HorizontalAlignment="Left" Height="6" Stroke="#00000000" VerticalAlignment="Top" Margin="22.5,37,0,0" Grid.Row="1" Width="35" RadiusX="3" RadiusY="3"/>
                             <Rectangle Fill="White" HorizontalAlignment="Left" Height="35" Stroke="#00000000" VerticalAlignment="Top" Margin="37,22.5,0,0" Grid.Row="1" Width="6" RadiusX="3" RadiusY="3"/>
@@ -257,6 +259,9 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
+            <TextBox x:Name="SubYear"  HorizontalAlignment="Left" Height="68" Margin="733,214,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="323" Background="{x:Null}" Foreground="#FFD1D1D1" FontSize="22"/>
+            <TextBox x:Name="MarkName" HorizontalAlignment="Left" Height="68" Margin="733,426,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="323" Background="{x:Null}" Foreground="#FFD1D1D1" FontSize="22"/>
+            <TextBox x:Name="MarkMark" HorizontalAlignment="Left" Height="68" Margin="733,499,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="323" Background="{x:Null}" Foreground="#FFD1D1D1" FontSize="22"/>
 
         </Grid>
 
