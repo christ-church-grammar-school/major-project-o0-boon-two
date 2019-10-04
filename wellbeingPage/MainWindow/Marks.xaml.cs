@@ -108,8 +108,11 @@ namespace wellbeingPage
             
 
             SubjectList.ItemsSource = CurrentResults;
-            OverallRes.ItemsSource = CurrentResults;
-            
+            foreach(var sub in CurrentResults)
+            {
+                AddToOverall(sub.Name, sub.YourAverage, sub.EveryoneAverage);
+            }
+             
         }
 
         void SetCurrentResults()
@@ -184,6 +187,7 @@ namespace wellbeingPage
                 DrawGraph();
             }
         }
+
         void DrawGraph()
         {
             Subject sub = display; 
@@ -326,23 +330,22 @@ namespace wellbeingPage
             }
 
         }
+
         private void GradeStopHover(object sender, MouseEventArgs e)
         {
             if (!isPopupOpen)
             {
-                
                 HoverTestAv.Visibility = Visibility.Collapsed;
                 HoverTestInfo.Visibility = Visibility.Collapsed;
                 m.comment = MyHoverComments.Text;
-
             }
             
-
         }
+
         private void KeepPopup(object sender, RoutedEventArgs e)
         {
             isPopupOpen = !isPopupOpen;
-                  }
+        }
 
         private void YearChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -355,10 +358,89 @@ namespace wellbeingPage
             TitleSubject.Content = "Overall";
             TitleGrade.Content = "";
 
-            Console.Write("cahcsac \n");
+            
             SetCurrentResults();
         }
 
-      
+        private void SortYourAverage(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void AddToOverall(string name, int yourAv, int ClassAv)
+        {
+            var grid = new Grid() {
+                Height = 196,
+                Width = 128
+            };
+            var SubName = new TextBlock()
+            {
+                TextWrapping = TextWrapping.Wrap,
+                Text = name,
+                VerticalAlignment = VerticalAlignment.Top,
+                FontFamily = ResultsLabel.FontFamily,
+                Foreground = Brushes.White,
+                Height = 66,
+                TextAlignment = TextAlignment.Center,
+                FontSize = 16
+            };
+            var SubAv = new TextBlock()
+            {
+                TextWrapping = TextWrapping.Wrap,
+                Text = yourAv.ToString(),
+                FontFamily = ResultsLabel.FontFamily,
+                VerticalAlignment = VerticalAlignment.Top,
+                Margin = new Thickness(0,66,0,0),
+                Height = 66,
+                TextAlignment = TextAlignment.Center,
+                FontSize = 24,
+                
+            };
+
+            if (yourAv <= 50)
+                SubAv.Foreground = new SolidColorBrush(Color.FromRgb(181, 0, 0));
+            else if (yourAv <= 75)
+                SubAv.Foreground = new SolidColorBrush(Color.FromRgb(181, Convert.ToByte((181 / 25) * (yourAv - 50)), 0));
+            else
+                try
+                {
+                    SubAv.Foreground = new SolidColorBrush(Color.FromRgb(Convert.ToByte(181 - (181 / 25) * (yourAv - 75)), 181, 0));
+                }
+                catch
+                {
+                    SubAv.Foreground = new SolidColorBrush(Color.FromRgb(0, 181, 0));
+                }
+
+
+            var ClassAvText = new TextBlock()
+            {
+                TextWrapping = TextWrapping.Wrap,
+                Text = ClassAv.ToString(),
+                FontFamily = ResultsLabel.FontFamily,
+                VerticalAlignment = VerticalAlignment.Top,
+                Foreground = Brushes.White,
+                Height = 66,
+                Margin = new Thickness(0, 110, 0, 0),
+                TextAlignment = TextAlignment.Center,
+                FontSize = 24
+            };
+            var Dif = new TextBlock()
+            {
+                TextWrapping = TextWrapping.Wrap,
+                Text = (yourAv - ClassAv).ToString(),
+                FontFamily = ResultsLabel.FontFamily,
+                VerticalAlignment = VerticalAlignment.Top,
+                Foreground = Brushes.White,
+                Height = 66,
+                Margin = new Thickness(0, 154, 0, 0),
+                TextAlignment = TextAlignment.Center,
+                FontSize = 24
+            };
+            grid.Children.Add(SubName);
+            grid.Children.Add(SubAv);
+            grid.Children.Add(ClassAvText);
+            grid.Children.Add(Dif);
+
+            OverallList.Children.Add(grid);
+        }
     }
 }

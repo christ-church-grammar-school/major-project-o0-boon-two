@@ -13,7 +13,7 @@
     <Grid Background="#FF1F1F1F">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="383*"/>
-            
+
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
@@ -49,23 +49,12 @@
             </Rectangle>
 
             <GridSplitter DragDelta="SizeChangedd" Grid.Column="1" HorizontalAlignment="Left" Width="7" Background="#FF282828" Foreground="{x:Null}"/>
-            <ListBox x:Name="OverallRes" Grid.Column="1" ScrollViewer.VerticalScrollBarVisibility="Disabled" AlternationCount="-1" ScrollViewer.CanContentScroll="False" Background="{x:Null}" BorderBrush="{x:Null}" Margin="802,61,10,0" SelectionChanged="changed" IsManipulationEnabled="True" Height="250" VerticalAlignment="Top">
-                <ListBox.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal"/>
-                    </ItemsPanelTemplate>
-                </ListBox.ItemsPanel>
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding YourAverage}" TextWrapping="Wrap"  FontSize="38" Foreground="White" FontFamily="Consolas" Width="100"> %</TextBlock>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+            
             <Label x:Name="TitleSubject" Grid.Column="1" Content="" Margin="0,23,0,0" FontFamily="Consolas" FontSize="48" Foreground="White" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Height="66" VerticalAlignment="Top" Width="857"/>
             <Label x:Name="TitleGrade" Grid.Column="1" Content="" Margin="0,89,0,0" FontFamily="Consolas" FontSize="78" Foreground="White" HorizontalContentAlignment="Center" Background="{x:Null}" Width="857" Height="110" VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Bold"/>
 
             <Canvas x:Name="Graph" Grid.Column="1" Margin="30,180,13,10">
-                
+
             </Canvas>
 
 
@@ -98,7 +87,34 @@
                 <TextBlock Name="AvHoverWeight" Margin="0,194,0,0" TextWrapping="Wrap" Text="weighting: 5.00%" VerticalAlignment="Top" FontSize="36" Height="61" TextAlignment="Center" FontWeight="Bold" Foreground="#FF434343"/>
                 <TextBlock Name="AvHoverDate" Margin="10,260,-10,0" TextWrapping="Wrap" Text="Date&#x9;: 5.00%" VerticalAlignment="Top" FontSize="36" Height="61" TextAlignment="Center" FontWeight="Bold" Foreground="#FF434343"/>
             </Grid>
+            <Grid x:Name="OverallRes" Grid.Column="1" Margin="0,0,0,-1">
+                <ScrollViewer  VerticalAlignment="Top" Grid.Column="1" Margin="179,198,61,0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                <StackPanel Name="OverallList" HorizontalAlignment="Left"  VerticalAlignment="Top"  Orientation="Horizontal" >
 
+        
+                    <Grid Height="196"  Width="128">
+                        <ContentPresenter/>
+                        <TextBlock TextWrapping="Wrap" Text="advance software development" VerticalAlignment="Top" Foreground="White" FontFamily="Consolas" Height="66" TextAlignment="Center" FontSize="16" />
+                        <TextBlock TextWrapping="Wrap" Text="80%" VerticalAlignment="Top" Foreground="White" FontSize="24" FontFamily="Consolas" Height="44" TextAlignment="Center" Margin="0,66,0,0" />
+                        <TextBlock TextWrapping="Wrap" Text="70%" VerticalAlignment="Top" Foreground="White" FontSize="24" FontFamily="Consolas" Height="44" TextAlignment="Center" Margin="0,110,0,0" />
+                        <TextBlock TextWrapping="Wrap" Text="10%" VerticalAlignment="Top" Foreground="White" FontSize="24" FontFamily="Consolas" Height="44" TextAlignment="Center" Margin="0,154,0,0" />
+                    </Grid>
+                    
+                    
+                    
+                    
+                     
+                    
+
+
+                </StackPanel>
+            </ScrollViewer>
+            <Button Content="Your Average" Grid.Column="1" HorizontalAlignment="Left" Margin="69,270,0,0" VerticalAlignment="Top" Width="104" Height="22" Click="SortYourAverage"/>
+            <Button Content="Class Average" Grid.Column="1" HorizontalAlignment="Left" Margin="69,313,0,0" VerticalAlignment="Top" Width="104" Height="22"/>
+            <Button Content="Difference" Grid.Column="1" HorizontalAlignment="Left" Margin="69,359,0,0" VerticalAlignment="Top" Width="104" Height="23"/>
+
+            </Grid>
+            
 
 
 
@@ -126,10 +142,10 @@
             ItemContainerStyle="{DynamicResource theComboBoxItem}" Background="#FFFAD200" BorderBrush="Black" Foreground="Black" Margin="20,0,0,27.5" HorizontalAlignment="Left" Width="174" Grid.Row="1" SelectedIndex="2" Height="42" SelectionChanged="YearChanged"
             >
 
-            
+
 
         </ComboBox>
-        
+
     </Grid>
 
 </Page>

@@ -185,19 +185,31 @@ namespace wellbeingPage
         private void CreateEditMarksPopup(object sender, RoutedEventArgs e)
         {
             EditMarks.Visibility = Visibility.Visible;
-        }
-
-        private void SubjectChanged(object sender, RoutedEventArgs e)
-        {
             try
             {
-                MarksList.ItemsSource = Marks.CurrentResults[SubjectList.SelectedIndex].marks;
-                MarksList.ScrollIntoView(MarksList.Items[0]);
+                SubjectList.SelectedIndex = 0;
             }
             catch
             {
 
             }
+        }
+
+        private void SubjectChanged(object sender, RoutedEventArgs e)
+        {
+            
+            try
+            {
+                MarksList.ItemsSource = Marks.CurrentResults[SubjectList.SelectedIndex].marks;
+                MarksList.ScrollIntoView(MarksList.Items[0]);
+            }
+            catch { }
+            try
+            {
+                MarksList.SelectedIndex = 0;
+                MarksList.ScrollIntoView(MarksList.Items[0]);
+            }
+            catch { }
             
         }
 
@@ -214,29 +226,33 @@ namespace wellbeingPage
 
         private void AddMrk(object sender, RoutedEventArgs e)
         {
-            
+
             Marks.CurrentResults[SubjectList.SelectedIndex].marks.Add(new Mark() {
                 name = "untitled\n",
                 
             });
+
             MarksList.ItemsSource = null;                                                             //update source with new item
             MarksList.ItemsSource = Marks.CurrentResults[SubjectList.SelectedIndex].marks;
-
+            MarksList.SelectedIndex = MarksList.Items.Count - 1;
             // MarksList.ItemsSource = Marks.CurrentResults[SubjectList.SelectedIndex].marks;
         }
 
         private void MarkChanged(object sender, SelectionChangedEventArgs e)
         {
-            Mark mrk = Marks.CurrentResults[SubjectList.SelectedIndex].marks[MarksList.SelectedIndex];
-            Subject sub = Marks.CurrentResults[SubjectList.SelectedIndex];
+            try
+            {
+                Mark mrk = Marks.CurrentResults[SubjectList.SelectedIndex].marks[MarksList.SelectedIndex];
+                Subject sub = Marks.CurrentResults[SubjectList.SelectedIndex];
 
-            SubName.Text = sub.Name;
-            SubYear.Text = sub.Year;
+                SubName.Text = sub.Name;
+                SubYear.Text = sub.Year;
 
-            MarkName.Text = mrk.name;
-            MarkDate.Text = mrk.date.ToString();
-            MarkMark.Text = mrk.mark;
+                MarkName.Text = mrk.name;
+                MarkDate.Text = mrk.date.ToString();
+                MarkMark.Text = mrk.mark;
+            }
+            catch { }
         }
     }
 }
-
