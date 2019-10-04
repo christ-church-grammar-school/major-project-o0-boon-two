@@ -72,9 +72,16 @@
         <Rectangle x:Name="BackgroundScreen" Fill="#FF1F1F1F" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
         <TextBlock Style="{StaticResource textBlockListStyle}" FontSize="56" FontWeight="ExtraBold" Foreground="#FAD200" Margin="85,34,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="56" Width="Auto"> Workouts</TextBlock>
 
-        <Button x:Name="AddWorkout" Margin="1050,650,0,0" Click="AddWorkout_Click" Height="80" VerticalAlignment="Top" HorizontalAlignment="Left" Width="140">Add a new workout</Button>
+        <Button x:Name="AddWorkout" Margin="1050,650,10,70" Height="70" Width="130" Click="AddWorkout_Click">Add a new workout</Button>
 
-        <StackPanel x:Name="workoutsPanel" Background="Wheat" Margin="85,100,0,70" Orientation="Vertical" HorizontalAlignment="Left" Width="915"/>
+        <Border  x:Name="workoutsBorder" Margin="85,100,0,70" HorizontalAlignment="Left" Width="800">
+            <StackPanel x:Name="workoutsPanel" Background="Transparent" Width="800">
+                <ScrollBar Style="{StaticResource AScrollBar}">
+
+                </ScrollBar>
+            </StackPanel>
+        </Border>
+
 
         <Grid x:Name="AddWorkoutPopup" Visibility="Collapsed">
             <Rectangle x:Name="DarknessScreen" Fill="#CC3C3C3C"/>
@@ -96,7 +103,7 @@
 
         </Grid>
 
-        <Grid x:Name="AddExercisePopup" Visibility="visible" >
+        <Grid x:Name="AddExercisePopup" Visibility="Visible" >
             <Rectangle Fill="#CC3C3C3C"/>
 
             <Border x:Name="AddAnExerciseBottomBorder" BorderThickness="1" CornerRadius="0,0,50,50" BorderBrush="#00000000" Background="#FF1F1F1F" Height="470" VerticalAlignment="Center" HorizontalAlignment="Center" Width="1000" Margin="0,80,0,0">
@@ -116,7 +123,9 @@
                 <TextBlock x:Name="AddAnExerciseTextBlock" Text="Add Exercise" FontSize="72" FontFamily="Consolas" FontWeight="Bold" Margin="157,7,157,21" Foreground="White" RenderTransformOrigin="0.805,0.171"/>
             </Border>
             <Button x:Name="addEntered" Width="120" Height="80" Margin="915,360,165,360" IsEnabled="False" Content="Add to workout" Click="AddEntered_Click" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <Button x:Name="makeSuperset" Width="120" Height="80" Margin="915,510,165,210" IsEnabled="False" Content="Superset" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
+        <TextBlock Margin="431,40,0,0" Height="50" Width="375" TextAlignment="Center" FontWeight="Bold" FontSize="36" Background="#FAD200" TextWrapping="Wrap" Text="Delete Workout #" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <TextBox x:Name="workoutToDelete" Height="50" Width="65"  FontSize="36" MaxLength="2" Margin="792,40,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"></TextBox>
+        <Button x:Name="deleteWorkout" Height="50" Margin="838,40,0,0"  FontSize="24" HorizontalAlignment="Left" Width="193" VerticalAlignment="Top" Click="RemoveWorkout">Remove Workout</Button>
     </Grid>
 </Page>

@@ -20,24 +20,12 @@ namespace wellbeingPage
     /// </summary>
     public partial class Gym : Page
     {
-        //List<string> workout1 = new List<string>
-        //{
-        //    "DB Bench 3 x 12 50 kg 4011",
-        //    "DB Bench 3 x 12 50 kg 4011",
-        //    "DB Bench 3 x 12 50 kg 4011",
-        //    "DB Bench 3 x 12 50 kg 4011",
-        //    "DB Bench 3 x 12 50 kg 4011"
-        //};
-        //List<GymWorkout> workouts = new List<GymWorkout>();
-        //GymWorkout workout = new GymWorkout();
-        //Button addButton = new Button();
-        //StackPanel textblockPanel = new StackPanel();
-        //StackPanel textboxPanel = new StackPanel();
-
         List<Exercise> appendedWorkout = new List<Exercise>();
-        //Exercise newestWorkout = new Exercise();
         GymWorkout addIt = new GymWorkout();
-
+        ListObject listItem = new ListObject();
+        List<Border> setsOfListItems = new List<Border>();
+        List<Button> orderingDeleteExercise = new List<Button>();
+    //    List<int> numberList = new List<int>();
 
         public Gym()
         {
@@ -141,14 +129,29 @@ namespace wellbeingPage
             AddWorkoutPopup.Visibility = Visibility.Visible;
             ValidWorkout();
 
+
+
             TextBlock exerciseList = new TextBlock();
             
             exerciseList.Text = newestWorkout.exerciseName + " || " + newestWorkout.sets + " x "  + 
                                 newestWorkout.reps + " || " + newestWorkout.rest + "\n";
 
-            workoutStack.Children.Add(exerciseList);
+            Button deleteThisExercise = new Button();
+            deleteThisExercise.Height = 30;
+            deleteThisExercise.Width = 30;
+            deleteThisExercise.Content = "X";
+            deleteThisExercise.Margin = new Thickness(0, -30,0,0);
+
+            orderingDeleteExercise.Add(deleteThisExercise);
             
+            //adding the exercise
+            workoutStack.Children.Add(exerciseList);
+
+            //adding a cross
+            workoutStack.Children.Add(deleteThisExercise);
         }
+
+       
 
         private void ClearText(object sender, KeyboardFocusChangedEventArgs e)
         {
@@ -182,30 +185,73 @@ namespace wellbeingPage
         private void addCurrentWorkout(object sender, RoutedEventArgs e)
         {
                 ValidWorkout();
-                TextBlock workoutList = new TextBlock();
-
+                TextBlock setList = new TextBlock();
+                TextBlock setTitle = new TextBlock(); 
                 
 
                 addIt.workoutName = namingWorkout.Text;
                 addIt.exercises = appendedWorkout;
-                workoutList.Text = addIt.workoutName;
-                workoutList.Text += "\n";
+                setTitle.Text = addIt.workoutName;
+                listItem.workoutTitle = setTitle;
+                
+                //to make it title cased
+                listItem.workoutTitle.FontSize = 36;
+
+                listItem.workoutList = setList;
+
                 for (int i = 0; i < addIt.exercises.Count; i++)
                 {
-                    workoutList.Text += addIt.exercises[i].exerciseName;
-                    workoutList.Text += "\n";
-                    workoutList.Text += addIt.exercises[i].sets;
-                    workoutList.Text += " X ";
-                    workoutList.Text += addIt.exercises[i].reps;
-                    workoutList.Text += " || ";
-                    workoutList.Text += addIt.exercises[i].rest;
-                    workoutList.Text += "\n";
+                    listItem.workoutList.Text += addIt.exercises[i].exerciseName;
+                    listItem.workoutList.Text += "\n";
+                    listItem.workoutList.Text += addIt.exercises[i].sets;
+                    listItem.workoutList.Text += " X ";
+                    listItem.workoutList.Text += addIt.exercises[i].reps;
+                    listItem.workoutList.Text += " || ";
+                    listItem.workoutList.Text += addIt.exercises[i].rest;
+                    listItem.workoutList.Text += "\n";
                 }
-   
-                workoutsPanel.Children.Add(workoutList);
-                AddWorkoutPopup.Visibility = Visibility.Collapsed;
-                namingWorkout.Text = "";
-                workoutStack.Children.Clear();
+
+               Border expandingRectangles = new Border();
+
+               Rectangle setRect = new Rectangle();
+          
+               listItem.workoutRect = setRect;
+       
+               listItem.workoutRect.Margin = new Thickness(0, 5, 0, 0);
+               Style style = this.FindResource("rectangleYellowStyle") as Style;
+               listItem.workoutRect.Height = (addIt.exercises.Count) * 32 + 55; //60, 50
+               listItem.workoutList.Margin = new Thickness(50, (-32 * addIt.exercises.Count) - 5, 0, 0); // -50
+               double x = listItem.workoutRect.Height; 
+               listItem.workoutTitle.Margin = new Thickness(50, -x + 5 , 0, 0); // -x + 10
+               listItem.workoutRect.Style = style;
+               StackPanel listItemStack = new StackPanel();
+
+               TextBlock itemNumber = new TextBlock();
+               itemNumber.Width = 100;
+               itemNumber.Height = 80;
+               itemNumber.Text = (setsOfListItems.Count + 1).ToString();
+               itemNumber.FontSize = 50;
+               itemNumber.Margin = new Thickness(300, -100, 0, 0);
+               //numberList.Add(Convert.ToInt32(itemNumber.Text));
+
+          //     listItem.itemID = itemNumber;
+               listItemStack.Children.Add(listItem.workoutRect);
+               listItemStack.Children.Add(listItem.workoutTitle);
+               listItemStack.Children.Add(listItem.workoutList);
+       //     listItemStack.Children.Add(itemNumber);
+             //  listItemStack.Children.Add(listItem.itemID);
+               expandingRectangles.Child = listItemStack;
+               style = this.FindResource("Expands") as Style;
+               expandingRectangles.Style = style;
+
+               workoutsPanel.Children.Add(expandingRectangles);
+               workoutsPanel.Children.Add(itemNumber);
+
+               AddWorkoutPopup.Visibility = Visibility.Collapsed;
+               namingWorkout.Text = "";
+               workoutStack.Children.Clear();
+
+               setsOfListItems.Add(expandingRectangles);   
         }
 
         private void resetText(object sender, TextChangedEventArgs e)
@@ -221,6 +267,33 @@ namespace wellbeingPage
             }
         }
 
+        private void RemoveWorkout(object sender, RoutedEventArgs e)
+        {
+            if (Convert.ToInt32(workoutToDelete.Text.ToString()) > 0 && Convert.ToInt32(workoutToDelete.Text.ToString()) <= setsOfListItems.Count)
+            {
+                setsOfListItems.RemoveAt(Convert.ToInt32(workoutToDelete.Text.ToString()) - 1);
+                deleteWorkout.Content = "Done!";
+                workoutsPanel.Children.Clear();
+                for (var i = 0; i < setsOfListItems.Count; i++)
+                {
+                    //setsOfListItems[i].Child[3].Text = (i+1).ToString();
+             //       worko
+                    workoutsPanel.Children.Add(setsOfListItems[i]);
+                    TextBlock itemNumber = new TextBlock();
+                    itemNumber.Width = 100;
+                    itemNumber.Height = 80;
+                    itemNumber.FontSize = 50;
+                    itemNumber.Margin = new Thickness(300, -100, 0, 0);
+                    itemNumber.Text = (i + 1).ToString();
+                    workoutsPanel.Children.Add(itemNumber);
+                }
+            }
+            else
+            {
+                deleteWorkout.Content = "Invalid!";
+            }
+
+        }
     }
     public class GymWorkout
     {
@@ -236,4 +309,15 @@ namespace wellbeingPage
         public string reps;
         public string rest;
     }
+
+    public class ListObject
+    {
+        //public Border expandingRectangles;
+        public TextBlock workoutList;
+        public TextBlock workoutTitle;
+        public Rectangle workoutRect;
+       // public TextBlock itemID;
+    }
+
+
 }

@@ -151,7 +151,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style TargetType="{x:Type ScrollBar}">
+    <Style x:Key="AScrollBar" TargetType="{x:Type ScrollBar}">
         <Setter Property="Stylus.IsFlicksEnabled"
             Value="false" />
         <Setter Property="Foreground"
