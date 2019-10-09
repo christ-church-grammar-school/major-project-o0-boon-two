@@ -24,8 +24,6 @@ namespace wellbeingPage
         GymWorkout addIt = new GymWorkout();
         ListObject listItem = new ListObject();
         List<Border> setsOfListItems = new List<Border>();
-        List<Button> orderingDeleteExercise = new List<Button>();
-    //    List<int> numberList = new List<int>();
 
         public Gym()
         {
@@ -129,26 +127,29 @@ namespace wellbeingPage
             AddWorkoutPopup.Visibility = Visibility.Visible;
             ValidWorkout();
 
-
-
             TextBlock exerciseList = new TextBlock();
-            
-            exerciseList.Text = newestWorkout.exerciseName + " || " + newestWorkout.sets + " x "  + 
-                                newestWorkout.reps + " || " + newestWorkout.rest + "\n";
+            TextBlock exerciseName = new TextBlock();
+            Rectangle yellowTextBack = new Rectangle();
 
-            Button deleteThisExercise = new Button();
-            deleteThisExercise.Height = 30;
-            deleteThisExercise.Width = 30;
-            deleteThisExercise.Content = "X";
-            deleteThisExercise.Margin = new Thickness(0, -30,0,0);
+            exerciseList.Text =  newestWorkout.reps + " (" + newestWorkout.sets + "x)\n" + newestWorkout.rest + "\n";
 
-            orderingDeleteExercise.Add(deleteThisExercise);
+            exerciseName.Text = newestWorkout.exerciseName;
             
+
+
+            // Style textblock = new Style();
+            Style textblock = this.FindResource("rectangleYellowStyle") as Style;
+            yellowTextBack.Style = textblock;
+            yellowTextBack.Height = 50;
+            exerciseName.Margin = new Thickness(80, -45, 0, 0);
+            exerciseList.Margin = new Thickness(80, -20, 0, 0);
+            yellowTextBack.Margin = new Thickness(50, 0, 0, 0);
+            //
+
             //adding the exercise
+            workoutStack.Children.Add(yellowTextBack);
+            workoutStack.Children.Add(exerciseName);
             workoutStack.Children.Add(exerciseList);
-
-            //adding a cross
-            workoutStack.Children.Add(deleteThisExercise);
         }
 
        

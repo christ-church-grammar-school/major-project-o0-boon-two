@@ -83,11 +83,11 @@
         </Border>
 
 
-        <Grid x:Name="AddWorkoutPopup" Visibility="Collapsed">
+        <Grid x:Name="AddWorkoutPopup" Visibility="Visible">
             <Rectangle x:Name="DarknessScreen" Fill="#CC3C3C3C"/>
 
             <Border x:Name="AddATaskTopBorder" BorderThickness="1" CornerRadius="50,50,0,0" BorderBrush="#00000000" Background="#FFFAD200" Margin="0,0,0,490" Height="100" VerticalAlignment="Center" HorizontalAlignment="Center" Width="1000">
-                <TextBlock x:Name="AddATaskTextBlock" Text="New Workout" FontSize="72" FontFamily="Consolas" FontWeight="Bold" Margin="30,0,0,0" Foreground="White"/>
+                <TextBlock x:Name="AddATaskTextBlock" Text="New Workout" FontSize="72" FontFamily="Consolas" FontWeight="Bold" Foreground="White" Margin="30,0,0,0"/>
             </Border>
 
             <Border x:Name="AddATaskBottomBorder" BorderThickness="1" CornerRadius="0,0,50,50" BorderBrush="#00000000" Background="#FF1F1F1F" Margin="0,80,0,0" HorizontalAlignment="Center" Width="1000" Height="470" VerticalAlignment="Center">
@@ -97,13 +97,15 @@
             <Button x:Name="addToWorkouts" IsEnabled="False" HorizontalAlignment="Center" Background="#f1f1f1" VerticalAlignment="Center" Margin="822,439,178,301" Width="200" Height="60" Click="addCurrentWorkout">Add to Workouts</Button>
             <TextBox x:Name="namingWorkout" TextWrapping="Wrap" TextChanged="resetText" AcceptsReturn="False" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Gray" Margin="650, 0, 0, 0" Width="200" Height="42" GotKeyboardFocus="ClearText" >Enter Workout Name</TextBox>
 
-            <TextBlock Style="{StaticResource textBlockListStyle}" FontSize="36" Foreground="#FAD200" Margin="0,0,630,353" VerticalAlignment="Center" HorizontalAlignment="Center" Height="42" Text="Current Workout" Width="300"/>
+            <TextBlock Style="{StaticResource textBlockListStyle}" FontSize="36" Foreground="#FAD200" Margin="121,210,773,552" VerticalAlignment="Center" HorizontalAlignment="Center" Height="38" Text="Current Workout" Width="306"/>
 
-            <StackPanel x:Name="workoutStack" Background="Wheat" Margin="0,115,325,0" HorizontalAlignment="Center" Width="656" Height="425" VerticalAlignment="Center"/>
+            <StackPanel x:Name="workoutStack" Background="Transparent" HorizontalAlignment="Center" Width="694" Margin="100,271,406,125" Height="404" VerticalAlignment="Center"/>
+
+
 
         </Grid>
 
-        <Grid x:Name="AddExercisePopup" Visibility="Visible" >
+        <Grid x:Name="AddExercisePopup" Visibility="Collapsed" >
             <Rectangle Fill="#CC3C3C3C"/>
 
             <Border x:Name="AddAnExerciseBottomBorder" BorderThickness="1" CornerRadius="0,0,50,50" BorderBrush="#00000000" Background="#FF1F1F1F" Height="470" VerticalAlignment="Center" HorizontalAlignment="Center" Width="1000" Margin="0,80,0,0">
