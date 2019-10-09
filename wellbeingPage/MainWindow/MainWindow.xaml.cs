@@ -101,6 +101,7 @@ namespace wellbeingPage
         {
             MenuPopup.Visibility = Visibility.Collapsed;
             EditMarks.Visibility = Visibility.Collapsed;
+            SettingsPopup.Visibility = Visibility.Collapsed;
         }
 
         private void MenuButtonClicked(object sender, RoutedEventArgs e)

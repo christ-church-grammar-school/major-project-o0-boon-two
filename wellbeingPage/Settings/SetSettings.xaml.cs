@@ -20,7 +20,7 @@ namespace wellbeingPage.Settings
     /// <summary>
     /// Interaction logic for SetSettings.xaml
     /// </summary>
-    public partial class SetSettings : Page
+    public partial class SetSettings : Page 
     {
         public SetSettings()
         {
@@ -30,6 +30,8 @@ namespace wellbeingPage.Settings
             var a = conn.Table<Preferences.Info>().ToList()[0];
             UserField.Text = a.Username;
             PassField.Password = a.Password;
+            
+            
             
         }
 

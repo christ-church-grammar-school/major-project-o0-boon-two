@@ -71,5 +71,10 @@ namespace wellbeingPage
             prefWin.SettingsFrame.Content = new SetSettings();
             
         }
+
+        private void changed(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
