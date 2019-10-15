@@ -764,11 +764,12 @@ namespace wellbeingPage
 
         public class TaskData
         {
-            public string taskname;
-            public string taskdate;
-            public string taskmonth;
-            public string taskyear;
-            public bool check;
+            [prima]
+            public string taskname { get; set; }
+            public string taskdate { get; set; }
+            public string taskmonth { get; set; }
+            public string taskyear { get; set; }
+            public bool check { get; set; }
         }
 
 
