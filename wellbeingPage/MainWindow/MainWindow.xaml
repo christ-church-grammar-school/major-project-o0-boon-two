@@ -293,73 +293,76 @@
 
             <Rectangle x:Name="settingsPopupRectangle" Fill="#FF232323" HorizontalAlignment="Center" Height="600" VerticalAlignment="Center" Width="1000" Margin="98,86,97,86.5" RadiusX="50" RadiusY="50" Grid.RowSpan="2"/>
 
-            <ListBox x:Name="PeriodList" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False" Background="#FF232323" BorderBrush="{x:Null}" Margin="148,112,151,193.5" SelectionChanged="changed" Foreground="{x:Null}">
-                <TextBlock HorizontalAlignment="Left"  FontSize="20" FontFamily="Consolas"  TextWrapping="Wrap" Text="Username" VerticalAlignment="Top" Foreground="White"/>
-                <TextBox x:Name="UserField" HorizontalAlignment="Left"  MaxLength="56" VerticalAlignment="Top" FontSize="36" FontFamily="Consolas" Background="#00000000" BorderBrush="#00C1C1C1" Width="496" BorderThickness="0" Foreground="#FFC6C6C6" />
+            <ScrollViewer x:Name="PeriodList" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False" Background="#FF232323" BorderBrush="{x:Null}" Margin="148,112,151,183.5"  Foreground="{x:Null}">
+                <StackPanel Height="477">
+                    <TextBlock HorizontalAlignment="Left"  FontSize="20" FontFamily="Consolas"  TextWrapping="Wrap" Text="Username" VerticalAlignment="Top" Foreground="White"/>
+                    <TextBox x:Name="UserField" HorizontalAlignment="Left"  MaxLength="56" VerticalAlignment="Top" FontSize="36" FontFamily="Consolas" Background="#00000000" BorderBrush="#00C1C1C1" Width="496" BorderThickness="0" Foreground="#FFC6C6C6" />
 
-                <Rectangle x:Name="Underline_Copy"  Fill="#FF1F1F1F" HorizontalAlignment="Left" Height="2" Stroke="White" VerticalAlignment="Top" Width="496" StrokeThickness="3"/>
-                <TextBlock HorizontalAlignment="Left"  FontSize="20" FontFamily="Consolas"  TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" Foreground="White"  TextAlignment="Center"/>
-                <PasswordBox x:Name="PassField" HorizontalAlignment="Left" MaxLength="56"  VerticalAlignment="Top" FontSize="36" FontFamily="Consolas" Background="#00000000" BorderBrush="#00C1C1C1" Width="496" BorderThickness="0" Foreground="#FFC6C6C6" />
-                <Rectangle x:Name="Underline_Copy1"  Fill="#FF1F1F1F" HorizontalAlignment="Left" Height="2" Stroke="White" VerticalAlignment="Top" Width="496" StrokeThickness="3"/>
-                <RadioButton Content="Remind for Homework"  Height="35" Width="158" Foreground="White" Background="#FFFAD200" BorderBrush="Black" BorderThickness="3" RenderTransformOrigin="0.5,0.5" Margin="80,40,0,0">
-                    <RadioButton.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform ScaleX="2" ScaleY="2"/>
-                            <SkewTransform/>
-                            <RotateTransform/>
-                            <RotateTransform/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </RadioButton.RenderTransform>
-                </RadioButton>
-                <Grid x:Name="HomeworkGrid"  Height="56" Width="284" IsEnabled="True" >
-                    <TextBlock HorizontalAlignment="Left"  FontSize="20" FontFamily="Consolas"  TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" Margin="0,10,0,0"><Run Text="Remind at: "/><InlineUIContainer>
+                    <Rectangle x:Name="Underline_Copy"  Fill="#FF1F1F1F" HorizontalAlignment="Left" Height="2" Stroke="White" VerticalAlignment="Top" Width="496" StrokeThickness="3"/>
+                    <TextBlock HorizontalAlignment="Left"  FontSize="20" FontFamily="Consolas"  TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" Foreground="White"  TextAlignment="Center"/>
+                    <PasswordBox x:Name="PassField" HorizontalAlignment="Left" MaxLength="56"  VerticalAlignment="Top" FontSize="36" FontFamily="Consolas" Background="#00000000" BorderBrush="#00C1C1C1" Width="496" BorderThickness="0" Foreground="#FFC6C6C6" />
+                    <Rectangle x:Name="Underline_Copy1"  Fill="#FF1F1F1F" HorizontalAlignment="Left" Height="2" Stroke="White" VerticalAlignment="Top" Width="496" StrokeThickness="3"/>
+                    <RadioButton Content="Remind for Homework"  Height="35" Width="158" Foreground="White" Background="#FFFAD200" BorderBrush="Black" BorderThickness="3" RenderTransformOrigin="0.5,0.5" Margin="80,40,0,0" GroupName="homework" IsChecked="True">
+                        <RadioButton.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleX="2" ScaleY="2"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </RadioButton.RenderTransform>
+                    </RadioButton>
+                    <Grid x:Name="HomeworkGrid"  Height="56" Width="284" IsEnabled="True" >
+                        <TextBlock HorizontalAlignment="Left"  FontSize="20" FontFamily="Consolas"  TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" Margin="0,10,0,0"><Run Text="Remind at: "/><InlineUIContainer>
                             <TextBox Height="23" TextWrapping="Wrap" Text="05" Width="28" Background="#FFFAD200" BorderBrush="{x:Null}" Foreground="Black"/>
 
                         </InlineUIContainer><Run Text=":"/><InlineUIContainer>
                             <TextBox Height="23" TextWrapping="Wrap" Text="30" Width="34" Background="#FFFAD200" BorderBrush="{x:Null}" Foreground="Black"/>
                         </InlineUIContainer></TextBlock>
-                    <ComboBox   FontSize="13" Style="{DynamicResource theComboBox}" Padding="15,5,15,5" HorizontalContentAlignment="Left" VerticalAlignment="Bottom" ItemContainerStyle="{DynamicResource theComboBoxItem}" Background="#FFFAD200" BorderBrush="Black" Foreground="Black" Margin="216,0,0,18" HorizontalAlignment="Left" Width="58" SelectedIndex="1" Height="28" SelectionChanged="YearChanged">
-                        <ComboBoxItem  Content="AM" Height="28"/>
-                        <ComboBoxItem Content="PM" Height="28"/>
-                    </ComboBox>
-                </Grid>
+                        <ComboBox   FontSize="13" Style="{DynamicResource theComboBox}" Padding="15,5,15,5" HorizontalContentAlignment="Left" VerticalAlignment="Bottom" ItemContainerStyle="{DynamicResource theComboBoxItem}" Background="#FFFAD200" BorderBrush="Black" Foreground="Black" Margin="216,0,0,18" HorizontalAlignment="Left" Width="58" SelectedIndex="1" Height="28" >
+                            <ComboBoxItem  Content="AM" Height="28"/>
+                            <ComboBoxItem Content="PM" Height="28"/>
+                        </ComboBox>
+                    </Grid>
 
 
-                <RadioButton Content="Remind for Assignments"  Height="35" Width="158" Foreground="White" Background="#FFFAD200" BorderBrush="Black" BorderThickness="3" RenderTransformOrigin="0.5,0.5" Margin="80,40,0,0" IsChecked="True">
-                    <RadioButton.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform ScaleX="2" ScaleY="2"/>
-                            <SkewTransform/>
-                            <RotateTransform/>
-                            <RotateTransform/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </RadioButton.RenderTransform>
-                </RadioButton>
-                <Grid x:Name="AssignmentGrid"  Height="56" Width="284" IsEnabled="True" >
-                    <TextBlock HorizontalAlignment="Left"  FontSize="20" FontFamily="Consolas"  TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" Margin="0,10,0,0"><Run Text="Remind at: "/><InlineUIContainer>
+                    <RadioButton Content="Remind for Assignments"  Height="35" Width="158" Foreground="White" Background="#FFFAD200" BorderBrush="Black" BorderThickness="3" RenderTransformOrigin="0.5,0.5" Margin="80,40,0,0" GroupName="asssignment" IsChecked="True">
+                        <RadioButton.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleX="2" ScaleY="2"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </RadioButton.RenderTransform>
+                    </RadioButton>
+                    <Grid x:Name="AssignmentGrid"  Height="56" Width="284" IsEnabled="True" >
+                        <TextBlock HorizontalAlignment="Left"  FontSize="20" FontFamily="Consolas"  TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" Margin="0,10,0,0"><Run Text="Remind at: "/><InlineUIContainer>
                             <TextBox Height="23" TextWrapping="Wrap" Text="05" Width="28" Background="#FFFAD200" BorderBrush="{x:Null}" Foreground="Black"/>
 
                         </InlineUIContainer><Run Text=":"/><InlineUIContainer>
                             <TextBox Height="23" TextWrapping="Wrap" Text="30" Width="34" Background="#FFFAD200" BorderBrush="{x:Null}" Foreground="Black"/>
                         </InlineUIContainer></TextBlock>
-                    <ComboBox FontSize="13" Style="{DynamicResource theComboBox}" Padding="15,5,15,5" HorizontalContentAlignment="Left" VerticalAlignment="Bottom" ItemContainerStyle="{DynamicResource theComboBoxItem}" Background="#FFFAD200" BorderBrush="Black" Foreground="Black" Margin="216,0,0,18" HorizontalAlignment="Left" Width="58" SelectedIndex="1" Height="28" SelectionChanged="YearChanged">
-                        <ComboBoxItem Name="AM" Content="AM" Height="28"/>
-                        <ComboBoxItem Name="PM" Content="PM" Height="28"/>
-                    </ComboBox>
-                </Grid>
+                        <ComboBox FontSize="13" Style="{DynamicResource theComboBox}" Padding="15,5,15,5" HorizontalContentAlignment="Left" VerticalAlignment="Bottom" ItemContainerStyle="{DynamicResource theComboBoxItem}" Background="#FFFAD200" BorderBrush="Black" Foreground="Black" Margin="216,0,0,18" HorizontalAlignment="Left" Width="58" SelectedIndex="1" Height="28" >
+                            <ComboBoxItem x:Name="AM" Content="AM" Height="28"/>
+                            <ComboBoxItem x:Name="PM" Content="PM" Height="28"/>
+                        </ComboBox>
+                    </Grid>
 
-            </ListBox>
-            <Rectangle x:Name="settingsPopupRectangle_Copy" Fill="#FF181818" HorizontalAlignment="Center" Height="107" VerticalAlignment="Bottom" Width="1000" Margin="98,0,97,86.5" RadiusX="50" RadiusY="50" StrokeThickness="20"/>
+                </StackPanel>
+
+            </ScrollViewer>
 
 
-            <Rectangle x:Name="settingsPopupRectangle_Copy1" Fill="#FF181818" HorizontalAlignment="Center" Height="62" VerticalAlignment="Bottom" Width="1000" Margin="98,0,97,144.5" StrokeThickness="3">
+            <Rectangle x:Name="settingsPopupRectangle_Copy1" Fill="#FF181818" HorizontalAlignment="Center" Height="53" VerticalAlignment="Bottom" Width="1000" Margin="98,0,97,125.5" StrokeThickness="0">
                 <Rectangle.Effect>
-                    <DropShadowEffect Direction="90" BlurRadius="10"/>
+                    <DropShadowEffect Direction="90" BlurRadius="10" Opacity="0.8"/>
                 </Rectangle.Effect>
             </Rectangle>
-            <Border x:Name="helpBorder" Style="{StaticResource Expands}" Grid.Column="0" CornerRadius="15" BorderBrush="#FFFAD200" BorderThickness="8" VerticalAlignment="Bottom" Width="200" Height="50" Margin="496,0,499,108.5" HorizontalAlignment="Center">
+            <Rectangle x:Name="settingsPopupRectangle_Copy" Fill="#FF181818" HorizontalAlignment="Center" Height="72" VerticalAlignment="Bottom" Width="1000" Margin="98,0,97,86.5" RadiusX="36" RadiusY="36" StrokeThickness="20"/>
+            <Border x:Name="helpBorder" Style="{StaticResource Expands}" Grid.Column="0" CornerRadius="15" BorderBrush="#FFFAD200" BorderThickness="8" VerticalAlignment="Bottom" Width="200" Height="50" Margin="496,0,499,106.5" HorizontalAlignment="Center">
                 <Button x:Name="helpButton"  Content="Save" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="190" Background="#FFFAD200" BorderThickness="0" BorderBrush="#FFFAD200" FontFamily="Consolas" Foreground="Black" Height="40" FontSize="20" FontWeight="Bold" Click="Save"/>
             </Border>
         </Grid>

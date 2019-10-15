@@ -255,5 +255,10 @@ namespace wellbeingPage
             }
             catch { }
         }
+
+        private void Save(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

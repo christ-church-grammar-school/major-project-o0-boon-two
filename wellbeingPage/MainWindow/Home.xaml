@@ -46,11 +46,36 @@
                     <Grid>
                         <Ellipse Stroke="Black" StrokeThickness="1" Fill="#FFFAD200" Width="80" Height="80"/>
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <Rectangle Fill="Black" HorizontalAlignment="Left" Height="6" Stroke="#00000000" VerticalAlignment="Top" Margin="22.5,37,0,0" Grid.Row="1" Width="35" RadiusX="3" RadiusY="3"/>
-                        <Rectangle Fill="Black" HorizontalAlignment="Left" Height="35" Stroke="#00000000" VerticalAlignment="Top" Margin="37,22.5,0,0" Grid.Row="1" Width="6" RadiusX="3" RadiusY="3"/>
+                        <Ellipse Stroke="Black" StrokeThickness="1" Fill="Black" Width="Auto" Height="Auto" Margin="15"/>
+                        <Rectangle Fill="Black" HorizontalAlignment="Left" Height="12" Stroke="#00000000" VerticalAlignment="Top" Margin="5,34,0,0" Grid.Row="0" Width="70" RadiusX="3" RadiusY="3"/>
+                        
+                        <Rectangle Fill="Black" HorizontalAlignment="Left" Height="70" Stroke="#00000000" VerticalAlignment="Top" Margin="35,5,0,0" Grid.Row="0" Width="12" RadiusX="3" RadiusY="3"/>
+                        <Rectangle Fill="Black" HorizontalAlignment="Left" Height="70" Stroke="#00000000" VerticalAlignment="Top" Width="12" RadiusX="3" RadiusY="3" RenderTransformOrigin="0.5,0.5" Margin="34,6,0,0">
+                            <Rectangle.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="-45"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Rectangle.RenderTransform>
+                        </Rectangle>
+                        <Rectangle Fill="Black" HorizontalAlignment="Left" Height="70" Stroke="#00000000" VerticalAlignment="Top" Width="12" RadiusX="3" RadiusY="3" RenderTransformOrigin="0.5,0.5" Margin="36,6,0,0">
+                            <Rectangle.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="45"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Rectangle.RenderTransform>
+                        </Rectangle>
+                        <Ellipse Stroke="{x:Null}" StrokeThickness="1" Fill="#FFFAD200" Width="Auto" Height="Auto" Margin="25"/>
                     </Grid>
                 </ControlTemplate>
             </Button.Template>
+            
+            
         </Button>
         <ListBox x:Name="PeriodList" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  AlternationCount="2"  ScrollViewer.CanContentScroll="False" Background="{x:Null}" BorderBrush="{x:Null}" Margin="26,201,921,176.5" SelectionChanged="changed">
             <ListBox.ItemTemplate>

@@ -91,22 +91,6 @@
                 <ScrollViewer  VerticalAlignment="Top" Grid.Column="1" Margin="179,198,61,0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
                 <StackPanel Name="OverallList" HorizontalAlignment="Left"  VerticalAlignment="Top"  Orientation="Horizontal" >
 
-        
-                    <Grid Height="196"  Width="128">
-                        <ContentPresenter/>
-                        <TextBlock TextWrapping="Wrap" Text="advance software development" VerticalAlignment="Top" Foreground="White" FontFamily="Consolas" Height="66" TextAlignment="Center" FontSize="16" />
-                        <TextBlock TextWrapping="Wrap" Text="80%" VerticalAlignment="Top" Foreground="White" FontSize="24" FontFamily="Consolas" Height="44" TextAlignment="Center" Margin="0,66,0,0" />
-                        <TextBlock TextWrapping="Wrap" Text="70%" VerticalAlignment="Top" Foreground="White" FontSize="24" FontFamily="Consolas" Height="44" TextAlignment="Center" Margin="0,110,0,0" />
-                        <TextBlock TextWrapping="Wrap" Text="10%" VerticalAlignment="Top" Foreground="White" FontSize="24" FontFamily="Consolas" Height="44" TextAlignment="Center" Margin="0,154,0,0" />
-                    </Grid>
-                    
-                    
-                    
-                    
-                     
-                    
-
-
                 </StackPanel>
             </ScrollViewer>
             <Button Content="Your Average" Grid.Column="1" HorizontalAlignment="Left" Margin="69,270,0,0" VerticalAlignment="Top" Width="104" Height="22" Click="SortYourAverage"/>
