@@ -110,8 +110,17 @@ namespace wellbeingPage
             if (sub.marks.Count > 0)
             {
                 sub.YourAverage = Convert.ToInt32((split[0].Split(new[] { " " }, StringSplitOptions.None).ToList()).Last());
-                
-                sub.EveryoneAverage = Convert.ToInt32((split[1].Split(new[] { " " }, StringSplitOptions.None).ToList()).Last());
+                MessageBox.Show((split[1]));
+                try
+                {
+                    sub.EveryoneAverage = Convert.ToInt32((split[1].Split(new[] { " " }, StringSplitOptions.None).ToList()).Last());
+                }
+                    
+                catch
+                {
+
+                }
+
                 
                 
             }
@@ -153,8 +162,7 @@ namespace wellbeingPage
             Console.WriteLine("Logging into live marks with username: " + username + " and password:  " + password);
 
             ChromeDriver driver = new ChromeDriver(driverService, Options);
-            try
-            {
+            
                 driver.Navigate().GoToUrl("https://parentportal.ccgs.wa.edu.au/");
                 System.Threading.Thread.Sleep(5000);
                 var search_box = driver.FindElementById("TextBoxUserName");
@@ -243,15 +251,21 @@ namespace wellbeingPage
                 }
                 int run = 0;
 
+                try
+                {
+                    while (indexProg[run] != '\0')
+                    {
 
-                while (indexProg[run] != '\0')
+                        var subset = lines.ToList().GetRange(indexSub[run], indexProg[run] - indexSub[run] + 1);
+                        ParseMarks(String.Join("\n", subset), year);
+
+                        run++;
+                    }
+            } catch
                 {
 
-                    var subset = lines.ToList().GetRange(indexSub[run], indexProg[run] - indexSub[run] + 1);
-                    ParseMarks(String.Join("\n", subset), year);
-
-                    run++;
                 }
+                
 
                 App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
                 {
@@ -272,9 +286,7 @@ namespace wellbeingPage
                 });
 
                 return true;
-            }
-            catch
-            {
+            
                 Console.WriteLine("Chromedriver was unable to complete webscraping");
                 driver.Quit();
                 App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
@@ -290,7 +302,7 @@ namespace wellbeingPage
                 
 
                 return false;
-            }                        
+                                  
         }
     }
 }

@@ -27,7 +27,7 @@ namespace wellbeingPage
     {
         
         public string subject{ get; set; }
-        [PrimaryKey, Unique]
+            
         public string name { get; set; }
         public string mark { get; set; }
         public double weight { get; set; }
