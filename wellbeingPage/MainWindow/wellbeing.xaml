@@ -69,8 +69,12 @@
         <Label x:Name="wellbeingLabel" Content="Wellbeing" HorizontalAlignment="Left" Margin="10,140,0,0" VerticalAlignment="Top" Height="100" Width="380" FontFamily="Consolas" FontSize="64" FontWeight="Bold" Foreground="White" HorizontalContentAlignment="Center"/>
         <Label x:Name="greetingLabel" Content="Good Morning," HorizontalAlignment="Left" Margin="10,285,0,0" VerticalAlignment="Top" Height="60" Width="380" FontSize="36" HorizontalContentAlignment="Center" FontFamily="Consolas" Foreground="White"/>
         <Label x:Name="nameLabel" Content="Isaac" HorizontalAlignment="Left" Margin="10,350,0,0" VerticalAlignment="Top" Height="60" Width="380" FontFamily="Consolas" FontSize="36" HorizontalContentAlignment="Center" Foreground="White"/>
-        <Label x:Name="planLabel" Content="Mindfulness" Margin="410,0,0,680" FontFamily="Consolas" FontSize="48" VerticalContentAlignment="Center" Foreground="White" Height="120" VerticalAlignment="Top" HorizontalAlignment="Left" Width="665"/>
+        <Label x:Name="planLabel" Content=" Mindfulness" Margin="410,0,0,680" FontFamily="Consolas" FontSize="48" VerticalContentAlignment="Center" Foreground="White" Height="120" VerticalAlignment="Top" HorizontalAlignment="Left" Width="665"/>
         <Label x:Name="audioStatusLabel" Content="0:00 / 0:00" HorizontalAlignment="Left" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="100,0,0,160" Width="200" Height="50" FontFamily="Consolas" FontWeight="Bold" FontSize="20" Foreground="White"/>
+
+        <Border x:Name="audio1Border" BorderBrush="#FFFAD200" BorderThickness="15" Margin="410,140,40,0" CornerRadius="35" Height="70" VerticalAlignment="Top">
+            <Button x:Name="audio1Button" Content="5 Minute Meditation" Margin="0,-20" VerticalAlignment="Center" Background="#FFFAD200" BorderThickness="0" BorderBrush="#FFFAD200" FontFamily="Consolas" Foreground="Black" Height="54" FontSize="20" FontWeight="Bold" Click="audio1Clicked"/>
+        </Border>
 
         <Rectangle x:Name="opacityRectangle" Fill="#CC3C3C3C" Margin="0" Stroke="#FF191919" Opacity="0.8" Visibility="Collapsed"/>
 

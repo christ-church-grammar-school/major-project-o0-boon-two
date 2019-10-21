@@ -150,5 +150,19 @@ namespace wellbeingPage
             pauseButton.Visibility = Visibility.Collapsed;
             playButton.Visibility = Visibility.Visible;
         }
+
+        private void audio1Clicked(object sender, RoutedEventArgs e)
+        {
+            if (mediaPlayer.Source != null)
+            {
+                mediaPlayer.Stop();
+                mediaLabel.Content = "";
+                audioStatusLabel.Content = "0:00 / 0:00";
+            }
+
+            /*
+            mediaPlayer.Open(new Uri());
+            */
+        }
     }
 }
