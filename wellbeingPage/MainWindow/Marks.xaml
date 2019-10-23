@@ -22,7 +22,7 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="1"  Grid.ColumnSpan="2" Margin="0,0,0,-0.5">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*" MinWidth="250" />
+                <ColumnDefinition Width="2*" MinWidth="270" />
                 <ColumnDefinition Width="5*" MinWidth="250"/>
             </Grid.ColumnDefinitions>
             <Rectangle Fill="#FF181818" Stroke="#FF191919" Margin="0,0,23,96"/>
@@ -95,7 +95,7 @@
             </ScrollViewer>
             <Button Content="Your Average" Grid.Column="1" HorizontalAlignment="Left" Margin="69,270,0,0" VerticalAlignment="Top" Width="104" Height="22" Click="SortYourAverage"/>
             <Button Content="Class Average" Grid.Column="1" HorizontalAlignment="Left" Margin="69,313,0,0" VerticalAlignment="Top" Width="104" Height="22"/>
-            <Button Content="Difference" Grid.Column="1" HorizontalAlignment="Left" Margin="69,359,0,0" VerticalAlignment="Top" Width="104" Height="23"/>
+            <Button Content="Difference" Grid.Column="1" HorizontalAlignment="Left" Margin="69,359,0,0" VerticalAlignment="Top" Width="104" Height="23" Click="Button_Click"/>
 
             </Grid>
             

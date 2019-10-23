@@ -23,6 +23,12 @@ namespace wellbeingPage
     /// <summary>
     /// Interaction logic for Marks.xaml
     /// </summary>
+    /// 
+
+
+
+
+    //TO DO: create unique identifier including 
     public class Mark
     {
         [Unique, PrimaryKey]
@@ -360,6 +366,13 @@ namespace wellbeingPage
 
             
             SetCurrentResults();
+
+            OverallList.Children.Clear();
+
+            foreach (var sub in CurrentResults)
+            {
+                AddToOverall(sub.Name, sub.YourAverage, sub.EveryoneAverage);
+            }
         }
 
         private void SortYourAverage(object sender, RoutedEventArgs e)
@@ -441,6 +454,11 @@ namespace wellbeingPage
             grid.Children.Add(Dif);
 
             OverallList.Children.Add(grid);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -207,10 +207,14 @@ namespace wellbeingPage
                     element.SendKeys(Keys.Control + "c");
 
                     System.Threading.Thread.Sleep(50);
-                    Data = Clipboard.GetText();
-                    Clipboard.Clear();
+                    try
+                    {
+                        Data = Clipboard.GetText();
+                        Clipboard.Clear();
 
-                    Clipboard.SetText(PrevClipboard);
+                        Clipboard.SetText(PrevClipboard);
+                    }catch { }
+                    
 
                 }));
 

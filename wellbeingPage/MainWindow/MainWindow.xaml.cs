@@ -36,8 +36,8 @@ namespace wellbeingPage
         {
             InitializeComponent();
             MainFrame.Content = new Home();
+           
 
-          
             if (!File.Exists("StudentData.sqlite")) // IF THIS PERSON HAS NOT USED THE APP BEFORE
             {
 
@@ -185,6 +185,11 @@ namespace wellbeingPage
 
         private void CreateEditMarksPopup(object sender, RoutedEventArgs e)
         {
+            if (Marks.CurrentResults.Count == 0)
+            {
+                AddMarks.IsEnabled = false;
+                AddMarksDisabledRec.Visibility = Visibility.Visible;
+            }
             EditMarks.Visibility = Visibility.Visible;
             try
             {
@@ -198,7 +203,8 @@ namespace wellbeingPage
 
         private void SubjectChanged(object sender, RoutedEventArgs e)
         {
-            
+   
+           
             try
             {
                 MarksList.ItemsSource = Marks.CurrentResults[SubjectList.SelectedIndex].marks;
@@ -219,15 +225,17 @@ namespace wellbeingPage
             Marks.CurrentResults.Add(new Subject()
             {
                 Name = "Untitled\n",
-                Year = DateTime.Now.Year.ToString(),
+                Year = DateTime.Now.Year.ToString(), // not necessarily..
                 
             });
-
+            AddMarksDisabledRec.Visibility = Visibility.Collapsed;
+            AddMarks.IsEnabled = true;
+       
         }
 
         private void AddMrk(object sender, RoutedEventArgs e)
         {
-
+           
             Marks.CurrentResults[SubjectList.SelectedIndex].marks.Add(new Mark() {
                 name = "untitled\n",
                 
@@ -252,6 +260,8 @@ namespace wellbeingPage
                 MarkName.Text = mrk.name;
                 MarkDate.Text = mrk.date.ToString();
                 MarkMark.Text = mrk.mark;
+
+
             }
             catch { }
         }
@@ -259,6 +269,21 @@ namespace wellbeingPage
         private void Save(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void SubYear_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void DeleteMark(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DeleteSub(object sender, RoutedEventArgs e)
+        {
+            //var sub = VisualTreeHelper.GetParent(sender as Button);
         }
     }
 }

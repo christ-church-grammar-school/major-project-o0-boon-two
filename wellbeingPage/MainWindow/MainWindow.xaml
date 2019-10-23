@@ -36,7 +36,7 @@
         </Button>
         <TextBlock  x:Name="LastUp" Visibility="Collapsed" HorizontalAlignment="Left" TextWrapping="Wrap"  Text="Last Updated: never" VerticalAlignment="Top" Margin="10,94,0,0" Foreground="#FF797979" FontSize="16"/>
 
-        <Button Style="{StaticResource Expand}" x:Name="EditButton" Visibility="Collapsed" Margin="230,0,0,9.5" Foreground="{x:Null}"  Cursor="Hand" Grid.Row="1" HorizontalAlignment="Left" Width="78" Height="80" VerticalAlignment="Bottom" Click="CreateEditMarksPopup">
+        <Button Style="{StaticResource Expand}" x:Name="EditButton" Visibility="Collapsed" Margin="200,0,0,9.5" Foreground="{x:Null}"  Cursor="Hand" Grid.Row="1" HorizontalAlignment="Left" Width="78" Height="80" VerticalAlignment="Bottom" Click="CreateEditMarksPopup">
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid>
@@ -201,13 +201,20 @@
             </StackPanel>
         </Grid>
 
-        <Grid x:Name="EditMarks" Visibility="Collapsed">
+        <Grid x:Name="EditMarks" Visibility="Visible">
             <Grid.RowDefinitions>
-                <RowDefinition Height="533*"/>
-                <RowDefinition Height="240*"/>
+                <RowDefinition Height="86*"/>
+                <RowDefinition Height="599.5"/>
+                <RowDefinition Height="87*"/>
             </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="48*"/>
+                <ColumnDefinition Width="1003"/>
+                <ColumnDefinition Width="48*"/>
+            </Grid.ColumnDefinitions>
 
-            <Button x:Name="DarknessButtonScreen2" Background="#CC3C3C3C" Click="DarknessButtonScreenClicked" Margin="0,0,0,-17.5" Grid.RowSpan="2">
+
+            <Button x:Name="DarknessButtonScreen2" Background="#CC3C3C3C" Click="DarknessButtonScreenClicked" Margin="0,0,0,-2.5" Grid.ColumnSpan="3" Grid.RowSpan="3">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
@@ -219,19 +226,42 @@
 
             </Button>
 
-            <Rectangle x:Name="EditPopupRectangle" Fill="#FF1F1F1F" HorizontalAlignment="Center" Height="600" VerticalAlignment="Center" Width="1000" Margin="98,86,97,86.5" RadiusX="50" RadiusY="50" Grid.RowSpan="2"/>
-            <Rectangle Fill="#FF181818" Stroke="#FF191919" Margin="162,121,509,150.5" HorizontalAlignment="Center" VerticalAlignment="Center" Height="501" Width="524" Grid.RowSpan="2"/>
-            <ListBox x:Name="SubjectList" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  AlternationCount="2"  ScrollViewer.CanContentScroll="False" Background="{x:Null}" BorderBrush="{x:Null}" Margin="155,121,772,150.5" SelectionChanged="SubjectChanged" SelectedIndex="0" FontSize="10" HorizontalAlignment="Center" Width="268" Height="501" VerticalAlignment="Center" Grid.RowSpan="2" >
+            <Rectangle x:Name="EditPopupRectangle" Fill="#FF1F1F1F" RadiusX="50" RadiusY="50" Grid.Row="1" Grid.Column="1" Margin="0,0,0,0.5"/>
+            <Rectangle Fill="#FF181818" Stroke="#FF191919" Margin="64,35,415,64" HorizontalAlignment="Center" VerticalAlignment="Center" Height="501" Width="524" Grid.Row="1" Grid.Column="1"/>
+            <ListBox x:Name="SubjectList" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  AlternationCount="2"  ScrollViewer.CanContentScroll="False" Background="{x:Null}" BorderBrush="{x:Null}" Margin="57,35,678,64" SelectionChanged="SubjectChanged" SelectedIndex="0" FontSize="10" HorizontalAlignment="Center" Width="268" Height="501" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Name}"  TextWrapping="Wrap"  FontSize="28" Foreground="White" FontFamily="Consolas" Width="Auto"/>
+                        <TextBlock Text="{Binding Name}"  TextWrapping="Wrap"  FontSize="28" Foreground="White" FontFamily="Consolas" Width="Auto">
+                           <Button  Style="{StaticResource Expand}" Visibility="Visible" Width="80" Height="72"  HorizontalAlignment="Left" VerticalAlignment="Bottom" BorderBrush="Black" Background="Black" Click="DeleteSub" Margin="157,0,0,0.5" Grid.Row="1" Grid.Column="1">
+                            <Button.Template>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Grid RenderTransformOrigin="0.5,0.5">
+                                        <Grid.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform/>
+                                                <SkewTransform/>
+                                                <RotateTransform Angle="45"/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </Grid.RenderTransform>
+                                        <Ellipse Fill="#00000004" Margin="17,16,15,16"/>
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        <Rectangle Fill="#FF8F4646"  HorizontalAlignment="Left" Height="4"  VerticalAlignment="Top" Margin="22.5,37,0,0" Grid.Row="1" Width="35" RadiusX="3" RadiusY="3"/>
+                                        <Rectangle Fill="#FF8F4646" HorizontalAlignment="Left" Height="35" VerticalAlignment="Top" Margin="37,22.5,0,0" Grid.Row="1" Width="4" RadiusX="3" RadiusY="3"/>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                        </TextBlock>
 
                     </DataTemplate>
 
                 </ListBox.ItemTemplate>
 
+
+
             </ListBox>
-            <Button x:Name="AddSubjects" Style="{StaticResource Expand}" Width="80" Height="80" Foreground="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="Black" Background="Black" Click="AddSub" Margin="270,79,845,80.5" Grid.Row="1">
+            <Button x:Name="AddSubjects" Style="{StaticResource Expand}" Width="80" Height="72" Foreground="{x:Null}" HorizontalAlignment="Left" VerticalAlignment="Bottom" BorderBrush="Black" Background="Black" Click="AddSub" Margin="157,0,0,0.5" Grid.Row="1" Grid.Column="1">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
@@ -243,16 +273,37 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <ListBox x:Name="MarksList" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  AlternationCount="2"  ScrollViewer.CanContentScroll="False" Background="{x:Null}" BorderBrush="{x:Null}" Margin="418,121,509,150.5" SelectedIndex="0" SelectionChanged="MarkChanged" Height="501" VerticalAlignment="Center" HorizontalAlignment="Center" Width="268" Grid.RowSpan="2" >
+            <ListBox x:Name="MarksList" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  AlternationCount="2"  ScrollViewer.CanContentScroll="False" Background="{x:Null}" BorderBrush="{x:Null}" Margin="320,35,415,64" SelectedIndex="0" SelectionChanged="MarkChanged" Height="501" VerticalAlignment="Center" HorizontalAlignment="Center" Width="268" Grid.Row="1" Grid.Column="1" >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding name}"  TextWrapping="Wrap"  FontSize="28" Foreground="White" FontFamily="Consolas" Width="Auto"/>
+                        <TextBlock Text="{Binding name}"  TextWrapping="Wrap"  FontSize="28" Foreground="White" FontFamily="Consolas" Width="Auto">
+                            <Button Style="{StaticResource Expand}" Visibility="Visible" Width="80" Height="72"  HorizontalAlignment="Left" VerticalAlignment="Bottom" BorderBrush="Black" Background="Black" Click="DeleteMark" Margin="157,0,0,0.5" Grid.Row="1" Grid.Column="1">
+                            <Button.Template>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Grid RenderTransformOrigin="0.5,0.5">
+                                        <Grid.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform/>
+                                                <SkewTransform/>
+                                                <RotateTransform Angle="45"/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </Grid.RenderTransform>
+                                        <Ellipse Fill="#00000004" Margin="17,16,15,16"/>
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        <Rectangle Fill="#FF8F4646"  HorizontalAlignment="Left" Height="4"  VerticalAlignment="Top" Margin="22.5,37,0,0" Grid.Row="1" Width="35" RadiusX="3" RadiusY="3"/>
+                                        <Rectangle Fill="#FF8F4646" HorizontalAlignment="Left" Height="35" VerticalAlignment="Top" Margin="37,22.5,0,0" Grid.Row="1" Width="4" RadiusX="3" RadiusY="3"/>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                        </TextBlock>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <TextBox x:Name="SubName" HorizontalAlignment="Right" Height="68" Margin="0,0,139,344" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Bottom" Width="323" Background="{x:Null}" Foreground="#FFD1D1D1" FontSize="22"/>
-            <DatePicker x:Name="MarkDate" HorizontalAlignment="Right" Margin="0,0,210,112" VerticalAlignment="Bottom" Height="53" Width="252"/>
-            <Button x:Name="AddMarks" Style="{StaticResource Expand}" Width="80" Height="80" Foreground="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Bottom" BorderBrush="Black" Background="Black" Click="AddMrk" Margin="0,0,625,80.5" Grid.Row="1">
+            <TextBox x:Name="SubName" HorizontalAlignment="Right" Height="68" Margin="0,0,46,400.5" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Bottom" Width="324" Background="{x:Null}" Foreground="#FFD1D1D1" FontSize="22" Grid.Row="1" Grid.Column="1"/>
+            <DatePicker x:Name="MarkDate" HorizontalAlignment="Right" Margin="0,0,180,48.5" VerticalAlignment="Bottom" Height="24" Width="189" Grid.Row="1" Grid.Column="1"/>
+            <Button x:Name="AddMarks" Style="{StaticResource Expand}" Height="72" Foreground="{x:Null}" VerticalAlignment="Bottom" BorderBrush="Black" Background="Black" Click="AddMrk" Margin="398,0,525,0.5" Grid.Row="1" Grid.Column="1">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
@@ -264,20 +315,17 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <TextBox x:Name="SubYear"  HorizontalAlignment="Left" Height="68" Margin="733,214,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="323" Background="{x:Null}" Foreground="#FFD1D1D1" FontSize="22"/>
-            <TextBox x:Name="MarkName" HorizontalAlignment="Left" Height="68" Margin="733,426,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="323" Background="{x:Null}" Foreground="#FFD1D1D1" FontSize="22"/>
-            <TextBox x:Name="MarkMark" HorizontalAlignment="Right" Height="68" Margin="0,0,375,205.5" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Bottom" Width="87" Background="{x:Null}" Foreground="#FFD1D1D1" FontSize="22" Grid.RowSpan="2"/>
-            <TextBox x:Name="MarkPercent" HorizontalAlignment="Right" Height="68" Margin="0,0,251,205.5" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Bottom" Width="87" Background="{x:Null}" Foreground="#FFD1D1D1" FontSize="22" Grid.RowSpan="2"/>
-            <TextBox x:Name="AvMark" HorizontalAlignment="Right" Height="68" Margin="0,0,375,117.5" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Bottom" Width="87" Background="{x:Null}" Foreground="#FFD1D1D1" FontSize="22" Grid.Row="1"/>
-            <TextBox x:Name="AvPercent" HorizontalAlignment="Right" Height="68" Margin="0,0,251,117.5" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Bottom" Width="87" Background="{x:Null}" Foreground="#FFD1D1D1" FontSize="22" Grid.Row="1"/>
+            <TextBox x:Name="SubYear"  HorizontalAlignment="Left" Height="68" Margin="634,35,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="323" Background="{x:Null}" Foreground="#FFD1D1D1" FontSize="22" Grid.Row="1" Grid.Column="1" TextChanged="SubYear_TextChanged"/>
+            <TextBox x:Name="MarkName" HorizontalAlignment="Left" Height="68" Margin="633,273,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="323" Background="{x:Null}" Foreground="#FFD1D1D1" FontSize="22" Grid.Row="1" Grid.Column="1"/>
+            <TextBox x:Name="MarkMark" HorizontalAlignment="Right" Height="68" Margin="0,0,281,155.5" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Bottom" Width="88" Background="{x:Null}" Foreground="#FFD1D1D1" FontSize="22" Grid.Row="1" Grid.Column="1"/>
+            <TextBox x:Name="MarkPercent" HorizontalAlignment="Right" Height="68" Margin="0,0,84,155.5" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Bottom" Width="88" Background="{x:Null}" Foreground="#FFD1D1D1" FontSize="22" Grid.Row="1" Grid.Column="1"/>
+            <TextBox x:Name="AvMark" HorizontalAlignment="Right" Height="68" Margin="0,0,281,77.5" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Bottom" Width="88" Background="{x:Null}" Foreground="#FFD1D1D1" FontSize="22" Grid.Row="1" Grid.Column="1"/>
+            <TextBox x:Name="AvPercent" HorizontalAlignment="Right" Height="68" Margin="0,0,84,77.5" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Bottom" Width="88" Background="{x:Null}" Foreground="#FFD1D1D1" FontSize="22" Grid.Row="1" Grid.Column="1"/>
+            <Rectangle x:Name="AddMarksDisabledRec" Fill="#991F1F1F" RadiusX="50" RadiusY="50" Grid.Row="1" Grid.Column="1" Visibility="Collapsed" Margin="398,541,525,0.5"/>
 
         </Grid>
 
-
-
-
-        <Grid x:Name="SettingsPopup" Visibility="Visible">
-
+        <Grid x:Name="SettingsPopup" Visibility="Collapsed">
 
             <Button x:Name="DarknessButtonScreen3" Background="#CC3C3C3C" Click="DarknessButtonScreenClicked" Margin="0,0,0,-17.5" Grid.RowSpan="2">
                 <Button.Template>
