@@ -160,9 +160,14 @@ namespace wellbeingPage
                 audioStatusLabel.Content = "0:00 / 0:00";
             }
 
-            /*
-            mediaPlayer.Open(new Uri());
-            */
+            mediaPlayer.Open(new Uri("C:/User Program Files/VS Projects/wellbeingPage/major-project-o0-boon-two/wellbeingPage/Audio/MARC5MinuteBreathing.mp3"));
+            mediaPlayer.Play();
+
+            playButton.IsEnabled = true;
+            playButton.Opacity = 1;
+            playButton.Visibility = Visibility.Collapsed;
+            pauseButton.Visibility = Visibility.Visible;
+            mediaLabel.Content = Convert.ToString(mediaPlayer.Source);
         }
     }
 }
