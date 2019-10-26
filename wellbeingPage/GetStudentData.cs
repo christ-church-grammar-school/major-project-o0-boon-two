@@ -238,7 +238,8 @@ namespace wellbeingPage
 
                 var FirstLine = lines[0].Split(new[] { " " }, StringSplitOptions.None);
 
-                var year = FirstLine.Last();
+                var stry = FirstLine.Last();
+                string year = stry.Substring(0, 4);
                 Console.WriteLine("------------------:" +year.Contains('\n'));
                 Console.WriteLine(year);
 
