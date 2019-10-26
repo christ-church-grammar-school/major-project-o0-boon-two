@@ -16,7 +16,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
-using wellbeingPage.Settings;
 using static wellbeingPage.Preferences;
 
 namespace wellbeingPage
@@ -43,8 +42,7 @@ namespace wellbeingPage
 
                 Preferences SettingsWin = new Preferences();
                 SettingsWin.Show();
-                SettingsWin.SettingsFrame.Content = new Login();
-                SettingsWin.LoginStuff.Visibility = Visibility.Visible;
+                
                 
                 ShutAll = false;
                 this.Close();
@@ -168,9 +166,12 @@ namespace wellbeingPage
         private void MainWinClosed(object sender, EventArgs e)
         {
             SQLiteConnection conn = new SQLiteConnection("StudentData.sqlite");
-            info.LiveMarksUpdate = LastUp.Text;
-            conn.InsertOrReplace(info);
-            
+            try
+            {
+                info.LiveMarksUpdate = LastUp.Text;
+                conn.InsertOrReplace(info);
+            }
+            catch { }
             if (ShutAll)
             {
                 Application.Current.Shutdown();
@@ -260,8 +261,6 @@ namespace wellbeingPage
                 MarkName.Text = mrk.name;
                 MarkDate.Text = mrk.date.ToString();
                 MarkMark.Text = mrk.mark;
-
-
             }
             catch { }
         }

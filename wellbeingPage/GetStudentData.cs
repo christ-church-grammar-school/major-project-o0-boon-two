@@ -9,7 +9,6 @@ using OpenQA.Selenium;
 using System.Windows;
 using System.IO;
 using System.Threading;
-using wellbeingPage.Settings;
 using SQLite;
 using System.Configuration;
 
@@ -26,15 +25,17 @@ namespace wellbeingPage
             
             var a  = conn.Table<Preferences.Info>().ToList()[0].Username;
             var b = conn.Table<Preferences.Info>().ToList()[0].Password;
-            
-            var cTask = Task.Run(() => StartDownload(a,b,ShowError));
+
+            var c = conn.Table<Preferences.Info>().ToList()[0].StudentNO;
+
+            var cTask = Task.Run(() => StartDownload(a,b,c,ShowError));
             await cTask;
         }
 
                 
         private static void ParseMarks(string inp, string year)
         {
-              
+           
             Subject sub = new Subject();
             List<string> Lines = new List<string>(inp.Split(new[] { "\n" }, StringSplitOptions.None).ToList());
 
@@ -44,7 +45,7 @@ namespace wellbeingPage
             for (int j = 0; j < First.Count; j++)
             {
                 //Console.WriteLine(First[j]);
-                if (First[j] == "Mrs" || First[j] == "Ms" || First[j] == "Miss" || First[j] == "Mr" || First[j] == "Dr")
+                if (First[j] == "Mrs" || First[j] == "Ms" || First[j] == "Miss" || First[j] == "Mr" || First[j] == "Dr" || First[j] == "Rev")
                 {
                     Pindex = j;
                         
@@ -65,7 +66,7 @@ namespace wellbeingPage
                 int SlashCount = a.Split('/').Length - 1;
                 if (SlashCount >= 3) //Assume there is marks
                 {
-                    //Module 1 Project 7/04/2019 20 / 20 100 93% 6.00%          EXAMPLE OF LAYOU
+                    //Module 1 Project 7/04/2019 20 / 20 100 93% 6.00%          EXAMPLE OF LAYOUT
 
                     List<string> line1 = a.Split(new[] { " " }, StringSplitOptions.None).ToList();
                     List<string> line = new List<string>();
@@ -131,22 +132,26 @@ namespace wellbeingPage
                 sub.YourAverage = -1;
             }
 
-            
+            sub.All = sub.Year + sub.Name;
 
+           
             SQLiteConnection conn = new SQLiteConnection("StudentData.sqlite");
 
             conn.CreateTable<Subject>();
             conn.InsertOrReplace(sub);
-
+     
 
             conn.CreateTable<Mark>();
             foreach (var j in sub.marks)
+            {
+                j.All = j.year + j.name + j.subject;
                 conn.InsertOrReplace(j);
+            }
             
 
         }
 
-        private static bool StartDownload(string username, string password, bool ShowError)
+        private static bool StartDownload(string username, string password, string studentNum, bool ShowError)
         {
             var driverService = ChromeDriverService.CreateDefaultService();
             driverService.HideCommandPromptWindow = true;
@@ -169,9 +174,9 @@ namespace wellbeingPage
                 search_box = driver.FindElementById("textBox2");
                 search_box.SendKeys(password);
                 driver.FindElementById("loginButton").Click();
-               
 
-                driver.Navigate().GoToUrl("https://parentportal.ccgs.wa.edu.au/stures.aspx");
+
+                driver.Navigate().GoToUrl("https://parentportal.ccgs.wa.edu.au/stures.aspx?sid=" + studentNum);
                 System.Threading.Thread.Sleep(3000);
                 var a = driver.FindElementByXPath("//*[@id='cla_table']/tbody/tr[2]/td[2]/a");
 
@@ -213,8 +218,9 @@ namespace wellbeingPage
                         Clipboard.Clear();
 
                         Clipboard.SetText(PrevClipboard);
-                    }catch { }
-                    
+                    }
+                    catch { }
+
 
                 }));
 
@@ -233,6 +239,8 @@ namespace wellbeingPage
                 var FirstLine = lines[0].Split(new[] { " " }, StringSplitOptions.None);
 
                 var year = FirstLine.Last();
+                Console.WriteLine("------------------:" +year.Contains('\n'));
+                Console.WriteLine(year);
 
                 int[] indexSub = new int[10];
                 int[] indexProg = new int[10];
@@ -242,7 +250,7 @@ namespace wellbeingPage
 
                 for (int line = 0; line < lines.Length; line++)
                 {
-                    if ((lines[line].Contains(" Dr ") || lines[line].Contains(" Mr ") || lines[line].Contains(" Mrs ") || lines[line].Contains(" Ms ") || lines[line].Contains(" Miss ")) && lines[line].Contains(":") == false)
+                    if ((lines[line].Contains(" Dr ") || lines[line].Contains(" Mr ") || lines[line].Contains(" Mrs ") || lines[line].Contains(" Ms ") || lines[line].Contains(" Miss ") || lines[line].Contains("Rev")) && lines[line].Contains(":") == false)
                     {
                         indexSub[num2] = line;
                         num2++;
@@ -259,12 +267,14 @@ namespace wellbeingPage
                 {
                     while (indexProg[run] != '\0')
                     {
-
+                        Console.WriteLine(indexSub[run] + "   " + indexProg[run]);
                         var subset = lines.ToList().GetRange(indexSub[run], indexProg[run] - indexSub[run] + 1);
+                        //Console.WriteLine(String.Join("\n", subset));
                         ParseMarks(String.Join("\n", subset), year);
 
                         run++;
                     }
+
                 }
                 catch
                 {
@@ -289,19 +299,20 @@ namespace wellbeingPage
 
 
                 });
+                Console.WriteLine("Chromedriver was unable to complete webscraping");
 
 
                 return true;
             }
             catch
             {
-            
                 Console.WriteLine("Chromedriver was unable to complete webscraping");
                 driver.Quit();
                 App.Current.Dispatcher.Invoke((Action)delegate
                 {
                     ((MainWindow)System.Windows.Application.Current.MainWindow).ReloadButton.IsEnabled = true;
                     ((MainWindow)Application.Current.MainWindow).ReloadRotater.Angle = 0;
+
                     if (ShowError)
                     {
                         MessageBox.Show("There was an error connecting to Live Marks. Please ensure that you:\n\n   " +
@@ -314,7 +325,6 @@ namespace wellbeingPage
 
                 return false;
             }
-                           
         }
     }
 }

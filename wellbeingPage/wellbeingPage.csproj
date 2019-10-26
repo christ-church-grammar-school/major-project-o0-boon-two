@@ -90,10 +90,7 @@
     <Compile Include="MainWindow\Marks.xaml.cs">
       <DependentUpon>Marks.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Settings\Login.xaml.cs">
-      <DependentUpon>Login.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Settings\PreferencesWindow.xaml.cs">
+    <Compile Include="Login\PreferencesWindow.xaml.cs">
       <DependentUpon>PreferencesWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow\TasksPage.xaml.cs">
@@ -101,9 +98,6 @@
     </Compile>
     <Compile Include="MainWindow\wellbeing.xaml.cs">
       <DependentUpon>wellbeing.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Settings\SetSettings.xaml.cs">
-      <DependentUpon>SetSettings.xaml</DependentUpon>
     </Compile>
     <Page Include="Dictionary1.xaml">
       <SubType>Designer</SubType>
@@ -133,11 +127,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Settings\Login.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Settings\PreferencesWindow.xaml">
+    <Page Include="Login\PreferencesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -146,10 +136,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainWindow\wellbeing.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Settings\SetSettings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

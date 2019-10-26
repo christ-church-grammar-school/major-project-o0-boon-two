@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wellbeingPage"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         Background="#FF1F1F1F"
         Title="Bumblebee" Height="800" Width="1200" MinHeight="500" MinWidth="600" Closed="MainWinClosed" Icon="/wellbeingPage;component/SplashIcon1.png" >
     <Grid>
