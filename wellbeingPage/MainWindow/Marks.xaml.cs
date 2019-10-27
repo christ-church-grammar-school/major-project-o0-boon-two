@@ -28,6 +28,7 @@ namespace wellbeingPage
 
 
 
+    
     //TO DO: create unique identifier including 
     public class Mark
     {
@@ -73,18 +74,23 @@ namespace wellbeingPage
 
         public static ObservableCollection<Subject> SubjectResults = new ObservableCollection<Subject>();
         public static ObservableCollection<Subject> CurrentResults = new ObservableCollection<Subject>();
-        ObservableCollection<string> Years = new ObservableCollection<string>();
-        
+        public static ObservableCollection<string> Years = new ObservableCollection<string>();
 
+        public static string CurrentYear;
         public bool isPopupOpen = false;
         Subject display;
         Mark m;
+
+        public int CurrentSort = 0; //0 - yourav desc 1 - your av asc   2 - classav desx  3 - class av asc    4  - diff desc 5 - diff asc
+
+
         public Marks()
         {
             InitializeComponent();
-
-
-
+           
+            SubjectList.ItemsSource = CurrentResults;
+            YearSelect.ItemsSource = Years;
+           
             OverallRes.Visibility = Visibility.Visible;
             if (SubjectResults.Count != 0)
             {
@@ -94,6 +100,7 @@ namespace wellbeingPage
             TitleGrade.Content = "";
 
             Years.Add(DateTime.Now.Year.ToString());
+            
             foreach (Subject sub in SubjectResults)
             {
                 if (!Years.Contains(sub.Year))
@@ -103,32 +110,24 @@ namespace wellbeingPage
             }
 
 
-
-            YearSelect.ItemsSource = Years;
-            if(Years.Count != 0) // if they have at least one subject
-            {
-                YearSelect.SelectedIndex = 0;
-
-                SetCurrentResults();
-            }
             
-
-            SubjectList.ItemsSource = CurrentResults;
-            foreach(var sub in CurrentResults)
-            {
-                AddToOverall(sub.Name, sub.YourAverage, sub.EveryoneAverage);
-            }
+            YearSelect.SelectedIndex = 0;
+            
+            SetCurrentResults();
+            UpdateOverallList();
              
         }
+      
 
-        void SetCurrentResults()
+    void SetCurrentResults()
         {
             CurrentResults.Clear();
+            CurrentYear = YearSelect.SelectedValue.ToString().Split(new[] { " " }, StringSplitOptions.None).ToList().Last();
 
             foreach (Subject sub in SubjectResults)
             {
                
-                if (sub.marks.Count >  0 && sub.Year == YearSelect.SelectedValue.ToString().Split(new[] { " " }, StringSplitOptions.None).ToList().Last())
+                if (sub.marks.Count >  0 && sub.Year == CurrentYear)
                 {
                     CurrentResults.Add(sub);
                 }
@@ -138,7 +137,7 @@ namespace wellbeingPage
         private void MyListView_MouseDown(object sender, MouseButtonEventArgs e)
         {
             HitTestResult r = VisualTreeHelper.HitTest(this, e.GetPosition(this));
-            if (r.VisualHit.GetType() != typeof(ListBoxItem) && r.VisualHit.GetType() != typeof(Button) && !isPopupOpen)
+            if (r.VisualHit.GetType() != typeof(ListBoxItem) && !isPopupOpen)
             {
                 SubjectList.UnselectAll();
                 isPopupOpen = false;
@@ -191,6 +190,16 @@ namespace wellbeingPage
                     }
 
                 DrawGraph();
+            }
+        }
+
+        void UpdateOverallList()
+        {
+            OverallList.Children.Clear();
+
+            foreach (var sub in CurrentResults)
+            {
+                AddToOverall(sub.Name, sub.YourAverage, sub.EveryoneAverage);
             }
         }
 
@@ -375,10 +384,7 @@ namespace wellbeingPage
             }
         }
 
-        private void SortYourAverage(object sender, RoutedEventArgs e)
-        {
-
-        }
+       
         private void AddToOverall(string name, int yourAv, int ClassAv)
         {
             var grid = new Grid() {
@@ -456,9 +462,82 @@ namespace wellbeingPage
             OverallList.Children.Add(grid);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void AverageSort(object sender, RoutedEventArgs e)
         {
+            if (CurrentSort == 0)
+            {
+                var a = CurrentResults.OrderBy(o => o.YourAverage).ToList();
+                CurrentSort = 1;
+                CurrentResults.Clear();
+                foreach (var b in a)
+                {
+                    CurrentResults.Add(b);
+                }
+            }
+            else
+            {
+                var a = CurrentResults.OrderByDescending(o => o.YourAverage).ToList();
+                CurrentSort = 0;
+                CurrentResults.Clear();
+                foreach (var b in a)
+                {
+                    CurrentResults.Add(b);
+                }
+            }
+            
+            UpdateOverallList();
+        }
 
+        private void ClassSort(object sender, RoutedEventArgs e)
+        {
+            if (CurrentSort == 2)
+            {
+                var a = CurrentResults.OrderBy(o => o.EveryoneAverage).ToList();
+                CurrentSort = 3;
+                CurrentResults.Clear();
+                foreach (var b in a)
+                {
+                    CurrentResults.Add(b);
+                }
+            }
+            else
+            {
+                var a = CurrentResults.OrderByDescending(o => o.EveryoneAverage).ToList();
+                CurrentSort = 2;
+                CurrentResults.Clear();
+                foreach (var b in a)
+                {
+                    CurrentResults.Add(b);
+                }
+            }
+            
+            UpdateOverallList();
+        }
+
+        private void DifferenceSort(object sender, RoutedEventArgs e)
+        {
+            if (CurrentSort == 4)
+            {
+                var a = CurrentResults.OrderBy(o => (o.YourAverage - o.EveryoneAverage)).ToList();
+                CurrentSort = 5;
+                CurrentResults.Clear();
+                foreach (var b in a)
+                {
+                    CurrentResults.Add(b);
+                }
+            }
+            else
+            {
+                var a = CurrentResults.OrderByDescending(o => (o.YourAverage - o.EveryoneAverage)).ToList();
+                CurrentSort = 4;
+                CurrentResults.Clear();
+                foreach (var b in a)
+                {
+                    CurrentResults.Add(b);
+                }
+            }
+            
+            UpdateOverallList();
         }
     }
 }

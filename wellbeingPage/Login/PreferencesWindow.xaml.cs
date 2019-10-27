@@ -62,13 +62,12 @@ namespace wellbeingPage
             conn.InsertOrReplace(inf);
             conn.CreateTable<Mark>();
             conn.Close();
-
-            var win = new MainWindow();
-            win.Show();
+            ((MainWindow)System.Windows.Application.Current.MainWindow).Show();
+            
             if (sender == subButton)
             {
                 GetStudentData.DownloadLiveMarks(true);
-                win.ReloadButton.IsEnabled = false;
+                ((MainWindow)System.Windows.Application.Current.MainWindow).ReloadButton.IsEnabled = false;
             }
             this.Close();
         }

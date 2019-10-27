@@ -25,7 +25,6 @@ namespace wellbeingPage
     {
         
 
-        public bool ShutAll = true;  //when this window shuts everything shuts
         DispatcherTimer milliseconds = new DispatcherTimer();
 
         public static Info info;
@@ -42,14 +41,12 @@ namespace wellbeingPage
 
                 Preferences SettingsWin = new Preferences();
                 SettingsWin.Show();
-                
-                
-                ShutAll = false;
-                this.Close();
+               
+                this.Hide();
             } else
             {
                 GetFromDB();
-                if (info.LiveMarksUpdate == "")
+                if (info.LiveMarksUpdate == "" || info.LiveMarksUpdate == "Last Updated: never")
                 {
                     LastUp.Text = "Last Updated: never";
                 } else
@@ -73,8 +70,10 @@ namespace wellbeingPage
             }
             
         }
+
         public static void GetFromDB() 
         {
+            
             Marks.SubjectResults.Clear();
             SQLiteConnection conn = new SQLiteConnection("StudentData.sqlite");
             
@@ -93,7 +92,8 @@ namespace wellbeingPage
             }
 
             
-                
+
+
         }
         private void DarknessButtonScreenClicked(object sender, RoutedEventArgs e)
         {
@@ -101,6 +101,7 @@ namespace wellbeingPage
             EditMarks.Visibility = Visibility.Collapsed;
             SettingsPopup.Visibility = Visibility.Collapsed;
         }
+        
 
         private void MenuButtonClicked(object sender, RoutedEventArgs e)
         {
@@ -172,11 +173,11 @@ namespace wellbeingPage
                 conn.InsertOrReplace(info);
             }
             catch { }
-            if (ShutAll)
-            {
-                Application.Current.Shutdown();
-            }
-                      
+
+            Application.Current.Shutdown();
+
+
+
         }
         private void ReloadMarks(object sender, RoutedEventArgs e)
         {
@@ -186,6 +187,7 @@ namespace wellbeingPage
 
         private void CreateEditMarksPopup(object sender, RoutedEventArgs e)
         {
+            
             if (Marks.CurrentResults.Count == 0)
             {
                 AddMarks.IsEnabled = false;

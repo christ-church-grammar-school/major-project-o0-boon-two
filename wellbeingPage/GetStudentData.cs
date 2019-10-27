@@ -165,8 +165,7 @@ namespace wellbeingPage
             Console.WriteLine("Logging into live marks with username: " + username + " and password:  " + password);
 
             ChromeDriver driver = new ChromeDriver(driverService, Options);
-            try
-            {
+            
                 driver.Navigate().GoToUrl("https://parentportal.ccgs.wa.edu.au/");
                 System.Threading.Thread.Sleep(5000);
                 var search_box = driver.FindElementById("TextBoxUserName");
@@ -286,10 +285,22 @@ namespace wellbeingPage
                 App.Current.Dispatcher.Invoke((Action)delegate
                 {
                     MainWindow.GetFromDB();
-
+                    Marks.CurrentResults.Clear();
                 });
+                foreach (Subject sub in Marks.SubjectResults)
+                {
+                    if (sub.marks.Count > 0 && sub.Year == Marks.CurrentYear)
+                    {
+                        App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+                        {
+                            Marks.CurrentResults.Add(sub);
+                        });
+                    }
+                }
+               
 
-                App.Current.Dispatcher.Invoke((Action)delegate
+
+            App.Current.Dispatcher.Invoke((Action)delegate
                 {
 
                     var str = "Last Updated: " + DateTime.Now.ToString("dd/MM/yyyy  h:mm tt");
@@ -300,13 +311,12 @@ namespace wellbeingPage
 
 
                 });
+                MainWindow.GetFromDB();
                 Console.WriteLine("Chromedriver was unable to complete webscraping");
 
 
                 return true;
-            }
-            catch
-            {
+            
                 Console.WriteLine("Chromedriver was unable to complete webscraping");
                 driver.Quit();
                 App.Current.Dispatcher.Invoke((Action)delegate
@@ -326,6 +336,6 @@ namespace wellbeingPage
 
                 return false;
             }
-        }
+        
     }
 }

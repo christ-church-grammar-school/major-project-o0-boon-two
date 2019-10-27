@@ -93,9 +93,9 @@
 
                 </StackPanel>
             </ScrollViewer>
-            <Button Content="Your Average" Grid.Column="1" HorizontalAlignment="Left" Margin="69,270,0,0" VerticalAlignment="Top" Width="104" Height="22" Click="SortYourAverage"/>
-            <Button Content="Class Average" Grid.Column="1" HorizontalAlignment="Left" Margin="69,313,0,0" VerticalAlignment="Top" Width="104" Height="22"/>
-            <Button Content="Difference" Grid.Column="1" HorizontalAlignment="Left" Margin="69,359,0,0" VerticalAlignment="Top" Width="104" Height="23" Click="Button_Click"/>
+            <Button Content="Your Average" Grid.Column="1" HorizontalAlignment="Left" Margin="69,270,0,0" VerticalAlignment="Top" Width="104" Height="22" Click="AverageSort"/>
+            <Button Content="Class Average" Grid.Column="1" HorizontalAlignment="Left" Margin="69,313,0,0" VerticalAlignment="Top" Width="104" Height="22" Click="ClassSort"/>
+            <Button Content="Difference" Grid.Column="1" HorizontalAlignment="Left" Margin="69,359,0,0" VerticalAlignment="Top" Width="104" Height="23" Click="DifferenceSort" />
 
             </Grid>
             
