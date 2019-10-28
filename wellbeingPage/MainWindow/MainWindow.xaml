@@ -232,11 +232,12 @@
             <ListBox x:Name="SubjectList" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  AlternationCount="2"  ScrollViewer.CanContentScroll="False" Background="{x:Null}" BorderBrush="{x:Null}" Margin="57,35,678,64" SelectionChanged="SubjectChanged" SelectedIndex="0" FontSize="10" HorizontalAlignment="Center" Width="268" Height="501" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Name}"  TextWrapping="Wrap"  FontSize="28" Foreground="White" FontFamily="Consolas" Width="Auto">
-                           <Button  Style="{StaticResource Expand}" Visibility="Visible" Width="80" Height="72"  HorizontalAlignment="Left" VerticalAlignment="Bottom" BorderBrush="Black" Background="Black" Click="DeleteSub" Margin="157,0,0,0.5" Grid.Row="1" Grid.Column="1">
+
+                        <TextBlock Text="{Binding Name}"  TextWrapping="Wrap"  FontSize="30" Foreground="White" FontFamily="Consolas" Width="Auto">
+                            <Button Style="{StaticResource Expand}" Visibility="Visible"   HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="Black" Background="Black" Click="DeleteSub" Margin="157,0,0,0.5" >
                             <Button.Template>
                                 <ControlTemplate TargetType="{x:Type Button}">
-                                    <Grid RenderTransformOrigin="0.5,0.5">
+                                    <Grid RenderTransformOrigin="0.25,0.25">
                                         <Grid.RenderTransform>
                                             <TransformGroup>
                                                 <ScaleTransform/>
@@ -245,10 +246,10 @@
                                                 <TranslateTransform/>
                                             </TransformGroup>
                                         </Grid.RenderTransform>
-                                        <Ellipse Fill="#00000004" Margin="17,16,15,16"/>
+                                        <Ellipse Fill="#00000004" Width="40" Height="50"/>
                                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        <Rectangle Fill="#FF8F4646"  HorizontalAlignment="Left" Height="4"  VerticalAlignment="Top" Margin="22.5,37,0,0" Grid.Row="1" Width="35" RadiusX="3" RadiusY="3"/>
-                                        <Rectangle Fill="#FF8F4646" HorizontalAlignment="Left" Height="35" VerticalAlignment="Top" Margin="37,22.5,0,0" Grid.Row="1" Width="4" RadiusX="3" RadiusY="3"/>
+                                        <Rectangle Fill="#FF8F4646"  HorizontalAlignment="Left" Height="4"  VerticalAlignment="Top" Margin="22.5,14.5,0,0" Width="35" RadiusX="3" RadiusY="3"/>
+                                        <Rectangle Fill="#FF8F4646" HorizontalAlignment="Left" Height="35" VerticalAlignment="Top" Margin="37,0,0,0" Width="4" RadiusX="3" RadiusY="3"/>
                                     </Grid>
                                 </ControlTemplate>
                             </Button.Template>
@@ -277,11 +278,11 @@
             <ListBox x:Name="MarksList" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  AlternationCount="2"  ScrollViewer.CanContentScroll="False" Background="{x:Null}" BorderBrush="{x:Null}" Margin="320,35,415,64" SelectedIndex="0" SelectionChanged="MarkChanged" Height="501" VerticalAlignment="Center" HorizontalAlignment="Center" Width="268" Grid.Row="1" Grid.Column="1" >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding name}"  TextWrapping="Wrap"  FontSize="28" Foreground="White" FontFamily="Consolas" Width="Auto">
-                            <Button Style="{StaticResource Expand}" Visibility="Visible" Width="80" Height="72"  HorizontalAlignment="Left" VerticalAlignment="Bottom" BorderBrush="Black" Background="Black" Click="DeleteMark" Margin="157,0,0,0.5" Grid.Row="1" Grid.Column="1">
+                        <TextBlock Text="{Binding name}"  TextWrapping="Wrap"  FontSize="24" Foreground="White" FontFamily="Consolas" Width="Auto">
+                            <Button Style="{StaticResource Expand}" Visibility="Visible"   HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="Black" Background="Black" Click="DeleteMark" Margin="157,0,0,0.5" >
                             <Button.Template>
                                 <ControlTemplate TargetType="{x:Type Button}">
-                                    <Grid RenderTransformOrigin="0.5,0.5">
+                                    <Grid RenderTransformOrigin="0.25,0.25">
                                         <Grid.RenderTransform>
                                             <TransformGroup>
                                                 <ScaleTransform/>
@@ -290,10 +291,10 @@
                                                 <TranslateTransform/>
                                             </TransformGroup>
                                         </Grid.RenderTransform>
-                                        <Ellipse Fill="#00000004" Margin="17,16,15,16"/>
+                                        <Ellipse Fill="#00000004" Width="40" Height="50"/>
                                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        <Rectangle Fill="#FF8F4646"  HorizontalAlignment="Left" Height="4"  VerticalAlignment="Top" Margin="22.5,37,0,0" Grid.Row="1" Width="35" RadiusX="3" RadiusY="3"/>
-                                        <Rectangle Fill="#FF8F4646" HorizontalAlignment="Left" Height="35" VerticalAlignment="Top" Margin="37,22.5,0,0" Grid.Row="1" Width="4" RadiusX="3" RadiusY="3"/>
+                                        <Rectangle Fill="#FF8F4646"  HorizontalAlignment="Left" Height="4"  VerticalAlignment="Top" Margin="22.5,14.5,0,0" Width="35" RadiusX="3" RadiusY="3"/>
+                                        <Rectangle Fill="#FF8F4646" HorizontalAlignment="Left" Height="35" VerticalAlignment="Top" Margin="37,0,0,0" Width="4" RadiusX="3" RadiusY="3"/>
                                     </Grid>
                                 </ControlTemplate>
                             </Button.Template>

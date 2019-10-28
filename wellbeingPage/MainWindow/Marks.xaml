@@ -22,7 +22,7 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="1"  Grid.ColumnSpan="2" Margin="0,0,0,-0.5">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*" MinWidth="270" />
+                <ColumnDefinition Width="2*" MinWidth="290" />
                 <ColumnDefinition Width="5*" MinWidth="250"/>
             </Grid.ColumnDefinitions>
             <Rectangle Fill="#FF181818" Stroke="#FF191919" Margin="0,0,23,96"/>
@@ -88,7 +88,7 @@
                 <TextBlock Name="AvHoverDate" Margin="10,260,-10,0" TextWrapping="Wrap" Text="Date&#x9;: 5.00%" VerticalAlignment="Top" FontSize="36" Height="61" TextAlignment="Center" FontWeight="Bold" Foreground="#FF434343"/>
             </Grid>
             <Grid x:Name="OverallRes" Grid.Column="1" Margin="0,0,0,-1">
-                <ScrollViewer  VerticalAlignment="Top" Grid.Column="1" Margin="179,198,61,0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                <ScrollViewer Name="overallScroll" VerticalAlignment="Top" Grid.Column="1" Margin="179,198,61,0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
                 <StackPanel Name="OverallList" HorizontalAlignment="Left"  VerticalAlignment="Top"  Orientation="Horizontal" >
 
                 </StackPanel>

@@ -272,6 +272,32 @@ namespace wellbeingPage
                 }
 
             }
+            else
+            {
+                Button a = new Button();
+
+                a.Style = (Style)FindResource("MarkHover");
+                a.Template = (ControlTemplate)FindResource("HMK_Dark");
+                Canvas.SetLeft(a,-6.5);
+                Canvas.SetTop(a, he - sub.marks[0].average * he / 100 - 6.5);
+                a.MouseEnter += GradeHover;
+                a.MouseLeave += GradeStopHover;
+                a.Click += KeepPopup;
+                a.Name = "Av" + 0;
+                Graph.Children.Add(a);
+
+                Button b = new Button();
+
+                b.Style = (Style)FindResource("MarkHover");
+                b.Template = (ControlTemplate)FindResource("HMK");
+                Canvas.SetLeft(b, - 6.5);
+                Canvas.SetTop(b, he - sub.marks[0].percent * he - 6.5);
+                b.MouseEnter += GradeHover;
+                b.MouseLeave += GradeStopHover;
+                b.Click += KeepPopup;
+                b.Name = "My" + 0;
+                Graph.Children.Add(b);
+            }
 
         }
         private void SizeChangedd(object sender, EventArgs e)
@@ -287,63 +313,79 @@ namespace wellbeingPage
 
         private void GradeHover(object sender, MouseEventArgs e)
         {
-            string name = ((Button)sender).Name;
-            Subject sub = CurrentResults[SubjectList.SelectedIndex];
-            var val = Convert.ToInt32(name[2]) - 48;
-            System.Windows.Point pos = e.GetPosition(DataBackround);
-
-            var x = pos.X;
-            var y = pos.Y;
-
-            if (x > DataBackround.ActualWidth / 2)
+            try
             {
-                
-                x -= HoverTestInfo.Width;
-            }
+                string name = ((Button)sender).Name;
+                Subject sub = CurrentResults[SubjectList.SelectedIndex];
 
-            
-            m = sub.marks[val];
 
-            if (name[0] == 'M') // It is persons grade
-            {
-                if (y > DataBackround.ActualHeight / 2)
+                var val = Convert.ToInt32(name[2]) - 48;
+                System.Windows.Point pos = e.GetPosition(DataBackround);
+
+                var x = pos.X;
+                var y = pos.Y;
+
+                if (x > DataBackround.ActualWidth / 2)
                 {
-                    y -= HoverTestInfo.Height;
+
+                    x -= HoverTestInfo.Width;
                 }
-                Thickness margin = new Thickness(x, y, 0, 0);
 
-                MyHoverDate.Text = "Date: " + m.date.ToShortDateString();
-                MyHoverMarks.Text = "Mark: " + m.mark;
-                MyHoverP.Text = "" + m.percent*100;
-                MyHoverComments.Text = m.comment;
-                MyHoverWeight.Text = "Weight: " + m.weight;
-                MyHoverName.Text = m.name;
-                HoverTestInfo.Margin = margin;
-                
 
-                HoverTestInfo.Visibility = Visibility.Visible;
-                HoverTestAv.Visibility = Visibility.Collapsed;
+                m = sub.marks[val];
+
+                if (name[0] == 'M') // It is persons grade
+                {
+                    if (y > DataBackround.ActualHeight / 2)
+                    {
+                        y -= HoverTestInfo.Height;
+                    }
+                    Thickness margin = new Thickness(x, y, 0, 0);
+
+                    MyHoverDate.Text = "Date: " + m.date.ToShortDateString();
+                    MyHoverMarks.Text = "Mark: " + m.mark;
+                    MyHoverP.Text = "" + m.percent * 100;
+                    MyHoverComments.Text = m.comment;
+                    MyHoverWeight.Text = "Weight: " + m.weight;
+                    MyHoverName.Text = m.name;
+                    HoverTestInfo.Margin = margin;
+
+
+                    HoverTestInfo.Visibility = Visibility.Visible;
+                    HoverTestAv.Visibility = Visibility.Collapsed;
+                    isPopupOpen = false;
+                }
+                else // average grade
+                {
+                    if (y > DataBackround.ActualHeight / 2)
+                    {
+                        y -= HoverTestAv.Height;
+                    }
+                    Thickness margin = new Thickness(x, y, 0, 0);
+
+                    AvHoverDate.Text = "Date: " + m.date.ToShortDateString();
+
+                    AvHoverP.Text = "" + m.average;
+                    AvHoverWeight.Text = "Weight: " + m.weight;
+                    AvHoverName.Text = m.name;
+                    HoverTestAv.Margin = margin;
+                    HoverTestAv.Visibility = Visibility.Visible;
+                    HoverTestInfo.Visibility = Visibility.Collapsed;
+                    isPopupOpen = false;
+                }
+
+            }
+            catch
+            {
+                SubjectList.UnselectAll();
                 isPopupOpen = false;
-            }
-            else // average grade
-            {
-                if (y > DataBackround.ActualHeight / 2)
-                {
-                    y -= HoverTestAv.Height;
-                }
-                Thickness margin = new Thickness(x, y, 0, 0);
-
-                AvHoverDate.Text = "Date: " + m.date.ToShortDateString();
-
-                AvHoverP.Text = "" + m.average;
-                AvHoverWeight.Text = "Weight: " + m.weight;
-                AvHoverName.Text = m.name;
-                HoverTestAv.Margin = margin;
-                HoverTestAv.Visibility = Visibility.Visible;
                 HoverTestInfo.Visibility = Visibility.Collapsed;
-                isPopupOpen = false;
+                HoverTestAv.Visibility = Visibility.Collapsed;
+                Graph.Children.Clear();
+                OverallRes.Visibility = Visibility.Visible;
+                TitleSubject.Content = "Overall";
+                TitleGrade.Content = "";
             }
-
         }
 
         private void GradeStopHover(object sender, MouseEventArgs e)
@@ -428,15 +470,16 @@ namespace wellbeingPage
                 {
                     SubAv.Foreground = new SolidColorBrush(Color.FromRgb(0, 181, 0));
                 }
-
+            
 
             var ClassAvText = new TextBlock()
             {
+               
                 TextWrapping = TextWrapping.Wrap,
                 Text = ClassAv.ToString(),
                 FontFamily = ResultsLabel.FontFamily,
                 VerticalAlignment = VerticalAlignment.Top,
-                Foreground = Brushes.White,
+                Foreground = new SolidColorBrush(Color.FromRgb(Convert.ToByte(55+2*ClassAv), Convert.ToByte(55 + 2*ClassAv), Convert.ToByte(55 + 2*ClassAv))),
                 Height = 66,
                 Margin = new Thickness(0, 110, 0, 0),
                 TextAlignment = TextAlignment.Center,
@@ -484,8 +527,9 @@ namespace wellbeingPage
                     CurrentResults.Add(b);
                 }
             }
-            
+
             UpdateOverallList();
+            overallScroll.ScrollToLeftEnd();
         }
 
         private void ClassSort(object sender, RoutedEventArgs e)
@@ -510,8 +554,9 @@ namespace wellbeingPage
                     CurrentResults.Add(b);
                 }
             }
-            
+
             UpdateOverallList();
+            overallScroll.ScrollToLeftEnd();
         }
 
         private void DifferenceSort(object sender, RoutedEventArgs e)
@@ -538,6 +583,7 @@ namespace wellbeingPage
             }
             
             UpdateOverallList();
+            overallScroll.ScrollToLeftEnd();
         }
     }
 }

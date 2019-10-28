@@ -308,14 +308,14 @@ namespace wellbeingPage
                     ((MainWindow)System.Windows.Application.Current.MainWindow).LastUp.Text = str;
                     ((MainWindow)System.Windows.Application.Current.MainWindow).ReloadButton.IsEnabled = true;
                     ((MainWindow)Application.Current.MainWindow).ReloadRotater.Angle = 0;
-
+                    
 
                 });
                 MainWindow.GetFromDB();
                 Console.WriteLine("Chromedriver was unable to complete webscraping");
+                
 
-
-                return true;
+            return true;
             
                 Console.WriteLine("Chromedriver was unable to complete webscraping");
                 driver.Quit();

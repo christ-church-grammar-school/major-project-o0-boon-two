@@ -240,7 +240,7 @@ namespace wellbeingPage
         {
            
             Marks.CurrentResults[SubjectList.SelectedIndex].marks.Add(new Mark() {
-                name = "untitled\n",
+                name = "Untitled\n",
                 
             });
 
@@ -284,7 +284,14 @@ namespace wellbeingPage
 
         private void DeleteSub(object sender, RoutedEventArgs e)
         {
-            //var sub = VisualTreeHelper.GetParent(sender as Button);
+            var sub = VisualTreeHelper.GetParent(sender as Button);
+            if (sub == null)
+                MessageBox.Show("hh");
+            TextBlock parent = sub as TextBlock;
+            if (parent == null)
+                MessageBox.Show("pp");
+            
+            MessageBox.Show(sub.GetType().ToString());
         }
     }
 }
