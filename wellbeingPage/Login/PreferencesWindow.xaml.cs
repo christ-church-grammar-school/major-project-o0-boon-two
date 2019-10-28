@@ -13,7 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using wellbeingPage.Settings;
+
 
 namespace wellbeingPage
 {
@@ -37,9 +37,10 @@ namespace wellbeingPage
             public string PersonName { get; set; }
             public string Username { get; set; }
 
-            
+            public string StudentNO { get; set; } // implement this!
+
             public string Password { get; set; }
-            public DateTime LiveMarksUpdate { get; set; }
+            public string LiveMarksUpdate { get; set; }
         }
         public Preferences()
         {
@@ -52,8 +53,9 @@ namespace wellbeingPage
             Info inf = new Info();
             inf.Username = UsernameBox.Text;
             inf.Password = PasswordBox.Password;
+            inf.StudentNO = StudentNumBox.Text;
                 
-            LoginStuff.Visibility = Visibility.Collapsed;
+            
             SQLiteConnection conn = new SQLiteConnection("StudentData.sqlite");
             conn.CreateTable<Subject>();
             conn.CreateTable<Info>();
@@ -61,13 +63,12 @@ namespace wellbeingPage
             conn.InsertOrReplace(inf);
             conn.CreateTable<Mark>();
             conn.Close();
-
-            var win = new MainWindow();
-            win.Show();
+            ((MainWindow)System.Windows.Application.Current.MainWindow).Show();
+            
             if (sender == subButton)
             {
                 GetStudentData.DownloadLiveMarks(true);
-                win.ReloadButton.IsEnabled = false;
+                ((MainWindow)System.Windows.Application.Current.MainWindow).ReloadButton.IsEnabled = false;
             }
             this.Close();
         }

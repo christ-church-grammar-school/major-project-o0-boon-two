@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wellbeingPage"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         Background="#FF1F1F1F"
         Title="Bumblebee" Height="800" Width="1200" MinHeight="500" MinWidth="600" Closed="MainWinClosed" Icon="/wellbeingPage;component/SplashIcon1.png" >
     <Grid>
@@ -36,6 +37,45 @@
         </Button>
         <TextBlock  x:Name="LastUp" Visibility="Collapsed" HorizontalAlignment="Left" TextWrapping="Wrap"  Text="Last Updated: never" VerticalAlignment="Top" Margin="10,94,0,0" Foreground="#FF797979" FontSize="16"/>
 
+        <Button Style="{StaticResource Expand}" x:Name="EditButton" Visibility="Collapsed" Margin="200,0,0,9.5" Foreground="{x:Null}"  Cursor="Hand" Grid.Row="1" HorizontalAlignment="Left" Width="78" Height="80" VerticalAlignment="Bottom" Click="CreateEditMarksPopup">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Ellipse Fill="#FFFAD200" Width="Auto" Height="Auto" Margin="6,10,4,5"/>
+
+
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Rectangle Fill="Black" HorizontalAlignment="Left" Height="6" Stroke="#00000000" VerticalAlignment="Top" Margin="22,25,0,0" Grid.Row="0" Width="35" RadiusX="3" RadiusY="3"/>
+                        <Rectangle Fill="Black" HorizontalAlignment="Left" Height="36" Stroke="#00000000" VerticalAlignment="Top" Margin="22,25,0,0" Grid.Row="0" Width="6" RadiusX="3" RadiusY="3"/>
+                        <Rectangle Fill="Black" HorizontalAlignment="Left" Height="6" Stroke="#00000000" VerticalAlignment="Top" Margin="22,55,0,0" Grid.Row="0" Width="35" RadiusX="3" RadiusY="3"/>
+                        <Rectangle Fill="Black" HorizontalAlignment="Left" Height="36" Stroke="#00000000" VerticalAlignment="Top" Margin="51,25,0,0" Grid.Row="0" Width="6" RadiusX="3" RadiusY="3"/>
+                        <Ellipse Fill="#FFFAD200" Width="Auto" Height="Auto" Margin="26,28,10,43" RenderTransformOrigin="0.5,0.5">
+                            <Ellipse.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="-42.589"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Ellipse.RenderTransform>
+                        </Ellipse>
+                        <Ellipse Fill="Black" Width="Auto" Height="Auto" Margin="30,29,10,47" RenderTransformOrigin="0.5,0.5">
+                            <Ellipse.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="-42.709"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Ellipse.RenderTransform>
+                        </Ellipse>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+
+        </Button>
+
+
         <Button Style="{StaticResource Expand}" x:Name="MenuButton" Width="80" Height="80" Margin="0,20,40,0" Foreground="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Top" Click="MenuButtonClicked" Cursor="Hand">
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -62,6 +102,8 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
+
+
 
             <Rectangle x:Name="MenuPopupRectangle" Fill="#FF1F1F1F" HorizontalAlignment="Center" Height="600" VerticalAlignment="Center" Width="1000" Margin="0" RadiusX="50" RadiusY="50"/>
             <StackPanel HorizontalAlignment="Center" Height="560" VerticalAlignment="Center" Width="1346" Margin="0,40,0,0">
@@ -159,5 +201,222 @@
 
             </StackPanel>
         </Grid>
+
+        <Grid x:Name="EditMarks" Visibility="Visible">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="86*"/>
+                <RowDefinition Height="599.5"/>
+                <RowDefinition Height="87*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="48*"/>
+                <ColumnDefinition Width="1003"/>
+                <ColumnDefinition Width="48*"/>
+            </Grid.ColumnDefinitions>
+
+
+            <Button x:Name="DarknessButtonScreen2" Background="#CC3C3C3C" Click="DarknessButtonScreenClicked" Margin="0,0,0,-2.5" Grid.ColumnSpan="3" Grid.RowSpan="3">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Rectangle Fill="#CC3C3C3C"/>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+
+            </Button>
+
+            <Rectangle x:Name="EditPopupRectangle" Fill="#FF1F1F1F" RadiusX="50" RadiusY="50" Grid.Row="1" Grid.Column="1" Margin="0,0,0,0.5"/>
+            <Rectangle Fill="#FF181818" Stroke="#FF191919" Margin="64,35,415,64" HorizontalAlignment="Center" VerticalAlignment="Center" Height="501" Width="524" Grid.Row="1" Grid.Column="1"/>
+            <ListBox x:Name="SubjectList" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  AlternationCount="2"  ScrollViewer.CanContentScroll="False" Background="{x:Null}" BorderBrush="{x:Null}" Margin="57,35,678,64" SelectionChanged="SubjectChanged" SelectedIndex="0" FontSize="10" HorizontalAlignment="Center" Width="268" Height="501" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+
+                        <TextBlock Text="{Binding Name}"  TextWrapping="Wrap"  FontSize="30" Foreground="White" FontFamily="Consolas" Width="Auto">
+                            <Button Style="{StaticResource Expand}" Visibility="Visible"   HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="Black" Background="Black" Click="DeleteSub" Margin="157,0,0,0.5" >
+                            <Button.Template>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Grid RenderTransformOrigin="0.25,0.25">
+                                        <Grid.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform/>
+                                                <SkewTransform/>
+                                                <RotateTransform Angle="45"/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </Grid.RenderTransform>
+                                        <Ellipse Fill="#00000004" Width="40" Height="50"/>
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        <Rectangle Fill="#FF8F4646"  HorizontalAlignment="Left" Height="4"  VerticalAlignment="Top" Margin="22.5,14.5,0,0" Width="35" RadiusX="3" RadiusY="3"/>
+                                        <Rectangle Fill="#FF8F4646" HorizontalAlignment="Left" Height="35" VerticalAlignment="Top" Margin="37,0,0,0" Width="4" RadiusX="3" RadiusY="3"/>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                        </TextBlock>
+
+                    </DataTemplate>
+
+                </ListBox.ItemTemplate>
+
+
+
+            </ListBox>
+            <Button x:Name="AddSubjects" Style="{StaticResource Expand}" Width="80" Height="72" Foreground="{x:Null}" HorizontalAlignment="Left" VerticalAlignment="Bottom" BorderBrush="Black" Background="Black" Click="AddSub" Margin="157,0,0,0.5" Grid.Row="1" Grid.Column="1">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Ellipse Fill="#00000004" Margin="17,16,15,16"/>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <Rectangle Fill="White" HorizontalAlignment="Left" Height="6" Stroke="#00000000" VerticalAlignment="Top" Margin="22.5,37,0,0" Grid.Row="1" Width="35" RadiusX="3" RadiusY="3"/>
+                            <Rectangle Fill="White" HorizontalAlignment="Left" Height="35" Stroke="#00000000" VerticalAlignment="Top" Margin="37,22.5,0,0" Grid.Row="1" Width="6" RadiusX="3" RadiusY="3"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <ListBox x:Name="MarksList" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  AlternationCount="2"  ScrollViewer.CanContentScroll="False" Background="{x:Null}" BorderBrush="{x:Null}" Margin="320,35,415,64" SelectedIndex="0" SelectionChanged="MarkChanged" Height="501" VerticalAlignment="Center" HorizontalAlignment="Center" Width="268" Grid.Row="1" Grid.Column="1" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding name}"  TextWrapping="Wrap"  FontSize="24" Foreground="White" FontFamily="Consolas" Width="Auto">
+                            <Button Style="{StaticResource Expand}" Visibility="Visible"   HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="Black" Background="Black" Click="DeleteMark" Margin="157,0,0,0.5" >
+                            <Button.Template>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Grid RenderTransformOrigin="0.25,0.25">
+                                        <Grid.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform/>
+                                                <SkewTransform/>
+                                                <RotateTransform Angle="45"/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </Grid.RenderTransform>
+                                        <Ellipse Fill="#00000004" Width="40" Height="50"/>
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        <Rectangle Fill="#FF8F4646"  HorizontalAlignment="Left" Height="4"  VerticalAlignment="Top" Margin="22.5,14.5,0,0" Width="35" RadiusX="3" RadiusY="3"/>
+                                        <Rectangle Fill="#FF8F4646" HorizontalAlignment="Left" Height="35" VerticalAlignment="Top" Margin="37,0,0,0" Width="4" RadiusX="3" RadiusY="3"/>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                        </TextBlock>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <TextBox x:Name="SubName" HorizontalAlignment="Right" Height="68" Margin="0,0,46,400.5" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Bottom" Width="324" Background="{x:Null}" Foreground="#FFD1D1D1" FontSize="22" Grid.Row="1" Grid.Column="1"/>
+            <DatePicker x:Name="MarkDate" HorizontalAlignment="Right" Margin="0,0,180,48.5" VerticalAlignment="Bottom" Height="24" Width="189" Grid.Row="1" Grid.Column="1"/>
+            <Button x:Name="AddMarks" Style="{StaticResource Expand}" Height="72" Foreground="{x:Null}" VerticalAlignment="Bottom" BorderBrush="Black" Background="Black" Click="AddMrk" Margin="398,0,525,0.5" Grid.Row="1" Grid.Column="1">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Ellipse Fill="#00000004" Margin="17,16,15,16"/>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <Rectangle Fill="White" HorizontalAlignment="Left" Height="6" Stroke="#00000000" VerticalAlignment="Top" Margin="22.5,37,0,0" Grid.Row="1" Width="35" RadiusX="3" RadiusY="3"/>
+                            <Rectangle Fill="White" HorizontalAlignment="Left" Height="35" Stroke="#00000000" VerticalAlignment="Top" Margin="37,22.5,0,0" Grid.Row="1" Width="6" RadiusX="3" RadiusY="3"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <TextBox x:Name="SubYear"  HorizontalAlignment="Left" Height="68" Margin="634,35,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="323" Background="{x:Null}" Foreground="#FFD1D1D1" FontSize="22" Grid.Row="1" Grid.Column="1" TextChanged="SubYear_TextChanged"/>
+            <TextBox x:Name="MarkName" HorizontalAlignment="Left" Height="68" Margin="633,273,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="323" Background="{x:Null}" Foreground="#FFD1D1D1" FontSize="22" Grid.Row="1" Grid.Column="1"/>
+            <TextBox x:Name="MarkMark" HorizontalAlignment="Right" Height="68" Margin="0,0,281,155.5" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Bottom" Width="88" Background="{x:Null}" Foreground="#FFD1D1D1" FontSize="22" Grid.Row="1" Grid.Column="1"/>
+            <TextBox x:Name="MarkPercent" HorizontalAlignment="Right" Height="68" Margin="0,0,84,155.5" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Bottom" Width="88" Background="{x:Null}" Foreground="#FFD1D1D1" FontSize="22" Grid.Row="1" Grid.Column="1"/>
+            <TextBox x:Name="AvMark" HorizontalAlignment="Right" Height="68" Margin="0,0,281,77.5" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Bottom" Width="88" Background="{x:Null}" Foreground="#FFD1D1D1" FontSize="22" Grid.Row="1" Grid.Column="1"/>
+            <TextBox x:Name="AvPercent" HorizontalAlignment="Right" Height="68" Margin="0,0,84,77.5" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Bottom" Width="88" Background="{x:Null}" Foreground="#FFD1D1D1" FontSize="22" Grid.Row="1" Grid.Column="1"/>
+            <Rectangle x:Name="AddMarksDisabledRec" Fill="#991F1F1F" RadiusX="50" RadiusY="50" Grid.Row="1" Grid.Column="1" Visibility="Collapsed" Margin="398,541,525,0.5"/>
+
+        </Grid>
+
+        <Grid x:Name="SettingsPopup" Visibility="Collapsed">
+
+            <Button x:Name="DarknessButtonScreen3" Background="#CC3C3C3C" Click="DarknessButtonScreenClicked" Margin="0,0,0,-17.5" Grid.RowSpan="2">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Rectangle Fill="#CC3C3C3C"/>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+
+            </Button>
+
+            <Rectangle x:Name="settingsPopupRectangle" Fill="#FF232323" HorizontalAlignment="Center" Height="600" VerticalAlignment="Center" Width="1000" Margin="98,86,97,86.5" RadiusX="50" RadiusY="50" Grid.RowSpan="2"/>
+
+            <ScrollViewer x:Name="PeriodList" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False" Background="#FF232323" BorderBrush="{x:Null}" Margin="148,112,151,183.5"  Foreground="{x:Null}">
+                <StackPanel Height="477">
+                    <TextBlock HorizontalAlignment="Left"  FontSize="20" FontFamily="Consolas"  TextWrapping="Wrap" Text="Username" VerticalAlignment="Top" Foreground="White"/>
+                    <TextBox x:Name="UserField" HorizontalAlignment="Left"  MaxLength="56" VerticalAlignment="Top" FontSize="36" FontFamily="Consolas" Background="#00000000" BorderBrush="#00C1C1C1" Width="496" BorderThickness="0" Foreground="#FFC6C6C6" />
+
+                    <Rectangle x:Name="Underline_Copy"  Fill="#FF1F1F1F" HorizontalAlignment="Left" Height="2" Stroke="White" VerticalAlignment="Top" Width="496" StrokeThickness="3"/>
+                    <TextBlock HorizontalAlignment="Left"  FontSize="20" FontFamily="Consolas"  TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" Foreground="White"  TextAlignment="Center"/>
+                    <PasswordBox x:Name="PassField" HorizontalAlignment="Left" MaxLength="56"  VerticalAlignment="Top" FontSize="36" FontFamily="Consolas" Background="#00000000" BorderBrush="#00C1C1C1" Width="496" BorderThickness="0" Foreground="#FFC6C6C6" />
+                    <Rectangle x:Name="Underline_Copy1"  Fill="#FF1F1F1F" HorizontalAlignment="Left" Height="2" Stroke="White" VerticalAlignment="Top" Width="496" StrokeThickness="3"/>
+                    <RadioButton Content="Remind for Homework"  Height="35" Width="158" Foreground="White" Background="#FFFAD200" BorderBrush="Black" BorderThickness="3" RenderTransformOrigin="0.5,0.5" Margin="80,40,0,0" GroupName="homework" IsChecked="True">
+                        <RadioButton.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleX="2" ScaleY="2"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </RadioButton.RenderTransform>
+                    </RadioButton>
+                    <Grid x:Name="HomeworkGrid"  Height="56" Width="284" IsEnabled="True" >
+                        <TextBlock HorizontalAlignment="Left"  FontSize="20" FontFamily="Consolas"  TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" Margin="0,10,0,0"><Run Text="Remind at: "/><InlineUIContainer>
+                            <TextBox Height="23" TextWrapping="Wrap" Text="05" Width="28" Background="#FFFAD200" BorderBrush="{x:Null}" Foreground="Black"/>
+
+                        </InlineUIContainer><Run Text=":"/><InlineUIContainer>
+                            <TextBox Height="23" TextWrapping="Wrap" Text="30" Width="34" Background="#FFFAD200" BorderBrush="{x:Null}" Foreground="Black"/>
+                        </InlineUIContainer></TextBlock>
+                        <ComboBox   FontSize="13" Style="{DynamicResource theComboBox}" Padding="15,5,15,5" HorizontalContentAlignment="Left" VerticalAlignment="Bottom" ItemContainerStyle="{DynamicResource theComboBoxItem}" Background="#FFFAD200" BorderBrush="Black" Foreground="Black" Margin="216,0,0,18" HorizontalAlignment="Left" Width="58" SelectedIndex="1" Height="28" >
+                            <ComboBoxItem  Content="AM" Height="28"/>
+                            <ComboBoxItem Content="PM" Height="28"/>
+                        </ComboBox>
+                    </Grid>
+
+
+                    <RadioButton Content="Remind for Assignments"  Height="35" Width="158" Foreground="White" Background="#FFFAD200" BorderBrush="Black" BorderThickness="3" RenderTransformOrigin="0.5,0.5" Margin="80,40,0,0" GroupName="asssignment" IsChecked="True">
+                        <RadioButton.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleX="2" ScaleY="2"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </RadioButton.RenderTransform>
+                    </RadioButton>
+                    <Grid x:Name="AssignmentGrid"  Height="56" Width="284" IsEnabled="True" >
+                        <TextBlock HorizontalAlignment="Left"  FontSize="20" FontFamily="Consolas"  TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" Margin="0,10,0,0"><Run Text="Remind at: "/><InlineUIContainer>
+                            <TextBox Height="23" TextWrapping="Wrap" Text="05" Width="28" Background="#FFFAD200" BorderBrush="{x:Null}" Foreground="Black"/>
+
+                        </InlineUIContainer><Run Text=":"/><InlineUIContainer>
+                            <TextBox Height="23" TextWrapping="Wrap" Text="30" Width="34" Background="#FFFAD200" BorderBrush="{x:Null}" Foreground="Black"/>
+                        </InlineUIContainer></TextBlock>
+                        <ComboBox FontSize="13" Style="{DynamicResource theComboBox}" Padding="15,5,15,5" HorizontalContentAlignment="Left" VerticalAlignment="Bottom" ItemContainerStyle="{DynamicResource theComboBoxItem}" Background="#FFFAD200" BorderBrush="Black" Foreground="Black" Margin="216,0,0,18" HorizontalAlignment="Left" Width="58" SelectedIndex="1" Height="28" >
+                            <ComboBoxItem x:Name="AM" Content="AM" Height="28"/>
+                            <ComboBoxItem x:Name="PM" Content="PM" Height="28"/>
+                        </ComboBox>
+                    </Grid>
+
+                </StackPanel>
+
+            </ScrollViewer>
+
+
+            <Rectangle x:Name="settingsPopupRectangle_Copy1" Fill="#FF181818" HorizontalAlignment="Center" Height="53" VerticalAlignment="Bottom" Width="1000" Margin="98,0,97,125.5" StrokeThickness="0">
+                <Rectangle.Effect>
+                    <DropShadowEffect Direction="90" BlurRadius="10" Opacity="0.8"/>
+                </Rectangle.Effect>
+            </Rectangle>
+            <Rectangle x:Name="settingsPopupRectangle_Copy" Fill="#FF181818" HorizontalAlignment="Center" Height="72" VerticalAlignment="Bottom" Width="1000" Margin="98,0,97,86.5" RadiusX="36" RadiusY="36" StrokeThickness="20"/>
+            <Border x:Name="helpBorder" Style="{StaticResource Expands}" Grid.Column="0" CornerRadius="15" BorderBrush="#FFFAD200" BorderThickness="8" VerticalAlignment="Bottom" Width="200" Height="50" Margin="496,0,499,106.5" HorizontalAlignment="Center">
+                <Button x:Name="helpButton"  Content="Save" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="190" Background="#FFFAD200" BorderThickness="0" BorderBrush="#FFFAD200" FontFamily="Consolas" Foreground="Black" Height="40" FontSize="20" FontWeight="Bold" Click="Save"/>
+            </Border>
+        </Grid>
+
+
     </Grid>
 </Window>
