@@ -65,7 +65,7 @@
             </Button.Template>
         </Button>
 
-        <Label x:Name="mediaLabel" HorizontalAlignment="Left" Margin="50,435,0,0" VerticalAlignment="Top" Height="50" Width="300" FontFamily="Consolas" Foreground="White"/>
+        <Label x:Name="mediaLabel" HorizontalAlignment="Left" Margin="50,0,0,300" Width="300" FontFamily="Consolas" Foreground="White" Height="50" VerticalAlignment="Bottom"/>
         <Label x:Name="wellbeingLabel" Content="Wellbeing" HorizontalAlignment="Left" Margin="10,140,0,0" VerticalAlignment="Top" Height="100" Width="380" FontFamily="Consolas" FontSize="64" FontWeight="Bold" Foreground="White" HorizontalContentAlignment="Center"/>
         <Label x:Name="greetingLabel" Content="Good Morning," HorizontalAlignment="Left" Margin="10,285,0,0" VerticalAlignment="Top" Height="60" Width="380" FontSize="36" HorizontalContentAlignment="Center" FontFamily="Consolas" Foreground="White"/>
         <Label x:Name="nameLabel" Content="Isaac" HorizontalAlignment="Left" Margin="10,350,0,0" VerticalAlignment="Top" Height="60" Width="380" FontFamily="Consolas" FontSize="36" HorizontalContentAlignment="Center" Foreground="White"/>
@@ -116,6 +116,13 @@
             </Border>
 
             <Border x:Name="infoPopupBottom" BorderThickness="1" Grid.Row="0" Grid.ColumnSpan="2" CornerRadius="0,0,50,50" BorderBrush="#00000000" Background="#FF1F1F1F" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="1000" Height="455" Margin="100,0,0,100"/>
+
+            <TextBlock x:Name="drugText" Text="Drugs and Alcohol:" FontSize="28" FontFamily="Consolas" FontWeight="Bold" Margin="120,260,590,507" Foreground="White"/>
+            <TextBlock x:Name="drugAwareText" Text="    - https://drugaware.com.au/" FontSize="24" FontFamily="Consolas" Margin="120,298,590,469" Foreground="White"/>
+            <TextBlock x:Name="healthDirectText" Text="    - https://www.healthdirect.gov.au/drugs-and-alcohol" FontSize="24" FontFamily="Consolas" Margin="120,331,590,436" Foreground="White"/>
+            <TextBlock x:Name="mentalHealthText" Text="Mental Health:" FontSize="28" FontFamily="Consolas" FontWeight="Bold" Margin="120,451,590,316" Foreground="White"/>
+            <TextBlock x:Name="beyondBlueText" Text="    - https://www.beyondblue.org.au/" FontSize="24" FontFamily="Consolas" Margin="120,489,590,278" Foreground="White"/>
+            
 
             <Button x:Name="infoCloseButton" Width="80" Height="80" Margin="0,125,125,0" Foreground="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Top" BorderBrush="Black" Background="Black" Click="infoCloseClicked" RenderTransformOrigin="0.5,0.5">
                 <Button.RenderTransform>

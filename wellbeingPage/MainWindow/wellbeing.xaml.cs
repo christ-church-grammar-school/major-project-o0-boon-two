@@ -167,7 +167,7 @@ namespace wellbeingPage
             playButton.Opacity = 1;
             playButton.Visibility = Visibility.Collapsed;
             pauseButton.Visibility = Visibility.Visible;
-            mediaLabel.Content = Convert.ToString(mediaPlayer.Source);
+            mediaLabel.Content = "5 Minute Breathing";
         }
     }
 }
