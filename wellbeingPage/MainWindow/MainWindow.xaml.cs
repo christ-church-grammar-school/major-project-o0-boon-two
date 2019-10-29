@@ -16,43 +16,51 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
-using wellbeingPage.Settings;
+using static wellbeingPage.Preferences;
 
 namespace wellbeingPage
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+    
     public partial class MainWindow : Window
     {
         
 
-        public bool ShutAll = true;  //when this window shuts everything shuts
         DispatcherTimer milliseconds = new DispatcherTimer();
+
+        public static Info info;
+
 
         public MainWindow()
         {
             InitializeComponent();
             MainFrame.Content = new Home();
+           
 
-          
             if (!File.Exists("StudentData.sqlite")) // IF THIS PERSON HAS NOT USED THE APP BEFORE
             {
 
                 Preferences SettingsWin = new Preferences();
                 SettingsWin.Show();
-                SettingsWin.SettingsFrame.Content = new Login();
-                SettingsWin.LoginStuff.Visibility = Visibility.Visible;
-                ShutAll = false;
-                this.Close();
+               
+                this.Hide();
             } else
             {
                 GetFromDB();
+                if (info.LiveMarksUpdate == "" || info.LiveMarksUpdate == "Last Updated: never")
+                {
+                    LastUp.Text = "Last Updated: never";
+                } else
+                {
+                    LastUp.Text = info.LiveMarksUpdate;
+                }
+                
             }
 
             milliseconds.Interval = TimeSpan.FromMilliseconds(1);
             milliseconds.Tick += Rot;
             milliseconds.Start();
+
+            SubjectList.ItemsSource = Marks.CurrentResults;
         }
         void Rot(object sender, object e)
         {
@@ -62,28 +70,38 @@ namespace wellbeingPage
             }
             
         }
+
         public static void GetFromDB() 
         {
+            
             Marks.SubjectResults.Clear();
             SQLiteConnection conn = new SQLiteConnection("StudentData.sqlite");
-           
+            
             List<Subject> res = (from m in conn.Table<Subject>() orderby m.YourAverage descending select m).ToList();
             
-            foreach(var i in res)
+            info = conn.Table<Info>().ToList()[0];
+            
+            foreach (var i in res)
             {
                 
-                var mrks = (from m in conn.Table<Mark>().Where(p => p.subject == i.Name) orderby m.date ascending select m).ToList();
+                var mrks = (from m in conn.Table<Mark>().Where(p => p.subject == i.Name && p.year == i.Year) orderby m.date ascending select m).ToList();
+                
+                
                 i.marks.AddRange(mrks);
                 Marks.SubjectResults.Add(i);
             }
 
             
-                
+
+
         }
         private void DarknessButtonScreenClicked(object sender, RoutedEventArgs e)
         {
             MenuPopup.Visibility = Visibility.Collapsed;
+            EditMarks.Visibility = Visibility.Collapsed;
+            SettingsPopup.Visibility = Visibility.Collapsed;
         }
+        
 
         private void MenuButtonClicked(object sender, RoutedEventArgs e)
         {
@@ -122,6 +140,8 @@ namespace wellbeingPage
             MarksSection.Visibility = Visibility.Collapsed;
             LastUp.Visibility = Visibility.Visible;
             ReloadButton.Visibility = Visibility.Visible;
+            EditButton.Visibility = Visibility.Visible;
+           
             MainFrame.Content = new Marks();
         }
         private void HomeClicked(object sender, RoutedEventArgs e)
@@ -131,7 +151,7 @@ namespace wellbeingPage
             HomeSection.Visibility = Visibility.Collapsed;
             MainFrame.Content = new Home();
         }
-        void ShowAllPages()
+        void ShowAllPages() // on the menu popup options
         {
             LastUp.Visibility = Visibility.Collapsed;
             ReloadButton.Visibility = Visibility.Collapsed;
@@ -141,14 +161,23 @@ namespace wellbeingPage
             WellbeingSection.Visibility = Visibility.Visible;
             GymSection.Visibility = Visibility.Visible;
             MarksSection.Visibility = Visibility.Visible;
+            EditButton.Visibility = Visibility.Collapsed;
         }
 
         private void MainWinClosed(object sender, EventArgs e)
         {
-            if (ShutAll)
+            SQLiteConnection conn = new SQLiteConnection("StudentData.sqlite");
+            try
             {
-                Application.Current.Shutdown();
+                info.LiveMarksUpdate = LastUp.Text;
+                conn.InsertOrReplace(info);
             }
+            catch { }
+
+            Application.Current.Shutdown();
+
+
+
         }
         private void ReloadMarks(object sender, RoutedEventArgs e)
         {
@@ -156,8 +185,113 @@ namespace wellbeingPage
             ReloadButton.IsEnabled = false;
         }
 
-        
+        private void CreateEditMarksPopup(object sender, RoutedEventArgs e)
+        {
+            
+            if (Marks.CurrentResults.Count == 0)
+            {
+                AddMarks.IsEnabled = false;
+                AddMarksDisabledRec.Visibility = Visibility.Visible;
+            }
+            EditMarks.Visibility = Visibility.Visible;
+            try
+            {
+                SubjectList.SelectedIndex = 0;
+            }
+            catch
+            {
 
+            }
+        }
+
+        private void SubjectChanged(object sender, RoutedEventArgs e)
+        {
+   
+           
+            try
+            {
+                MarksList.ItemsSource = Marks.CurrentResults[SubjectList.SelectedIndex].marks;
+                MarksList.ScrollIntoView(MarksList.Items[0]);
+            }
+            catch { }
+            try
+            {
+                MarksList.SelectedIndex = 0;
+                MarksList.ScrollIntoView(MarksList.Items[0]);
+            }
+            catch { }
+            
+        }
+
+        private void AddSub(object sender, RoutedEventArgs e)
+        {
+            Marks.CurrentResults.Add(new Subject()
+            {
+                Name = "Untitled\n",
+                Year = DateTime.Now.Year.ToString(), // not necessarily..
+                
+            });
+            AddMarksDisabledRec.Visibility = Visibility.Collapsed;
+            AddMarks.IsEnabled = true;
+       
+        }
+
+        private void AddMrk(object sender, RoutedEventArgs e)
+        {
+           
+            Marks.CurrentResults[SubjectList.SelectedIndex].marks.Add(new Mark() {
+                name = "Untitled\n",
+                
+            });
+
+            MarksList.ItemsSource = null;                                                             //update source with new item
+            MarksList.ItemsSource = Marks.CurrentResults[SubjectList.SelectedIndex].marks;
+            MarksList.SelectedIndex = MarksList.Items.Count - 1;
+            // MarksList.ItemsSource = Marks.CurrentResults[SubjectList.SelectedIndex].marks;
+        }
+
+        private void MarkChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                Mark mrk = Marks.CurrentResults[SubjectList.SelectedIndex].marks[MarksList.SelectedIndex];
+                Subject sub = Marks.CurrentResults[SubjectList.SelectedIndex];
+
+                SubName.Text = sub.Name;
+                SubYear.Text = sub.Year;
+
+                MarkName.Text = mrk.name;
+                MarkDate.Text = mrk.date.ToString();
+                MarkMark.Text = mrk.mark;
+            }
+            catch { }
+        }
+
+        private void Save(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SubYear_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void DeleteMark(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DeleteSub(object sender, RoutedEventArgs e)
+        {
+            var sub = VisualTreeHelper.GetParent(sender as Button);
+            if (sub == null)
+                MessageBox.Show("hh");
+            TextBlock parent = sub as TextBlock;
+            if (parent == null)
+                MessageBox.Show("pp");
+            
+            MessageBox.Show(sub.GetType().ToString());
+        }
     }
 }
-
