@@ -165,7 +165,8 @@ namespace wellbeingPage
             Console.WriteLine("Logging into live marks with username: " + username + " and password:  " + password);
 
             ChromeDriver driver = new ChromeDriver(driverService, Options);
-            
+            try
+            {
                 driver.Navigate().GoToUrl("https://parentportal.ccgs.wa.edu.au/");
                 System.Threading.Thread.Sleep(5000);
                 var search_box = driver.FindElementById("TextBoxUserName");
@@ -239,7 +240,7 @@ namespace wellbeingPage
 
                 var stry = FirstLine.Last();
                 string year = stry.Substring(0, 4);
-                Console.WriteLine("------------------:" +year.Contains('\n'));
+                Console.WriteLine("------------------:" + year.Contains('\n'));
                 Console.WriteLine(year);
 
                 int[] indexSub = new int[10];
@@ -297,26 +298,28 @@ namespace wellbeingPage
                         });
                     }
                 }
-               
 
 
-            App.Current.Dispatcher.Invoke((Action)delegate
-                {
 
-                    var str = "Last Updated: " + DateTime.Now.ToString("dd/MM/yyyy  h:mm tt");
+                App.Current.Dispatcher.Invoke((Action)delegate
+                    {
 
-                    ((MainWindow)System.Windows.Application.Current.MainWindow).LastUp.Text = str;
-                    ((MainWindow)System.Windows.Application.Current.MainWindow).ReloadButton.IsEnabled = true;
-                    ((MainWindow)Application.Current.MainWindow).ReloadRotater.Angle = 0;
-                    
+                        var str = "Last Updated: " + DateTime.Now.ToString("dd/MM/yyyy  h:mm tt");
 
-                });
+                        ((MainWindow)System.Windows.Application.Current.MainWindow).LastUp.Text = str;
+                        ((MainWindow)System.Windows.Application.Current.MainWindow).ReloadButton.IsEnabled = true;
+                        ((MainWindow)Application.Current.MainWindow).ReloadRotater.Angle = 0;
+
+
+                    });
                 MainWindow.GetFromDB();
                 Console.WriteLine("Chromedriver was unable to complete webscraping");
-                
 
-            return true;
-            
+
+                return true;
+            }
+            catch
+            {
                 Console.WriteLine("Chromedriver was unable to complete webscraping");
                 driver.Quit();
                 App.Current.Dispatcher.Invoke((Action)delegate
@@ -336,6 +339,6 @@ namespace wellbeingPage
 
                 return false;
             }
-        
+        }
     }
 }

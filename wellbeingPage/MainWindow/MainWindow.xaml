@@ -202,7 +202,7 @@
             </StackPanel>
         </Grid>
 
-        <Grid x:Name="EditMarks" Visibility="Visible">
+        <Grid x:Name="EditMarks" Visibility="Collapsed">
             <Grid.RowDefinitions>
                 <RowDefinition Height="86*"/>
                 <RowDefinition Height="599.5"/>
@@ -234,7 +234,7 @@
                     <DataTemplate>
 
                         <TextBlock Text="{Binding Name}"  TextWrapping="Wrap"  FontSize="30" Foreground="White" FontFamily="Consolas" Width="Auto">
-                            <Button Style="{StaticResource Expand}" Visibility="Visible"   HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="Black" Background="Black" Click="DeleteSub" Margin="157,0,0,0.5" >
+                            <Button Tag="{Binding Name}" Style="{StaticResource Expand}" Visibility="Visible"   HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="Black" Background="Black" Click="DeleteSub" Margin="157,0,0,0.5" >
                             <Button.Template>
                                 <ControlTemplate TargetType="{x:Type Button}">
                                     <Grid RenderTransformOrigin="0.25,0.25">
@@ -248,8 +248,8 @@
                                         </Grid.RenderTransform>
                                         <Ellipse Fill="#00000004" Width="40" Height="50"/>
                                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        <Rectangle Fill="#FF8F4646"  HorizontalAlignment="Left" Height="4"  VerticalAlignment="Top" Margin="22.5,14.5,0,0" Width="35" RadiusX="3" RadiusY="3"/>
-                                        <Rectangle Fill="#FF8F4646" HorizontalAlignment="Left" Height="35" VerticalAlignment="Top" Margin="37,0,0,0" Width="4" RadiusX="3" RadiusY="3"/>
+                                        <Rectangle Fill="#FF9C1515"  HorizontalAlignment="Left" Height="4"  VerticalAlignment="Top" Margin="22.5,14.5,0,0" Width="35" RadiusX="3" RadiusY="3"/>
+                                        <Rectangle Fill="#FF9C1515" HorizontalAlignment="Left" Height="35" VerticalAlignment="Top" Margin="37,0,0,0" Width="4" RadiusX="3" RadiusY="3"/>
                                     </Grid>
                                 </ControlTemplate>
                             </Button.Template>
@@ -279,7 +279,7 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding name}"  TextWrapping="Wrap"  FontSize="24" Foreground="White" FontFamily="Consolas" Width="Auto">
-                            <Button Style="{StaticResource Expand}" Visibility="Visible"   HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="Black" Background="Black" Click="DeleteMark" Margin="157,0,0,0.5" >
+                            <Button  Tag="{Binding name}"  Style="{StaticResource Expand}" Visibility="Visible"   HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="Black" Background="Black" Click="DeleteMark" Margin="157,0,0,0.5" >
                             <Button.Template>
                                 <ControlTemplate TargetType="{x:Type Button}">
                                     <Grid RenderTransformOrigin="0.25,0.25">
@@ -293,8 +293,8 @@
                                         </Grid.RenderTransform>
                                         <Ellipse Fill="#00000004" Width="40" Height="50"/>
                                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        <Rectangle Fill="#FF8F4646"  HorizontalAlignment="Left" Height="4"  VerticalAlignment="Top" Margin="22.5,14.5,0,0" Width="35" RadiusX="3" RadiusY="3"/>
-                                        <Rectangle Fill="#FF8F4646" HorizontalAlignment="Left" Height="35" VerticalAlignment="Top" Margin="37,0,0,0" Width="4" RadiusX="3" RadiusY="3"/>
+                                        <Rectangle Fill="#FF9C1515"  HorizontalAlignment="Left" Height="4"  VerticalAlignment="Top" Margin="22.5,14.5,0,0" Width="35" RadiusX="3" RadiusY="3"/>
+                                        <Rectangle Fill="#FF9C1515" HorizontalAlignment="Left" Height="35" VerticalAlignment="Top" Margin="37,0,0,0" Width="4" RadiusX="3" RadiusY="3"/>
                                     </Grid>
                                 </ControlTemplate>
                             </Button.Template>
@@ -327,7 +327,7 @@
 
         </Grid>
 
-        <Grid x:Name="SettingsPopup" Visibility="Collapsed">
+        <Grid x:Name="SettingsPopup" Visibility="Visible">
 
             <Button x:Name="DarknessButtonScreen3" Background="#CC3C3C3C" Click="DarknessButtonScreenClicked" Margin="0,0,0,-17.5" Grid.RowSpan="2">
                 <Button.Template>
@@ -349,9 +349,13 @@
                     <TextBox x:Name="UserField" HorizontalAlignment="Left"  MaxLength="56" VerticalAlignment="Top" FontSize="36" FontFamily="Consolas" Background="#00000000" BorderBrush="#00C1C1C1" Width="496" BorderThickness="0" Foreground="#FFC6C6C6" />
 
                     <Rectangle x:Name="Underline_Copy"  Fill="#FF1F1F1F" HorizontalAlignment="Left" Height="2" Stroke="White" VerticalAlignment="Top" Width="496" StrokeThickness="3"/>
-                    <TextBlock HorizontalAlignment="Left"  FontSize="20" FontFamily="Consolas"  TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" Foreground="White"  TextAlignment="Center"/>
+                    <TextBlock HorizontalAlignment="Left"  FontSize="20" FontFamily="Consolas"  TextWrapping="Wrap" Text="Password            " VerticalAlignment="Top" Foreground="White"  TextAlignment="Center"/>
                     <PasswordBox x:Name="PassField" HorizontalAlignment="Left" MaxLength="56"  VerticalAlignment="Top" FontSize="36" FontFamily="Consolas" Background="#00000000" BorderBrush="#00C1C1C1" Width="496" BorderThickness="0" Foreground="#FFC6C6C6" />
                     <Rectangle x:Name="Underline_Copy1"  Fill="#FF1F1F1F" HorizontalAlignment="Left" Height="2" Stroke="White" VerticalAlignment="Top" Width="496" StrokeThickness="3"/>
+                    <TextBlock HorizontalAlignment="Left"  FontSize="20" FontFamily="Consolas"  TextWrapping="Wrap" Text="Student  Number" VerticalAlignment="Top" Foreground="White"/>
+                    <TextBox x:Name="UserFieldk" HorizontalAlignment="Left"  MaxLength="56" VerticalAlignment="Top" FontSize="36" FontFamily="Consolas" Background="#00000000" BorderBrush="#00C1C1C1" Width="496" BorderThickness="0" Foreground="#FFC6C6C6" />
+
+                    <Rectangle x:Name="Underlimne_Copy"  Fill="#FF1F1F1F" HorizontalAlignment="Left" Height="2" Stroke="White" VerticalAlignment="Top" Width="496" StrokeThickness="3"/>
                     <RadioButton Content="Remind for Homework"  Height="35" Width="158" Foreground="White" Background="#FFFAD200" BorderBrush="Black" BorderThickness="3" RenderTransformOrigin="0.5,0.5" Margin="80,40,0,0" GroupName="homework" IsChecked="True">
                         <RadioButton.RenderTransform>
                             <TransformGroup>
