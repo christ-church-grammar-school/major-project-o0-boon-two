@@ -9,7 +9,7 @@
       Title="Home" SizeChanged="WindowSizeChanged">
 
     <Grid Background="#FF1F1F1F" Margin="0,0,0,1.5">
-        <Ellipse HorizontalAlignment="Center" VerticalAlignment="Center" Width="600" Height="600" Fill="#FFFAD200"/>
+        <Ellipse HorizontalAlignment="Center" VerticalAlignment="Center" Width="540" Height="540" Fill="#FFFAD200"/>
         <Rectangle x:Name="SecondHand" Fill="#FF747474" Margin="0,0,599,384" RenderTransformOrigin="1,0.5" HorizontalAlignment="Right" Width="250" VerticalAlignment="Bottom" Height="2">
             <Rectangle.RenderTransform>
                 <TransformGroup>
@@ -40,7 +40,7 @@
                 </TransformGroup>
             </Rectangle.RenderTransform>
         </Rectangle>
-        <Button x:Name="addButton" Style="{StaticResource Expand}" Margin="53,36,0,682.5" Foreground="{x:Null}" BorderBrush="Black" Background="Black" HorizontalAlignment="Left" Width="80" Click="OpenSettings">
+        <Button x:Name="addButton" Style="{StaticResource Expand}" Margin="53,36,0,0" Foreground="{x:Null}" BorderBrush="Black" Background="Black" HorizontalAlignment="Left" Width="80" Click="OpenSettings" Height="80" VerticalAlignment="Top">
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid>
@@ -48,7 +48,7 @@
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         <Ellipse Stroke="Black" StrokeThickness="1" Fill="Black" Width="Auto" Height="Auto" Margin="15"/>
                         <Rectangle Fill="Black" HorizontalAlignment="Left" Height="12" Stroke="#00000000" VerticalAlignment="Top" Margin="5,34,0,0" Grid.Row="0" Width="70" RadiusX="3" RadiusY="3"/>
-                        
+
                         <Rectangle Fill="Black" HorizontalAlignment="Left" Height="70" Stroke="#00000000" VerticalAlignment="Top" Margin="35,5,0,0" Grid.Row="0" Width="12" RadiusX="3" RadiusY="3"/>
                         <Rectangle Fill="Black" HorizontalAlignment="Left" Height="70" Stroke="#00000000" VerticalAlignment="Top" Width="12" RadiusX="3" RadiusY="3" RenderTransformOrigin="0.5,0.5" Margin="34,6,0,0">
                             <Rectangle.RenderTransform>
@@ -74,20 +74,19 @@
                     </Grid>
                 </ControlTemplate>
             </Button.Template>
-            
-            
+
+
         </Button>
-        <ListBox x:Name="PeriodList" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  AlternationCount="2"  ScrollViewer.CanContentScroll="False" Background="{x:Null}" BorderBrush="{x:Null}" Margin="26,201,921,176.5" SelectionChanged="changed">
+        <ListBox x:Name="PeriodList" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  AlternationCount="2"  ScrollViewer.CanContentScroll="False" Background="{x:Null}" BorderBrush="{x:Null}" Margin="53,200,894,178.5" SelectionChanged="changed">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}"  TextWrapping="Wrap"  FontSize="38" Foreground="White" FontFamily="Consolas" Width="Auto"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
+            <Rectangle Fill="Azure" Height="100" RadiusY="50" RadiusX="50" Width="100"/>
         </ListBox>
 
-        <Grid x:Name="LoadingScreen" Margin="0,0,0,0" Visibility="Collapsed" Background="#FF191919">
-            <Image x:Name="LoadingIcon" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Source="/wellbeingPage;component/Icon.png" Width="250"/>
-        </Grid>
+
 
     </Grid>
 </Page>

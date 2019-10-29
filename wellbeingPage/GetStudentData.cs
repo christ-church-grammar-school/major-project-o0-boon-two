@@ -90,7 +90,14 @@ namespace wellbeingPage
                     mrk.average = Convert.ToInt32(line[line.Count - 2].Split(new[] { "%" }, StringSplitOptions.None).ToList()[0]);
                     mrk.percent = Convert.ToDouble(line[line.Count - 6]) / Convert.ToDouble(line[line.Count - 4]);
                     mrk.year = year;
-                    mrk.mark = line[line.Count - 6] + "/" +line[line.Count - 4];
+                    double x = 0; 
+                    int y = 0;
+                
+                    Int32.TryParse(line[line.Count - 4], out y); // convert string to the mark number
+                    double.TryParse(line[line.Count - 6], out x);
+                    mrk.mark = x;
+                    mrk.outOf = y;
+                  
                     //MessageBox.Show(sub.YourScores[0]); 
 
                     mrk.date = Convert.ToDateTime(line[line.Count - 7]);
@@ -162,7 +169,7 @@ namespace wellbeingPage
             //Options.AddArgument("--headless");
             //Options.AddArgument("--always-on");
 
-            Console.WriteLine("Logging into live marks with username: " + username + " and password:  " + password);
+            Console.WriteLine("Logging into live marks with username: " + username + " and password:  " + password + " and student number:  " + studentNum);
 
             ChromeDriver driver = new ChromeDriver(driverService, Options);
             try
@@ -200,12 +207,8 @@ namespace wellbeingPage
                 {
 
                     PrevClipboard = Clipboard.GetText();
-                    //Console.Write(PrevClipboard);
 
                     element.Click();
-
-                    //Console.WriteLine("Yes");
-
 
                     element.SendKeys(Keys.Control + "a");
                     System.Threading.Thread.Sleep(50);
@@ -240,8 +243,7 @@ namespace wellbeingPage
 
                 var stry = FirstLine.Last();
                 string year = stry.Substring(0, 4);
-                Console.WriteLine("------------------:" + year.Contains('\n'));
-                Console.WriteLine(year);
+
 
                 int[] indexSub = new int[10];
                 int[] indexProg = new int[10];
