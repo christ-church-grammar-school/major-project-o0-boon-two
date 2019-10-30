@@ -285,7 +285,7 @@ namespace wellbeingPage
                 SubYear.Text = Marks.CurrentResults[SubjectList.SelectedIndex].Year;
 
                 MarkName.Text = Marks.CurrentResults[SubjectList.SelectedIndex].marks[MarksList.SelectedIndex].name;
-                MarkDate.Text = Marks.CurrentResults[SubjectList.SelectedIndex].marks[MarksList.SelectedIndex].date.ToString();
+                MarkDate.Text = Marks.CurrentResults[SubjectList.SelectedIndex].marks[MarksList.SelectedIndex].date.ToString(); // not working
                 MarkMark.Text = Convert.ToString(Marks.CurrentResults[SubjectList.SelectedIndex].marks[MarksList.SelectedIndex].mark);
                 MarkOutof.Text = Convert.ToString(Marks.CurrentResults[SubjectList.SelectedIndex].marks[MarksList.SelectedIndex].outOf);
 
@@ -456,6 +456,7 @@ namespace wellbeingPage
                 e.CancelCommand();
             }
         }
+        
     }
 }
 

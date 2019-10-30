@@ -67,7 +67,7 @@ namespace wellbeingPage
         
         private void OpenSettings(object sender, RoutedEventArgs e)
         {
-            ((MainWindow)System.Windows.Application.Current.MainWindow).SettingsPopup.Visibility = Visibility.Collapsed;
+            ((MainWindow)System.Windows.Application.Current.MainWindow).SettingsPopup.Visibility = Visibility.Visible;
             
         }
 

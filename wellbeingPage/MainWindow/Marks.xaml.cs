@@ -341,7 +341,7 @@ namespace wellbeingPage
                     Thickness margin = new Thickness(x, y, 0, 0);
 
                     MyHoverDate.Text = "Date: " + m.date.ToShortDateString();
-                    MyHoverMarks.Text = "Mark: " + m.mark;
+                    MyHoverMarks.Text = "Mark: " + m.mark + " / " + m.outOf;
                     MyHoverP.Text = "" + m.percent * 100;
                     MyHoverComments.Text = m.comment;
                     MyHoverWeight.Text = "Weight: " + m.weight;
@@ -363,6 +363,7 @@ namespace wellbeingPage
 
                     AvHoverDate.Text = "Date: " + m.date.ToShortDateString();
 
+                    AvHoverMark.Text = "Mark: " + Convert.ToString(Math.Round( (double)m.outOf*m.average/100,1)) + " / " + m.outOf;
                     AvHoverP.Text = "" + m.average;
                     AvHoverWeight.Text = "Weight: " + m.weight;
                     AvHoverName.Text = m.name;
