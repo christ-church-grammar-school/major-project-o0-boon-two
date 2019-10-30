@@ -76,6 +76,10 @@
             <Button x:Name="audio1Button" Content="5 Minute Meditation" Margin="0,-20" VerticalAlignment="Center" Background="#FFFAD200" BorderThickness="0" BorderBrush="#FFFAD200" FontFamily="Consolas" Foreground="Black" Height="54" FontSize="20" FontWeight="Bold" Click="audio1Clicked"/>
         </Border>
 
+        <Border x:Name="audio2Border" BorderBrush="#FFFAD200" BorderThickness="15" Margin="410,244,40,0" CornerRadius="35" Height="70" VerticalAlignment="Top">
+            <Button x:Name="audio2Button" Content="10 Minute Meditation" Margin="0,-20" VerticalAlignment="Center" Background="#FFFAD200" BorderThickness="0" BorderBrush="#FFFAD200" FontFamily="Consolas" Foreground="Black" Height="54" FontSize="20" FontWeight="Bold" Click="audio2Clicked"/>
+        </Border>
+
         <Rectangle x:Name="opacityRectangle" Fill="#CC3C3C3C" Margin="0" Stroke="#FF191919" Opacity="0.8" Visibility="Collapsed"/>
 
         <Grid x:Name="addPopup" Visibility="Collapsed" VerticalAlignment="Center" HorizontalAlignment="Center" Height="800" Width="1200">
@@ -122,7 +126,7 @@
             <TextBlock x:Name="healthDirectText" Text="    - https://www.healthdirect.gov.au/drugs-and-alcohol" FontSize="24" FontFamily="Consolas" Margin="120,331,590,436" Foreground="White"/>
             <TextBlock x:Name="mentalHealthText" Text="Mental Health:" FontSize="28" FontFamily="Consolas" FontWeight="Bold" Margin="120,451,590,316" Foreground="White"/>
             <TextBlock x:Name="beyondBlueText" Text="    - https://www.beyondblue.org.au/" FontSize="24" FontFamily="Consolas" Margin="120,489,590,278" Foreground="White"/>
-            
+            <TextBlock x:Name="rUOkText" Text="    - https://www.ruok.org.au/" FontSize="24" FontFamily="Consolas" Margin="120,522,590,245" Foreground="White"/>
 
             <Button x:Name="infoCloseButton" Width="80" Height="80" Margin="0,125,125,0" Foreground="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Top" BorderBrush="Black" Background="Black" Click="infoCloseClicked" RenderTransformOrigin="0.5,0.5">
                 <Button.RenderTransform>
