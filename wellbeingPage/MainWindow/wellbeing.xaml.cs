@@ -160,14 +160,33 @@ namespace wellbeingPage
                 audioStatusLabel.Content = "0:00 / 0:00";
             }
 
-            mediaPlayer.Open(new Uri("C:/User Program Files/VS Projects/wellbeingPage/major-project-o0-boon-two/wellbeingPage/Audio/MARC5MinuteBreathing.mp3"));
+            mediaPlayer.Open(new Uri("Audio/MARC5MinuteBreathing.mp3", UriKind.Relative));
             mediaPlayer.Play();
 
             playButton.IsEnabled = true;
             playButton.Opacity = 1;
             playButton.Visibility = Visibility.Collapsed;
             pauseButton.Visibility = Visibility.Visible;
-            mediaLabel.Content = Convert.ToString(mediaPlayer.Source);
+            mediaLabel.Content = "5 Minute Breathing Meditation";
+        }
+
+        private void audio2Clicked(object sender, RoutedEventArgs e)
+        {
+            if (mediaPlayer.Source != null)
+            {
+                mediaPlayer.Stop();
+                mediaLabel.Content = "";
+                audioStatusLabel.Content = "0:00 / 0:00";
+            }
+
+            mediaPlayer.Open(new Uri("Audio/FreeMindfulness10MinuteBreathing.mp3", UriKind.Relative));
+            mediaPlayer.Play();
+
+            playButton.IsEnabled = true;
+            playButton.Opacity = 1;
+            playButton.Visibility = Visibility.Collapsed;
+            pauseButton.Visibility = Visibility.Visible;
+            mediaLabel.Content = "10 Minute Breathing Meditation";
         }
     }
 }
