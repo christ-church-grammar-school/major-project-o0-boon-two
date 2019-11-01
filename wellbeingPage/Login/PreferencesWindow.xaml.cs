@@ -59,7 +59,8 @@ namespace wellbeingPage
             SQLiteConnection conn = new SQLiteConnection("StudentData.sqlite");
             conn.CreateTable<Subject>();
             conn.CreateTable<Info>();
-           
+            conn.CreateTable<Exercise>();
+
             conn.InsertOrReplace(inf);
             conn.CreateTable<Mark>();
             conn.Close();

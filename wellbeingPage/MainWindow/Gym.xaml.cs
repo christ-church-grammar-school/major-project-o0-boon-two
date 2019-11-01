@@ -270,7 +270,7 @@ namespace wellbeingPage
                listItemStack.Children.Add(listItem.workoutList);
 
                expandingRectangles.Child = listItemStack;
-            expandingRectangles.Width = 800;
+               expandingRectangles.Width = 800;
 
                workoutsPanel.Children.Add(expandingRectangles);
                workoutsPanel.Children.Add(itemNumber);

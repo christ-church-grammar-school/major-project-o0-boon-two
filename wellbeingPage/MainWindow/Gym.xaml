@@ -73,33 +73,45 @@
         <Rectangle x:Name="BackgroundScreen" Fill="#FF1F1F1F" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
         <TextBlock Style="{StaticResource textBlockListStyle}" FontSize="56" FontWeight="ExtraBold" Foreground="#FAD200" Margin="85,34,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="56" Width="Auto"> Workouts</TextBlock>
 
-        <Button x:Name="AddWorkout" Margin="1050,650,10,70" Height="70" Width="130" Click="AddWorkout_Click">Add a new workout</Button>
+        <Button x:Name="AddWorkout" Style="{StaticResource Expand}" Width="80" Margin="0,0,30,70" Foreground="{x:Null}" HorizontalAlignment="Right" Click="AddWorkout_Click" Cursor="Hand" Height="80" VerticalAlignment="Bottom">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Ellipse Fill="#FFFAD200" Width="80" Height="80"/>
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Foreground="White" FontSize="64" FontWeight="Bold" Text="+" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,18"/>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
 
         <Border x:Name="workoutsBorder" Margin="0,100,0,70" HorizontalAlignment="Left" Width="1200">
-            <StackPanel x:Name="workoutsPanel" Background="Transparent" Margin="35,10,376,10">
-                <ScrollBar Style="{StaticResource AScrollBar}">
 
-                </ScrollBar>
-            </StackPanel>
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="36,0,257,0">
+                <StackPanel x:Name="workoutsPanel" Width="Auto">
+                </StackPanel>
+            </ScrollViewer>
+
         </Border>
 
 
-        <Grid x:Name="AddWorkoutPopup" Visibility="Visible">
+        <Grid x:Name="AddWorkoutPopup" Visibility="Collapsed">
             <Grid.RowDefinitions>
-                <RowDefinition Height="23*"/>
-                <RowDefinition Height="57*"/>
+                <RowDefinition Height="230*"/>
+                <RowDefinition Height="222*"/>
+                <RowDefinition Height="349*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="91*"/>
                 <ColumnDefinition Width="309*"/>
             </Grid.ColumnDefinitions>
-            <Rectangle x:Name="DarknessScreen" Fill="#CC3C3C3C" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+            <Rectangle x:Name="DarknessScreen" Fill="#CC3C3C3C" Grid.ColumnSpan="2" Grid.RowSpan="3"/>
 
             <Border x:Name="AddATaskTopBorder" BorderThickness="1" CornerRadius="50,50,0,0" BorderBrush="#00000000" Background="#FFFAD200" Margin="100,105,100,10" Height="115" VerticalAlignment="Center" HorizontalAlignment="Center" Width="1000" Grid.ColumnSpan="2">
                 <TextBlock x:Name="AddATaskTextBlock" Text="New Workout" FontSize="72" FontFamily="Consolas" FontWeight="Bold" Foreground="White" Margin="31,9,-1,9" Height="95" VerticalAlignment="Center" HorizontalAlignment="Center" Width="968"/>
             </Border>
 
-            <Border x:Name="AddATaskBottomBorder" BorderThickness="1" CornerRadius="0,0,50,50" BorderBrush="#00000000" Background="#FF1F1F1F" Margin="100,205,100,125" HorizontalAlignment="Center" Width="1000" Height="470" VerticalAlignment="Center" Grid.ColumnSpan="2" Grid.RowSpan="2">
+            <Border x:Name="AddATaskBottomBorder" BorderThickness="1" CornerRadius="0,0,50,50" BorderBrush="#00000000" Background="#FF1F1F1F" Margin="100,205,100,125" HorizontalAlignment="Center" Width="1000" Height="470" VerticalAlignment="Center" Grid.ColumnSpan="2" Grid.RowSpan="3">
                 <Grid x:Name="AddAWorkoutStack" Width="980" Height="450">
                     <TextBox x:Name="namingWorkout" Margin="0,109,63,0" Height="42" IsEnabled="True" TextWrapping="Wrap" TextChanged="resetText" AcceptsReturn="False" HorizontalAlignment="Right" VerticalAlignment="Top" Foreground="Gray" Width="197" GotKeyboardFocus="ClearText" Text="Enter Workout Name" />
                     <Button x:Name="addAnExercise" Width="200" Height="60" IsEnabled="True" Margin="0,290,60,0" Click="Button_Click" Content="Add an Exercise" VerticalAlignment="Top" HorizontalAlignment="Right"/>
@@ -108,9 +120,9 @@
 
             </Border>
 
-            <TextBlock Style="{StaticResource textBlockListStyle}" FontSize="36" Foreground="#FAD200" Margin="121,210,773,552" VerticalAlignment="Center" HorizontalAlignment="Center" MinHeight="38" MinWidth="306" Text="Current Workout" Width="306" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+            <TextBlock Style="{StaticResource textBlockListStyle}" FontSize="36" Foreground="#FAD200" Margin="121,210,773,203.5" VerticalAlignment="Center" HorizontalAlignment="Center" MinHeight="38" MinWidth="306" Text="Current Workout" Width="306" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
 
-            <StackPanel x:Name="workoutStack" Background="Transparent" Margin="100,41,406,160" Grid.ColumnSpan="2" Grid.Row="1"/>
+            <StackPanel x:Name="workoutStack" Background="Transparent" Margin="0,40.5,406,160" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="2" HorizontalAlignment="Right" Width="694"/>
 
 
 
