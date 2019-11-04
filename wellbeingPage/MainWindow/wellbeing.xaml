@@ -80,7 +80,7 @@
             <Button x:Name="audio2Button" Content="10 Minute Meditation" Margin="0,-20" VerticalAlignment="Center" Background="#FFFAD200" BorderThickness="0" BorderBrush="#FFFAD200" FontFamily="Consolas" Foreground="Black" Height="54" FontSize="20" FontWeight="Bold" Click="audio2Clicked"/>
         </Border>
 
-        <Rectangle x:Name="opacityRectangle" Fill="#CC3C3C3C" Margin="0" Stroke="#FF191919" Opacity="0.8" Visibility="Collapsed"/>
+        <Rectangle x:Name="opacityRectangle" Fill="#CC3C3C3C" Margin="0" Stroke="#FF191919" Opacity="0.8" Visibility="Collapsed" />
 
         <Grid x:Name="addPopup" Visibility="Collapsed" VerticalAlignment="Center" HorizontalAlignment="Center" Height="800" Width="1200">
             <Border x:Name="addPopupTop" BorderThickness="1" Grid.Row="0" Grid.ColumnSpan="2" CornerRadius="50,50,0,0" BorderBrush="#00000000" Background="#FF191919" HorizontalAlignment="Left" VerticalAlignment="Top" Width="1000" Height="150" Margin="100,100,0,0">

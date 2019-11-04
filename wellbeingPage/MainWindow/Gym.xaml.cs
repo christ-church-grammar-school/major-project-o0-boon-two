@@ -145,15 +145,24 @@ namespace wellbeingPage
             exerciseList.Text += "\n";
 
             // Style of the rectangle back that is under the textblocks
-            Style textblock = this.FindResource("rectangleYellowStyle") as Style;
-            yellowTextBack.Style = textblock;
+            Style style = this.FindResource("rectangleYellowStyle") as Style;
+
+            yellowTextBack.Style = style;
             yellowTextBack.Height = 50;
             yellowTextBack.Width = 600;
 
             // Making it arrange in the stackpanel
-            exerciseName.Margin = new Thickness(80, -50, 0, 0);
-            exerciseList.Margin = new Thickness(80, -20, 0, 0);
-            yellowTextBack.Margin = new Thickness(50, 0, 0, 0);
+
+            if (workoutStack.Children.Count == 0)
+            {
+
+            }
+
+                exerciseName.Margin = new Thickness(40, -50, 0, 0);
+                exerciseList.Margin = new Thickness(40, -20, 0, 0);
+                yellowTextBack.Margin = new Thickness(10, 0, 0, 0);
+  
+
 
             // adding the exercise to the workout
             workoutStack.Children.Add(yellowTextBack);
@@ -199,11 +208,7 @@ namespace wellbeingPage
                     conn.Insert(i);
                 }
             }
-                        
-               //  string sql = ;
-             //    SQLiteCommand command = new SQLiteCommand(sql, conn);
-             //    command.ExecuteNonQuery();
-
+                  
         }
 
 
@@ -214,23 +219,20 @@ namespace wellbeingPage
                 TextBlock setTitle = new TextBlock();
 
             TextBlock exerciseName = new TextBlock();
-          //   GymWorkout localWorkout = new GymWorkout();
-            // localWorkout = addIt;
 
             Run bold = new Run();
-            
-
+            bold.Text = namingWorkout.Text;
             bold.FontWeight = FontWeights.Bold;
             bold.FontSize = 36;
-            addIt.workoutName = namingWorkout.Text;
-            bold.Text = addIt.workoutName.ToUpper();
+            exerciseName.Inlines.Add(bold);
+            setList.Inlines.Add(bold);
 
-            setTitle.Inlines.Add(bold);
-                addIt.exercises = appendedWorkout;
-                listItem.workoutTitle = setTitle;
-                
 
-                listItem.workoutList = setList;
+            addIt.exercises = appendedWorkout;
+            listItem.workoutTitle = setTitle;
+            listItem.workoutTitle.Inlines.Add(bold);
+
+            listItem.workoutList = setList;
 
                 for (int i = 0; i < addIt.exercises.Count; i++)
                 {
@@ -337,10 +339,18 @@ namespace wellbeingPage
 
         }
 
-        private void Page_SizeChanged(object sender, SizeChangedEventArgs e)
+        private void workoutCloseClicked(object sender, RoutedEventArgs e)
         {
-
+            AddWorkoutPopup.Visibility = Visibility.Collapsed;
+            deleteWorkout.IsEnabled = true;
+            deleteWorkout.Height = 50;
+            workoutToDelete.Height = 50;
+            deleteTab.Height = 50;
+            namingWorkout.Text = "";
+            workoutStack.Children.Clear();
         }
+
+
     }
     public class GymWorkout
     {
