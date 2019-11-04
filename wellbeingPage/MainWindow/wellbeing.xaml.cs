@@ -29,17 +29,17 @@ namespace wellbeingPage
 
             if (DateTime.Now.Hour > 0)
             {
-                greetingLabel.Content = "Good Morning,";
+                greetingLabel.Content = "Good Morning :)";
             }
 
             if (DateTime.Now.Hour > 12)
             {
-                greetingLabel.Content = "Good Afternoon,";
+                greetingLabel.Content = "Good Afternoon :)";
             }
 
             if (DateTime.Now.Hour > 17.5)
             {
-                greetingLabel.Content = "Good Evening,";
+                greetingLabel.Content = "Good Evening :)";
             }
 
             DispatcherTimer audioTimer = new DispatcherTimer();
