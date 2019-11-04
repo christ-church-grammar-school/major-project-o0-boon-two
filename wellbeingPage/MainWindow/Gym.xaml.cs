@@ -43,6 +43,7 @@ namespace wellbeingPage
             deleteWorkout.Height = 0;
             workoutToDelete.Height = 0;
             deleteTab.Height = 0;
+            logWorkout.Width = 0;
 
             // Shifts page shown from gym to add workout
             AddWorkoutPopup.Visibility = Visibility.Visible;
@@ -207,7 +208,7 @@ namespace wellbeingPage
                 {
                     conn.Insert(i);
                 }
-            }
+               }
                   
         }
 
@@ -277,6 +278,7 @@ namespace wellbeingPage
                workoutsPanel.Children.Add(itemNumber);
 
                AddWorkoutPopup.Visibility = Visibility.Collapsed;
+               logWorkout.Width = 120;
                deleteWorkout.IsEnabled = true;
                deleteWorkout.Height = 50;
                workoutToDelete.Height = 50;

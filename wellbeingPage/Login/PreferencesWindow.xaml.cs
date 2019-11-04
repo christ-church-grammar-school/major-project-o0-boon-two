@@ -60,6 +60,7 @@ namespace wellbeingPage
             conn.CreateTable<Subject>();
             conn.CreateTable<Info>();
             conn.CreateTable<Exercise>();
+            conn.CreateTable<wellbeingPage.TasksPage.TaskData>();
 
             conn.InsertOrReplace(inf);
             conn.CreateTable<Mark>();
