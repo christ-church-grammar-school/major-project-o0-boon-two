@@ -121,12 +121,12 @@
 
             <Border x:Name="infoPopupBottom" BorderThickness="1" Grid.Row="0" Grid.ColumnSpan="2" CornerRadius="0,0,50,50" BorderBrush="#00000000" Background="#FF1F1F1F" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="1000" Height="455" Margin="100,0,0,100"/>
 
-            <TextBlock x:Name="drugText" Text="Drugs and Alcohol:" FontSize="28" FontFamily="Consolas" FontWeight="Bold" Margin="120,260,590,507" Foreground="White"/>
-            <TextBlock x:Name="drugAwareText" Text="    - https://drugaware.com.au/" FontSize="24" FontFamily="Consolas" Margin="120,298,590,469" Foreground="White"/>
-            <TextBlock x:Name="healthDirectText" Text="    - https://www.healthdirect.gov.au/drugs-and-alcohol" FontSize="24" FontFamily="Consolas" Margin="120,331,590,436" Foreground="White"/>
-            <TextBlock x:Name="mentalHealthText" Text="Mental Health:" FontSize="28" FontFamily="Consolas" FontWeight="Bold" Margin="120,451,590,316" Foreground="White"/>
-            <TextBlock x:Name="beyondBlueText" Text="    - https://www.beyondblue.org.au/" FontSize="24" FontFamily="Consolas" Margin="120,489,590,278" Foreground="White"/>
-            <TextBlock x:Name="rUOkText" Text="    - https://www.ruok.org.au/" FontSize="24" FontFamily="Consolas" Margin="120,522,590,245" Foreground="White"/>
+            <TextBlock x:Name="drugText" Text="Drugs and Alcohol:" FontSize="28" FontFamily="Consolas" FontWeight="Bold" Margin="150,255,560,512" Foreground="White"/>
+            <TextBlock x:Name="drugAwareText" Text="    - https://drugaware.com.au/" FontSize="24" FontFamily="Consolas" Margin="150,298,560,469" Foreground="White"/>
+            <TextBlock x:Name="healthDirectText" Text="    - https://www.healthdirect.gov.au/drugs-and-alcohol" FontSize="24" FontFamily="Consolas" Margin="150,331,560,436" Foreground="White"/>
+            <TextBlock x:Name="mentalHealthText" Text="Mental Health:" FontSize="28" FontFamily="Consolas" FontWeight="Bold" Margin="150,451,560,316" Foreground="White"/>
+            <TextBlock x:Name="beyondBlueText" Text="    - https://www.beyondblue.org.au/" FontSize="24" FontFamily="Consolas" Margin="150,484,560,283" Foreground="White"/>
+            <TextBlock x:Name="rUOkText" Text="    - https://www.ruok.org.au/" FontSize="24" FontFamily="Consolas" Margin="150,517,560,250" Foreground="White"/>
 
             <Button x:Name="infoCloseButton" Width="80" Height="80" Margin="0,125,125,0" Foreground="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Top" BorderBrush="Black" Background="Black" Click="infoCloseClicked" RenderTransformOrigin="0.5,0.5">
                 <Button.RenderTransform>
@@ -156,6 +156,12 @@
             </Border>
 
             <Border x:Name="helpPopupBottom" BorderThickness="1" Grid.Row="0" Grid.ColumnSpan="2" CornerRadius="0,0,50,50" BorderBrush="#00000000" Background="#FF1F1F1F" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="1000" Height="455" Margin="100,0,0,100"/>
+
+            <TextBlock x:Name="suicideText" Text="Lifeline:" FontSize="28" FontFamily="Consolas" FontWeight="Bold" Margin="150,255,560,512" Foreground="White"/>
+            <TextBlock x:Name="callLineText" Text="    - Call 13 11 14" FontSize="24" FontFamily="Consolas" Margin="150,293,560,474" Foreground="White"/>
+            <TextBlock x:Name="callSLineText" Text="    - Call 1300 659 467" FontSize="24" FontFamily="Consolas" Margin="150,331,560,436" Foreground="White"/>
+            <TextBlock x:Name="blueText" Text="Beyond Blue:" FontSize="28" FontFamily="Consolas" FontWeight="Bold" Margin="150,451,560,316" Foreground="White"/>
+            <TextBlock x:Name="beyondBlueCallText" Text="    - Call 1300 224 636" FontSize="24" FontFamily="Consolas" Margin="150,489,560,278" Foreground="White"/>
 
             <Button x:Name="helpCloseButton" Width="80" Height="80" Margin="0,125,125,0" Foreground="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Top" BorderBrush="Black" Background="Black" RenderTransformOrigin="0.5,0.5" Click="helpCloseClicked">
                 <Button.RenderTransform>
@@ -382,15 +388,103 @@
             <Rectangle x:Name="wellbeingOpacityRectangle" Fill="#CC3C3C3C" Margin="0" Stroke="#FF191919" Opacity="0.8"/>
             <Rectangle Fill="#FF191919" HorizontalAlignment="Center" Height="600" RadiusY="50" RadiusX="50" Stroke="#FF191919" VerticalAlignment="Center" Width="1000"/>
 
-            <TextBlock x:Name="wellbeingQuestionTextBlock" Text="How are you feeling?" FontSize="48" FontFamily="Consolas" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,250,0,0" Foreground="White" Width="550" TextAlignment="Center"/>
+            <TextBlock x:Name="wellbeingQuestionTextBlock" Text="How are you feeling?" FontSize="48" FontFamily="Consolas" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,250" Foreground="White" Width="550" TextAlignment="Center"/>
 
-            <Button x:Name="happyButton" Width="100" Height="100" Margin="0" Foreground="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="Black" Background="Black" Cursor="Hand" Click="happyClicked">
+            <Button x:Name="happyButton" Margin="0,0,500,0" Foreground="{x:Null}" BorderBrush="Black" Background="Black" Cursor="Hand" Click="happyClicked" HorizontalAlignment="Center" Width="100" Height="100" VerticalAlignment="Center">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Ellipse Stroke="Black" StrokeThickness="1" Fill="#32CD32" Width="100" Height="100"/>
+                            <Ellipse Stroke="#00000000" StrokeThickness="1" Fill="Black" Width="50" Height="50" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="25,25,0,0"/>
+                            <Rectangle Width="50" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="25,25,0,0" Fill="#32CD32"/>
+                            <Rectangle Fill="Black" HorizontalAlignment="Left" Height="7.5" Stroke="#00000000" VerticalAlignment="Top" Margin="27.5,35,0,0" Grid.Row="1" Width="15" RadiusX="3.75" RadiusY="3.75"/>
+                            <Rectangle Fill="Black" HorizontalAlignment="Right" Height="7.5" Stroke="#00000000" VerticalAlignment="Top" Margin="0,35,27.5,0" Grid.Row="1" Width="15" RadiusX="3.75" RadiusY="3.75"/>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="RenderTransform">
+                            <Setter.Value>
+                                <ScaleTransform CenterX="40" CenterY="40" ScaleY="1" ScaleX="1" />
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation From="1" To="1.2"  AutoReverse="False" Duration="00:00:00.3" Storyboard.TargetProperty="RenderTransform.ScaleY" />
+                                            <DoubleAnimation From="1" To="1.2"  AutoReverse="False" Duration="00:00:00.3" Storyboard.TargetProperty="RenderTransform.ScaleX" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation To="1"  Duration="00:00:00.4" Storyboard.TargetProperty="RenderTransform.ScaleY" />
+                                            <DoubleAnimation To="1" Duration="00:00:00.4" Storyboard.TargetProperty="RenderTransform.ScaleX" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <Button x:Name="okButton" Margin="0,0,0,0" Foreground="{x:Null}" BorderBrush="Black" Background="Black" Cursor="Hand" Click="happyClicked" HorizontalAlignment="Center" Width="100" Height="100" VerticalAlignment="Center">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
                             <Ellipse Stroke="Black" StrokeThickness="1" Fill="#FFFAD200" Width="100" Height="100"/>
-                            <Ellipse Stroke="#00000000" StrokeThickness="1" Fill="Black" Width="50" Height="50" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="25,25,0,0"/>
+                            <Rectangle Fill="Black" HorizontalAlignment="Center" Height="10" Stroke="#00000000" VerticalAlignment="Center" Margin="0,20,0,0" Grid.Row="1" Width="35" RadiusX="3.75" RadiusY="3.75"/>
                             <Rectangle Width="50" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="25,25,0,0" Fill="#FFFAD200"/>
+                            <Rectangle Fill="Black" HorizontalAlignment="Left" Height="7.5" Stroke="#00000000" VerticalAlignment="Top" Margin="27.5,35,0,0" Grid.Row="1" Width="15" RadiusX="3.75" RadiusY="3.75"/>
+                            <Rectangle Fill="Black" HorizontalAlignment="Right" Height="7.5" Stroke="#00000000" VerticalAlignment="Top" Margin="0,35,27.5,0" Grid.Row="1" Width="15" RadiusX="3.75" RadiusY="3.75"/>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="RenderTransform">
+                            <Setter.Value>
+                                <ScaleTransform CenterX="40" CenterY="40" ScaleY="1" ScaleX="1" />
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation From="1" To="1.2"  AutoReverse="False" Duration="00:00:00.3" Storyboard.TargetProperty="RenderTransform.ScaleY" />
+                                            <DoubleAnimation From="1" To="1.2"  AutoReverse="False" Duration="00:00:00.3" Storyboard.TargetProperty="RenderTransform.ScaleX" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation To="1"  Duration="00:00:00.4" Storyboard.TargetProperty="RenderTransform.ScaleY" />
+                                            <DoubleAnimation To="1" Duration="00:00:00.4" Storyboard.TargetProperty="RenderTransform.ScaleX" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <Button x:Name="notOkButton" Margin="500,0,0,0" Foreground="{x:Null}" BorderBrush="Black" Background="Black" Cursor="Hand" Click="happyClicked" HorizontalAlignment="Center" Width="100" Height="100" VerticalAlignment="Center">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Ellipse Stroke="Black" StrokeThickness="1" Fill="#FF6347" Width="100" Height="100"/>
+                            <Ellipse Stroke="#00000000" StrokeThickness="1" Fill="Black" Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,50,0,0"/>
+                            <Rectangle Width="50" Height="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="25,70,0,0" Fill="#FF6347"/>
                             <Rectangle Fill="Black" HorizontalAlignment="Left" Height="7.5" Stroke="#00000000" VerticalAlignment="Top" Margin="27.5,35,0,0" Grid.Row="1" Width="15" RadiusX="3.75" RadiusY="3.75"/>
                             <Rectangle Fill="Black" HorizontalAlignment="Right" Height="7.5" Stroke="#00000000" VerticalAlignment="Top" Margin="0,35,27.5,0" Grid.Row="1" Width="15" RadiusX="3.75" RadiusY="3.75"/>
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
