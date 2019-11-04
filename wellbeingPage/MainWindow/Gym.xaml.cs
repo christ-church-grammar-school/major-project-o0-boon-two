@@ -218,28 +218,27 @@ namespace wellbeingPage
                 TextBlock setList = new TextBlock();
                 TextBlock setTitle = new TextBlock();
 
-            TextBlock exerciseName = new TextBlock();
-
             Run bold = new Run();
             bold.Text = namingWorkout.Text;
             bold.FontWeight = FontWeights.Bold;
             bold.FontSize = 36;
-            exerciseName.Inlines.Add(bold);
             setList.Inlines.Add(bold);
-
 
             addIt.exercises = appendedWorkout;
             listItem.workoutTitle = setTitle;
             listItem.workoutTitle.Inlines.Add(bold);
 
             listItem.workoutList = setList;
-
-                for (int i = 0; i < addIt.exercises.Count; i++)
+         
+            for (int i = 0; i < addIt.exercises.Count; i++)
                 {
-                    listItem.workoutList.Text += addIt.exercises[i].exerciseName;
-                    listItem.workoutList.Text += "\n";
-                    listItem.workoutList.Text += addIt.exercises[i].reps;
-                    listItem.workoutList.Text += "\n";
+                    Run boldExercise = new Run();
+                    boldExercise.Text = addIt.exercises[i].exerciseName;
+                    boldExercise.FontWeight = FontWeights.Bold;
+                     
+
+                    listItem.workoutList.Inlines.Add(boldExercise);
+                    listItem.workoutList.Inlines.Add("\n" + addIt.exercises[i].reps + "\n");
                 }
 
                Border expandingRectangles = new Border();
