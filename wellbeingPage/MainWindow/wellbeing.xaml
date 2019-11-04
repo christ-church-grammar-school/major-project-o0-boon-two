@@ -67,8 +67,7 @@
 
         <Label x:Name="mediaLabel" HorizontalAlignment="Left" Margin="50,0,0,300" Width="300" FontFamily="Consolas" Foreground="White" Height="50" VerticalAlignment="Bottom"/>
         <Label x:Name="wellbeingLabel" Content="Wellbeing" HorizontalAlignment="Left" Margin="10,140,0,0" VerticalAlignment="Top" Height="100" Width="380" FontFamily="Consolas" FontSize="64" FontWeight="Bold" Foreground="White" HorizontalContentAlignment="Center"/>
-        <Label x:Name="greetingLabel" Content="Good Morning," HorizontalAlignment="Left" Margin="10,285,0,0" VerticalAlignment="Top" Height="60" Width="380" FontSize="36" HorizontalContentAlignment="Center" FontFamily="Consolas" Foreground="White"/>
-        <Label x:Name="nameLabel" Content="Isaac" HorizontalAlignment="Left" Margin="10,350,0,0" VerticalAlignment="Top" Height="60" Width="380" FontFamily="Consolas" FontSize="36" HorizontalContentAlignment="Center" Foreground="White"/>
+        <Label x:Name="greetingLabel" Content="Good Morning" HorizontalAlignment="Left" Margin="10,276,0,0" VerticalAlignment="Top" Height="60" Width="380" FontSize="42" HorizontalContentAlignment="Center" FontFamily="Consolas" Foreground="White"/>
         <Label x:Name="planLabel" Content=" Mindfulness" Margin="410,0,0,680" FontFamily="Consolas" FontSize="48" VerticalContentAlignment="Center" Foreground="White" Height="120" VerticalAlignment="Top" HorizontalAlignment="Left" Width="665"/>
         <Label x:Name="audioStatusLabel" Content="0:00 / 0:00" HorizontalAlignment="Left" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="100,0,0,160" Width="200" Height="50" FontFamily="Consolas" FontWeight="Bold" FontSize="20" Foreground="White"/>
 
