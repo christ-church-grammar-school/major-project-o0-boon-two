@@ -27,6 +27,7 @@ namespace wellbeingPage
         {
             InitializeComponent();
 
+            //Greeting based on local time
             if (DateTime.Now.Hour > 0)
             {
                 greetingLabel.Content = "Good Morning :)";
@@ -50,6 +51,7 @@ namespace wellbeingPage
             wellbeingPopup.Visibility = Visibility.Visible;
         }
 
+        //Changing window
         public void Climbladder()
         {
             ladder(this, EventArgs.Empty);
@@ -95,6 +97,8 @@ namespace wellbeingPage
 
         private void menuButtonClicked(object sender, RoutedEventArgs e)
         {
+            mediaPlayer.Pause();
+
             MenuPopup.Visibility = Visibility.Visible;
         }
 
@@ -103,6 +107,7 @@ namespace wellbeingPage
             MenuPopup.Visibility = Visibility.Collapsed;
         }
 
+        //Opens file explorer and searches for mp3
         private void audioClicked(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -111,30 +116,40 @@ namespace wellbeingPage
             {
                 mediaPlayer.Open(new Uri(openFileDialog.FileName));
                 mediaPlayer.Play();
+
+                playButton.IsEnabled = true;
+                playButton.Opacity = 1;
+                playButton.Visibility = Visibility.Collapsed;
+                pauseButton.Visibility = Visibility.Visible;
             }
 
             opacityRectangle.Visibility = Visibility.Collapsed;
             addPopup.Visibility = Visibility.Collapsed;
 
-            playButton.IsEnabled = true;
-            playButton.Opacity = 1;
-            playButton.Visibility = Visibility.Collapsed;
-            pauseButton.Visibility = Visibility.Visible;
             mediaLabel.Content = openFileDialog.FileName;
         }
 
+        //Asks how you're going
         private void happyClicked(object sender, RoutedEventArgs e)
         {
             wellbeingPopup.Visibility = Visibility.Collapsed;
         }
 
+        //Determines length of audio file and how long it's been playing
         void loadTimer_Tick(object sender, EventArgs e)
         {
             if (mediaPlayer.Source != null)
+            {
                 if (mediaPlayer.NaturalDuration.HasTimeSpan)
+                {
                     audioStatusLabel.Content = String.Format("{0} / {1}", mediaPlayer.Position.ToString(@"mm\:ss"), mediaPlayer.NaturalDuration.TimeSpan.ToString(@"mm\:ss"));
+                }
+            }
+
             else
+            {
                 audioStatusLabel.Content = "0:00 / 0:00";
+            }
         }
 
         private void playClicked(object sender, RoutedEventArgs e)
@@ -167,7 +182,7 @@ namespace wellbeingPage
             playButton.Opacity = 1;
             playButton.Visibility = Visibility.Collapsed;
             pauseButton.Visibility = Visibility.Visible;
-            mediaLabel.Content = "5 Minute Breathing Meditation";
+            mediaLabel.Content = "       5 Minute Breathing Meditation";
         }
 
         private void audio2Clicked(object sender, RoutedEventArgs e)
@@ -186,7 +201,7 @@ namespace wellbeingPage
             playButton.Opacity = 1;
             playButton.Visibility = Visibility.Collapsed;
             pauseButton.Visibility = Visibility.Visible;
-            mediaLabel.Content = "10 Minute Breathing Meditation";
+            mediaLabel.Content = "       10 Minute Breathing Meditation";
         }
     }
 }
