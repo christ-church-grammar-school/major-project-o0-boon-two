@@ -17,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using static wellbeingPage.Preferences;
+using System.Text.RegularExpressions;
 
 namespace wellbeingPage
 {
@@ -46,9 +47,9 @@ namespace wellbeingPage
             } else
             {
                 GetFromDB();
-                if (info.LiveMarksUpdate == "" || info.LiveMarksUpdate == "Last Updated: never")
+                if (info.LiveMarksUpdate == "" || info.LiveMarksUpdate == "Last Updated: N/A")
                 {
-                    LastUp.Text = "Last Updated: never";
+                    LastUp.Text = "Last Updated: N/A";
                 } else
                 {
                     LastUp.Text = info.LiveMarksUpdate;
@@ -100,6 +101,20 @@ namespace wellbeingPage
             MenuPopup.Visibility = Visibility.Collapsed;
             EditMarks.Visibility = Visibility.Collapsed;
             SettingsPopup.Visibility = Visibility.Collapsed;
+            
+            if (((Button)sender).Name == "DarknessButtonScreen2") // remove subjects with no marks
+            {
+                Marks.CurrentResults.Clear();
+                
+                foreach (Subject sub in Marks.SubjectResults)
+                {
+
+                    if (sub.marks.Count > 0 && sub.Year == Marks.CurrentYear)
+                    {
+                        Marks.CurrentResults.Add(sub);
+                    }
+                }
+            }
         }
         
 
@@ -187,7 +202,17 @@ namespace wellbeingPage
 
         private void CreateEditMarksPopup(object sender, RoutedEventArgs e)
         {
-            
+            Marks.CurrentResults.Clear();
+
+            foreach (Subject sub in Marks.SubjectResults) // add subjecrts with no marks
+            {
+
+                if ( sub.Year == Marks.CurrentYear)
+                {
+                    Marks.CurrentResults.Add(sub);
+                }
+            }
+
             if (Marks.CurrentResults.Count == 0)
             {
                 AddMarks.IsEnabled = false;
@@ -202,12 +227,11 @@ namespace wellbeingPage
             {
 
             }
+
         }
 
         private void SubjectChanged(object sender, RoutedEventArgs e)
         {
-   
-           
             try
             {
                 MarksList.ItemsSource = Marks.CurrentResults[SubjectList.SelectedIndex].marks;
@@ -228,7 +252,7 @@ namespace wellbeingPage
             Marks.CurrentResults.Add(new Subject()
             {
                 Name = "Untitled\n",
-                Year = DateTime.Now.Year.ToString(), // not necessarily..
+                Year = Marks.CurrentYear, 
                 
             });
             AddMarksDisabledRec.Visibility = Visibility.Collapsed;
@@ -254,15 +278,19 @@ namespace wellbeingPage
         {
             try
             {
-                Mark mrk = Marks.CurrentResults[SubjectList.SelectedIndex].marks[MarksList.SelectedIndex];
                 Subject sub = Marks.CurrentResults[SubjectList.SelectedIndex];
+                Mark mrk = sub.marks[MarksList.SelectedIndex];
+                
+                SubName.Text = Marks.CurrentResults[SubjectList.SelectedIndex].Name;
+                SubYear.Text = Marks.CurrentResults[SubjectList.SelectedIndex].Year;
 
-                SubName.Text = sub.Name;
-                SubYear.Text = sub.Year;
+                MarkName.Text = Marks.CurrentResults[SubjectList.SelectedIndex].marks[MarksList.SelectedIndex].name;
+                MarkDate.Text = Marks.CurrentResults[SubjectList.SelectedIndex].marks[MarksList.SelectedIndex].date.ToString(); // not working
+                MarkMark.Text = Convert.ToString(Marks.CurrentResults[SubjectList.SelectedIndex].marks[MarksList.SelectedIndex].mark);
+                MarkOutof.Text = Convert.ToString(Marks.CurrentResults[SubjectList.SelectedIndex].marks[MarksList.SelectedIndex].outOf);
 
-                MarkName.Text = mrk.name;
-                MarkDate.Text = mrk.date.ToString();
-                MarkMark.Text = mrk.mark;
+                perc.Text = Convert.ToString(((double)mrk.mark)*100/ mrk.outOf);
+                AvPerc.Text = Convert.ToString(sub.YourAverage);
             }
             catch { }
         }
@@ -279,19 +307,157 @@ namespace wellbeingPage
 
         private void DeleteMark(object sender, RoutedEventArgs e)
         {
+            string Name = ((Button)sender).Tag.ToString();
+           
 
+            var selected = MessageBox.Show("Are you sure you would like to delete " + Name, "Delete Mark", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+            if (selected == MessageBoxResult.OK)
+            {
+                // Find subject to delete in CurrentResults
+                for (int i = 0; i < Marks.CurrentResults[SubjectList.SelectedIndex].marks.Count(); i++)
+                {
+                    if (Marks.CurrentResults[SubjectList.SelectedIndex].marks[i].name == Name)
+                    {
+                        Marks.CurrentResults[SubjectList.SelectedIndex].marks.RemoveAt(i);
+                    }
+                }
+
+                int index = 0;
+                for(var a = 0; a < Marks.SubjectResults.Count(); a ++)
+                {
+                    if (Marks.SubjectResults[a].All == Marks.CurrentResults[SubjectList.SelectedIndex].All)
+                    {
+                        index = a;
+                    }
+                }
+                // Find subject to delete in SubjectResults
+                for (int i = 0; i < Marks.SubjectResults[index].marks.Count(); i++)
+                {
+                    if (Marks.SubjectResults[index].marks[i].name == Name)
+                    {
+                        Marks.SubjectResults[index].marks.RemoveAt(i);
+                    }
+                }
+
+                SQLiteConnection con = new SQLiteConnection("StudentData.sqlite");
+
+
+                con.Execute("DELETE FROM Mark WHERE [subject] = '" + Marks.CurrentResults[SubjectList.SelectedIndex].Name + "' and [year] = '" + Marks.CurrentYear + "' and [name] = '" + Name + "'");
+
+                int sel = MarksList.SelectedIndex;
+
+                MarksList.ItemsSource = null;                                                             //update source with new item
+                MarksList.ItemsSource = Marks.CurrentResults[SubjectList.SelectedIndex].marks;
+
+                if (MarksList.SelectedIndex == -1)
+                {
+                    try
+                    {
+                        MarksList.SelectedIndex = 0;
+                        MarksList.ScrollIntoView(MarksList.Items[0]);
+
+                        MarksList.SelectedIndex = sel;
+                        MarksList.ScrollIntoView(MarksList.Items[sel]);
+                    }
+                    catch { }
+                    
+                }
+            }
         }
 
         private void DeleteSub(object sender, RoutedEventArgs e)
         {
-            var sub = VisualTreeHelper.GetParent(sender as Button);
-            if (sub == null)
-                MessageBox.Show("hh");
-            TextBlock parent = sub as TextBlock;
-            if (parent == null)
-                MessageBox.Show("pp");
-            
-            MessageBox.Show(sub.GetType().ToString());
+           string Name = ((Button)sender).Tag.ToString();
+            string all = Marks.CurrentYear+Name;
+            var a = new List<Mark>() { };
+
+           var selected = MessageBox.Show("Are you sure you would like to delete " + Name, "Delete Subject", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+           if (selected == MessageBoxResult.OK)
+            {
+                // Find subject to delete in SubjectResults
+                for (int i= 0; i < Marks.SubjectResults.Count(); i++)
+                {
+                    if (Marks.SubjectResults[i].All == all)
+                    {
+                        Marks.SubjectResults.RemoveAt(i);
+                    }
+                }
+
+                // Find subject to delete in CurrentResults
+                for (int i = 0; i < Marks.CurrentResults.Count(); i++)
+                {
+                    if (Marks.CurrentResults[i].Name == Name)
+                    {
+                        Marks.CurrentResults.RemoveAt(i);
+                    }
+                }
+
+                SQLiteConnection con = new SQLiteConnection("StudentData.sqlite");
+                
+                
+                con.Execute("DELETE FROM Subject WHERE [All] = '" + all + "'");
+                con.Execute("DELETE FROM Mark WHERE [subject] = '" + Name + "' and [year] = '"+ Marks.CurrentYear + "'");
+                if (SubjectList.SelectedIndex == -1)
+                {
+                    try
+                    {
+                        SubjectList.SelectedIndex = 0;
+                        SubjectList.ScrollIntoView(SubjectList.Items[0]);
+                    } catch
+                    {
+                        MarksList.ItemsSource = a;
+
+                    }
+                    
+                }
+            }
+
         }
+
+        private void TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                    Marks.CurrentResults[SubjectList.SelectedIndex].marks[MarksList.SelectedIndex].name = MarkName.Text;
+                Marks.CurrentResults[SubjectList.SelectedIndex].marks[MarksList.SelectedIndex].date = MarkDate.DisplayDate; ////////////////////////////////////////////////////////
+                // Marks.CurrentResults[SubjectList.SelectedIndex].marks[MarksList.SelectedIndex].mark = MarkMark.Text;
+
+                Marks.CurrentResults[SubjectList.SelectedIndex].Name = SubName.Text;
+                Marks.CurrentResults[SubjectList.SelectedIndex].Year = SubYear.Text;
+               
+                
+            } catch { }
+            
+        }
+
+        private static readonly Regex _regex = new Regex("[^0-9.-]+"); //regex that matches disallowed text
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = _regex.IsMatch(e.Text);    
+        }
+
+        private static bool IsTextAllowed(string text)
+        {
+            return !_regex.IsMatch(text);
+        }
+
+        private void TextBoxPasting(object sender, DataObjectPastingEventArgs e)
+        {
+            if (e.DataObject.GetDataPresent(typeof(String)))
+            {
+                String text = (String)e.DataObject.GetData(typeof(String));
+                if (!IsTextAllowed(text))
+                {
+                    e.CancelCommand();
+                }
+            }
+            else
+            {
+                e.CancelCommand();
+            }
+        }
+        
     }
 }
+
+

@@ -90,7 +90,14 @@ namespace wellbeingPage
                     mrk.average = Convert.ToInt32(line[line.Count - 2].Split(new[] { "%" }, StringSplitOptions.None).ToList()[0]);
                     mrk.percent = Convert.ToDouble(line[line.Count - 6]) / Convert.ToDouble(line[line.Count - 4]);
                     mrk.year = year;
-                    mrk.mark = line[line.Count - 6] + "/" +line[line.Count - 4];
+                    double x = 0; 
+                    int y = 0;
+                
+                    Int32.TryParse(line[line.Count - 4], out y); // convert string to the mark number
+                    double.TryParse(line[line.Count - 6], out x);
+                    mrk.mark = x;
+                    mrk.outOf = y;
+                  
                     //MessageBox.Show(sub.YourScores[0]); 
 
                     mrk.date = Convert.ToDateTime(line[line.Count - 7]);
@@ -162,10 +169,11 @@ namespace wellbeingPage
             //Options.AddArgument("--headless");
             //Options.AddArgument("--always-on");
 
-            Console.WriteLine("Logging into live marks with username: " + username + " and password:  " + password);
+            Console.WriteLine("Logging into live marks with username: " + username + " and password:  " + password + " and student number:  " + studentNum);
 
             ChromeDriver driver = new ChromeDriver(driverService, Options);
-            
+            try
+            {
                 driver.Navigate().GoToUrl("https://parentportal.ccgs.wa.edu.au/");
                 System.Threading.Thread.Sleep(5000);
                 var search_box = driver.FindElementById("TextBoxUserName");
@@ -199,12 +207,8 @@ namespace wellbeingPage
                 {
 
                     PrevClipboard = Clipboard.GetText();
-                    //Console.Write(PrevClipboard);
 
                     element.Click();
-
-                    //Console.WriteLine("Yes");
-
 
                     element.SendKeys(Keys.Control + "a");
                     System.Threading.Thread.Sleep(50);
@@ -239,8 +243,7 @@ namespace wellbeingPage
 
                 var stry = FirstLine.Last();
                 string year = stry.Substring(0, 4);
-                Console.WriteLine("------------------:" +year.Contains('\n'));
-                Console.WriteLine(year);
+
 
                 int[] indexSub = new int[10];
                 int[] indexProg = new int[10];
@@ -297,26 +300,28 @@ namespace wellbeingPage
                         });
                     }
                 }
-               
 
 
-            App.Current.Dispatcher.Invoke((Action)delegate
-                {
 
-                    var str = "Last Updated: " + DateTime.Now.ToString("dd/MM/yyyy  h:mm tt");
+                App.Current.Dispatcher.Invoke((Action)delegate
+                    {
 
-                    ((MainWindow)System.Windows.Application.Current.MainWindow).LastUp.Text = str;
-                    ((MainWindow)System.Windows.Application.Current.MainWindow).ReloadButton.IsEnabled = true;
-                    ((MainWindow)Application.Current.MainWindow).ReloadRotater.Angle = 0;
-                    
+                        var str = "Last Updated: " + DateTime.Now.ToString("dd/MM/yyyy  h:mm tt");
 
-                });
+                        ((MainWindow)System.Windows.Application.Current.MainWindow).LastUp.Text = str;
+                        ((MainWindow)System.Windows.Application.Current.MainWindow).ReloadButton.IsEnabled = true;
+                        ((MainWindow)Application.Current.MainWindow).ReloadRotater.Angle = 0;
+
+
+                    });
                 MainWindow.GetFromDB();
                 Console.WriteLine("Chromedriver was unable to complete webscraping");
-                
 
-            return true;
-            
+
+                return true;
+            }
+            catch
+            {
                 Console.WriteLine("Chromedriver was unable to complete webscraping");
                 driver.Quit();
                 App.Current.Dispatcher.Invoke((Action)delegate
@@ -336,6 +341,6 @@ namespace wellbeingPage
 
                 return false;
             }
-        
+        }
     }
 }
