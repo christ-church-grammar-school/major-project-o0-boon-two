@@ -1,17 +1,10 @@
 ﻿using SQLite;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace wellbeingPage
@@ -215,10 +208,11 @@ namespace wellbeingPage
 
         private void addCurrentWorkout(object sender, RoutedEventArgs e)
         {
-                ValidWorkout();
-                TextBlock setList = new TextBlock();
-                TextBlock setTitle = new TextBlock();
+            ValidWorkout();
+            TextBlock setList = new TextBlock();
+            TextBlock setTitle = new TextBlock();
 
+            //Makes a textblock that contains the workout title capitalised
             Run bold = new Run();
             bold.Text = namingWorkout.Text;
             bold.FontWeight = FontWeights.Bold;
@@ -231,64 +225,64 @@ namespace wellbeingPage
 
             listItem.workoutList = setList;
          
+            //Creates a Textblock with a list of bolded exercises and reps
             for (int i = 0; i < addIt.exercises.Count; i++)
-                {
-                    Run boldExercise = new Run();
-                    boldExercise.Text = addIt.exercises[i].exerciseName;
-                    boldExercise.FontWeight = FontWeights.Bold;
+            {
+                Run boldExercise = new Run();
+                boldExercise.Text = addIt.exercises[i].exerciseName;
+                boldExercise.FontWeight = FontWeights.Bold;
                      
 
-                    listItem.workoutList.Inlines.Add(boldExercise);
-                    listItem.workoutList.Inlines.Add("\n" + addIt.exercises[i].reps + "\n");
-                }
+                listItem.workoutList.Inlines.Add(boldExercise);
+                listItem.workoutList.Inlines.Add("\n" + addIt.exercises[i].reps + "\n");
+            }
 
-               Border expandingRectangles = new Border();
+            //This is the yellow backing aesthetic
+            Border expandingRectangles = new Border();
+            Rectangle setRect = new Rectangle();
+            listItem.workoutRect = setRect;
+            listItem.workoutRect.Margin = new Thickness(0, 5, 0, 0);
 
-               Rectangle setRect = new Rectangle();
-          
-               listItem.workoutRect = setRect;
-       
-               listItem.workoutRect.Margin = new Thickness(0, 5, 0, 0);
 
             Style style = this.FindResource("rectangleYellowStyle") as Style;
-               listItem.workoutRect.Height = (addIt.exercises.Count) * 32 + 65; // 60, 50
-               listItem.workoutList.Margin = new Thickness(50, (-32 * addIt.exercises.Count) - 15, 0, 0);
-            double x = listItem.workoutRect.Height; 
-               listItem.workoutTitle.Margin = new Thickness(50, -x + 5 , 0, 0); //  -x + 10
-               listItem.workoutRect.Style = style;
+            listItem.workoutRect.Height = (addIt.exercises.Count) * 32 + 65;
+            listItem.workoutList.Margin = new Thickness(50, (-32 * addIt.exercises.Count) - 15, 0, 0);
+            double x = listItem.workoutRect.Height;
+            listItem.workoutTitle.Margin = new Thickness(50, -x + 5, 0, 0); //  -x + 10
+            listItem.workoutRect.Style = style;
             listItem.workoutRect.Width = 800;
             workoutsPanel.Width = 850;
-          StackPanel listItemStack = new StackPanel();
+            StackPanel listItemStack = new StackPanel();
 
-               TextBlock itemNumber = new TextBlock();
-               itemNumber.Width = 100;
-               itemNumber.Height = 80;
-               itemNumber.Text = (setsOfListItems.Count + 1).ToString();
-               itemNumber.FontSize = 50;
-               itemNumber.Margin = new Thickness(300, -100, 0, 0);
- 
-               listItemStack.Children.Add(listItem.workoutRect);
-               listItemStack.Children.Add(listItem.workoutTitle);
-               listItemStack.Children.Add(listItem.workoutList);
+            TextBlock itemNumber = new TextBlock();
+            itemNumber.Width = 100;
+            itemNumber.Height = 80;
+            itemNumber.Text = (setsOfListItems.Count + 1).ToString();
+            itemNumber.FontSize = 50;
+            itemNumber.Margin = new Thickness(300, -100, 0, 0);
 
-               expandingRectangles.Child = listItemStack;
-               expandingRectangles.Width = 800;
+            listItemStack.Children.Add(listItem.workoutRect);
+            listItemStack.Children.Add(listItem.workoutTitle);
+            listItemStack.Children.Add(listItem.workoutList);
 
-               workoutsPanel.Children.Add(expandingRectangles);
-               workoutsPanel.Children.Add(itemNumber);
+            expandingRectangles.Child = listItemStack;
+            expandingRectangles.Width = 800;
 
-               AddWorkoutPopup.Visibility = Visibility.Collapsed;
-               logWorkout.Width = 120;
-               deleteWorkout.IsEnabled = true;
-               deleteWorkout.Height = 50;
-               workoutToDelete.Height = 50;
-               deleteTab.Height = 50;
-               namingWorkout.Text = "";
-               workoutStack.Children.Clear();
+            workoutsPanel.Children.Add(expandingRectangles);
+            workoutsPanel.Children.Add(itemNumber);
 
-               setsOfListItems.Add(expandingRectangles);
-               workoutsList.Add(addIt);
-               WorkoutsSavedToDB();
+            AddWorkoutPopup.Visibility = Visibility.Collapsed;
+            logWorkout.Width = 120;
+            deleteWorkout.IsEnabled = true;
+            deleteWorkout.Height = 50;
+            workoutToDelete.Height = 50;
+            deleteTab.Height = 50;
+            namingWorkout.Text = "";
+            workoutStack.Children.Clear();
+
+            setsOfListItems.Add(expandingRectangles);
+            workoutsList.Add(addIt);
+            WorkoutsSavedToDB();
         }
 
         private void resetText(object sender, TextChangedEventArgs e)
