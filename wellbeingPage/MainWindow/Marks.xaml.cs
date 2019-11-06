@@ -38,7 +38,8 @@ namespace wellbeingPage
         public string subject{ get; set; }
        
         public string name { get; set; }
-        public string mark { get; set; }
+        public double mark { get; set; }
+        public int outOf { get; set; }
         public double weight { get; set; }
         public DateTime date { get; set; }
       
@@ -54,7 +55,7 @@ namespace wellbeingPage
     public class Subject
     {
         [Unique,PrimaryKey]
-        public string All { get; set; } // year-name
+        public string All { get; set; } // year-names
 
         public string Name { get; set; }
         
@@ -70,8 +71,6 @@ namespace wellbeingPage
 
     public partial class Marks : Page
     {
-
-
         public static ObservableCollection<Subject> SubjectResults = new ObservableCollection<Subject>();
         public static ObservableCollection<Subject> CurrentResults = new ObservableCollection<Subject>();
         public static ObservableCollection<string> Years = new ObservableCollection<string>();
@@ -115,7 +114,6 @@ namespace wellbeingPage
             
             SetCurrentResults();
             UpdateOverallList();
-             
         }
       
 
@@ -272,7 +270,7 @@ namespace wellbeingPage
                 }
 
             }
-            else
+            else if (sub.marks.Count() == 1)
             {
                 Button a = new Button();
 
@@ -322,13 +320,13 @@ namespace wellbeingPage
                 var val = Convert.ToInt32(name[2]) - 48;
                 System.Windows.Point pos = e.GetPosition(DataBackround);
 
-                var x = pos.X;
-                var y = pos.Y;
+                var x = pos.X +  10;
+                var y = pos.Y + 10;
 
                 if (x > DataBackround.ActualWidth / 2)
                 {
 
-                    x -= HoverTestInfo.Width;
+                    x -= HoverTestInfo.Width + 20;
                 }
 
 
@@ -343,7 +341,7 @@ namespace wellbeingPage
                     Thickness margin = new Thickness(x, y, 0, 0);
 
                     MyHoverDate.Text = "Date: " + m.date.ToShortDateString();
-                    MyHoverMarks.Text = "Mark: " + m.mark;
+                    MyHoverMarks.Text = "Mark: " + m.mark + " / " + m.outOf;
                     MyHoverP.Text = "" + m.percent * 100;
                     MyHoverComments.Text = m.comment;
                     MyHoverWeight.Text = "Weight: " + m.weight;
@@ -359,12 +357,13 @@ namespace wellbeingPage
                 {
                     if (y > DataBackround.ActualHeight / 2)
                     {
-                        y -= HoverTestAv.Height;
+                        y -= HoverTestAv.Height +20;
                     }
                     Thickness margin = new Thickness(x, y, 0, 0);
 
                     AvHoverDate.Text = "Date: " + m.date.ToShortDateString();
 
+                    AvHoverMark.Text = "Mark: " + Convert.ToString(Math.Round( (double)m.outOf*m.average/100,1)) + " / " + m.outOf;
                     AvHoverP.Text = "" + m.average;
                     AvHoverWeight.Text = "Weight: " + m.weight;
                     AvHoverName.Text = m.name;

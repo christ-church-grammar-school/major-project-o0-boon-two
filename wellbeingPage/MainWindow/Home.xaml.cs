@@ -24,23 +24,11 @@ namespace wellbeingPage
     {
         DispatcherTimer seconds = new DispatcherTimer();
         DispatcherTimer milliseconds = new DispatcherTimer();
-        DispatcherTimer loadTimer = new DispatcherTimer();
 
         public Home()
         {
             InitializeComponent();
-
-            loadTimer.Tick += new EventHandler(loadTimer_Tick);
-            loadTimer.Interval = new TimeSpan(0, 0, 4);
-            loadTimer.Start();
-
-            var myProperty = App.Current.Properties["LoadThing"];
-
-            if (myProperty != "1")
-            {
-                LoadingScreen.Visibility = Visibility.Visible;
-            }
-
+            
             App.Current.Properties["LoadThing"] = "1";
 
             secondHand.Angle = (DateTime.Now.Second + (double)DateTime.Now.Millisecond / 1000) * 6 + 90;
@@ -56,11 +44,7 @@ namespace wellbeingPage
             milliseconds.Start();
         }
 
-        private void loadTimer_Tick(object sender, EventArgs e)
-        {
-            LoadingScreen.Visibility = Visibility.Collapsed;
-            loadTimer.IsEnabled = false;
-        }
+       
 
         void UpdateSecondHand(object sender, object e)
         {
@@ -83,8 +67,7 @@ namespace wellbeingPage
         
         private void OpenSettings(object sender, RoutedEventArgs e)
         {
-            Preferences prefWin = new Preferences();
-            prefWin.Show();
+            ((MainWindow)System.Windows.Application.Current.MainWindow).SettingsPopup.Visibility = Visibility.Visible;
             
         }
 
