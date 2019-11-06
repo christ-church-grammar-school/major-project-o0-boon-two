@@ -1,4 +1,4 @@
-﻿
+﻿using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +29,7 @@ namespace wellbeingPage
 
 
         // implement keeping data after app is closed
-
+        SQLiteConnection conn = new SQLiteConnection("StudentData.sqlite");
 
 
         /// MINOR TASKS
@@ -43,13 +43,9 @@ namespace wellbeingPage
         /// Lists of TaskDatas
 
         public List<TaskData> HomeworkList = new List<TaskData>();
-
         public List<TaskData> TestsList = new List<TaskData>();
-
         public List<TaskData> AssignmentsList = new List<TaskData>();
-
         public List<TaskData> OtherList = new List<TaskData>();
-
         public List<TaskData> ummlist = new List<TaskData>();
 
 
@@ -86,6 +82,8 @@ namespace wellbeingPage
 
             InitializeComponent();
 
+            // Create the table in SQLite Database
+            conn.CreateTable<TaskData>();
 
 
             UpdateTasks();
@@ -1513,10 +1511,11 @@ namespace wellbeingPage
 
 
 
-
+        [Table("Tasks")]
         public class TaskData
-
         {
+            //[PrimaryKey, Unique, AutoIncrement]
+            //public int ID { get; set; }
 
             public string taskname { get; set; }
 
