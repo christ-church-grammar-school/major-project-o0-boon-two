@@ -69,6 +69,11 @@ namespace wellbeingPage
         {
             ((MainWindow)System.Windows.Application.Current.MainWindow).SettingsPopup.Visibility = Visibility.Visible;
             
+            ((MainWindow)System.Windows.Application.Current.MainWindow).UserField.Text = MainWindow.info.Username;
+            
+            ((MainWindow)System.Windows.Application.Current.MainWindow).PassField.Password = MainWindow.info.Password;
+            ((MainWindow)System.Windows.Application.Current.MainWindow).UsernumField.Text= MainWindow.info.StudentNO;
+
         }
 
         private void changed(object sender, SelectionChangedEventArgs e)
