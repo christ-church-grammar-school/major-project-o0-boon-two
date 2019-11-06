@@ -202,7 +202,7 @@
             </StackPanel>
         </Grid>
 
-        <Grid x:Name="EditMarks" Visibility="Visible">
+        <Grid x:Name="EditMarks" Visibility="Collapsed">
             <Grid.RowDefinitions>
                 <RowDefinition Height="86*"/>
                 <RowDefinition Height="599.5"/>
@@ -304,11 +304,11 @@
                 </ListBox.ItemTemplate>
             </ListBox>
 
-            <TextBox x:Name="SubYear"   HorizontalAlignment="Right" DataObject.Pasting="TextBoxPasting" PreviewTextInput="NumberValidationTextBox" Height="40" Margin="0,0,226,425.5" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="97" Background="{x:Null}" Foreground="#FFD1D1D1" FontSize="22" Grid.Row="1" Grid.Column="1" CaretBrush="#FFEAEAEA" ManipulationCompleted="TextChanged"/>
-            <DatePicker x:Name="MarkDate" HorizontalAlignment="Right"  Margin="0,0,117,123.5" VerticalAlignment="Bottom" Height="24" Width="138" Grid.Row="1" Grid.Column="1" RenderTransformOrigin="0.5,0.5" Background="{x:Null}" FontSize="9">
+            <TextBox x:Name="SubYear"  Text="{Binding Year, Mode=TwoWay}" HorizontalAlignment="Right" DataObject.Pasting="TextBoxPasting" PreviewTextInput="NumberValidationTextBox" Height="40" Margin="0,0,226,425.5" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="97" Background="{x:Null}" Foreground="#FFD1D1D1" FontSize="22" Grid.Row="1" Grid.Column="1" CaretBrush="#FFEAEAEA"/>
+            <DatePicker x:Name="MarkDate" Text="{Binding date, Mode=TwoWay}" HorizontalAlignment="Right"  Margin="0,0,157,125.5" VerticalAlignment="Bottom" Height="24" Width="138" Grid.Row="1" Grid.Column="1" RenderTransformOrigin="0.5,0.5" Background="{x:Null}" FontSize="9">
                 <DatePicker.RenderTransform>
                     <TransformGroup>
-                        <ScaleTransform ScaleX="2" ScaleY="2"/>
+                        <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
                         <SkewTransform/>
                         <RotateTransform/>
                         <TranslateTransform/>
@@ -328,15 +328,15 @@
                 </Button.Template>
             </Button>
 
-            <TextBox x:Name="SubName"  HorizontalAlignment="Left" Height="63" Margin="680,66,0,0" TextWrapping="Wrap"   VerticalAlignment="Top" Width="277" Background="{x:Null}" Foreground="#FFD1D1D1" FontSize="22" Grid.Row="1" Grid.Column="1" CaretBrush="#FFEAEAEA" ManipulationCompleted="TextChanged"/>
-            <TextBox x:Name="MarkName" ManipulationCompleted="TextChanged" HorizontalAlignment="Left" TextChanged="TextChanged"  Height="68" Margin="680,273,0,0" TextWrapping="Wrap" Text="Mark Name" VerticalAlignment="Top" Width="276" Background="{x:Null}" Foreground="#FFD1D1D1" FontSize="22" Grid.Row="1" Grid.Column="1" CaretBrush="#FFEAEAEA"/>
-            <TextBox x:Name="MarkMark" ManipulationCompleted="TextChanged"  HorizontalAlignment="Right" DataObject.Pasting="TextBoxPasting" PreviewTextInput="NumberValidationTextBox" TextChanged="TextChanged"  Height="39" Margin="0,0,235,209.5" TextWrapping="Wrap" Text="0" VerticalAlignment="Bottom" Width="88" Background="{x:Null}" Foreground="#FFD1D1D1" FontSize="22" Grid.Row="1" Grid.Column="1" CaretBrush="#FFEAEAEA"/>
-            <TextBox x:Name="MarkOutof" ManipulationCompleted="TextChanged" HorizontalAlignment="Right" DataObject.Pasting="TextBoxPasting" PreviewTextInput="NumberValidationTextBox" TextChanged="TextChanged"  Height="39" Margin="0,0,113,209.5" TextWrapping="Wrap" Text="0" VerticalAlignment="Bottom" Width="88" Background="{x:Null}" Foreground="#FFD1D1D1" FontSize="22" Grid.Row="1" Grid.Column="1" UndoLimit="0" CaretBrush="#FFEAEAEA"/>
-            <TextBox x:Name="AvMark" ManipulationCompleted="TextChanged" HorizontalAlignment="Right" TextChanged="TextChanged"  Height="68" Margin="0,0,46,29.5" TextWrapping="Wrap" Text="Comment" VerticalAlignment="Bottom" Width="277" Background="{x:Null}" Foreground="#FFD1D1D1" FontSize="22" Grid.Row="1" Grid.Column="1" CaretBrush="#FFEAEAEA"/>
+            <TextBox x:Name="SubName"  HorizontalAlignment="Left" Text="{Binding Name, Mode=TwoWay}" Height="63" Margin="680,66,0,0" TextWrapping="Wrap"   VerticalAlignment="Top" Width="277" Background="{x:Null}" Foreground="#FFD1D1D1" FontSize="22" Grid.Row="1" Grid.Column="1" CaretBrush="#FFEAEAEA" />
+            <TextBox x:Name="MarkName" HorizontalAlignment="Left"   Height="68" Margin="680,273,0,0" TextWrapping="Wrap" Text="{Binding name, Mode=TwoWay}" VerticalAlignment="Top" Width="276" Background="{x:Null}" Foreground="#FFD1D1D1" FontSize="22" Grid.Row="1" Grid.Column="1" CaretBrush="#FFEAEAEA"/>
+            <TextBox x:Name="MarkMark"  HorizontalAlignment="Right" Text="{Binding mark, Mode=TwoWay}" DataObject.Pasting="TextBoxPasting" PreviewTextInput="NumberValidationTextBox"   Height="33" Margin="0,0,235,215.5" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="88" Background="{x:Null}" Foreground="#FFD1D1D1" FontSize="22" Grid.Row="1" Grid.Column="1" CaretBrush="#FFEAEAEA" LostKeyboardFocus="MarkEdit"/>
+            <TextBox x:Name="MarkOutof"  HorizontalAlignment="Right" Text="{Binding outOf, Mode=TwoWay}" DataObject.Pasting="TextBoxPasting" PreviewTextInput="NumberValidationTextBox"   Height="33" Margin="0,0,113,215.5" TextWrapping="Wrap"  VerticalAlignment="Bottom" Width="88" Background="{x:Null}" Foreground="#FFD1D1D1" FontSize="22" Grid.Row="1" Grid.Column="1" UndoLimit="0" CaretBrush="#FFEAEAEA"  LostKeyboardFocus="MarkEdit"/>
+            <TextBox x:Name="MarkCom"  HorizontalAlignment="Right"   Height="52" Margin="0,0,46,25.5" TextWrapping="Wrap" Text="{Binding comment, Mode=TwoWay}"  VerticalAlignment="Bottom" Width="277" Background="{x:Null}" Foreground="#FFD1D1D1" FontSize="22" Grid.Row="1" Grid.Column="1" CaretBrush="#FFEAEAEA"/>
             <Rectangle x:Name="AddMarksDisabledRec" Fill="#991F1F1F" RadiusX="50" RadiusY="50" Grid.Row="1" Grid.Column="1" Visibility="Collapsed" Margin="398,541,525,0.5"/>
             <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="622,14,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Subject" VerticalAlignment="Top" Width="201" Height="47" Foreground="White" FontSize="36" FontWeight="Bold" FontFamily="Consolas"/>
             <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="622,220,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Mark" VerticalAlignment="Top" Width="201" Height="48" Foreground="White" FontSize="36" FontWeight="Bold" FontFamily="Consolas"/>
-            <Rectangle Grid.Column="1" Fill="#FFD4D4D4" HorizontalAlignment="Left" Height="55" Margin="782,343,0,0" Grid.Row="1" VerticalAlignment="Top" Width="4" RadiusY="3.5" RadiusX="3.5" RenderTransformOrigin="0.5,0.5">
+            <Rectangle Grid.Column="1" Fill="#FFD4D4D4" HorizontalAlignment="Left" Height="51" Margin="783,343,0,0" Grid.Row="1" VerticalAlignment="Top" Width="4" RadiusY="3.5" RadiusX="3.5" RenderTransformOrigin="0.5,0.5">
                 <Rectangle.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -348,18 +348,24 @@
             </Rectangle>
             <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="593,71,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="87" Height="43" Foreground="#FF8A8A8A" FontSize="22" FontWeight="Bold" FontFamily="Consolas"/>
             <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="593,134,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Year" VerticalAlignment="Top" Width="87" Height="40" Foreground="#FF8A8A8A" FontSize="22" FontWeight="Bold" FontFamily="Consolas"/>
-            <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="593,184,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Average" VerticalAlignment="Top" Width="87" Height="40" Foreground="#FF8A8A8A" FontSize="22" FontWeight="Bold" FontFamily="Consolas"/>
+            <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="782,134,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Average" VerticalAlignment="Top" Width="87" Height="40" Foreground="#FF8A8A8A" FontSize="22" FontWeight="Bold" FontFamily="Consolas"/>
             <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="593,273,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="87" Height="43" Foreground="#FF8A8A8A" FontSize="22" FontWeight="Bold" FontFamily="Consolas"/>
             <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="588,356,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Mark" VerticalAlignment="Top" Width="87" Height="43" Foreground="#FF8A8A8A" FontSize="22" FontWeight="Bold" FontFamily="Consolas"/>
             <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="593,446,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Date" VerticalAlignment="Top" Width="87" Height="43" Foreground="#FF8A8A8A" FontSize="22" FontWeight="Bold" FontFamily="Consolas"/>
-            <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="593,507,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Comment" VerticalAlignment="Top" Width="87" Height="43" Foreground="#FF8A8A8A" FontSize="22" FontWeight="Bold" FontFamily="Consolas"/>
-            <TextBlock Name="AvPerc" Grid.Column="1" HorizontalAlignment="Left" Margin="693,184,0,0" Grid.Row="1" TextWrapping="Wrap" Text="80.98" VerticalAlignment="Top" Width="87" Height="31" Foreground="#FF2EB700" FontSize="22" FontWeight="Bold" FontFamily="Consolas"/>
-            <TextBlock Name="perc" Grid.Column="1" HorizontalAlignment="Left" Margin="680,398,0,0" Grid.Row="1" TextWrapping="Wrap" Text="76" VerticalAlignment="Top" Width="87" Height="26" Foreground="#FF2AA600" FontSize="22" FontWeight="Bold" FontFamily="Consolas"/>
+            <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="593,522,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Comment" VerticalAlignment="Top" Width="87" Height="29" Foreground="#FF8A8A8A" FontSize="22" FontWeight="Bold" FontFamily="Consolas"/>
+            <TextBlock Name="AvPerc" Grid.Column="1" HorizontalAlignment="Left" Margin="882,134,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="87" Height="31" Foreground="#FF2EB700" FontSize="22" FontWeight="Bold" FontFamily="Consolas"/>
+            <TextBlock Name="perc" Grid.Column="1" Text="{Binding percent, Mode=TwoWay}" HorizontalAlignment="Left" Margin="680,398,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="76" Height="26" Foreground="#FF2AA600" FontSize="22" FontWeight="Bold" FontFamily="Consolas"/>
             <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="588,398,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Percent" VerticalAlignment="Top" Width="87" Height="43" Foreground="#FF8A8A8A" FontSize="22" FontWeight="Bold" FontFamily="Consolas"/>
+            <TextBox x:Name="MarkAv" Text="{Binding average, Mode=TwoWay}" HorizontalAlignment="Right" DataObject.Pasting="TextBoxPasting" PreviewTextInput="NumberValidationTextBox"   Height="25" Margin="0,0,46,175.5" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="90" Background="{x:Null}" Foreground="#FFD1D1D1" FontSize="22" Grid.Row="1" Grid.Column="1" UndoLimit="0" CaretBrush="#FFEAEAEA"/>
+            <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="771,398,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Average" VerticalAlignment="Top" Width="87" Height="26" Foreground="#FF8A8A8A" FontSize="22" FontWeight="Bold" FontFamily="Consolas"/>
+            <TextBox x:Name="weighting"  HorizontalAlignment="Right"   Height="28" Margin="0,0,226,82.5" TextWrapping="Wrap" Text="{Binding weight, Mode=TwoWay}"  VerticalAlignment="Bottom" Width="97" Background="{x:Null}" Foreground="#FFD1D1D1" FontSize="22" Grid.Row="1" Grid.Column="1" CaretBrush="#FFEAEAEA"/>
+            <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="593,489,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Weight" VerticalAlignment="Top" Width="87" Height="43" Foreground="#FF8A8A8A" FontSize="22" FontWeight="Bold" FontFamily="Consolas"/>
+            <TextBox x:Name="SubTeacher"  Text="{Binding teacher, Mode=TwoWay}" HorizontalAlignment="Right"  Height="40" Margin="0,0,46,379.5" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="277" Background="{x:Null}" Foreground="#FFD1D1D1" FontSize="22" Grid.Row="1" Grid.Column="1" CaretBrush="#FFEAEAEA"/>
+            <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="593,180,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Teacher" VerticalAlignment="Top" Width="87" Height="40" Foreground="#FF8A8A8A" FontSize="22" FontWeight="Bold" FontFamily="Consolas"/>
 
         </Grid>
 
-        <Grid x:Name="SettingsPopup" Visibility="Collapsed">
+        <Grid x:Name="SettingsPopup" Visibility="Visible">
 
             <Button x:Name="DarknessButtonScreen3" Background="#CC3C3C3C" Click="DarknessButtonScreenClicked" Margin="0,0,0,-17.5" Grid.RowSpan="2">
                 <Button.Template>
@@ -378,14 +384,14 @@
             <ScrollViewer x:Name="PeriodList" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False" Background="#FF232323" BorderBrush="{x:Null}" Margin="148,112,151,183.5"  Foreground="{x:Null}">
                 <StackPanel Height="477">
                     <TextBlock HorizontalAlignment="Left"  FontSize="20" FontFamily="Consolas"  TextWrapping="Wrap" Text="Username" VerticalAlignment="Top" Foreground="White"/>
-                    <TextBox x:Name="UserField" HorizontalAlignment="Left"  MaxLength="56" VerticalAlignment="Top" FontSize="36" FontFamily="Consolas" Background="#00000000" BorderBrush="#00C1C1C1" Width="496" BorderThickness="0" Foreground="#FFC6C6C6" />
+                    <TextBox x:Name="UserField" HorizontalAlignment="Left"  MaxLength="56" VerticalAlignment="Top" FontSize="36"  FontFamily="Consolas" Background="#00000000" BorderBrush="#00C1C1C1" Width="496" BorderThickness="0" Foreground="#FFC6C6C6" />
 
                     <Rectangle x:Name="Underline_Copy"  Fill="#FF1F1F1F" HorizontalAlignment="Left" Height="2" Stroke="White" VerticalAlignment="Top" Width="496" StrokeThickness="3"/>
                     <TextBlock HorizontalAlignment="Left"  FontSize="20" FontFamily="Consolas"  TextWrapping="Wrap" Text="Password            " VerticalAlignment="Top" Foreground="White"  TextAlignment="Center"/>
-                    <PasswordBox x:Name="PassField" HorizontalAlignment="Left" MaxLength="56"  VerticalAlignment="Top" FontSize="36" FontFamily="Consolas" Background="#00000000" BorderBrush="#00C1C1C1" Width="496" BorderThickness="0" Foreground="#FFC6C6C6" />
+                    <PasswordBox x:Name="PassField" HorizontalAlignment="Left" MaxLength="56"   VerticalAlignment="Top" FontSize="36" FontFamily="Consolas" Background="#00000000" BorderBrush="#00C1C1C1" Width="496" BorderThickness="0" Foreground="#FFC6C6C6" />
                     <Rectangle x:Name="Underline_Copy1"  Fill="#FF1F1F1F" HorizontalAlignment="Left" Height="2" Stroke="White" VerticalAlignment="Top" Width="496" StrokeThickness="3"/>
                     <TextBlock HorizontalAlignment="Left"  FontSize="20" FontFamily="Consolas"  TextWrapping="Wrap" Text="Student  Number" VerticalAlignment="Top" Foreground="White"/>
-                    <TextBox x:Name="UserFieldk" HorizontalAlignment="Left"  MaxLength="56" VerticalAlignment="Top" FontSize="36" FontFamily="Consolas" Background="#00000000" BorderBrush="#00C1C1C1" Width="496" BorderThickness="0" Foreground="#FFC6C6C6" />
+                    <TextBox x:Name="UsernumField" HorizontalAlignment="Left"   MaxLength="56" VerticalAlignment="Top" FontSize="36" FontFamily="Consolas" Background="#00000000" BorderBrush="#00C1C1C1" Width="496" BorderThickness="0" Foreground="#FFC6C6C6" />
 
                     <Rectangle x:Name="Underlimne_Copy"  Fill="#FF1F1F1F" HorizontalAlignment="Left" Height="2" Stroke="White" VerticalAlignment="Top" Width="496" StrokeThickness="3"/>
                     <RadioButton Content="Remind for Homework"  Height="35" Width="158" Foreground="White" Background="#FFFAD200" BorderBrush="Black" BorderThickness="3" RenderTransformOrigin="0.5,0.5" Margin="80,40,0,0" GroupName="homework" IsChecked="True">

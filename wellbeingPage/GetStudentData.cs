@@ -88,7 +88,7 @@ namespace wellbeingPage
 
                     mrk.weight= Convert.ToDouble(line[line.Count - 1].Split(new[] { "%" }, StringSplitOptions.None).ToList()[0]); // Getting weight as last term
                     mrk.average = Convert.ToInt32(line[line.Count - 2].Split(new[] { "%" }, StringSplitOptions.None).ToList()[0]);
-                    mrk.percent = Convert.ToDouble(line[line.Count - 6]) / Convert.ToDouble(line[line.Count - 4]);
+                    mrk.percent = Convert.ToDouble(line[line.Count - 6]) *100/ Convert.ToDouble(line[line.Count - 4]);
                     mrk.year = year;
                     double x = 0; 
                     int y = 0;
@@ -307,7 +307,7 @@ namespace wellbeingPage
                     {
 
                         var str = "Last Updated: " + DateTime.Now.ToString("dd/MM/yyyy  h:mm tt");
-
+                        
                         ((MainWindow)System.Windows.Application.Current.MainWindow).LastUp.Text = str;
                         ((MainWindow)System.Windows.Application.Current.MainWindow).ReloadButton.IsEnabled = true;
                         ((MainWindow)Application.Current.MainWindow).ReloadRotater.Angle = 0;
