@@ -26,7 +26,7 @@ namespace wellbeingPage
         {
             InitializeComponent();
             // Create the table in SQLite Database
-            conn.CreateTable<Exercise>();
+            conn.CreateTable<ExerciseIdentity>();
         }
 
         private void AddWorkout_Click(object sender, RoutedEventArgs e)
@@ -195,12 +195,17 @@ namespace wellbeingPage
         private void WorkoutsSavedToDB()
         {
             // Adds workout to DB
+            conn.Execute("DELETE FROM  GymExercises WHERE [id] != 'Null'");
              foreach (GymWorkout x in workoutsList)
                {
+                ExerciseIdentity add = new ExerciseIdentity();
+                add.workoutName = x.workoutName;
                 foreach (Exercise i in x.exercises)
                 {
-                    conn.Insert(i);
+                    add.exercise = i;
+                    conn.Insert(add);
                 }
+                
                }
                   
         }
@@ -248,9 +253,11 @@ namespace wellbeingPage
             listItem.workoutRect.Height = (addIt.exercises.Count) * 32 + 65;
             listItem.workoutList.Margin = new Thickness(50, (-32 * addIt.exercises.Count) - 15, 0, 0);
             double x = listItem.workoutRect.Height;
-            listItem.workoutTitle.Margin = new Thickness(50, -x + 5, 0, 0); //  -x + 10
+            listItem.workoutTitle.Margin = new Thickness(50, -x + 5, 0, 0);
             listItem.workoutRect.Style = style;
             listItem.workoutRect.Width = 800;
+
+            //Adds the workout title, exercises and rectangle to a stack in a border
             workoutsPanel.Width = 850;
             StackPanel listItemStack = new StackPanel();
 
@@ -271,6 +278,7 @@ namespace wellbeingPage
             workoutsPanel.Children.Add(expandingRectangles);
             workoutsPanel.Children.Add(itemNumber);
 
+            //Changing pages and resetting necessary elements
             AddWorkoutPopup.Visibility = Visibility.Collapsed;
             logWorkout.Width = 120;
             deleteWorkout.IsEnabled = true;
@@ -354,17 +362,22 @@ namespace wellbeingPage
         public List<Exercise> exercises = new List<Exercise>();
     }
 
-    [Table("GymExercises")]
     public class Exercise
     {
         //   public string workoutName;
-        [PrimaryKey, Unique, AutoIncrement]
-        public int ID { get; set; }
-
         public string WorkoutName { get; set; }
         public string exerciseName { get; set; }
         public string reps { get; set; }
     }
+    [Table("GymExercises")]
+    public class ExerciseIdentity
+    {
+        [PrimaryKey, Unique, AutoIncrement]
+        public int ID { get; set; }
+        public string workoutName;
+        public Exercise exercise = new Exercise();
+    }
+
 
     public class ListObject
     {
