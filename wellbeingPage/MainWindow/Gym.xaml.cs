@@ -19,14 +19,18 @@ namespace wellbeingPage
         ListObject listItem = new ListObject();
         List<Border> setsOfListItems = new List<Border>();
         List<GymWorkout> workoutsList = new List<GymWorkout>();
+        List<Exercise> databaseExercises = new List<Exercise>();
         SQLiteConnection conn = new SQLiteConnection("StudentData.sqlite");
+        
+
 
 
         public Gym()
         {
             InitializeComponent();
             // Create the table in SQLite Database
-            conn.CreateTable<ExerciseIdentity>();
+            conn.CreateTable<Exercise>();
+            refreshList();
         }
 
         private void AddWorkout_Click(object sender, RoutedEventArgs e)
@@ -97,6 +101,7 @@ namespace wellbeingPage
             // Where _Entered are the textboxes
             newestWorkout.exerciseName = exerciseEntered.Text.ToString();
             newestWorkout.reps = repsEntered.Text.ToString();
+            newestWorkout.WorkoutName = namingWorkout.Text.ToString();
 
             // Adding the 'Exercise' to appendedWorkout<Exercise>
             appendedWorkout.Add(newestWorkout);
@@ -192,32 +197,13 @@ namespace wellbeingPage
             }
         }
 
-        private void WorkoutsSavedToDB()
-        {
-            // Adds workout to DB
-            conn.Execute("DELETE FROM  GymExercises WHERE [id] != 'Null'");
-             foreach (GymWorkout x in workoutsList)
-               {
-                ExerciseIdentity add = new ExerciseIdentity();
-                add.workoutName = x.workoutName;
-                foreach (Exercise i in x.exercises)
-                {
-                    add.exercise = i;
-                    conn.Insert(add);
-                }
-                
-               }
-                  
-        }
-
-
         private void addCurrentWorkout(object sender, RoutedEventArgs e)
         {
             ValidWorkout();
             TextBlock setList = new TextBlock();
             TextBlock setTitle = new TextBlock();
 
-            //Makes a textblock that contains the workout title capitalised
+            //Makes a textblock that contains the workout title
             Run bold = new Run();
             bold.Text = namingWorkout.Text;
             bold.FontWeight = FontWeights.Bold;
@@ -225,6 +211,7 @@ namespace wellbeingPage
             setList.Inlines.Add(bold);
 
             addIt.exercises = appendedWorkout;
+            addIt.workoutName = namingWorkout.Text;
             listItem.workoutTitle = setTitle;
             listItem.workoutTitle.Inlines.Add(bold);
 
@@ -285,12 +272,118 @@ namespace wellbeingPage
             deleteWorkout.Height = 50;
             workoutToDelete.Height = 50;
             deleteTab.Height = 50;
-            namingWorkout.Text = "";
             workoutStack.Children.Clear();
 
             setsOfListItems.Add(expandingRectangles);
             workoutsList.Add(addIt);
-            WorkoutsSavedToDB();
+            addIt.workoutName = namingWorkout.Text;
+            
+            foreach (var i in addIt.exercises)
+            {
+                i.WorkoutName = addIt.workoutName;
+                conn.Insert(i);
+            }
+            namingWorkout.Text = "";
+        }
+
+        private void fetchFromDB()
+        {
+             databaseExercises = conn.Table<Exercise>().ToList();
+        }
+
+        private void refreshList()
+        {
+            workoutsPanel.Children.Clear();
+            //updates a list we can then work with
+            fetchFromDB();
+
+            List<string> workoutNames = new List<string>();
+
+            //defines what the workouts are called
+            foreach (var i in databaseExercises)
+            {
+                if (workoutNames.Contains(i.WorkoutName) == false)
+                {
+                    workoutNames.Add(i.WorkoutName);
+                }
+            }
+
+            foreach (var i in workoutNames)
+            {
+                TextBlock setList = new TextBlock();
+                TextBlock setTitle = new TextBlock();
+
+                //Makes a textblock that contains the workout title
+                Run bold = new Run();
+                bold.Text = i;
+                bold.FontWeight = FontWeights.Bold;
+                bold.FontSize = 36;
+
+              //  addIt.exercises = appendedWorkout;
+                listItem.workoutTitle = setTitle;
+                listItem.workoutTitle.Inlines.Add(bold);
+                listItem.workoutList = setList;
+
+                List<Exercise>exercisesOfWorkout = new List<Exercise>();
+
+                foreach (var z in databaseExercises)
+                {
+                    if (z.WorkoutName == i)
+                    {
+                        exercisesOfWorkout.Add(z);
+                    }
+                }
+                
+
+                //Creates a Textblock with a list of bolded exercises and reps
+                foreach (var b in exercisesOfWorkout)
+                {
+                    Run boldExercise = new Run();
+                    boldExercise.Text = b.exerciseName;
+                    boldExercise.FontWeight = FontWeights.Bold;
+
+
+                    listItem.workoutList.Inlines.Add(boldExercise);
+                    listItem.workoutList.Inlines.Add("\n" + b.reps + "\n");
+                }
+
+                //This is the yellow backing aesthetic
+                Border expandingRectangles = new Border();
+                Rectangle setRect = new Rectangle();
+                listItem.workoutRect = setRect;
+                listItem.workoutRect.Margin = new Thickness(0, 5, 0, 0);
+
+                Style style = this.FindResource("rectangleYellowStyle") as Style;
+                listItem.workoutRect.Height = (exercisesOfWorkout.Count) * 32 + 65;
+                listItem.workoutList.Margin = new Thickness(50, (-32 * exercisesOfWorkout.Count) - 15, 0, 0);
+                double x = listItem.workoutRect.Height;
+                listItem.workoutTitle.Margin = new Thickness(50, -x + 5, 0, 0);
+                listItem.workoutRect.Style = style;
+                listItem.workoutRect.Width = 800;
+
+                //Adds the workout title, exercises and rectangle to a stack in a border
+                workoutsPanel.Width = 850;
+                StackPanel listItemStack = new StackPanel();
+
+                TextBlock itemNumber = new TextBlock();
+                itemNumber.Width = 100;
+                itemNumber.Height = 80;
+                itemNumber.Text = (setsOfListItems.Count + 1).ToString();
+                itemNumber.FontSize = 50;
+                itemNumber.Margin = new Thickness(300, -100, 0, 0);
+
+                listItemStack.Children.Add(listItem.workoutRect);
+                listItemStack.Children.Add(listItem.workoutTitle);
+                listItemStack.Children.Add(listItem.workoutList);
+
+                expandingRectangles.Child = listItemStack;
+                expandingRectangles.Width = 800;
+
+                workoutsPanel.Children.Add(expandingRectangles);
+                workoutsPanel.Children.Add(itemNumber);
+
+                namingWorkout.Text = "";
+            }
         }
 
         private void resetText(object sender, TextChangedEventArgs e)
@@ -318,6 +411,7 @@ namespace wellbeingPage
 
                 try
                 {
+                    conn.Execute("?DELETE FROM  GymExercises WHERE [ID] == {0}", workoutToDelete.Text.ToString());
                     setsOfListItems.RemoveAt(Convert.ToInt32(workoutToDelete.Text.ToString()) - 1);
                     deleteWorkout.Content = "Done!";
                     workoutsPanel.Children.Clear();
@@ -362,20 +456,12 @@ namespace wellbeingPage
         public List<Exercise> exercises = new List<Exercise>();
     }
 
+  
     public class Exercise
     {
-        //   public string workoutName;
         public string WorkoutName { get; set; }
         public string exerciseName { get; set; }
         public string reps { get; set; }
-    }
-    [Table("GymExercises")]
-    public class ExerciseIdentity
-    {
-        [PrimaryKey, Unique, AutoIncrement]
-        public int ID { get; set; }
-        public string workoutName;
-        public Exercise exercise = new Exercise();
     }
 
 
