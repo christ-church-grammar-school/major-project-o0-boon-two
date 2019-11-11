@@ -20,6 +20,7 @@ namespace wellbeingPage
         List<Border> setsOfListItems = new List<Border>();
         List<GymWorkout> workoutsList = new List<GymWorkout>();
         List<Exercise> databaseExercises = new List<Exercise>();
+        List<string> numbersCorrespondence = new List<string>();
         SQLiteConnection conn = new SQLiteConnection("StudentData.sqlite");
         
 
@@ -211,6 +212,7 @@ namespace wellbeingPage
             setList.Inlines.Add(bold);
 
             addIt.exercises = appendedWorkout;
+            numbersCorrespondence.Add(namingWorkout.Text);
             addIt.workoutName = namingWorkout.Text;
             listItem.workoutTitle = setTitle;
             listItem.workoutTitle.Inlines.Add(bold);
@@ -251,7 +253,7 @@ namespace wellbeingPage
             TextBlock itemNumber = new TextBlock();
             itemNumber.Width = 100;
             itemNumber.Height = 80;
-            itemNumber.Text = (setsOfListItems.Count + 1).ToString();
+            itemNumber.Text = (workoutsPanel.Children.Count / 2 + 1).ToString();
             itemNumber.FontSize = 50;
             itemNumber.Margin = new Thickness(300, -100, 0, 0);
 
@@ -294,6 +296,7 @@ namespace wellbeingPage
         private void refreshList()
         {
             workoutsPanel.Children.Clear();
+            numbersCorrespondence.Clear();
             //updates a list we can then work with
             fetchFromDB();
 
@@ -305,6 +308,7 @@ namespace wellbeingPage
                 if (workoutNames.Contains(i.WorkoutName) == false)
                 {
                     workoutNames.Add(i.WorkoutName);
+                    numbersCorrespondence.Add(i.WorkoutName);
                 }
             }
 
@@ -368,7 +372,7 @@ namespace wellbeingPage
                 TextBlock itemNumber = new TextBlock();
                 itemNumber.Width = 100;
                 itemNumber.Height = 80;
-                itemNumber.Text = (setsOfListItems.Count + 1).ToString();
+                itemNumber.Text = (workoutsPanel.Children.Count/2 + 1).ToString();
                 itemNumber.FontSize = 50;
                 itemNumber.Margin = new Thickness(300, -100, 0, 0);
 
@@ -387,7 +391,8 @@ namespace wellbeingPage
         }
 
         private void resetText(object sender, TextChangedEventArgs e)
-        {
+        { 
+        
             if (namingWorkout.Text != "" && namingWorkout.Text != "Enter Workout Name")
             {
                 addToWorkouts.IsEnabled = true;
@@ -408,25 +413,16 @@ namespace wellbeingPage
 
         private void RemoveWorkout(object sender, RoutedEventArgs e)
         {
-
-                try
+            conn.Execute("DELETE FROM Exercise WHERE [WorkoutName] = '" + numbersCorrespondence[Convert.ToInt32(workoutToDelete.Text.ToString()) - 1] + "'");
+            fetchFromDB();
+            deleteWorkout.Content = "Done!";
+            workoutsPanel.Children.Clear();
+            try
                 {
-                    conn.Execute("?DELETE FROM  GymExercises WHERE [ID] == {0}", workoutToDelete.Text.ToString());
-                    setsOfListItems.RemoveAt(Convert.ToInt32(workoutToDelete.Text.ToString()) - 1);
-                    deleteWorkout.Content = "Done!";
-                    workoutsPanel.Children.Clear();
-                    for (var i = 0; i < setsOfListItems.Count; i++)
-                    {
-                        workoutsPanel.Children.Add(setsOfListItems[i]);
-                        TextBlock itemNumber = new TextBlock();
-                        itemNumber.Width = 100;
-                        itemNumber.Height = 80;
-                        itemNumber.FontSize = 50;
-                        itemNumber.Margin = new Thickness(300, -100, 0, 0);
-                        itemNumber.Text = (i + 1).ToString();
-                        workoutsPanel.Children.Add(itemNumber);
-                    }
-                }
+               
+
+                refreshList();
+            }
                 catch
                 {
                     deleteWorkout.Content = "Invalid!";
