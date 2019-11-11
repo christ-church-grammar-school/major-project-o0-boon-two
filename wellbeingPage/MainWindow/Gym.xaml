@@ -171,6 +171,5 @@
         <TextBlock x:Name="deleteTab"  Margin="431,40,0,0" Height="50" Width="375" TextAlignment="Center" FontWeight="Bold" FontSize="36" Background="#FAD200" TextWrapping="Wrap" Text="Delete Workout #" VerticalAlignment="Top" HorizontalAlignment="Left"/>
         <TextBox x:Name="workoutToDelete" Height="50" Width="65"  FontSize="36" MaxLength="2" Margin="792,40,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"></TextBox>
         <Button x:Name="deleteWorkout" Height="50" Margin="838,40,0,0"  FontSize="24" HorizontalAlignment="Left" Width="193" VerticalAlignment="Top" Click="RemoveWorkout">Remove Workout</Button>
-        <Button x:Name="logWorkout" Height="80" Width="120" Margin="966,400,114,320"></Button>
     </Grid>
 </Page>
