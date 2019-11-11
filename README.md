@@ -7,4 +7,4 @@ HOW TO USE APP after downloading zip
 1. extract zip into UserProgramFiles
 2. copy the file "chromedriver.exe" which can be found in the main directory of this repository 
    into \wellbeingPage\bin\Debug (you may need to build the app using VS first)
-3. run the app
+3. run the wellbeingpage.exe
