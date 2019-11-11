@@ -18,6 +18,7 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using static wellbeingPage.Preferences;
 using System.Text.RegularExpressions;
+using System.Globalization;
 
 namespace wellbeingPage
 {
@@ -34,6 +35,7 @@ namespace wellbeingPage
         public MainWindow()
         {
             InitializeComponent();
+            
             MainFrame.Content = new Home();
            
 
@@ -78,7 +80,7 @@ namespace wellbeingPage
             Marks.SubjectResults.Clear();
             SQLiteConnection conn = new SQLiteConnection("StudentData.sqlite");
             
-            List<Subject> res = (from m in conn.Table<Subject>() orderby m.YourAverage descending select m).ToList();
+            List<Subject> res = (from m in conn.Table<Subject>() orderby m.Year descending orderby m.YourAverage descending select m).ToList();
             
             info = conn.Table<Info>().ToList()[0];
             
@@ -102,18 +104,59 @@ namespace wellbeingPage
             EditMarks.Visibility = Visibility.Collapsed;
             SettingsPopup.Visibility = Visibility.Collapsed;
             
+            
             if (((Button)sender).Name == "DarknessButtonScreen2") // remove subjects with no marks
             {
-                Marks.CurrentResults.Clear();
-                
-                foreach (Subject sub in Marks.SubjectResults)
+                SQLiteConnection conn = new SQLiteConnection("StudentData.sqlite");
+                foreach (var a in Marks.CurrentResults)
                 {
+                    if (!Marks.SubjectResults.Contains(a))
+                    {
+                        Console.WriteLine("zdgxfchg");
+                        Marks.SubjectResults.Add(a);
+                    }
+                }
+                Marks.CurrentResults.Clear();
+                foreach (Subject sub in Marks.SubjectResults) 
+                {
+                    string old = sub.All;
+                    
+                    sub.All = sub.Year + sub.Name;
+                    conn.InsertOrReplace(sub);
+
+                    if (sub.All != old) // delete old duplicate
+                    {
+                        conn.Execute("DELETE FROM Subject WHERE [All] = '" + old + "'");
+                    }
+                    foreach (Mark m in sub.marks)
+                    {
+                        string oldm = m.All;
+                        m.year = sub.Year;
+                        m.subject = sub.Name;
+                        m.All = m.year + m.name + m.subject;
+
+                        conn.InsertOrReplace(m);
+
+                        if (m.All != oldm) // delete old duplicate
+                        {
+                            conn.Execute("DELETE FROM Mark WHERE [All] = '" + oldm + "'");
+                        }
+                    }
 
                     if (sub.marks.Count > 0 && sub.Year == Marks.CurrentYear)
                     {
                         Marks.CurrentResults.Add(sub);
                     }
                 }
+
+                foreach (Subject sub in Marks.SubjectResults)
+                {
+                    if (!Marks.Years.Contains(sub.Year))
+                    {
+                        Marks.Years.Add(sub.Year);
+                    }
+                }
+
             }
         }
         
@@ -162,6 +205,8 @@ namespace wellbeingPage
         private void HomeClicked(object sender, RoutedEventArgs e)
         {
             MenuPopup.Visibility = Visibility.Collapsed;
+            
+         
             ShowAllPages();
             HomeSection.Visibility = Visibility.Collapsed;
             MainFrame.Content = new Home();
@@ -198,6 +243,7 @@ namespace wellbeingPage
         {
             GetStudentData.DownloadLiveMarks(true);
             ReloadButton.IsEnabled = false;
+
         }
 
         private void CreateEditMarksPopup(object sender, RoutedEventArgs e)
@@ -227,7 +273,6 @@ namespace wellbeingPage
             {
 
             }
-
         }
 
         private void SubjectChanged(object sender, RoutedEventArgs e)
@@ -253,18 +298,16 @@ namespace wellbeingPage
             {
                 Name = "Untitled\n",
                 Year = Marks.CurrentYear, 
-                
             });
             AddMarksDisabledRec.Visibility = Visibility.Collapsed;
             AddMarks.IsEnabled = true;
-       
         }
 
         private void AddMrk(object sender, RoutedEventArgs e)
         {
-           
             Marks.CurrentResults[SubjectList.SelectedIndex].marks.Add(new Mark() {
                 name = "Untitled\n",
+                date = DateTime.Now.Date
                 
             });
 
@@ -278,18 +321,23 @@ namespace wellbeingPage
         {
             try
             {
+                MarkName.DataContext = Marks.CurrentResults[SubjectList.SelectedIndex].marks[MarksList.SelectedIndex];
                 Subject sub = Marks.CurrentResults[SubjectList.SelectedIndex];
                 Mark mrk = sub.marks[MarksList.SelectedIndex];
                 
-                SubName.Text = Marks.CurrentResults[SubjectList.SelectedIndex].Name;
-                SubYear.Text = Marks.CurrentResults[SubjectList.SelectedIndex].Year;
+                SubName.DataContext= Marks.CurrentResults[SubjectList.SelectedIndex];
+                SubYear.DataContext = Marks.CurrentResults[SubjectList.SelectedIndex];
 
-                MarkName.Text = Marks.CurrentResults[SubjectList.SelectedIndex].marks[MarksList.SelectedIndex].name;
-                MarkDate.Text = Marks.CurrentResults[SubjectList.SelectedIndex].marks[MarksList.SelectedIndex].date.ToString(); // not working
-                MarkMark.Text = Convert.ToString(Marks.CurrentResults[SubjectList.SelectedIndex].marks[MarksList.SelectedIndex].mark);
-                MarkOutof.Text = Convert.ToString(Marks.CurrentResults[SubjectList.SelectedIndex].marks[MarksList.SelectedIndex].outOf);
+                //MarkName.Text = Marks.CurrentResults[SubjectList.SelectedIndex].marks[MarksList.SelectedIndex].name;
+                MarkDate.DataContext = Marks.CurrentResults[SubjectList.SelectedIndex].marks[MarksList.SelectedIndex]; // not working
+                MarkMark.DataContext= Marks.CurrentResults[SubjectList.SelectedIndex].marks[MarksList.SelectedIndex];
+                MarkOutof.DataContext = Marks.CurrentResults[SubjectList.SelectedIndex].marks[MarksList.SelectedIndex];
+                MarkAv.DataContext = Marks.CurrentResults[SubjectList.SelectedIndex].marks[MarksList.SelectedIndex];
 
-                perc.Text = Convert.ToString(((double)mrk.mark)*100/ mrk.outOf);
+                SubTeacher.DataContext = Marks.CurrentResults[SubjectList.SelectedIndex];
+                weighting.DataContext = Marks.CurrentResults[SubjectList.SelectedIndex].marks[MarksList.SelectedIndex];
+                MarkCom.DataContext = Marks.CurrentResults[SubjectList.SelectedIndex].marks[MarksList.SelectedIndex];
+                perc.DataContext = Marks.CurrentResults[SubjectList.SelectedIndex].marks[MarksList.SelectedIndex];
                 AvPerc.Text = Convert.ToString(sub.YourAverage);
             }
             catch { }
@@ -297,7 +345,18 @@ namespace wellbeingPage
 
         private void Save(object sender, RoutedEventArgs e)
         {
+            SettingsPopup.Visibility = Visibility.Collapsed;
+            info.Username = UserField.Text;
+            info.Password = PassField.Password;
+            info.StudentNO = UsernumField.Text;
 
+            SQLiteConnection conn = new SQLiteConnection("StudentData.sqlite");
+            try
+            {
+                info.LiveMarksUpdate = LastUp.Text;
+                conn.InsertOrReplace(info);
+            }
+            catch { }
         }
 
         private void SubYear_TextChanged(object sender, TextChangedEventArgs e)
@@ -414,21 +473,6 @@ namespace wellbeingPage
 
         }
 
-        private void TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                    Marks.CurrentResults[SubjectList.SelectedIndex].marks[MarksList.SelectedIndex].name = MarkName.Text;
-                Marks.CurrentResults[SubjectList.SelectedIndex].marks[MarksList.SelectedIndex].date = MarkDate.DisplayDate; ////////////////////////////////////////////////////////
-                // Marks.CurrentResults[SubjectList.SelectedIndex].marks[MarksList.SelectedIndex].mark = MarkMark.Text;
-
-                Marks.CurrentResults[SubjectList.SelectedIndex].Name = SubName.Text;
-                Marks.CurrentResults[SubjectList.SelectedIndex].Year = SubYear.Text;
-               
-                
-            } catch { }
-            
-        }
 
         private static readonly Regex _regex = new Regex("[^0-9.-]+"); //regex that matches disallowed text
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
@@ -456,7 +500,51 @@ namespace wellbeingPage
                 e.CancelCommand();
             }
         }
-        
+
+        private void MarkEdit(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            Mark m = Marks.CurrentResults[SubjectList.SelectedIndex].marks[MarksList.SelectedIndex];
+            double x = 0;
+            int y = 0;
+
+
+            try
+            {
+                y = Int32.Parse(MarkOutof.Text, CultureInfo.InvariantCulture); // convert string to the mark number
+                x = double.Parse(MarkMark.Text, CultureInfo.InvariantCulture);
+                perc.Text = Convert.ToString(100 * x / y);
+            }
+            catch
+            {
+                Marks.CurrentResults[SubjectList.SelectedIndex].marks[MarksList.SelectedIndex].percent = (double)m.mark / m.outOf;
+
+            }
+
+            double num = 0;
+            double weights = 0;
+
+            double numAv = 0;
+            double weightsAv = 0;
+
+            foreach (var a in Marks.CurrentResults[SubjectList.SelectedIndex].marks)
+            {
+                num += a.percent * a.weight;
+                weights += a.weight;
+
+                numAv += a.average * a.weight;
+                weightsAv += a.weight;
+            }
+
+            Console.WriteLine(numAv + "   " + weightsAv + "  ");
+            try
+            {
+                Marks.CurrentResults[SubjectList.SelectedIndex].YourAverage = Convert.ToInt32(num / weights);
+                Marks.CurrentResults[SubjectList.SelectedIndex].EveryoneAverage = Convert.ToInt32(numAv / weightsAv);
+            }
+            catch { }
+                
+            
+        }
     }
 }
 

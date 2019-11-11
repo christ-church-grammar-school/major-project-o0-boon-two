@@ -108,7 +108,7 @@
                         <ColumnDefinition Width="879*"/>
                     </Grid.ColumnDefinitions>
 
-                    
+
                     <TextBlock Style="{StaticResource textBlockListStyle}" FontSize="36" Foreground="#FAD200"   MinHeight="38" MinWidth="306" Text="Current Workout" Width="250" RenderTransformOrigin="0.211,-0.842" Height="51" Grid.ColumnSpan="2" Margin="40,0,634,399" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     <TextBox x:Name="namingWorkout" Margin="0,109,63,0" Height="42" IsEnabled="True" TextWrapping="Wrap" TextChanged="resetText" AcceptsReturn="False" HorizontalAlignment="Right" VerticalAlignment="Top" Foreground="Gray" Width="197" GotKeyboardFocus="ClearText" Text="Enter Workout Name" Grid.Column="1" />
                     <Button x:Name="addAnExercise" Width="200" Height="60" IsEnabled="True" Margin="0,290,60,0" Click="Button_Click" Content="Add an Exercise" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Column="1"/>
@@ -133,6 +133,17 @@
 
 
 
+
+        </Grid>
+
+        <Grid x:Name="LogAWorkout" Visibility="Collapsed" >
+            <Rectangle Fill="#1f1f1f"/>
+
+            <TextBlock  Margin="58,40,0,0" FontFamily="consolas" FontSize="45" Foreground="#FAD200" Height="58" VerticalAlignment="Top" HorizontalAlignment="Left" Width="286">Log Workout</TextBlock>
+            <ComboBox Width="300" Height="80" Margin="81,152,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{DynamicResource theComboBox}" ></ComboBox>
+            <StackPanel>
+
+            </StackPanel>
 
         </Grid>
 

@@ -27,7 +27,7 @@
             </Grid.ColumnDefinitions>
             <Rectangle Fill="#FF181818" Stroke="#FF191919" Margin="0,0,23,96"/>
 
-            <ListBox x:Name="SubjectList" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  AlternationCount="2"  ScrollViewer.CanContentScroll="False" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,0,0,96" SelectionChanged="changed">
+            <ListBox x:Name="SubjectList" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  AlternationCount="2" ScrollViewer.CanContentScroll="False" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,0,0,96" SelectionChanged="changed">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Name}"  TextWrapping="Wrap"  FontSize="38" Foreground="White" FontFamily="Consolas" Width="Auto"/>

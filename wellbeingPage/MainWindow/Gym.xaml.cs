@@ -1,17 +1,10 @@
 ﻿using SQLite;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace wellbeingPage
@@ -26,7 +19,11 @@ namespace wellbeingPage
         ListObject listItem = new ListObject();
         List<Border> setsOfListItems = new List<Border>();
         List<GymWorkout> workoutsList = new List<GymWorkout>();
+        List<Exercise> databaseExercises = new List<Exercise>();
+        List<string> numbersCorrespondence = new List<string>();
         SQLiteConnection conn = new SQLiteConnection("StudentData.sqlite");
+        
+
 
 
         public Gym()
@@ -34,6 +31,7 @@ namespace wellbeingPage
             InitializeComponent();
             // Create the table in SQLite Database
             conn.CreateTable<Exercise>();
+            refreshList();
         }
 
         private void AddWorkout_Click(object sender, RoutedEventArgs e)
@@ -104,6 +102,7 @@ namespace wellbeingPage
             // Where _Entered are the textboxes
             newestWorkout.exerciseName = exerciseEntered.Text.ToString();
             newestWorkout.reps = repsEntered.Text.ToString();
+            newestWorkout.WorkoutName = namingWorkout.Text.ToString();
 
             // Adding the 'Exercise' to appendedWorkout<Exercise>
             appendedWorkout.Add(newestWorkout);
@@ -199,26 +198,13 @@ namespace wellbeingPage
             }
         }
 
-        private void WorkoutsSavedToDB()
-        {
-            // Adds workout to DB
-             foreach (GymWorkout x in workoutsList)
-               {
-                foreach (Exercise i in x.exercises)
-                {
-                    conn.Insert(i);
-                }
-               }
-                  
-        }
-
-
         private void addCurrentWorkout(object sender, RoutedEventArgs e)
         {
-                ValidWorkout();
-                TextBlock setList = new TextBlock();
-                TextBlock setTitle = new TextBlock();
+            ValidWorkout();
+            TextBlock setList = new TextBlock();
+            TextBlock setTitle = new TextBlock();
 
+            //Makes a textblock that contains the workout title
             Run bold = new Run();
             bold.Text = namingWorkout.Text;
             bold.FontWeight = FontWeights.Bold;
@@ -226,73 +212,187 @@ namespace wellbeingPage
             setList.Inlines.Add(bold);
 
             addIt.exercises = appendedWorkout;
+            numbersCorrespondence.Add(namingWorkout.Text);
+            addIt.workoutName = namingWorkout.Text;
             listItem.workoutTitle = setTitle;
             listItem.workoutTitle.Inlines.Add(bold);
 
             listItem.workoutList = setList;
          
+            //Creates a Textblock with a list of bolded exercises and reps
             for (int i = 0; i < addIt.exercises.Count; i++)
-                {
-                    Run boldExercise = new Run();
-                    boldExercise.Text = addIt.exercises[i].exerciseName;
-                    boldExercise.FontWeight = FontWeights.Bold;
+            {
+                Run boldExercise = new Run();
+                boldExercise.Text = addIt.exercises[i].exerciseName;
+                boldExercise.FontWeight = FontWeights.Bold;
                      
 
-                    listItem.workoutList.Inlines.Add(boldExercise);
-                    listItem.workoutList.Inlines.Add("\n" + addIt.exercises[i].reps + "\n");
-                }
+                listItem.workoutList.Inlines.Add(boldExercise);
+                listItem.workoutList.Inlines.Add("\n" + addIt.exercises[i].reps + "\n");
+            }
 
-               Border expandingRectangles = new Border();
+            //This is the yellow backing aesthetic
+            Border expandingRectangles = new Border();
+            Rectangle setRect = new Rectangle();
+            listItem.workoutRect = setRect;
+            listItem.workoutRect.Margin = new Thickness(0, 5, 0, 0);
 
-               Rectangle setRect = new Rectangle();
-          
-               listItem.workoutRect = setRect;
-       
-               listItem.workoutRect.Margin = new Thickness(0, 5, 0, 0);
 
             Style style = this.FindResource("rectangleYellowStyle") as Style;
-               listItem.workoutRect.Height = (addIt.exercises.Count) * 32 + 65; // 60, 50
-               listItem.workoutList.Margin = new Thickness(50, (-32 * addIt.exercises.Count) - 15, 0, 0);
-            double x = listItem.workoutRect.Height; 
-               listItem.workoutTitle.Margin = new Thickness(50, -x + 5 , 0, 0); //  -x + 10
-               listItem.workoutRect.Style = style;
+            listItem.workoutRect.Height = (addIt.exercises.Count) * 32 + 65;
+            listItem.workoutList.Margin = new Thickness(50, (-32 * addIt.exercises.Count) - 15, 0, 0);
+            double x = listItem.workoutRect.Height;
+            listItem.workoutTitle.Margin = new Thickness(50, -x + 5, 0, 0);
+            listItem.workoutRect.Style = style;
             listItem.workoutRect.Width = 800;
+
+            //Adds the workout title, exercises and rectangle to a stack in a border
             workoutsPanel.Width = 850;
-          StackPanel listItemStack = new StackPanel();
+            StackPanel listItemStack = new StackPanel();
 
-               TextBlock itemNumber = new TextBlock();
-               itemNumber.Width = 100;
-               itemNumber.Height = 80;
-               itemNumber.Text = (setsOfListItems.Count + 1).ToString();
-               itemNumber.FontSize = 50;
-               itemNumber.Margin = new Thickness(300, -100, 0, 0);
- 
-               listItemStack.Children.Add(listItem.workoutRect);
-               listItemStack.Children.Add(listItem.workoutTitle);
-               listItemStack.Children.Add(listItem.workoutList);
+            TextBlock itemNumber = new TextBlock();
+            itemNumber.Width = 100;
+            itemNumber.Height = 80;
+            itemNumber.Text = (workoutsPanel.Children.Count / 2 + 1).ToString();
+            itemNumber.FontSize = 50;
+            itemNumber.Margin = new Thickness(300, -100, 0, 0);
 
-               expandingRectangles.Child = listItemStack;
-               expandingRectangles.Width = 800;
+            listItemStack.Children.Add(listItem.workoutRect);
+            listItemStack.Children.Add(listItem.workoutTitle);
+            listItemStack.Children.Add(listItem.workoutList);
 
-               workoutsPanel.Children.Add(expandingRectangles);
-               workoutsPanel.Children.Add(itemNumber);
+            expandingRectangles.Child = listItemStack;
+            expandingRectangles.Width = 800;
 
-               AddWorkoutPopup.Visibility = Visibility.Collapsed;
-               logWorkout.Width = 120;
-               deleteWorkout.IsEnabled = true;
-               deleteWorkout.Height = 50;
-               workoutToDelete.Height = 50;
-               deleteTab.Height = 50;
-               namingWorkout.Text = "";
-               workoutStack.Children.Clear();
+            workoutsPanel.Children.Add(expandingRectangles);
+            workoutsPanel.Children.Add(itemNumber);
 
-               setsOfListItems.Add(expandingRectangles);
-               workoutsList.Add(addIt);
-               WorkoutsSavedToDB();
+            //Changing pages and resetting necessary elements
+            AddWorkoutPopup.Visibility = Visibility.Collapsed;
+            logWorkout.Width = 120;
+            deleteWorkout.IsEnabled = true;
+            deleteWorkout.Height = 50;
+            workoutToDelete.Height = 50;
+            deleteTab.Height = 50;
+            workoutStack.Children.Clear();
+
+            setsOfListItems.Add(expandingRectangles);
+            workoutsList.Add(addIt);
+            addIt.workoutName = namingWorkout.Text;
+            
+            foreach (var i in addIt.exercises)
+            {
+                i.WorkoutName = addIt.workoutName;
+                conn.Insert(i);
+            }
+            namingWorkout.Text = "";
+        }
+
+        private void fetchFromDB()
+        {
+             databaseExercises = conn.Table<Exercise>().ToList();
+        }
+
+        private void refreshList()
+        {
+            workoutsPanel.Children.Clear();
+            numbersCorrespondence.Clear();
+            //updates a list we can then work with
+            fetchFromDB();
+
+            List<string> workoutNames = new List<string>();
+
+            //defines what the workouts are called
+            foreach (var i in databaseExercises)
+            {
+                if (workoutNames.Contains(i.WorkoutName) == false)
+                {
+                    workoutNames.Add(i.WorkoutName);
+                    numbersCorrespondence.Add(i.WorkoutName);
+                }
+            }
+
+            foreach (var i in workoutNames)
+            {
+                TextBlock setList = new TextBlock();
+                TextBlock setTitle = new TextBlock();
+
+                //Makes a textblock that contains the workout title
+                Run bold = new Run();
+                bold.Text = i;
+                bold.FontWeight = FontWeights.Bold;
+                bold.FontSize = 36;
+
+              //  addIt.exercises = appendedWorkout;
+                listItem.workoutTitle = setTitle;
+                listItem.workoutTitle.Inlines.Add(bold);
+                listItem.workoutList = setList;
+
+                List<Exercise>exercisesOfWorkout = new List<Exercise>();
+
+                foreach (var z in databaseExercises)
+                {
+                    if (z.WorkoutName == i)
+                    {
+                        exercisesOfWorkout.Add(z);
+                    }
+                }
+                
+
+                //Creates a Textblock with a list of bolded exercises and reps
+                foreach (var b in exercisesOfWorkout)
+                {
+                    Run boldExercise = new Run();
+                    boldExercise.Text = b.exerciseName;
+                    boldExercise.FontWeight = FontWeights.Bold;
+
+
+                    listItem.workoutList.Inlines.Add(boldExercise);
+                    listItem.workoutList.Inlines.Add("\n" + b.reps + "\n");
+                }
+
+                //This is the yellow backing aesthetic
+                Border expandingRectangles = new Border();
+                Rectangle setRect = new Rectangle();
+                listItem.workoutRect = setRect;
+                listItem.workoutRect.Margin = new Thickness(0, 5, 0, 0);
+
+                Style style = this.FindResource("rectangleYellowStyle") as Style;
+                listItem.workoutRect.Height = (exercisesOfWorkout.Count) * 32 + 65;
+                listItem.workoutList.Margin = new Thickness(50, (-32 * exercisesOfWorkout.Count) - 15, 0, 0);
+                double x = listItem.workoutRect.Height;
+                listItem.workoutTitle.Margin = new Thickness(50, -x + 5, 0, 0);
+                listItem.workoutRect.Style = style;
+                listItem.workoutRect.Width = 800;
+
+                //Adds the workout title, exercises and rectangle to a stack in a border
+                workoutsPanel.Width = 850;
+                StackPanel listItemStack = new StackPanel();
+
+                TextBlock itemNumber = new TextBlock();
+                itemNumber.Width = 100;
+                itemNumber.Height = 80;
+                itemNumber.Text = (workoutsPanel.Children.Count/2 + 1).ToString();
+                itemNumber.FontSize = 50;
+                itemNumber.Margin = new Thickness(300, -100, 0, 0);
+
+                listItemStack.Children.Add(listItem.workoutRect);
+                listItemStack.Children.Add(listItem.workoutTitle);
+                listItemStack.Children.Add(listItem.workoutList);
+
+                expandingRectangles.Child = listItemStack;
+                expandingRectangles.Width = 800;
+
+                workoutsPanel.Children.Add(expandingRectangles);
+                workoutsPanel.Children.Add(itemNumber);
+
+                namingWorkout.Text = "";
+            }
         }
 
         private void resetText(object sender, TextChangedEventArgs e)
-        {
+        { 
+        
             if (namingWorkout.Text != "" && namingWorkout.Text != "Enter Workout Name")
             {
                 addToWorkouts.IsEnabled = true;
@@ -313,24 +413,16 @@ namespace wellbeingPage
 
         private void RemoveWorkout(object sender, RoutedEventArgs e)
         {
-
-                try
+            conn.Execute("DELETE FROM Exercise WHERE [WorkoutName] = '" + numbersCorrespondence[Convert.ToInt32(workoutToDelete.Text.ToString()) - 1] + "'");
+            fetchFromDB();
+            deleteWorkout.Content = "Done!";
+            workoutsPanel.Children.Clear();
+            try
                 {
-                    setsOfListItems.RemoveAt(Convert.ToInt32(workoutToDelete.Text.ToString()) - 1);
-                    deleteWorkout.Content = "Done!";
-                    workoutsPanel.Children.Clear();
-                    for (var i = 0; i < setsOfListItems.Count; i++)
-                    {
-                        workoutsPanel.Children.Add(setsOfListItems[i]);
-                        TextBlock itemNumber = new TextBlock();
-                        itemNumber.Width = 100;
-                        itemNumber.Height = 80;
-                        itemNumber.FontSize = 50;
-                        itemNumber.Margin = new Thickness(300, -100, 0, 0);
-                        itemNumber.Text = (i + 1).ToString();
-                        workoutsPanel.Children.Add(itemNumber);
-                    }
-                }
+               
+
+                refreshList();
+            }
                 catch
                 {
                     deleteWorkout.Content = "Invalid!";
@@ -360,17 +452,14 @@ namespace wellbeingPage
         public List<Exercise> exercises = new List<Exercise>();
     }
 
-    [Table("GymExercises")]
+  
     public class Exercise
     {
-        //   public string workoutName;
-        [PrimaryKey, Unique, AutoIncrement]
-        public int ID { get; set; }
-
         public string WorkoutName { get; set; }
         public string exerciseName { get; set; }
         public string reps { get; set; }
     }
+
 
     public class ListObject
     {

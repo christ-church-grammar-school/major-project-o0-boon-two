@@ -98,7 +98,12 @@ namespace wellbeingPage
             
             TitleGrade.Content = "";
 
-            Years.Add(DateTime.Now.Year.ToString());
+            string yr = DateTime.Now.Year.ToString();
+            if (!Years.Contains(yr))
+            {
+                Years.Add(yr);
+            }
+            
             
             foreach (Subject sub in SubjectResults)
             {
@@ -114,6 +119,7 @@ namespace wellbeingPage
             
             SetCurrentResults();
             UpdateOverallList();
+            
         }
       
 
@@ -218,6 +224,8 @@ namespace wellbeingPage
 
                 var ButList = new List<Button>();
 
+                var ordered = sub.marks.OrderBy(o => o.date).ToList();
+
                 for (var i = 0; i < sub.marks.Count; i++)
                 {
                     Button a = new Button();
@@ -225,7 +233,7 @@ namespace wellbeingPage
                     a.Style = (Style)FindResource("MarkHover");
                     a.Template = (ControlTemplate)FindResource("HMK_Dark");
                     Canvas.SetLeft(a, i * incr - 6.5);
-                    Canvas.SetTop(a, he - sub.marks[i].average * he / 100 - 6.5);
+                    Canvas.SetTop(a, he - ordered[i].average * he / 100 - 6.5);
                     a.MouseEnter += GradeHover;
                     a.MouseLeave += GradeStopHover;
                     a.Click += KeepPopup;
@@ -237,7 +245,7 @@ namespace wellbeingPage
                     b.Style = (Style)FindResource("MarkHover");
                     b.Template = (ControlTemplate)FindResource("HMK");
                     Canvas.SetLeft(b, i * incr - 6.5);
-                    Canvas.SetTop(b, he - sub.marks[i].percent * he - 6.5);
+                    Canvas.SetTop(b, he - ordered[i].percent * he/ 100 - 6.5);
                     b.MouseEnter += GradeHover;
                     b.MouseLeave += GradeStopHover;
                     b.Click += KeepPopup;
@@ -247,8 +255,8 @@ namespace wellbeingPage
 
 
 
-                    MyPoints.Add(new Point(i * incr, he - sub.marks[i].percent * he));
-                    AvPoints.Add(new Point(i * incr, he - sub.marks[i].average * he / 100));
+                    MyPoints.Add(new Point(i * incr, he - ordered[i].percent * he / 100));
+                    AvPoints.Add(new Point(i * incr, he - ordered[i].average * he / 100));
                 }
                 Polyline MyLline = new Polyline
                 {
@@ -289,7 +297,7 @@ namespace wellbeingPage
                 b.Style = (Style)FindResource("MarkHover");
                 b.Template = (ControlTemplate)FindResource("HMK");
                 Canvas.SetLeft(b, - 6.5);
-                Canvas.SetTop(b, he - sub.marks[0].percent * he - 6.5);
+                Canvas.SetTop(b, he - sub.marks[0].percent * he / 100 - 6.5);
                 b.MouseEnter += GradeHover;
                 b.MouseLeave += GradeStopHover;
                 b.Click += KeepPopup;
@@ -336,13 +344,13 @@ namespace wellbeingPage
                 {
                     if (y > DataBackround.ActualHeight / 2)
                     {
-                        y -= HoverTestInfo.Height;
+                        y -= HoverTestInfo.Height + 20;
                     }
                     Thickness margin = new Thickness(x, y, 0, 0);
 
                     MyHoverDate.Text = "Date: " + m.date.ToShortDateString();
                     MyHoverMarks.Text = "Mark: " + m.mark + " / " + m.outOf;
-                    MyHoverP.Text = "" + m.percent * 100;
+                    MyHoverP.Text = "" + m.percent;
                     MyHoverComments.Text = m.comment;
                     MyHoverWeight.Text = "Weight: " + m.weight;
                     MyHoverName.Text = m.name;
@@ -391,9 +399,13 @@ namespace wellbeingPage
         {
             if (!isPopupOpen)
             {
-                HoverTestAv.Visibility = Visibility.Collapsed;
-                HoverTestInfo.Visibility = Visibility.Collapsed;
-                m.comment = MyHoverComments.Text;
+                try
+                {
+                    HoverTestAv.Visibility = Visibility.Collapsed;
+                    HoverTestInfo.Visibility = Visibility.Collapsed;
+                    m.comment = MyHoverComments.Text;
+                }
+                catch { }
             }
             
         }
