@@ -48,6 +48,9 @@ namespace wellbeingPage
             audioTimer.Tick += loadTimer_Tick;
             audioTimer.Start();
 
+            mediaPlayer.Stop();
+            mediaPlayer.Pause();
+
             wellbeingPopup.Visibility = Visibility.Visible;
         }
 
@@ -55,6 +58,9 @@ namespace wellbeingPage
         public void Climbladder()
         {
             ladder(this, EventArgs.Empty);
+
+            mediaPlayer.Stop();
+            mediaPlayer.Pause();
         }
 
         /*
