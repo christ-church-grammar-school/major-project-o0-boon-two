@@ -136,17 +136,6 @@
 
         </Grid>
 
-        <Grid x:Name="LogAWorkout" Visibility="Collapsed" >
-            <Rectangle Fill="#1f1f1f"/>
-
-            <TextBlock  Margin="58,40,0,0" FontFamily="consolas" FontSize="45" Foreground="#FAD200" Height="58" VerticalAlignment="Top" HorizontalAlignment="Left" Width="286">Log Workout</TextBlock>
-            <ComboBox Width="300" Height="80" Margin="81,152,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{DynamicResource theComboBox}" ></ComboBox>
-            <StackPanel>
-
-            </StackPanel>
-
-        </Grid>
-
         <Grid x:Name="AddExercisePopup" Visibility="Collapsed" >
             <Rectangle Fill="#CC3C3C3C"/>
 
